@@ -1,20 +1,19 @@
 from pydantic import BaseModel
 
 
-class JobCreate(BaseModel):
-    title: str
+class CompanyCreate(BaseModel):
+    name: str
     description: str
+    website: str
     location: str
-    salary: int
-    company_id: int
 
 
-class JobResponse(BaseModel):
+class CompanyResponse(BaseModel):
     id: int
-    title: str
+    name: str
     description: str
+    website: str
     location: str
-    salary: int
 
     class Config:
         from_attributes = True
