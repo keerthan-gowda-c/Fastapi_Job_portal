@@ -3,6 +3,7 @@ from fastapi import (
     Depends,
     HTTPException
 )
+from app.dependencies.roles import require_role
 
 from sqlalchemy.orm import Session
 
@@ -11,6 +12,7 @@ from app.database import get_db
 from app.models.application import Application
 from app.models.job import Job
 from app.models.user import User
+from app.schemas.application import ApplicationStatusUpdate
 
 from app.dependencies.auth import (
     get_current_user
@@ -116,3 +118,22 @@ def job_applications(
     return applications
 
 
+@router.patch("/{application_id}/status")
+def update_application_status(
+    application_id:int,
+    data:ApplicationStatusUpdate,
+    db:Session = Depends(get_db),
+    current_user: User = Depends(require_role("recruiter"))
+):
+    application = (
+        db.query(Application).filter(Application.id == application_id).first())
+    
+    if not application:
+        raise HTTPException(status_code=404, detail = "Application not found")
+    
+    application.status = data.status
+
+    db.commit()
+    db.refresh(application)
+
+    return application
