@@ -1,5 +1,60 @@
+# Virtual Environment
 venv/
+env/
+.venv/
+
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Environment Variables
 .env
+
+# Database
 *.db
+*.sqlite3
+
+# Alembic
+alembic/versions/__pycache__/
+
+# Uploads (resume files)
+uploads/
+
+# IDE
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build Files
+build/
+dist/
+*.egg-info/
+
+# mypy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Docker
+.docker/
+
+# Node (for future React frontend)
+node_modules/
+.next/

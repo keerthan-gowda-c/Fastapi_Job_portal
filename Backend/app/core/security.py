@@ -14,9 +14,6 @@ print(pwd_context.schemes())
 
 
 def hash_password(password: str):
-    print("PASSWORD:", password)
-    print("TYPE:", type(password))
-    print("LENGTH:", len(password))
     return pwd_context.hash(password)
 
 

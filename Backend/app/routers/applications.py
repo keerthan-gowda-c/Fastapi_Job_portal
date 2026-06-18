@@ -12,7 +12,8 @@ from app.database import get_db
 from app.models.application import Application
 from app.models.job import Job
 from app.models.user import User
-from app.schemas.application import ApplicationStatusUpdate
+from app.models.company import Company
+from app.schemas.application import ApplicationStatusUpdate, ApplicationApplicantResponse
 
 from app.dependencies.auth import (
     get_current_user
@@ -97,15 +98,44 @@ def my_applications(
     return applications
 
 
+
+@router.get("/")
+def get_all_applications(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(
+        require_role("recruiter")
+    )
+):
+    applications = (
+        db.query(Application)
+        .join(Job)
+        .join(Company)
+        .filter(
+            Company.owner_id == current_user.id
+        )
+        .all()
+    )
+
+    return applications
+
+
 # Recruiter View Application
-@router.get("/job/{job_id}")
+@router.get("/job/{job_id}",response_model=list[ApplicationApplicantResponse])
 def job_applications(
     job_id: int,
     db: Session = Depends(get_db),
     current_user: User = Depends(
-        get_current_user
+        require_role("recruiter")
     )
 ):
+    
+    job = (db.query(Job).filter(Job.id == job_id).first())
+
+    if not job:
+        raise HTTPException(status_code=404,detail="Job not found")
+    
+    if job.company.owner_id != current_user.id:
+        raise HTTPException(status_code=403,detail="Access denied")
 
     applications = (
         db.query(Application)
@@ -131,9 +161,66 @@ def update_application_status(
     if not application:
         raise HTTPException(status_code=404, detail = "Application not found")
     
+    if not current_user:
+        raise HTTPException(status_code=403, detail="Access Denied")
+    
+     # Prevent updating withdrawn applications
+    if application.status == "withdrawn":
+        raise HTTPException(
+            status_code=400,
+            detail="Cannot update a withdrawn application"
+        )
+
+
     application.status = data.status
 
     db.commit()
     db.refresh(application)
 
     return application
+
+
+
+@router.patch("/{application_id}/withdraw")
+def withdraw_application(
+    application_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    application = (
+        db.query(Application)
+        .filter(Application.id == application_id)
+        .first()
+    )
+
+    if not application:
+        raise HTTPException(
+            status_code=404,
+            detail="Application not found"
+        )
+
+    # User can withdraw only their own application
+    if application.user_id != current_user.id:
+        raise HTTPException(
+            status_code=403,
+            detail="You can only withdraw your own application"
+        )
+
+    # Already withdrawn
+    if application.status == "withdrawn":
+        raise HTTPException(
+            status_code=400,
+            detail="Application already withdrawn"
+        )
+
+    # Update status instead of deleting
+    application.status = "withdrawn"
+
+    db.commit()
+    db.refresh(application)
+
+    return {
+        "message": "Application withdrawn successfully",
+        "application_id": application.id,
+        "status": application.status
+    }

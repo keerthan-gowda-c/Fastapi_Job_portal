@@ -9,6 +9,7 @@ class ApplicationStatus(str, Enum):
     shortlisted = "shortlisted"
     rejected = "rejected"
     hired = "hired"
+    withdrawn = "withdrawn"
 
 class ApplicationResponse(BaseModel):
     id: int
@@ -24,3 +25,24 @@ class ApplicationResponse(BaseModel):
 
 class ApplicationStatusUpdate(BaseModel):
     status:ApplicationStatus
+
+
+
+class ApplicantInfo(BaseModel):
+    id:int
+    full_name:str 
+    email:str 
+    resume_url:str | None=None 
+
+    class Config:
+        from_attributes = True
+
+
+class ApplicationApplicantResponse(BaseModel):
+    id:int 
+    status:ApplicationStatus 
+    applied_at:datetime 
+    user:ApplicantInfo
+
+    class Config: 
+        from_attribute = True

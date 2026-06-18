@@ -44,3 +44,7 @@ class Job(Base):
     back_populates="job",
     cascade="all, delete"
     )
+    saved_by = relationship(
+    "SavedJob",
+    back_populates="job"
+)

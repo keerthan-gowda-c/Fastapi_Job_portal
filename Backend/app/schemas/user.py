@@ -14,6 +14,7 @@ class UserResponse(BaseModel):
     full_name: str
     email: EmailStr
     role: str
+    resume_url:str | None=None
     is_active: bool
 
     class Config:

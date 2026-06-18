@@ -23,3 +23,6 @@ class User(Base):
     "Application",
     back_populates="user"
     )
+    resume_url = Column(String, nullable=True)
+
+    saved_jobs = relationship("SavedJob",back_populates="user")
