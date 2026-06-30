@@ -5,6 +5,8 @@ from typing import Optional
 from app.database import get_db
 from app.models.job import Job
 from app.models.user import User
+from app.models.company import Company
+from app.models.saved_jobs import SavedJob
 
 from app.schemas.job import (
     JobCreate,
@@ -28,7 +30,28 @@ def create_job(
     )
 ):
 
-    db_job = Job(**job.model_dump())
+    company = (
+        db.query(Company)
+        .filter(
+            Company.owner_id == current_user.id
+        )
+        .first()
+    )
+
+    if not company:
+        raise HTTPException(
+            status_code=400,
+            detail="Create company first"
+        )
+
+
+    db_job = Job(
+        title=job.title,
+        description=job.description,
+        location=job.location,
+        salary=job.salary,
+        company_id=company.id
+    )
 
     db.add(db_job)
     db.commit()
@@ -144,7 +167,9 @@ def delete_job(
             status_code=403,
             detail="Access denied"
         )
-
+    db.query(SavedJob).filter(
+        SavedJob.job_id == job.id
+    ).delete(synchronize_session=False)
     db.delete(job)
     db.commit()
 

@@ -6,7 +6,6 @@ class JobCreate(BaseModel):
     description: str
     location: str
     salary: int
-    company_id: int
 
 
 class JobResponse(BaseModel):

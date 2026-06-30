@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -26,3 +26,15 @@ class User(Base):
     resume_url = Column(String, nullable=True)
 
     saved_jobs = relationship("SavedJob",back_populates="user")
+
+    phone = Column(String, nullable=True)
+
+    location = Column(String, nullable=True)
+
+    skills = Column(Text, nullable=True)
+
+    experience = Column(Text, nullable=True)
+
+    education = Column(Text, nullable=True)
+
+    profile_image = Column(String, nullable=True)

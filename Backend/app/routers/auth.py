@@ -10,6 +10,10 @@ from app.core.security import (
     verify_password,
     create_access_token
 )
+from app.crud.user import (
+    create_user,
+    get_user_by_email
+)
 
 router = APIRouter(
     prefix="/auth",
@@ -88,5 +92,13 @@ def login(
 
     return {
         "access_token": access_token,
-        "token_type": "bearer"
+        "token_type": "bearer",
+        "user": {
+        "id": db_user.id,
+        "full_name": db_user.full_name,
+        "email": db_user.email,
+        "role": db_user.role
     }
+    }
+
+
