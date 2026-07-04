@@ -39,6 +39,17 @@ class ApplicantInfo(BaseModel):
         from_attributes = True
 
 
+class RecruiterApplicationResponse(BaseModel):
+    id: int
+    status: ApplicationStatus
+    applied_at: datetime
+    job: JobResponse
+    user: ApplicantInfo
+
+    class Config:
+        from_attributes = True
+
+
 class ApplicationApplicantResponse(BaseModel):
     id:int 
     status:ApplicationStatus 

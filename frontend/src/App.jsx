@@ -15,6 +15,8 @@ import Profile from "./pages/jobseeker/Profile";
 import JobseekerDashboard from "./pages/jobseeker/JobseekerDashboard";
 import EditProfile from "./pages/jobseeker/EditProfile";
 import MyApplications from "./pages/jobseeker/MyApplications";
+import RecruiterApplications from "./pages/recruiter/application/RecruiterApplications";
+import JobApplicants from "./pages/recruiter/application/JobApplicants";
 
 
 
@@ -102,6 +104,16 @@ function App() {
         <Route
           path="/jobseeker/profile/edit"
           element={<EditProfile />}
+        />
+
+        <Route
+          path="/recruiter/recruiter-application"
+          element={<RecruiterApplications />}
+        />
+
+        <Route
+          path="/recruiter/job-applicants/:jobId"
+          element={<JobApplicants />}
         />
 
       </Routes>

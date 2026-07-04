@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../../api/axios";
-import Navbar from "../../components/Navbar";
+
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/Navbar";
 
 function RecruiterDashboard() {
     const navigate = useNavigate();

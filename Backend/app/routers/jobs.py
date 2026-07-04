@@ -59,6 +59,7 @@ def create_job(
 
     return db_job
 
+# search
 @router.get("/")
 def get_jobs(
     keyword:Optional[str] = None,
@@ -83,6 +84,7 @@ def get_jobs(
 
     return jobs
 
+# Open for all
 @router.get("/{job_id}")
 def get_job(
     job_id: int,

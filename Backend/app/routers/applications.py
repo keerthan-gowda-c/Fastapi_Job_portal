@@ -14,7 +14,10 @@ from app.models.application import Application
 from app.models.job import Job
 from app.models.user import User
 from app.models.company import Company
-from app.schemas.application import ApplicationStatusUpdate, ApplicationApplicantResponse, MyApplicationResponse
+from app.schemas.application import (
+    ApplicationStatusUpdate, 
+     ApplicationApplicantResponse, MyApplicationResponse,
+     RecruiterApplicationResponse)
 
 from app.dependencies.auth import (
     get_current_user
@@ -25,7 +28,7 @@ router = APIRouter(
     tags=["Applications"]
 )
 
-
+# Jobseeker
 # Apply for a Job
 
 @router.post("/jobs/{job_id}")
@@ -91,6 +94,7 @@ def apply_for_job(
 
 
 # View my Applications
+# Jobseeker
 
 @router.get("/me", response_model=list[MyApplicationResponse])
 def my_applications(
@@ -113,7 +117,7 @@ def my_applications(
 
 
 
-@router.get("/")
+@router.get("/",response_model=list[RecruiterApplicationResponse])
 def get_all_applications(
     db: Session = Depends(get_db),
     current_user: User = Depends(
@@ -194,7 +198,7 @@ def update_application_status(
     return application
 
 
-
+# Jobseeker
 @router.patch("/{application_id}/withdraw")
 def withdraw_application(
     application_id: int,
@@ -239,7 +243,7 @@ def withdraw_application(
         "status": application.status
     }
 
-
+# Jobseeker
 @router.patch("/{application_id}/delete")
 def delete_application(
     application_id:int ,

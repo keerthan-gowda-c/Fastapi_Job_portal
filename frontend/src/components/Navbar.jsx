@@ -81,6 +81,17 @@ function Navbar() {
                             >
                                 My Jobs
                             </Link>
+
+                            <Link
+                                className="nav-link"
+                                to="/recruiter/recruiter-application"
+                            >
+                                All Applications
+                            </Link>
+
+                            
+
+                            
                         </>
                     )}
 
