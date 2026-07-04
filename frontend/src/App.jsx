@@ -6,7 +6,6 @@ import HomePage from "./pages/HomePage";
 import ChooseRole from "./pages/ChooseRole";
 import ChooseLoginRole from "./pages/ChooseLoginRole";
 import SavedJobs from "./pages/jobseeker/SavedJobs";
-import MyApplications from "./pages/jobseeker/MyApplications";
 import RecruiterDashboard from "./pages/recruiter/RecruiterDashboard";
 import CreateCompany from "./pages/recruiter/company/CreateCompany";
 import CreateJob from "./pages/recruiter/job/CreateJob";
@@ -15,6 +14,7 @@ import EditJob from "./pages/recruiter/job/EditJob";
 import Profile from "./pages/jobseeker/Profile";
 import JobseekerDashboard from "./pages/jobseeker/JobseekerDashboard";
 import EditProfile from "./pages/jobseeker/EditProfile";
+import MyApplications from "./pages/jobseeker/MyApplications";
 
 
 
@@ -85,7 +85,7 @@ function App() {
         />
 
         <Route
-          path="/applications"
+          path="/jobseeeker/applications"
           element={<MyApplications />}
         />
 

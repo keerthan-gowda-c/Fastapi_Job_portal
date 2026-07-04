@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from datetime import datetime
 from enum import Enum
+from app.schemas.job import JobResponse
 
 
 class ApplicationStatus(str, Enum):
@@ -45,4 +46,14 @@ class ApplicationApplicantResponse(BaseModel):
     user:ApplicantInfo
 
     class Config: 
+        from_attribute = True
+
+
+class MyApplicationResponse(BaseModel):
+    id:int
+    status:ApplicationStatus
+    applied_at:datetime
+    job:JobResponse
+
+    class Config:
         from_attribute = True

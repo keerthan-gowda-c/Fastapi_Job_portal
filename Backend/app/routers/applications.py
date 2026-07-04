@@ -13,7 +13,7 @@ from app.models.application import Application
 from app.models.job import Job
 from app.models.user import User
 from app.models.company import Company
-from app.schemas.application import ApplicationStatusUpdate, ApplicationApplicantResponse
+from app.schemas.application import ApplicationStatusUpdate, ApplicationApplicantResponse, MyApplicationResponse
 
 from app.dependencies.auth import (
     get_current_user
@@ -79,7 +79,7 @@ def apply_for_job(
 
 # View my Applications
 
-@router.get("/me")
+@router.get("/me", response_model=list[MyApplicationResponse])
 def my_applications(
     db: Session = Depends(get_db),
     current_user: User = Depends(

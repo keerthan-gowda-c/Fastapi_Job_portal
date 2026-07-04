@@ -20,6 +20,19 @@ function Jobs(){
         fetchJobs();
     })
 
+    const applyjob = async(jobId) => {
+        
+        try{
+            await api.post(`/applications/jobs/${jobId}`)
+            alert("Application submitted successfully")
+        }
+        catch(error){
+            console.log(error)
+            alert(error.response?.data?.detail)
+
+        }
+    }
+
     
     return (
 
@@ -69,6 +82,7 @@ function Jobs(){
 
                                     <button
                                         className="btn btn-primary me-2"
+                                        onClick={()=>applyjob(job.id)}
                                     >
                                         Apply
                                     </button>
