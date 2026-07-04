@@ -35,7 +35,7 @@ function JobseekerDashboard() {
 
                     <div className="col-md-3">
                         <button
-                            className="btn btn-warning w-100" onClick={() => navigate("/jobseeeker/applications")}
+                            className="btn btn-warning w-100" onClick={() => navigate("/jobseeker/applications")}
                         >
                             Applied Jobs
                         </button>

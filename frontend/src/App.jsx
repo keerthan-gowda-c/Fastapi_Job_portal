@@ -85,7 +85,7 @@ function App() {
         />
 
         <Route
-          path="/jobseeeker/applications"
+          path="/jobseeker/applications"
           element={<MyApplications />}
         />
 

@@ -1,11 +1,12 @@
 from fastapi import (
     APIRouter,
     Depends,
-    HTTPException
+    HTTPException,
 )
 from app.dependencies.roles import require_role
 
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 
 from app.database import get_db
 
@@ -52,12 +53,24 @@ def apply_for_job(
         db.query(Application)
         .filter(
             Application.job_id == job_id,
-            Application.user_id == current_user.id
+            Application.user_id == current_user.id,
+            Application.is_deleted == False
         )
         .first()
     )
 
     if existing_application:
+        if existing_application.status == "withdrawn":
+            existing_application.status = "pending"
+            existing_application.applied_at = func.now()
+
+            db.commit()
+            db.refresh(existing_application)
+
+            return{
+                "message":"Application submitted successfully"
+            }
+        
         raise HTTPException(
             status_code=400,
             detail="Already applied"
@@ -90,7 +103,8 @@ def my_applications(
     applications = (
         db.query(Application)
         .filter(
-            Application.user_id == current_user.id
+            Application.user_id == current_user.id,
+            Application.is_deleted == False
         )
         .all()
     )
@@ -224,3 +238,22 @@ def withdraw_application(
         "application_id": application.id,
         "status": application.status
     }
+
+
+@router.patch("/{application_id}/delete")
+def delete_application(
+    application_id:int ,
+    db:Session=Depends(get_db),
+    current_user:User=Depends(get_current_user)
+    ):
+    application=(db.query(Application).filter(Application.id == application_id).first())
+    if not application:
+        raise HTTPException(status_code=404,detail="Application not found")
+    
+    if application.user_id != current_user.id:
+        raise HTTPException(status_code=403,detail="Access denied")
+    
+    application.is_deleted = True
+    db.commit()
+
+    return{"message":"Application removed successfully"}

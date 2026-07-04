@@ -33,6 +33,17 @@ function Jobs(){
         }
     }
 
+    const saveJob = async(jobId) => {
+        try{
+            await api.post(`/saved-jobs/${jobId}`)
+            alert("Job saved successfully")
+        }
+        catch(error){
+            console.log(error)
+            alert(error.response?.data?.detail || "Failed to save job")
+        }
+    }
+
     
     return (
 
@@ -89,6 +100,7 @@ function Jobs(){
 
                                     <button
                                         className="btn btn-outline-secondary"
+                                        onClick={()=>saveJob(job.id)}
                                     >
                                         Save
                                     </button>

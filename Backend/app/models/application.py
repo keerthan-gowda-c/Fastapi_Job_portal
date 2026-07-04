@@ -3,7 +3,8 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    DateTime
+    DateTime,
+    Boolean
 )
 
 from sqlalchemy.orm import relationship
@@ -52,3 +53,8 @@ class Application(Base):
         "User",
         back_populates="applications"
     )
+
+    is_deleted = Column(
+    Boolean,
+    default=False
+)

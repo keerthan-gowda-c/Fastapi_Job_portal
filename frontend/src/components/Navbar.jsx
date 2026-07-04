@@ -51,7 +51,7 @@ function Navbar() {
 
                             <Link
                                 className="nav-link"
-                                to="/applications"
+                                to="/jobseeker/applications"
                             >
                                 Applications
                             </Link>
