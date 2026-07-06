@@ -3,63 +3,40 @@ import { useNavigate } from "react-router-dom";
 
 import api from "../../../api/axios";
 import Navbar from "../../../components/Navbar";
+import "./CreateJob.css";
 
-
-function CreateJob(){
-
+function CreateJob() {
     const navigate = useNavigate();
 
-
-    const [form,setForm] = useState({
-
-        title:"",
-        description:"",
-        location:"",
-        salary:""
-
+    const [form, setForm] = useState({
+        title: "",
+        description: "",
+        location: "",
+        salary: ""
     });
 
-
-
-    const handleChange = (e)=>{
-
+    const handleChange = (e) => {
         setForm({
-
             ...form,
             [e.target.name]: e.target.value
-
         });
-
     };
 
-
-
-    const handleSubmit = async(e)=>{
-
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
+        try {
 
-        try{
+            await api.post("/jobs/", {
+                ...form,
+                salary: Number(form.salary)
+            });
 
-            await api.post(
-                "/jobs/",
-                {
-                    ...form,
-                    salary:Number(form.salary)
-                }
-            );
-
-
-            alert(
-                "Job created successfully"
-            );
-
+            alert("Job created successfully");
 
             navigate("/recruiter-dashboard");
 
-
-        }
-        catch(error){
+        } catch (error) {
 
             console.log(error);
 
@@ -67,141 +44,146 @@ function CreateJob(){
                 error.response?.data?.detail ||
                 "Job creation failed"
             );
-
         }
-
     };
 
-
-
-
     return (
-
         <>
+            <Navbar />
 
-        <Navbar />
+            <div className="create-job-bg">
 
+                <div className="container py-5">
 
-        <div className="container mt-5">
+                    <div className="row justify-content-center">
 
+                        <div className="col-lg-8">
 
-            <div className="row justify-content-center">
+                            <div className="card border-0 shadow-lg create-job-card">
 
+                                <div className="card-body p-5">
 
-                <div className="col-md-6">
+                                    <h2 className="fw-bold mb-2">
+                                        Create New Job
+                                    </h2>
 
+                                    <p className="text-muted mb-4">
+                                        Fill in the details below to publish a new job posting.
+                                    </p>
 
-                    <div className="card p-4 shadow">
+                                    <form onSubmit={handleSubmit}>
 
+                                        <div className="mb-4">
 
-                        <h2 className="mb-4">
-                            Create Job
-                        </h2>
+                                            <label className="form-label fw-semibold">
+                                                Job Title
+                                            </label>
 
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="title"
+                                                value={form.title}
+                                                onChange={handleChange}
+                                                placeholder="Frontend Developer"
+                                                required
+                                            />
 
+                                        </div>
 
-                        <form onSubmit={handleSubmit}>
+                                        <div className="mb-4">
 
+                                            <label className="form-label fw-semibold">
+                                                Job Description
+                                            </label>
 
-                            <input
+                                            <textarea
+                                                rows="6"
+                                                className="form-control"
+                                                name="description"
+                                                value={form.description}
+                                                onChange={handleChange}
+                                                placeholder="Describe the responsibilities, requirements, and benefits..."
+                                                required
+                                            />
 
-                            className="form-control mb-3"
+                                        </div>
 
-                            name="title"
+                                        <div className="row">
 
-                            placeholder="Job Title"
+                                            <div className="col-md-6 mb-4">
 
-                            onChange={handleChange}
+                                                <label className="form-label fw-semibold">
+                                                    Location
+                                                </label>
 
-                            required
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="location"
+                                                    value={form.location}
+                                                    onChange={handleChange}
+                                                    placeholder="Bangalore"
+                                                    required
+                                                />
 
-                            />
+                                            </div>
 
+                                            <div className="col-md-6 mb-4">
 
+                                                <label className="form-label fw-semibold">
+                                                    Annual Salary (₹)
+                                                </label>
 
-                            <textarea
+                                                <input
+                                                    type="number"
+                                                    className="form-control"
+                                                    name="salary"
+                                                    value={form.salary}
+                                                    onChange={handleChange}
+                                                    placeholder="800000"
+                                                    required
+                                                />
 
-                            className="form-control mb-3"
+                                            </div>
 
-                            name="description"
+                                        </div>
 
-                            placeholder="Job Description"
+                                        <div className="d-flex gap-3 mt-4">
 
-                            rows="4"
+                                            <button
+                                                type="submit"
+                                                className="btn btn-primary px-4"
+                                            >
+                                                Publish Job
+                                            </button>
 
-                            onChange={handleChange}
+                                            <button
+                                                type="button"
+                                                className="btn btn-outline-secondary px-4"
+                                                onClick={() => navigate("/recruiter-dashboard")}
+                                            >
+                                                Cancel
+                                            </button>
 
-                            required
+                                        </div>
 
-                            />
+                                    </form>
 
+                                </div>
 
+                            </div>
 
-                            <input
-
-                            className="form-control mb-3"
-
-                            name="location"
-
-                            placeholder="Location"
-
-                            onChange={handleChange}
-
-                            required
-
-                            />
-
-
-
-                            <input
-
-                            className="form-control mb-3"
-
-                            type="number"
-
-                            name="salary"
-
-                            placeholder="Salary"
-
-                            onChange={handleChange}
-
-                            required
-
-                            />
-
-
-
-                            <button
-
-                            className="btn btn-success w-100"
-
-                            >
-
-                                Create Job
-
-                            </button>
-
-
-                        </form>
-
+                        </div>
 
                     </div>
 
-
                 </div>
-
 
             </div>
 
-
-        </div>
-
-
         </>
-
     );
-
 }
-
 
 export default CreateJob;

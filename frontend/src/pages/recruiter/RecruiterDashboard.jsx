@@ -1,168 +1,191 @@
 import { useEffect, useState } from "react";
 import api from "../../api/axios";
-
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import "./RecruiterDashboard.css";
+
 
 function RecruiterDashboard() {
     const navigate = useNavigate();
     const [stats, setStats] = useState(null);
+
     const fetchDashboard = async () => {
         try {
-            const response = await api.get("/dashboard/recruiter")
-            setStats(response.data)
-        }
-        catch (error) {
+            const response = await api.get("/dashboard/recruiter");
+            setStats(response.data);
+        } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     useEffect(() => {
-        fetchDashboard()
-    }, [])
+        fetchDashboard();
+    }, []);
+
     if (!stats) {
         return (
-            <h3 className="text-center mt-5">
-                Loading...
-            </h3>
-        )
+            <>
+                <Navbar />
+                <div className="d-flex justify-content-center align-items-center vh-100">
+                    <div className="spinner-border text-primary"></div>
+                </div>
+            </>
+        );
     }
 
     return (
-
         <>
             <Navbar />
 
-            <div className="container mt-4">
+            <div className="dashboard-bg">
+                <div className="container py-5">
 
+                    {/* Header */}
+                    <div className="dashboard-header shadow-sm rounded-4 p-4 mb-4">
+                        <div className="d-md-flex justify-content-between align-items-center">
 
-                <h2>
-                    Recruiter Dashboard
-                </h2>
+                            <div>
+                                <h2 className="fw-bold mb-1">
+                                    Recruiter Dashboard
+                                </h2>
 
-                <button
-                    className="btn btn-success"
-                    onClick={() =>
-                        navigate("/company/create")
-                    }
-                >
-                    Create Company
-                </button>
-                <button
-                    className="btn btn-success"
-                    onClick={() =>
-                        navigate("/job/create")
-                    }
-                >
-                    Create Job
-                </button>
+                                <p className="text-muted mb-0">
+                                    Manage companies, jobs and track hiring progress.
+                                </p>
+                            </div>
 
-                <button
+                            <div className="mt-3 mt-md-0 d-flex flex-wrap gap-2">
 
-                    className="btn btn-primary"
+                                {stats.companies > 0 ? (
+                                    <button
+                                        className="btn btn-outline-primary px-4"
+                                        onClick={() => navigate("/company")}
+                                    >
+                                        🏢 View Company
+                                    </button>
+                                ) : (
+                                    <button
+                                        className="btn btn-primary px-4"
+                                        onClick={() => navigate("/company/create")}
+                                    >
+                                        + Create Company
+                                    </button>
+                                )}
 
-                    onClick={() => navigate("/my-jobs")}
+                                <button
+                                    className="btn btn-success px-4"
+                                    onClick={() => navigate("/job/create")}
+                                >
+                                    + Post Job
+                                </button>
 
-                >
-                    Manage Jobs
-                </button>
+                                <button
+                                    className="btn btn-outline-dark px-4"
+                                    onClick={() => navigate("/my-jobs")}
+                                >
+                                    Manage Jobs
+                                </button>
 
+                            </div>
+                        </div>
+                    </div>
 
-                <div className="row mt-4">
+                    {/* Statistics */}
 
+                    <h5 className="fw-bold mb-3">
+                        Overview
+                    </h5>
 
-                    <Card
-                        title="Companies"
-                        value={stats.companies}
-                    />
+                    <div className="row g-4">
 
+                        <Card
+                            title="Companies"
+                            value={stats.companies}
+                            color="primary"
+                        />
 
-                    <Card
-                        title="Jobs"
-                        value={stats.jobs}
-                    />
+                        <Card
+                            title="Jobs"
+                            value={stats.jobs}
+                            color="success"
+                        />
 
+                        <Card
+                            title="Applications"
+                            value={stats.applications}
+                            color="warning"
+                        />
 
-                    <Card
-                        title="Applications"
-                        value={stats.applications}
-                    />
+                        <Card
+                            title="Hire Rate"
+                            value={`${stats.hire_rate}%`}
+                            color="info"
+                        />
 
+                    </div>
 
-                    <Card
-                        title="Hire Rate"
-                        value={`${stats.hire_rate}%`}
-                    />
+                    <h5 className="fw-bold mt-5 mb-3">
+                        Application Status
+                    </h5>
 
+                    <div className="row g-4">
+
+                        <Card
+                            title="Pending"
+                            value={stats.pending}
+                            color="secondary"
+                        />
+
+                        <Card
+                            title="Shortlisted"
+                            value={stats.shortlisted}
+                            color="primary"
+                        />
+
+                        <Card
+                            title="Hired"
+                            value={stats.hired}
+                            color="success"
+                        />
+
+                        <Card
+                            title="Rejected"
+                            value={stats.rejected}
+                            color="danger"
+                        />
+
+                    </div>
 
                 </div>
-
-
-
-                <div className="row mt-4">
-
-
-                    <Card
-                        title="Pending"
-                        value={stats.pending}
-                    />
-
-
-                    <Card
-                        title="Shortlisted"
-                        value={stats.shortlisted}
-                    />
-
-
-                    <Card
-                        title="Hired"
-                        value={stats.hired}
-                    />
-
-
-                    <Card
-                        title="Rejected"
-                        value={stats.rejected}
-                    />
-
-
-                </div>
-
-
             </div>
-
         </>
-
-    )
-
-
+    );
 }
 
-function Card({ title, value }) {
-
+function Card({ title, value, color }) {
     return (
+        <div className="col-lg-3 col-md-6">
 
-        <div className="col-md-3 mb-3">
+            <div className="card dashboard-card border-0 shadow-sm h-100">
 
-            <div className="card shadow p-3 text-center">
+                <div className="card-body">
 
+                    <div className={`top-line bg-${color}`}></div>
 
-                <h5>
-                    {title}
-                </h5>
+                    <p className="text-muted fw-semibold mb-2">
+                        {title}
+                    </p>
 
+                    <h2 className="fw-bold display-6">
+                        {value}
+                    </h2>
 
-                <h2>
-                    {value}
-                </h2>
-
+                </div>
 
             </div>
 
         </div>
-
-    )
-
+    );
 }
 
 export default RecruiterDashboard;

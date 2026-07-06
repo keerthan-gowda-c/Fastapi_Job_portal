@@ -2,110 +2,186 @@ import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import api from "../../api/axios";
 
-function SavedJobs(){
+function SavedJobs() {
+
     const [savedJobs, setSavedJobs] = useState([]);
 
     useEffect(() => {
+
         fetchSavedJobs();
-    }, [])
+
+    }, []);
+
     const fetchSavedJobs = async () => {
+
         try {
-            const response = await api.get("/saved-jobs")
-            setSavedJobs(response.data)
+
+            const response = await api.get("/saved-jobs");
+
+            setSavedJobs(response.data);
+
         }
+
         catch (error) {
-            alert(error)
+
+            console.log(error);
+
+            alert("Failed to load saved jobs");
+
         }
-    }
+
+    };
 
     const removeSavedJob = async (jobId) => {
-        try {
-            await api.delete(`/saved-jobs/${jobId}`)
-            fetchSavedJobs();
-        }
-        catch (error) {
-            alert(error.response?.data?.detail)
-        }
-    }
 
+        try {
+
+            await api.delete(`/saved-jobs/${jobId}`);
+
+            fetchSavedJobs();
+
+        }
+
+        catch (error) {
+
+            alert(
+                error.response?.data?.detail ||
+                "Failed to remove job"
+            );
+
+        }
+
+    };
 
     return (
+
         <>
+
             <Navbar />
 
-            <div className="container mt-5">
+            <div className="container py-5">
 
-                <div className="card shadow">
+                <div className="text-center mb-5">
 
-                    <div className="card-header bg-primary text-white">
-                        <h3 className="mb-0">Saved Jobs</h3>
+                    <h1 className="fw-bold">
+
+                        ❤️ Saved Jobs
+
+                    </h1>
+
+                    <p className="text-muted fs-5">
+
+                        Jobs you've saved for later.
+
+                    </p>
+
+                </div>
+
+                {savedJobs.length === 0 ? (
+
+                    <div className="card border-0 shadow rounded-4">
+
+                        <div className="card-body text-center py-5">
+
+                            <h3>
+
+                                No Saved Jobs
+
+                            </h3>
+
+                            <p className="text-muted">
+
+                                Save jobs while browsing and they will
+                                appear here.
+
+                            </p>
+
+                        </div>
+
                     </div>
 
-                    <div className="card-body">
+                ) : (
 
-                        {savedJobs.length === 0 ? (
+                    <div className="row">
 
-                            <div className="text-center py-4">
-                                <h5>No saved jobs found.</h5>
+    {savedJobs.map((savedJob) => (
+
+        <div
+            className="col-12 mb-3"
+            key={savedJob.id}
+        >
+
+            <div className="card border-0 shadow-sm">
+
+                <div className="card-body">
+
+                    <div className="d-flex justify-content-between align-items-center">
+
+                        {/* Left */}
+
+                        <div>
+
+                            <h5 className="fw-bold mb-1">
+
+                                {savedJob.job.title}
+
+                            </h5>
+
+                            <div className="text-muted small">
+
+                                📍 {savedJob.job.location}
+
+                                <span className="mx-2">•</span>
+
+                                💰 ₹{savedJob.job.salary}
+
                             </div>
 
-                        ) : (
+                        </div>
 
-                            <table className="table table-bordered table-hover">
+                        {/* Right */}
 
-                                <thead className="table-dark">
+                        <div className="text-end">
 
-                                    <tr>
-                                        <th>Job Title</th>
-                                        <th>Location</th>
-                                        <th>Salary</th>
-                                        <th>Action</th>
-                                    </tr>
+                            <span className="badge bg-success mb-2">
 
-                                </thead>
+                                Saved
 
-                                <tbody>
+                            </span>
 
-                                    {savedJobs.map((savedJob) => (
+                            <br />
 
-                                        <tr key={savedJob.id}>
+                            <button
+                                className="btn btn-outline-danger btn-sm"
+                                onClick={() =>
+                                    removeSavedJob(savedJob.job.id)
+                                }
+                            >
+                                Remove
+                            </button>
 
-                                            <td>{savedJob.job.title}</td>
-
-                                            <td>{savedJob.job.location}</td>
-
-                                            <td>₹ {savedJob.job.salary}</td>
-
-                                            <td>
-
-                                                <button
-                                                    className="btn btn-danger btn-sm"
-                                                    onClick={() =>
-                                                        removeSavedJob(savedJob.job.id)
-                                                    }
-                                                >
-                                                    Remove
-                                                </button>
-
-                                            </td>
-
-                                        </tr>
-
-                                    ))}
-
-                                </tbody>
-
-                            </table>
-
-                        )}
+                        </div>
 
                     </div>
 
                 </div>
 
             </div>
+
+        </div>
+
+    ))}
+
+</div>
+
+                )}
+
+            </div>
+
         </>
-    )
+
+    );
+
 }
 
 export default SavedJobs;

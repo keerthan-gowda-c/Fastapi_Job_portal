@@ -6,121 +6,263 @@ function HomePage() {
 
     return (
 
-        <div className="container mt-5">
+        <div className="container py-5">
 
             {/* Hero Section */}
 
-            <div className="text-center mb-5">
+            <div className="row align-items-center py-5">
 
-                <h1 className="display-4 fw-bold">
-                    Welcome to Job Portal
-                </h1>
+    <div className="col-lg-6">
 
-                <p className="lead mt-3">
-                    Find your dream job or hire the perfect candidate.
+        <span className="badge bg-primary fs-6 px-3 py-2 mb-3">
+            🚀 #1 Job Portal
+        </span>
+
+        <h1 className="display-3 fw-bold mb-4">
+            Find Your <span className="text-primary">Dream Job</span>
+        </h1>
+
+        <p className="lead text-muted mb-4">
+            Connect with top companies, apply instantly,
+            and build your career with confidence.
+        </p>
+
+        <div>
+
+            <button
+                className="btn btn-primary btn-lg px-4 me-3 shadow"
+                onClick={() => navigate("/jobs")}
+            >
+                Browse Jobs
+            </button>
+
+            <button
+                className="btn btn-outline-primary btn-lg px-4 me-3"
+                onClick={() => navigate("/choose-login-role")}
+            >
+                Login
+            </button>
+
+            <button
+                className="btn btn-success btn-lg px-4 shadow"
+                onClick={() => navigate("/choose-role")}
+            >
+                Register
+            </button>
+
+        </div>
+
+    </div>
+
+    <div className="col-lg-6 text-center">
+
+        <img
+            src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800"
+            className="img-fluid rounded-4 shadow-lg"
+            alt="Job Portal"
+        />
+
+    </div>
+
+</div>
+
+{/* Statistic section */}
+
+<div className="row text-center my-5">
+
+    <div className="col-md-3">
+
+        <div className="card border-0 shadow-lg rounded-4">
+
+            <div className="card-body">
+
+                <h2 className="fw-bold text-primary">
+                    500+
+                </h2>
+
+                <p className="text-muted">
+                    Jobs
                 </p>
 
-                <div className="mt-4">
+            </div>
 
-                    <button
-                        className="btn btn-info btn-lg me-3"
-                        onClick={() => navigate("/jobs")}
-                    >
-                        Browse Jobs
-                    </button>
+        </div>
 
-                    <button
-                        className="btn btn-primary btn-lg me-3"
-                        onClick={() => navigate("/choose-login-role")}
-                    >
-                        Login
-                    </button>
+    </div>
 
-                    <button
-                        className="btn btn-success btn-lg"
-                        onClick={() => navigate("/choose-role")}
-                    >
-                        Register
-                    </button>
+    <div className="col-md-3">
 
-                </div>
+        <div className="card border-0 shadow-lg rounded-4">
+
+            <div className="card-body">
+
+                <h2 className="fw-bold text-success">
+                    120+
+                </h2>
+
+                <p className="text-muted">
+                    Companies
+                </p>
 
             </div>
+
+        </div>
+
+    </div>
+
+    <div className="col-md-3">
+
+        <div className="card border-0 shadow-lg rounded-4">
+
+            <div className="card-body">
+
+                <h2 className="fw-bold text-warning">
+                    5K+
+                </h2>
+
+                <p className="text-muted">
+                    Job Seekers
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div className="col-md-3">
+
+        <div className="card border-0 shadow-lg rounded-4">
+
+            <div className="card-body">
+
+                <h2 className="fw-bold text-danger">
+                    95%
+                </h2>
+
+                <p className="text-muted">
+                    Success Rate
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
             {/* Features */}
 
-            <div className="row">
+            <h2 className="text-center fw-bold mb-5">
+    Why Choose Us?
+</h2>
 
-                <div className="col-md-4 mb-4">
+<div className="row g-4">
 
-                    <div className="card shadow h-100">
+    <div className="col-md-4">
 
-                        <div className="card-body text-center">
+        <div className="card border-0 shadow-lg rounded-4 h-100">
 
-                            <h3>🔍 Find Jobs</h3>
+            <div className="card-body text-center p-5">
 
-                            <p className="mt-3">
-                                Browse hundreds of job opportunities from
-                                top companies.
-                            </p>
-
-                        </div>
-
-                    </div>
-
+                <div className="display-4 mb-3">
+                    🔍
                 </div>
 
-                <div className="col-md-4 mb-4">
-
-                    <div className="card shadow h-100">
-
-                        <div className="card-body text-center">
-
-                            <h3>📄 Easy Apply</h3>
-
-                            <p className="mt-3">
-                                Upload your resume and apply for jobs
-                                with one click.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="col-md-4 mb-4">
-
-                    <div className="card shadow h-100">
-
-                        <div className="card-body text-center">
-
-                            <h3>🏢 Recruit Talent</h3>
-
-                            <p className="mt-3">
-                                Recruiters can post jobs, review
-                                applicants, and hire the best candidates.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            {/* Footer */}
-
-            <div className="text-center mt-5 mb-3">
-
-                <hr />
+                <h4 className="fw-bold">
+                    Find Jobs
+                </h4>
 
                 <p className="text-muted">
-                    © 2025 Job Portal. All Rights Reserved.
+                    Browse thousands of verified job
+                    opportunities from trusted companies.
                 </p>
 
             </div>
+
+        </div>
+
+    </div>
+
+    <div className="col-md-4">
+
+        <div className="card border-0 shadow-lg rounded-4 h-100">
+
+            <div className="card-body text-center p-5">
+
+                <div className="display-4 mb-3">
+                    📄
+                </div>
+
+                <h4 className="fw-bold">
+                    Easy Apply
+                </h4>
+
+                <p className="text-muted">
+                    Upload your resume and apply with
+                    one click.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div className="col-md-4">
+
+        <div className="card border-0 shadow-lg rounded-4 h-100">
+
+            <div className="card-body text-center p-5">
+
+                <div className="display-4 mb-3">
+                    🏢
+                </div>
+
+                <h4 className="fw-bold">
+                    Top Recruiters
+                </h4>
+
+                <p className="text-muted">
+                    Connect directly with recruiters and
+                    leading organizations.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+            {/* Footer */}
+
+            <footer className="bg-dark text-white mt-5 rounded-4">
+
+    <div className="container py-5 text-center">
+
+        <h3 className="fw-bold">
+            Job Portal
+        </h3>
+
+        <p className="text-light">
+
+            Connecting talent with opportunities.
+
+        </p>
+
+        <hr className="bg-light"/>
+
+        <small>
+
+            © 2025 Job Portal | Built with React + FastAPI
+
+        </small>
+
+    </div>
+
+</footer>
 
         </div>
 

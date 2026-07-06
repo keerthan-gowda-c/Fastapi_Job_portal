@@ -2,153 +2,216 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../../api/axios";
 import Navbar from "../../../components/Navbar";
+import "./JobApplicants.css";
 
 function JobApplicants() {
-    const { jobId } = useParams()
+    const { jobId } = useParams();
 
-    const [applications, setApplications] = useState([])
+    const [applications, setApplications] = useState([]);
+
     useEffect(() => {
-        fetchApplicants()
-    }, [])
+        fetchApplicants();
+    }, []);
 
     const fetchApplicants = async () => {
         try {
-            const response = await api.get(`/applications/job/${jobId}`)
-            setApplications(response.data)
+            const response = await api.get(`/applications/job/${jobId}`);
+            setApplications(response.data);
+        } catch (error) {
+            console.log(error);
+            alert(error.response?.data?.detail || "Failed to load applications");
         }
-        catch (error) {
-            console.log(error)
-            alert(error.response?.data?.detail || "Failed to load applications")
-        }
-    }
+    };
 
     const updateStatus = async (applicationId, status) => {
         try {
-            await api.patch(`/applications/${applicationId}/status`, { status: status })
-            fetchApplicants()
+            await api.patch(`/applications/${applicationId}/status`, {
+                status,
+            });
+
+            fetchApplicants();
+
+        } catch (error) {
+
+            console.log(error);
+
+            alert(error.response?.data?.detail || "Failed to update status");
         }
-        catch (error) {
-            console.log(error)
-            alert(error.response?.data?.detail || "Failed to update status")
+    };
+
+    const badgeColor = (status) => {
+        switch (status) {
+            case "pending":
+                return "warning";
+            case "reviewed":
+                return "info";
+            case "shortlisted":
+                return "primary";
+            case "hired":
+                return "success";
+            case "rejected":
+                return "danger";
+            default:
+                return "secondary";
         }
-    }
+    };
+
     return (
         <>
             <Navbar />
-            <div className="container mt-4">
 
-                <div className="card shadow">
+            <div className="applicants-bg">
 
-                    <div className="card-header bg-primary text-white">
+                <div className="container py-5">
 
-                        <h3>Applicants</h3>
+                    <div className="card border-0 shadow-lg applicants-card">
 
-                    </div>
+                        <div className="card-body">
 
-                    <div className="card-body">
+                            <div className="d-flex justify-content-between align-items-center mb-4">
 
-                        {applications.length === 0 ? (
+                                <div>
 
-                            <div className="text-center">
+                                    <h2 className="fw-bold mb-1">
+                                        Job Applicants
+                                    </h2>
 
-                                <h5>No applicants yet.</h5>
+                                    <p className="text-muted mb-0">
+                                        {applications.length} candidate(s) applied
+                                    </p>
+
+                                </div>
 
                             </div>
 
-                        ) : (
+                            {applications.length === 0 ? (
 
-                            <table className="table table-bordered table-hover">
+                                <div className="text-center py-5">
 
-                                <thead className="table-dark">
+                                    <h4>No applicants yet</h4>
 
-                                    <tr>
+                                    <p className="text-muted">
+                                        Applications will appear here once candidates apply.
+                                    </p>
 
-                                        <th>Name</th>
+                                </div>
 
-                                        <th>Email</th>
+                            ) : (
 
-                                        <th>Status</th>
+                                <div className="table-responsive">
 
-                                        <th>Applied On</th>
+                                    <table className="table align-middle">
 
-                                        <th>Resume</th>
+                                        <thead className="table-light">
 
-                                    </tr>
+                                            <tr>
 
-                                </thead>
+                                                <th>Candidate</th>
+                                                <th>Email</th>
+                                                <th>Status</th>
+                                                <th>Applied On</th>
+                                                <th>Resume</th>
 
-                                <tbody>
+                                            </tr>
 
-                                    {applications.map((application) => (
+                                        </thead>
 
-                                        <tr key={application.id}>
+                                        <tbody>
 
-                                            <td>{application.user.full_name}</td>
+                                            {applications.map((application) => (
 
-                                            <td>{application.user.email}</td>
+                                                <tr key={application.id}>
 
-                                            <td>
-                                                <select
-                                                    className="form-select form-select-sm"
-                                                    value={application.status}
-                                                    onChange={(e) =>
-                                                        updateStatus(
-                                                            application.id,
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                >
+                                                    <td>
 
-                                                    <option value="pending">Pending</option>
+                                                        <strong>
+                                                            {application.user.full_name}
+                                                        </strong>
 
-                                                    <option value="reviewed">Reviewed</option>
+                                                    </td>
 
-                                                    <option value="shortlisted">Shortlisted</option>
+                                                    <td>
+                                                        {application.user.email}
+                                                    </td>
 
-                                                    <option value="rejected">Rejected</option>
+                                                    <td>
 
-                                                    <option value="hired">Hired</option>
-                                                </select>
-                                            </td>
+                                                        <div className="d-flex align-items-center gap-2">
 
-                                            <td>
+                                                            <span
+                                                                className={`badge bg-${badgeColor(application.status)}`}
+                                                            >
+                                                                {application.status}
+                                                            </span>
 
-                                                {new Date(
-                                                    application.applied_at
-                                                ).toLocaleDateString()}
+                                                            <select
+                                                                className="form-select form-select-sm"
+                                                                style={{ width: "160px" }}
+                                                                value={application.status}
+                                                                onChange={(e) =>
+                                                                    updateStatus(
+                                                                        application.id,
+                                                                        e.target.value
+                                                                    )
+                                                                }
+                                                            >
 
-                                            </td>
+                                                                <option value="pending">Pending</option>
+                                                                <option value="reviewed">Reviewed</option>
+                                                                <option value="shortlisted">Shortlisted</option>
+                                                                <option value="hired">Hired</option>
+                                                                <option value="rejected">Rejected</option>
 
-                                            <td>
+                                                            </select>
 
-                                                {application.user.resume_url ? (
+                                                        </div>
 
-                                                    <a
-                                                        href={`http://localhost:8000/${application.user.resume_url}`}
-                                                        target="_blank"
-                                                        rel="noreferrer"
-                                                        className="btn btn-success btn-sm"
-                                                    >
-                                                        View Resume
-                                                    </a>
+                                                    </td>
 
-                                                ) : (
+                                                    <td>
 
-                                                    <span>No Resume</span>
+                                                        {new Date(
+                                                            application.applied_at
+                                                        ).toLocaleDateString()}
 
-                                                )}
+                                                    </td>
 
-                                            </td>
+                                                    <td>
 
-                                        </tr>
+                                                        {application.user.resume_url ? (
 
-                                    ))}
+                                                            <a
+                                                                href={`http://localhost:8000/${application.user.resume_url}`}
+                                                                target="_blank"
+                                                                rel="noreferrer"
+                                                                className="btn btn-outline-primary btn-sm"
+                                                            >
+                                                                Resume
+                                                            </a>
 
-                                </tbody>
+                                                        ) : (
 
-                            </table>
+                                                            <span className="text-muted">
+                                                                Not Uploaded
+                                                            </span>
 
-                        )}
+                                                        )}
+
+                                                    </td>
+
+                                                </tr>
+
+                                            ))}
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                            )}
+
+                        </div>
 
                     </div>
 

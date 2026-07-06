@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../../api/axios";
 import Navbar from "../../../components/Navbar";
 import { Link } from "react-router-dom";
-
+import "./RecruiterApplications.css";
 
 function RecruiterApplications() {
 
@@ -13,98 +13,129 @@ function RecruiterApplications() {
     }, []);
 
     const fetchApplications = async () => {
-
         try {
-
             const response = await api.get("/applications");
-
             setApplications(response.data);
-
         }
         catch (error) {
-
             console.log(error);
-
             alert(
                 error.response?.data?.detail ||
                 "Failed to load applications"
             );
-
         }
-
     };
 
     return (
         <>
             <Navbar />
-            <div className="container mt-4">
 
-                <div className="card shadow">
+            <div className="applications-bg">
 
-                    <div className="card-header bg-primary text-white">
-                        <h3 className="mb-0">Job Applications</h3>
+                <div className="container py-5">
+
+                    <div className="page-header shadow-sm">
+
+                        <h2 className="fw-bold mb-1">
+                            Job Applications
+                        </h2>
+
+                        <p className="text-muted mb-0">
+                            View applicants for all your job postings.
+                        </p>
+
                     </div>
 
-                    <div className="card-body">
+                    <div className="card border-0 shadow-sm mt-4">
 
-                        {applications.length === 0 ? (
+                        <div className="card-body">
 
-                            <div className="text-center">
-                                <h5>No applications found.</h5>
-                            </div>
+                            {applications.length === 0 ? (
 
-                        ) : (
+                                <div className="text-center py-5">
 
-                            <table className="table table-bordered table-hover">
+                                    <h4>No applications found</h4>
 
-                                <thead className="table-dark">
+                                    <p className="text-muted">
+                                        Applications will appear here.
+                                    </p>
 
-                                    <tr>
-                                        <th>Job Title</th>
-                                        
-                                        <th>View</th>
-                                        
-                                    </tr>
+                                </div>
 
-                                </thead>
+                            ) : (
 
-                                <tbody>
+                                <div className="table-responsive">
 
-                                    {applications.map((application) => (
+                                    <table className="table table-hover align-middle mb-0">
 
-                                        <tr key={application.id}>
+                                        <thead className="table-light">
 
-                                            <td>{application.job.title}</td>
+                                            <tr>
 
-                                            
-                                            <td>
-                                                <Link
-                                                    className="btn btn-primary btn-sm"
-                                                    to={`/recruiter/job-applicants/${application.job.id}`}
-                                                >
-                                                    View Applicants
-                                                </Link>
-                                            </td>
+                                                <th>#</th>
+                                                <th>Job Title</th>
+                                                <th>Job ID</th>
+                                                <th className="text-center">
+                                                    Action
+                                                </th>
 
-                                            
+                                            </tr>
 
-                                           
+                                        </thead>
 
-                                        </tr>
+                                        <tbody>
 
-                                    ))}
+                                            {applications.map((application, index) => (
 
-                                </tbody>
+                                                <tr key={application.id}>
 
-                            </table>
+                                                    <td>
+                                                        {index + 1}
+                                                    </td>
 
-                        )}
+                                                    <td className="fw-semibold">
+                                                        {application.job.title}
+                                                    </td>
+
+                                                    <td>
+
+                                                        <span className="badge bg-secondary">
+                                                            #{application.job.id}
+                                                        </span>
+
+                                                    </td>
+
+                                                    <td className="text-center">
+
+                                                        <Link
+                                                            to={`/recruiter/job-applicants/${application.job.id}`}
+                                                            className="btn btn-primary btn-sm px-3"
+                                                        >
+                                                            View Applicants
+                                                        </Link>
+
+                                                    </td>
+
+                                                </tr>
+
+                                            ))}
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                            )}
+
+                        </div>
 
                     </div>
 
                 </div>
 
             </div>
+
         </>
     );
 }

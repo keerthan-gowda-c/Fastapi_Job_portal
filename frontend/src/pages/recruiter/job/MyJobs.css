@@ -1,0 +1,51 @@
+.jobs-bg{
+    background:#f5f7fa;
+    min-height:100vh;
+}
+
+.jobs-header{
+    background:#fff;
+    padding:30px;
+    border-radius:16px;
+}
+
+.job-card{
+    border-radius:18px;
+    transition:.3s ease;
+}
+
+.job-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 12px 28px rgba(0,0,0,.12)!important;
+}
+
+.job-card h4{
+    color:#1f2937;
+}
+
+.job-card p{
+    line-height:1.6;
+}
+
+.badge{
+    font-size:.8rem;
+    padding:8px 14px;
+    border-radius:20px;
+}
+
+.btn{
+    border-radius:10px;
+    font-weight:600;
+}
+
+.btn-warning{
+    color:white;
+}
+
+@media(max-width:768px){
+
+.jobs-header{
+    text-align:center;
+}
+
+}

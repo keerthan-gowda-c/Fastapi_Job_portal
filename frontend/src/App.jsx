@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Jobs from "./pages/Jobs";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import Jobs from "./pages/jobseeker/Jobs";
 import HomePage from "./pages/HomePage";
-import ChooseRole from "./pages/ChooseRole";
-import ChooseLoginRole from "./pages/ChooseLoginRole";
+import ChooseRole from "./pages/register/ChooseRole";
+import ChooseLoginRole from "./pages/login/ChooseLoginRole";
 import SavedJobs from "./pages/jobseeker/SavedJobs";
 import RecruiterDashboard from "./pages/recruiter/RecruiterDashboard";
 import CreateCompany from "./pages/recruiter/company/CreateCompany";

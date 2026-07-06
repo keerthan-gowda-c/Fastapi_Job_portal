@@ -1,106 +1,191 @@
-import { use } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
+
     const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem("user"))
+
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const logout = () => {
-        localStorage.removeItem("token")
-        localStorage.removeItem("user")
-        navigate("/")
 
-    }
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        navigate("/");
+
+    };
+
     return (
 
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow sticky-top">
 
             <div className="container">
 
                 <Link
-                    className="navbar-brand"
+                    className="navbar-brand fw-bold fs-3"
                     to="/"
                 >
-                    Job Portal
+                    💼 Job Portal
                 </Link>
 
-                <div className="navbar-nav ms-auto">
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                >
+                    <span className="navbar-toggler-icon"></span>
+                </button>
 
-                    {user?.role === "jobseeker" && (
-                        <>
-                            <Link
-                                className="nav-link"
-                                to="/jobs"
-                            >
-                                Jobs
-                            </Link>
+                <div
+                    className="collapse navbar-collapse"
+                    id="navbarNav"
+                >
 
-                            <Link
-                                to="/jobseeker/profile"
-                                className="btn btn-primary"
-                            >
-                                My Profile
-                            </Link>
+                    <ul className="navbar-nav ms-auto align-items-center">
 
-                            <Link
-                                className="nav-link"
-                                to="/saved-jobs"
-                            >
-                                Saved Jobs
-                            </Link>
+                        {/* Jobseeker */}
 
-                            <Link
-                                className="nav-link"
-                                to="/jobseeker/applications"
-                            >
-                                Applications
-                            </Link>
-                            <Link
-                                className="nav-link"
-                                to="/jobseeker/dashboard"
-                            >
-                                Dashboard
-                            </Link>
-                        </>
-                    )}
+                        {user?.role === "jobseeker" && (
 
-                    {user?.role === "recruiter" && (
-                        <>
-                            <Link
-                                className="nav-link"
-                                to="/recruiter-dashboard"
-                            >
-                                Dashboard
-                            </Link>
+                            <>
 
+                                <li className="nav-item">
 
+                                    <Link
+                                        className="nav-link"
+                                        to="/jobs"
+                                    >
+                                        Jobs
+                                    </Link>
 
-                            <Link
-                                className="nav-link"
-                                to="/my-jobs"
-                            >
-                                My Jobs
-                            </Link>
+                                </li>
 
-                            <Link
-                                className="nav-link"
-                                to="/recruiter/recruiter-application"
-                            >
-                                All Applications
-                            </Link>
+                                <li className="nav-item">
 
-                            
+                                    <Link
+                                        className="nav-link"
+                                        to="/saved-jobs"
+                                    >
+                                        Saved Jobs
+                                    </Link>
 
-                            
-                        </>
-                    )}
+                                </li>
 
-                    <button
-                        className="btn btn-danger ms-3"
-                        onClick={logout}
-                    >
-                        Logout
-                    </button>
+                                <li className="nav-item">
+
+                                    <Link
+                                        className="nav-link"
+                                        to="/jobseeker/applications"
+                                    >
+                                        Applications
+                                    </Link>
+
+                                </li>
+
+                                <li className="nav-item">
+
+                                    <Link
+                                        className="nav-link"
+                                        to="/jobseeker/dashboard"
+                                    >
+                                        Dashboard
+                                    </Link>
+
+                                </li>
+
+                                <li className="nav-item ms-2">
+
+                                    <Link
+                                        className="btn btn-primary rounded-pill px-3"
+                                        to="/jobseeker/profile"
+                                    >
+                                        My Profile
+                                    </Link>
+
+                                </li>
+
+                            </>
+
+                        )}
+
+                        {/* Recruiter */}
+
+                        {user?.role === "recruiter" && (
+
+                            <>
+
+                                <li className="nav-item">
+
+                                    <Link
+                                        className="nav-link"
+                                        to="/recruiter-dashboard"
+                                    >
+                                        Dashboard
+                                    </Link>
+
+                                </li>
+
+                                <li className="nav-item">
+
+                                    <Link
+                                        className="nav-link"
+                                        to="/my-jobs"
+                                    >
+                                        My Jobs
+                                    </Link>
+
+                                </li>
+
+                                <li className="nav-item">
+
+                                    <Link
+                                        className="nav-link"
+                                        to="/recruiter/recruiter-application"
+                                    >
+                                        Applications
+                                    </Link>
+
+                                </li>
+
+                            </>
+
+                        )}
+
+                        {/* User */}
+
+                        {user && (
+
+                            <li className="nav-item ms-4">
+
+                                <span className="text-light fw-semibold">
+
+                                    👋 {user.full_name}
+
+                                </span>
+
+                            </li>
+
+                        )}
+
+                        {/* Logout */}
+
+                        {user && (
+
+                            <li className="nav-item ms-3">
+
+                                <button
+                                    className="btn btn-danger rounded-pill px-4"
+                                    onClick={logout}
+                                >
+                                    Logout
+                                </button>
+
+                            </li>
+
+                        )}
+
+                    </ul>
 
                 </div>
 
@@ -109,6 +194,7 @@ function Navbar() {
         </nav>
 
     );
+
 }
 
 export default Navbar;

@@ -1,0 +1,40 @@
+.applicants-bg{
+    background:#f4f7fb;
+    min-height:100vh;
+}
+
+.applicants-card{
+    border-radius:20px;
+}
+
+.table th{
+    font-weight:600;
+}
+
+.table td{
+    vertical-align:middle;
+}
+
+tbody tr{
+    transition:.25s;
+}
+
+tbody tr:hover{
+    background:#f8f9fa;
+}
+
+.badge{
+    text-transform:capitalize;
+    padding:8px 12px;
+    font-size:.75rem;
+    border-radius:20px;
+}
+
+.form-select{
+    border-radius:8px;
+}
+
+.btn{
+    border-radius:8px;
+    font-weight:600;
+}

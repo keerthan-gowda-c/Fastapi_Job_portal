@@ -1,0 +1,52 @@
+.applications-bg{
+    background:#f4f7fb;
+    min-height:100vh;
+}
+
+.page-header{
+    background:#fff;
+    border-radius:16px;
+    padding:24px 30px;
+}
+
+.card{
+    border-radius:16px;
+}
+
+.table{
+    margin-bottom:0;
+}
+
+.table thead th{
+    background:#f8f9fa;
+    color:#495057;
+    font-weight:600;
+    border-bottom:2px solid #dee2e6;
+}
+
+.table tbody tr{
+    transition:.25s;
+}
+
+.table tbody tr:hover{
+    background:#f8fafc;
+}
+
+.badge{
+    font-size:.8rem;
+    padding:8px 12px;
+    border-radius:20px;
+}
+
+.btn{
+    border-radius:8px;
+    font-weight:600;
+}
+
+@media(max-width:768px){
+
+.page-header{
+    text-align:center;
+}
+
+}
