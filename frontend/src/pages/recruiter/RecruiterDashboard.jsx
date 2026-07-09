@@ -59,7 +59,7 @@ function RecruiterDashboard() {
                                 {stats.companies > 0 ? (
                                     <button
                                         className="btn btn-outline-primary px-4"
-                                        onClick={() => navigate("/company")}
+                                        onClick={() => navigate("/company/my-company")}
                                     >
                                         🏢 View Company
                                     </button>

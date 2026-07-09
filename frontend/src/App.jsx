@@ -17,6 +17,8 @@ import EditProfile from "./pages/jobseeker/EditProfile";
 import MyApplications from "./pages/jobseeker/MyApplications";
 import RecruiterApplications from "./pages/recruiter/application/RecruiterApplications";
 import JobApplicants from "./pages/recruiter/application/JobApplicants";
+import MyCompany from "./pages/recruiter/company/MyCompany";
+import EditCompany from "./pages/recruiter/company/EditCompany";
 
 
 
@@ -64,6 +66,16 @@ function App() {
         <Route
           path="/company/create"
           element={<CreateCompany />}
+        />
+
+        <Route
+          path="/company/my-company"
+          element={<MyCompany />}
+        />
+
+        <Route
+          path="/company/edit-company"
+          element={<EditCompany />}
         />
 
         <Route

@@ -17,3 +17,12 @@ class CompanyResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class CompanyUpdate(BaseModel):
+    id: int | None = None
+    name: str | None = None
+    description: str | None = None
+    website: str | None = None
+    location: str | None = None
+    

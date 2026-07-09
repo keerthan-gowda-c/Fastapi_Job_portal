@@ -1,13 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from typing import Optional
 
 from app.database import get_db
 from app.models.company import Company
 from app.models.user import User
 
+
 from app.schemas.company import (
     CompanyCreate,
-    CompanyResponse
+    CompanyResponse, CompanyUpdate
 )
 
 from app.dependencies.roles import require_role
@@ -18,10 +20,7 @@ router = APIRouter(
 )
 
 
-@router.post(
-    "/",
-    response_model=CompanyResponse
-)
+@router.post("/",response_model=CompanyResponse)
 def create_company(
     company: CompanyCreate,
     db: Session = Depends(get_db),
@@ -46,8 +45,17 @@ def create_company(
 
 
 @router.get("/")
-def get_companies(db: Session = Depends(get_db)):
-    return db.query(Company).all()
+def list_companies(search:Optional[str]=None, db:Session = Depends(get_db)):
+    query=db.query(Company)
+    if search:
+        query = query.filter(Company.name.ilike(f"%{search}%"))
+    
+    return query.order_by(Company.name).all()
+
+
+@router.get("/me")
+def get_my_company(db:Session=Depends(get_db),current_user:User=Depends(require_role("recruiter"))):
+    return db.query(Company).filter(Company.owner_id == current_user.id).first()
 
 
 
@@ -59,6 +67,7 @@ def get_company(company_id:int, db:Session=Depends(get_db)):
         raise HTTPException(status_code=404,detail = "Company not found")
     
     return company
+
 
 
 @router.put("/{company_id}")
@@ -80,6 +89,22 @@ def update_company(
     company.description = company_data.description
     company.website = company_data.website
     company.location = company_data.location
+
+    db.commit()
+    db.refresh(company)
+
+    return company
+
+
+@router.patch("/me",response_model=CompanyResponse)
+def update_my_company(data:CompanyUpdate, db:Session = Depends(get_db), current_user : User = Depends(require_role("recruiter"))):
+    company = (db.query(Company).filter(Company.owner_id == current_user.id).first())
+
+    if not company:
+        raise HTTPException(status_code=404, detail="Company not found")
+    
+    for field, value in data.model_dump(exclude_unset=True).items():
+        setattr(company,field, value)
 
     db.commit()
     db.refresh(company)
