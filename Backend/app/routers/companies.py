@@ -45,12 +45,17 @@ def create_company(
 
 
 @router.get("/")
-def list_companies(search:Optional[str]=None, db:Session = Depends(get_db)):
+def list_companies(search:Optional[str]=None,
+                   page:int = 1, limit:int=10,
+                   db:Session = Depends(get_db)):
+
     query=db.query(Company)
     if search:
         query = query.filter(Company.name.ilike(f"%{search}%"))
-    
-    return query.order_by(Company.name).all()
+
+    companies = query.order_by(Company.name).offset((page - 1)*limit).limit(limit).all()
+    return companies
+
 
 
 @router.get("/me")

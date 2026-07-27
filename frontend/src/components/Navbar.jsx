@@ -43,6 +43,16 @@ function Navbar() {
                 >
 
                     <ul className="navbar-nav ms-auto align-items-center">
+                        {/* Public Links */}
+
+                        {/* <li className="nav-item">
+                            <Link
+                                className="nav-link"
+                                to="/companies/all"
+                            >
+                                Companies
+                            </Link>
+                        </li> */}
 
                         {/* Jobseeker */}
 
@@ -97,7 +107,7 @@ function Navbar() {
                                 <li className="nav-item ms-2">
 
                                     <Link
-                                        className="btn btn-primary rounded-pill px-3"
+                                        className="nav-link"
                                         to="/jobseeker/profile"
                                     >
                                         My Profile

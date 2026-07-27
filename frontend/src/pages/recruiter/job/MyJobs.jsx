@@ -181,11 +181,13 @@ function MyJobs() {
                                                 <button
                                                     className="btn btn-outline-primary"
                                                     onClick={() =>
-                                                        navigate(`/job/${job.id}/applications`)
+                                                        navigate(`/recruiter/job-applicants/${job.id}`)
                                                     }
                                                 >
                                                     View Applicants
                                                 </button>
+
+                                                
 
                                             </div>
 

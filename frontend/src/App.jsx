@@ -19,6 +19,8 @@ import RecruiterApplications from "./pages/recruiter/application/RecruiterApplic
 import JobApplicants from "./pages/recruiter/application/JobApplicants";
 import MyCompany from "./pages/recruiter/company/MyCompany";
 import EditCompany from "./pages/recruiter/company/EditCompany";
+import CompaniesList from "./pages/search/CompaniesList";
+import CompanyDetails from "./pages/company/CompanyDetails";
 
 
 
@@ -126,6 +128,16 @@ function App() {
         <Route
           path="/recruiter/job-applicants/:jobId"
           element={<JobApplicants />}
+        />
+
+        <Route
+          path="/companies/all"
+          element={<CompaniesList />}
+        />
+
+        <Route
+          path="/companies/details/:id"
+          element={<CompanyDetails />}
         />
 
       </Routes>
