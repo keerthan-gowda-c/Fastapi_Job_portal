@@ -211,22 +211,27 @@ http://localhost:8000/docs
 
 # Screenshots
 
-```markdown
+## Home Page
 ![Home](screenshots/home.png)
 
+## Login Page
 ![Login](screenshots/login.png)
 
+## Jobs Page
 ![Jobs](screenshots/jobs.png)
 
+## Recruiter Dashboard
 ![Recruiter Dashboard](screenshots/recruiter-dashboard.png)
 
+## Recruiter Job Applications
 ![Recruiter Job Applications](screenshots/recruiter-applications.png)
 
+## Jobseeker Dashboard
 ![Jobseeker Dashboard](screenshots/jobseeker-dashboard.png)
 
+## Jobseeker Job Applications
 ![Jobseeker Job Applications](screenshots/jobseeker-applications.png)
 
-```
 
 ---
 
