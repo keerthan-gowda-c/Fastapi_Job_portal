@@ -1,7 +1,8 @@
 from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
+import cloudinary
+import os
 
 from app.models.user import User
 from app.models.company import Company
@@ -24,6 +25,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True,
+)
+
 
 from app.routers.auth import router as auth_router
 from app.routers.user import router as user_router
@@ -43,4 +51,3 @@ app.include_router(dashboard_router)
 app.include_router(saved_job_router)
 
 
-app.mount("/uploads",StaticFiles(directory="uploads"),name="uploads")

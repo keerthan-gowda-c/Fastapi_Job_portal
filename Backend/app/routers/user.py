@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, Form
 import os
+import cloudinary.uploader
 import shutil
 from app.dependencies.auth import get_current_user
 from app.models.user import User
@@ -52,9 +53,6 @@ async def upload_resume(
             status_code=400,
             detail="Only PDF and DOCX files are allowed"
         )
-    os.makedirs("uploads/resumes", exist_ok=True)
-
-    file_path = f"uploads/resumes/{current_user.id}_{file.filename}"
 
     contents = await file.read()
 
@@ -64,16 +62,20 @@ async def upload_resume(
             detail="File size must be less than 5 MB"
         )
 
-    with open(file_path, "wb") as buffer:
-        buffer.write(contents)
+    result = cloudinary.uploader.upload(
+        contents,
+        resource_type="raw",
+        folder="jobportal/resumes",
+        public_id=f"{current_user.id}_{os.path.splitext(file.filename)[0]}"
+    )
 
-    current_user.resume_url = file_path
+    current_user.resume_url = result["secure_url"]
     db.commit()
     db.refresh(current_user)
 
     return{
         "message" : "Resume uploaded",
-        "resume_url" : file_path
+        "resume_url" : result["secure_url"]
     }
 
 @router.delete("/delete-all-users")
@@ -112,20 +114,24 @@ def update_profile(
     current_user.education = education
 
     if resume:
-        resume_path = f"uploads/resumes/{resume.filename}"
+        result = cloudinary.uploader.upload(
+            resume.file,
+            resource_type="raw",
+            folder="jobportal/resumes",
+            public_id=f"{current_user.id}_{os.path.splitext(resume.filename)[0]}"
+        )
 
-        with open(resume_path, "wb") as buffer:
-            shutil.copyfileobj(resume.file, buffer)
-
-        current_user.resume_url = "/" + resume_path
+        current_user.resume_url = result["secure_url"]
 
     if profile_image:
-        image_path = f"uploads/profile_images/{profile_image.filename}"
-
-        with open(image_path, "wb") as buffer:
-            shutil.copyfileobj(profile_image.file, buffer)
-
-        current_user.profile_image = "/" + image_path
+        result = cloudinary.uploader.upload(
+            profile_image.file,
+            resource_type="raw",
+            folder="jobportal/profile_images",
+            public_id=f"{current_user.id}_{os.path.splitext(profile_image.filename)[0]}"
+        )
+        
+        current_user.profile_image = result["secure_url"]
 
     db.commit()
     db.refresh(current_user)
@@ -152,10 +158,6 @@ async def upload_profile_image(
             detail="Only JPG, JPEG and PNG images are allowed"
         )
 
-    os.makedirs("uploads/profile_images", exist_ok=True)
-
-    file_path = f"uploads/profile_images/{current_user.id}_{file.filename}"
-
     contents = await file.read()
 
     if len(contents) > 2 * 1024 * 1024:
@@ -164,15 +166,18 @@ async def upload_profile_image(
             detail="Image size must be less than 2 MB"
         )
 
-    with open(file_path, "wb") as buffer:
-        buffer.write(contents)
-
-    current_user.profile_image = file_path
+    result = cloudinary.uploader.upload(
+           contents,
+           folder="jobportal/profile_images",
+           public_id=f"{current_user.id}_{os.path.splitext(file.filename)[0]}"
+       )
+   
+    current_user.profile_image = result["secure_url"]
 
     db.commit()
     db.refresh(current_user)
 
     return {
         "message": "Profile image uploaded successfully",
-        "profile_image": file_path
+        "profile_image": result["secure_url"]
     }
