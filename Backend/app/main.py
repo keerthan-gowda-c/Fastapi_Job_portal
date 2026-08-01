@@ -19,7 +19,8 @@ app = FastAPI(
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Change later when frontend is deployed
+    allow_origins=["http://localhost:5173",
+        "https://fastapi-job-portal-mauve.vercel.app/",],  # Change later when frontend is deployed
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
