@@ -15,7 +15,6 @@ app = FastAPI(
     title="Job Portal API"
 )
 
-
 # CORS
 app.add_middleware(
     CORSMiddleware,
