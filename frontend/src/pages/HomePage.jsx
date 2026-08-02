@@ -243,7 +243,7 @@ function HomePage() {
     <div className="container py-5 text-center">
 
         <h3 className="fw-bold">
-            Job Portal
+            JobHive
         </h3>
 
         <p className="text-light">
@@ -256,7 +256,7 @@ function HomePage() {
 
         <small>
 
-            © 2025 Job Portal | Built with React + FastAPI
+            © 2026 JobHive. All rights reserved | Built with React + FastAPI
 
         </small>
 
