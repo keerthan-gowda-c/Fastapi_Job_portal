@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import "./Navbar.css"
+import "./Navbar.css";
+
 function Navbar() {
 
     const navigate = useNavigate();
@@ -16,10 +17,10 @@ function Navbar() {
     };
 
     return (
- <nav className="navbar space-around bg-dark fixed-top" data-bs-theme="dark">
-    <div className="container">
+ <nav className="navbar bg-dark fixed-top" data-bs-theme="dark">
+    <div className="container ">
 
-        <Link className="navbar-brand fw-bold fs-4 d-flex align-items-center" to="/">
+        <Link className="navbar-brand fw-bold align-items-center" to="/">
             💼 <span className="ms-2">JobHive</span>
         </Link>
 
@@ -63,12 +64,12 @@ function Navbar() {
                     </div>
 
                     <button
-                        className="btn menu-btn"
+                        className="menu-btn"
                         type="button"
                         data-bs-toggle="offcanvas"
                         data-bs-target="#menuOffcanvas"
                     >
-                        <i className="bi bi-list fs-3"></i>
+                        <i className="bi bi-menu-button-fill fs-5"></i>
                     </button>
                 </>
             )}

@@ -130,7 +130,12 @@ function EditProfile() {
                 data.append("profile_image", formData.profile_image);
             }
 
-            await api.put("/users/me", data);
+            try {
+                await api.put("/users/me", data);
+            } catch (error) {
+                console.log(error.response?.data);
+                console.log(error.response?.status);
+            }
 
             await uploadResume();
 

@@ -231,7 +231,7 @@ function Profile() {
                                     <a
                                         href={`${user.resume_url}`}
                                         target="_blank"
-                                        rel="noreferrer"
+                                        rel="noopener noreferrer"
                                         className="btn btn-success rounded-pill px-4"
                                     >
 
