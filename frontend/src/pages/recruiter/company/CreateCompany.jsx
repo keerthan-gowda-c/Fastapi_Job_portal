@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api/axios";
 import Navbar from "../../../components/Navbar";
+import { toast } from "react-toastify";
 
 
 function CreateCompany(){
@@ -22,12 +23,12 @@ function CreateCompany(){
 
         try{
             await api.post("/companies/",form)
-            alert("Company created successfully")
+            toast.success("Company created successfully")
             navigate("/recruiter-dashboard")
         }
         catch(error){
             console.log(error);
-            alert(error.response?.data?.detail || "Company creation failed")
+            toast.error(error.response?.data?.detail || "Company creation failed")
         }
     }
 

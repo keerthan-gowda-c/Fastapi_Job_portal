@@ -51,8 +51,7 @@
 }
 
 body {
-  margin: 0;
-
+  padding-top: 50px;
 }
 body:hover{
   cursor: default;

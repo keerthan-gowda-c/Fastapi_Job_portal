@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../api/axios";
 import Navbar from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function CompaniesList() {
     const [companies, setCompanies] = useState([]);
@@ -28,7 +29,7 @@ function CompaniesList() {
             setCompanies(response.data);
         } catch (error) {
             console.log(error);
-            alert("Failed to fetch companies");
+            toast.error("Failed to fetch companies");
         } finally {
             setLoading(false);
         }

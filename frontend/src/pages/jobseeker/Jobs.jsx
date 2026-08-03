@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
 import Navbar from "../../components/Navbar";
+import { toast } from "react-toastify";
 
 function Jobs() {
 
@@ -74,7 +75,7 @@ function Jobs() {
 
             await api.post(`/applications/jobs/${jobId}`);
 
-            alert("Application submitted successfully");
+            toast.success("Application submitted successfully");
 
         }
 
@@ -82,7 +83,7 @@ function Jobs() {
 
             console.log(error);
 
-            alert(
+            toast.warning(
                 error.response?.data?.detail ||
                 "Failed to apply"
             );
@@ -97,7 +98,7 @@ function Jobs() {
 
             await api.post(`/saved-jobs/${jobId}`);
 
-            alert("Job saved successfully");
+            toast.info("Job saved successfully");
 
         }
 
@@ -105,7 +106,7 @@ function Jobs() {
 
             console.log(error);
 
-            alert(
+            toast.warning(
                 error.response?.data?.detail ||
                 "Failed to save job"
             );

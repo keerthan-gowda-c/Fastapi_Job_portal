@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../../api/axios";
 import Navbar from "../../../components/Navbar";
 import "./CreateJob.css";
+import { toast } from "react-toastify";
 
 function CreateJob() {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ function CreateJob() {
                 salary: Number(form.salary)
             });
 
-            alert("Job created successfully");
+            toast.success("Job created successfully");
 
             navigate("/recruiter-dashboard");
 
@@ -40,7 +41,7 @@ function CreateJob() {
 
             console.log(error);
 
-            alert(
+            toast.error(
                 error.response?.data?.detail ||
                 "Job creation failed"
             );

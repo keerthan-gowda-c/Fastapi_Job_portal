@@ -17,65 +17,80 @@ function Navbar() {
     };
 
     return (
- <nav className="navbar bg-dark fixed-top" data-bs-theme="dark">
-    <div className="container ">
+        <nav className="navbar bg-dark fixed-top" data-bs-theme="dark">
+            <div className="container ">
 
-        <Link className="navbar-brand fw-bold align-items-center" to="/">
-            💼 <span className="ms-2">JobHive</span>
-        </Link>
-
-        <div className="d-flex align-items-center ms-auto">
-
-            <Link
-                className="nav-link text-light me-4 nav-hover"
-                to="/companies/all"
-            >
-                Companies
-            </Link>
-
-            {!user ? (
-                <>
-                    <Link
-                        className="nav-link text-light me-3 nav-hover"
-                        to="/login"
-                    >
-                        Login
+                {!user ? (
+                    <Link className="navbar-brand fw-bold align-items-center" to="/">
+                        💼 <span className="ms-2">JobHive</span>
                     </Link>
+                ) : (
+                    <Link className="navbar-brand fw-bold align-items-center" to="/jobs">
+                        💼 <span className="ms-2">JobHive</span>
+                    </Link>
+                )}
+
+                <div className="d-flex align-items-center ms-auto">
 
                     <Link
-                        className="btn btn-primary rounded-pill px-4 fw-semibold"
-                        to="/register"
+                        className="nav-link text-light me-4 nav-hover"
+                        to="/companies/all"
                     >
-                        Get Started
+                        Companies
                     </Link>
-                </>
-            ) : (
-                <>
-                    <div className="d-flex align-items-center me-3">
-{/* 
+
+                    {!user ? (
+                        <>
+                            <Link
+                                className="nav-link text-light me-3 nav-hover"
+                                to="/login"
+                            >
+                                Login
+                            </Link>
+
+                            <Link
+                                className="btn btn-primary rounded-pill px-4 fw-semibold"
+                                to="/register"
+                            >
+                                Get Started
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                            <div className="d-flex align-items-center me-3">
+                                {/* 
                         <div className="avatar-circle">
                             {user.full_name.charAt(0).toUpperCase()}
                         </div> */}
 
-                        <span className="text-light user-name fw-semibold ms-2 d-none d-md-inline">
-                            {user.full_name}
-                        </span>
+                                <span className="text-light ms-2 d-none d-md-inline">
+                                    {user?.role === "jobseeker" && (
+                                        <Link className="nav-link py-0 nav-hover" to="/jobs">Jobs</Link>
+                                    )}
+                                </span>
 
-                    </div>
+                                <span className="text-light user-name fw-semibold ms-2 px-4 d-none d-md-inline">
+                                    {user.full_name}
+                                </span>
 
-                    <button
-                        className="menu-btn"
-                        type="button"
-                        data-bs-toggle="offcanvas"
-                        data-bs-target="#menuOffcanvas"
-                    >
-                        <i className="bi bi-menu-button-fill fs-5"></i>
-                    </button>
-                </>
-            )}
 
-        </div>
-            <div className="offcanvas offcanvas-end" style={{ "--bs-offcanvas-width": "300px" }} tabIndex="-1" id="menuOffcanvas" aria-labelledby="offcanvasNavbarLabel">
+
+
+                            </div>
+
+                            <button
+                                className="menu-btn"
+                                type="button"
+                                data-bs-toggle="offcanvas"
+                                data-bs-target="#menuOffcanvas"
+                            >
+                                <i className="bi bi-menu-button-fill fs-5"></i>
+                            </button>
+                        </>
+                    )}
+
+                </div>
+                <div className="offcanvas offcanvas-end" style={{ "--bs-offcanvas-width": "300px" }} tabIndex="-1" id="menuOffcanvas" aria-labelledby="offcanvasNavbarLabel">
                     <div className="offcanvas-header">
                         <h5 className="offcanvas-title p-0" id="offcanvasNavbarLabel">💼 JobHive</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>

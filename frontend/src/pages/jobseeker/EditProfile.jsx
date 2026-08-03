@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
+import { toast } from "react-toastify";
 
 
 function EditProfile() {
@@ -9,6 +10,8 @@ function EditProfile() {
     const [resume, setResume] = useState(null);
 
     const [profileImage, setProfileImage] = useState(null);
+
+    const [loading, setLoading] = useState(false)
 
     const [formData, setFormData] = useState({
         full_name: "",
@@ -33,8 +36,6 @@ function EditProfile() {
                 skills: response.data.skills || "",
                 experience: response.data.experience || "",
                 education: response.data.education || "",
-                resume_url: response.data.resume_url || "",
-                profile_image: response.data.profile_image || "",
 
             })
 
@@ -56,13 +57,13 @@ function EditProfile() {
 
             await api.post("/users/resume", formData);
 
-            alert("Resume uploaded successfully");
+            toast.info("Resume uploaded successfully");
 
         } catch (error) {
 
             console.log(error);
 
-            alert("Resume upload failed");
+            toast.warning("Resume upload failed");
 
         }
 
@@ -80,26 +81,18 @@ function EditProfile() {
 
             await api.post("/users/profile-image", formData);
 
-            alert("Profile image uploaded successfully");
+            toast.info("Profile image uploaded successfully");
 
         } catch (error) {
 
             console.log(error);
 
-            alert("Profile image upload failed");
+            toast.warning("Profile image upload failed");
 
         }
 
     };
 
-    const handleFileChange = (e) => {
-
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.files[0]
-        });
-
-    };
 
     const handleChange = (e) => {
         setFormData({
@@ -110,6 +103,7 @@ function EditProfile() {
     const handleSubmit = async (e) => {
 
         e.preventDefault();
+        setLoading(true)
 
         try {
 
@@ -122,12 +116,14 @@ function EditProfile() {
             data.append("experience", formData.experience);
             data.append("education", formData.education);
 
-            if (formData.resume) {
+            if (resume) {
                 data.append("resume", formData.resume);
+                 await uploadResume();
             }
 
-            if (formData.profile_image) {
+            if (profileImage) {
                 data.append("profile_image", formData.profile_image);
+                await uploadProfileImage();
             }
 
             try {
@@ -137,11 +133,7 @@ function EditProfile() {
                 console.log(error.response?.status);
             }
 
-            await uploadResume();
-
-            await uploadProfileImage();
-
-            alert("Profile updated successfully");
+            toast.success("Profile updated successfully");
 
             navigate("/jobseeker/profile");
 
@@ -149,8 +141,11 @@ function EditProfile() {
 
             console.log(error);
 
-            alert("Update failed");
+            toast.error("Update failed");
 
+        }
+        finally {
+            setLoading(false)
         }
 
     };
@@ -261,8 +256,21 @@ function EditProfile() {
                         <button
                             className="btn btn-primary"
                             type="submit"
+                            disabled={loading}
                         >
-                            Save Changes
+                            {
+                                loading ? (
+                                    <>
+                                        <span className="spinner-border spinner-border-sm me-2"
+                                            role="status">
+                                        </span>
+                                        Updating...
+                                    </>
+                                ) : (
+                                    "Save Changes"
+                                )
+                            }
+                            
                         </button>
 
                     </form>

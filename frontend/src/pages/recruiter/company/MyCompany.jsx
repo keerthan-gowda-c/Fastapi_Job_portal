@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api/axios";
 import Navbar from "../../../components/Navbar";
+import { toast } from "react-toastify";
 
 function MyCompany(){
     const[company, setCompany] = useState(null)
@@ -18,7 +19,7 @@ function MyCompany(){
         }
         catch(error){
             console.log(error)
-            alert(error.response?.data?.detail || "Failed to load Company")
+            toast.warning(error.response?.data?.detail || "Failed to load Company")
 
         }
     }
@@ -31,11 +32,11 @@ function MyCompany(){
 
         try{
             await api.delete(`/companies/${company.id}`)
-            alert("Company deleted successfully")
+            toast.success("Company deleted successfully")
             navigate("/recruiter-dashboard")
         }
         catch(error){
-            alert(error.response?.data?.detail || "Failed to delete company")
+            toast.warning(error.response?.data?.detail || "Failed to delete company")
         }
     }
     if(!company){

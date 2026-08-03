@@ -23,9 +23,12 @@ import CompaniesList from "./pages/search/CompaniesList";
 import CompanyDetails from "./pages/company/CompanyDetails";
 
 
+import {ToastContainer} from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 function App() {
   return (
+    <>
     <BrowserRouter>
 
       <Routes>
@@ -143,6 +146,14 @@ function App() {
       </Routes>
 
     </BrowserRouter>
+    <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        theme="colored"
+      />
+
+    </>
+
   )
 }
 

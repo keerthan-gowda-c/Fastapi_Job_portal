@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
 import Navbar from "../../components/Navbar";
+import { toast } from "react-toastify";
 
 function Profile() {
 
@@ -26,7 +27,7 @@ function Profile() {
 
             console.log(error);
 
-            alert("Failed to load profile");
+            toast.warning("Failed to load profile");
 
         }
 
@@ -37,8 +38,20 @@ function Profile() {
         return (
             <>
                 <Navbar />
-                <div className="container mt-5">
-                    Loading...
+                <div className="container vh-100 d-flex justify-content-center align-items-center">
+                    <div className="text-center">
+                        <div className="spinner-grow text-primary me-2"></div>
+                        <div className="spinner-grow text-primary me-2"></div>
+                        <div className="spinner-grow text-primary"></div>
+
+                        <h5 className="mt-4 fw-semibold">
+                            Loading...
+                        </h5>
+
+                        <p className="text-muted">
+                            Please wait while we prepare everything.
+                        </p>
+                    </div>
                 </div>
             </>
 
@@ -47,221 +60,223 @@ function Profile() {
     }
 
     return (
-    <>
-        <Navbar />
+        <>
+            <Navbar />
 
-        <div className="container py-5">
+            <div className="container py-5">
 
-            <div className="text-center mb-5">
+                <div className="text-center mb-5">
 
-                <h1 className="fw-bold">
-                    👤 My Profile
-                </h1>
+                    <h1 className="fw-bold">
+                        👤 My Profile
+                    </h1>
 
-                <p className="text-muted fs-5">
-                    Manage your personal information and resume.
-                </p>
-
-            </div>
-
-            <div className="row g-4">
-
-                {/* Left Profile Card */}
-
-                <div className="col-lg-4">
-
-                    <div className="card border-0 shadow rounded-4">
-
-                        <div className="card-body text-center p-5">
-
-                            {user.profile_image ? (
-
-                                <img
-                                    src={`${user.profile_image}`}
-                                    alt="Profile"
-                                    className="rounded-circle shadow mb-4"
-                                    style={{
-                                        width: "180px",
-                                        height: "180px",
-                                        objectFit: "cover"
-                                    }}
-                                />
-
-                            ) : (
-
-                                <div
-                                    className="rounded-circle bg-light d-flex justify-content-center align-items-center mx-auto mb-4"
-                                    style={{
-                                        width: "180px",
-                                        height: "180px"
-                                    }}
-                                >
-
-                                    <i
-                                        className="bi bi-person-fill text-secondary"
-                                        style={{ fontSize: "80px" }}
-                                    ></i>
-
-                                </div>
-
-                            )}
-
-                            <h3 className="fw-bold">
-
-                                {user.full_name}
-
-                            </h3>
-
-                            <p className="text-muted">
-
-                                {user.email}
-
-                            </p>
-
-                            <span className="badge bg-primary text-capitalize fs-6">
-
-                                {user.role}
-
-                            </span>
-
-                        </div>
-
-                    </div>
+                    <p className="text-muted fs-5">
+                        Manage your personal information and resume.
+                    </p>
 
                 </div>
 
-                {/* Right Information */}
+                <div className="row g-4">
 
-                <div className="col-lg-8">
+                    {/* Left Profile Card */}
 
-                    <div className="card border-0 shadow rounded-4">
+                    <div className="col-lg-4">
 
-                        <div className="card-body p-5">
+                        <div className="card border-0 shadow rounded-4">
 
-                            <div className="row">
+                            <div className="card-body text-center p-5">
 
-                                <div className="col-md-6 mb-4">
+                                {user.profile_image ? (
 
-                                    <h6 className="text-muted">
-
-                                        Phone
-
-                                    </h6>
-
-                                    <p className="fw-semibold">
-
-                                        {user.phone || "Not Added"}
-
-                                    </p>
-
-                                </div>
-
-                                <div className="col-md-6 mb-4">
-
-                                    <h6 className="text-muted">
-
-                                        Location
-
-                                    </h6>
-
-                                    <p className="fw-semibold">
-
-                                        {user.location || "Not Added"}
-
-                                    </p>
-
-                                </div>
-
-                                <div className="col-md-6 mb-4">
-
-                                    <h6 className="text-muted">
-
-                                        Skills
-
-                                    </h6>
-
-                                    <p className="fw-semibold">
-
-                                        {user.skills || "Not Added"}
-
-                                    </p>
-
-                                </div>
-
-                                <div className="col-md-6 mb-4">
-
-                                    <h6 className="text-muted">
-
-                                        Experience
-
-                                    </h6>
-
-                                    <p className="fw-semibold">
-
-                                        {user.experience || "Not Added"}
-
-                                    </p>
-
-                                </div>
-
-                                <div className="col-12 mb-4">
-
-                                    <h6 className="text-muted">
-
-                                        Education
-
-                                    </h6>
-
-                                    <p className="fw-semibold">
-
-                                        {user.education || "Not Added"}
-
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                            <hr />
-
-                            <div className="d-flex flex-wrap gap-3">
-
-                                {user.resume_url ? (
-
-                                    <a
-                                        href={`${user.resume_url}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="btn btn-success rounded-pill px-4"
-                                    >
-
-                                        📄 View Resume
-
-                                    </a>
+                                    <img
+                                        src={`${user.profile_image}`}
+                                        alt="Profile"
+                                        className="rounded-circle shadow mb-4"
+                                        style={{
+                                            width: "180px",
+                                            height: "180px",
+                                            objectFit: "cover"
+                                        }}
+                                    />
 
                                 ) : (
 
-                                    <button
-                                        className="btn btn-outline-secondary rounded-pill"
-                                        disabled
+                                    <div
+                                        className="rounded-circle bg-light d-flex justify-content-center align-items-center mx-auto mb-4"
+                                        style={{
+                                            width: "180px",
+                                            height: "180px"
+                                        }}
                                     >
 
-                                        No Resume Uploaded
+                                        <i
+                                            className="bi bi-person-fill text-secondary"
+                                            style={{ fontSize: "80px" }}
+                                        ></i>
 
-                                    </button>
+                                    </div>
 
                                 )}
 
-                                <button
-                                    className="btn btn-primary rounded-pill px-4"
-                                    onClick={() =>
-                                        navigate("/jobseeker/profile/edit")
-                                    }
-                                >
+                                <h3 className="fw-bold">
 
-                                    ✏️ Edit Profile
+                                    {user.full_name}
 
-                                </button>
+                                </h3>
+
+                                <p className="text-muted">
+
+                                    {user.email}
+
+                                </p>
+
+                                <span className="badge bg-primary text-capitalize fs-6">
+
+                                    {user.role}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {/* Right Information */}
+
+                    <div className="col-lg-8">
+
+                        <div className="card border-0 shadow rounded-4">
+
+                            <div className="card-body p-5">
+
+                                <div className="row">
+
+                                    <div className="col-md-6 mb-4">
+
+                                        <h6 className="text-muted">
+
+                                            Phone
+
+                                        </h6>
+
+                                        <p className="fw-semibold">
+
+                                            {user.phone || "Not Added"}
+
+                                        </p>
+
+                                    </div>
+
+                                    <div className="col-md-6 mb-4">
+
+                                        <h6 className="text-muted">
+
+                                            Location
+
+                                        </h6>
+
+                                        <p className="fw-semibold">
+
+                                            {user.location || "Not Added"}
+
+                                        </p>
+
+                                    </div>
+
+                                    <div className="col-md-6 mb-4">
+
+                                        <h6 className="text-muted">
+
+                                            Skills
+
+                                        </h6>
+
+                                        <p className="fw-semibold">
+
+                                            {user.skills || "Not Added"}
+
+                                        </p>
+
+                                    </div>
+
+                                    <div className="col-md-6 mb-4">
+
+                                        <h6 className="text-muted">
+
+                                            Experience
+
+                                        </h6>
+
+                                        <p className="fw-semibold">
+
+                                            {user.experience || "Not Added"}
+
+                                        </p>
+
+                                    </div>
+
+                                    <div className="col-12 mb-4">
+
+                                        <h6 className="text-muted">
+
+                                            Education
+
+                                        </h6>
+
+                                        <p className="fw-semibold">
+
+                                            {user.education || "Not Added"}
+
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                                <hr />
+
+                                <div className="d-flex flex-wrap gap-3">
+
+                                    {user.resume_url ? (
+
+                                        <a
+                                            href={`${user.resume_url}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="btn btn-success rounded-pill px-4"
+                                        >
+
+                                            📄 View Resume
+
+                                        </a>
+
+                                    ) : (
+
+                                        <button
+                                            className="btn btn-outline-secondary rounded-pill"
+                                            disabled
+                                        >
+
+                                            No Resume Uploaded
+
+                                        </button>
+
+                                    )}
+
+                                    <button
+                                        className="btn btn-primary rounded-pill px-4"
+                                        onClick={() =>
+                                            navigate("/jobseeker/profile/edit")
+                                        }
+                                    >
+
+                                        ✏️ Edit Profile
+
+                                    </button>
+
+                                </div>
 
                             </div>
 
@@ -273,10 +288,8 @@ function Profile() {
 
             </div>
 
-        </div>
-
-    </>
-);
+        </>
+    );
 
 }
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../api/axios";
 import Navbar from "../../components/Navbar";
+import { toast } from "react-toastify";
 
 function MyApplications() {
 
@@ -17,7 +18,7 @@ function MyApplications() {
         }
         catch (error) {
             console.log(error)
-            alert("Failed to load applications")
+            toast.warning("Failed to load applications")
         }
     }
 
@@ -30,12 +31,12 @@ function MyApplications() {
         try {
             await api.patch(`/applications/${applicationId}/withdraw`)
 
-            alert("Application withdrawn successfully")
+            toast.info("Application withdrawn successfully")
             fetchApplications();
         }
         catch (error) {
             console.log(error)
-            alert(error.response?.data?.detail || "Failed to withdraw application.")
+            toast.warning(error.response?.data?.detail || "Failed to withdraw application.")
         }
     }
     const applyAgain = async (jobId) => {
@@ -44,7 +45,7 @@ function MyApplications() {
 
             await api.post(`/applications/jobs/${jobId}`);
 
-            alert("Application submitted successfully");
+            toast.success("Application submitted successfully");
 
             fetchApplications();
 
@@ -52,7 +53,7 @@ function MyApplications() {
 
             console.log(error);
 
-            alert(
+            toast.error(
                 error.response?.data?.detail ||
                 "Failed to apply"
             );
@@ -68,7 +69,7 @@ function MyApplications() {
         }
         catch (error) {
             console.log(error)
-            alert(error.response?.data?.detail || "Delete failed")
+            toast.warning(error.response?.data?.detail || "Delete failed")
         }
     }
 

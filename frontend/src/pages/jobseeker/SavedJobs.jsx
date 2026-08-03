@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import api from "../../api/axios";
+import { toast } from "react-toastify";
 
 function SavedJobs() {
 
@@ -26,7 +27,7 @@ function SavedJobs() {
 
             console.log(error);
 
-            alert("Failed to load saved jobs");
+            toast.warning("Failed to load saved jobs");
 
         }
 
@@ -44,7 +45,7 @@ function SavedJobs() {
 
         catch (error) {
 
-            alert(
+            toast.warning(
                 error.response?.data?.detail ||
                 "Failed to remove job"
             );

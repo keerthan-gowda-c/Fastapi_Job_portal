@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api/axios";
+import { toast } from "react-toastify";
 
 function Register() {
 
@@ -32,13 +33,13 @@ function Register() {
                 role: role
             });
 
-            alert("Registration Successful!");
+            toast.success("Registration Successful!");
 
             navigate(`/login/${role}`);
 
         } catch (error) {
 
-            alert(
+            toast.error(
                 error.response?.data?.detail ||
                 "Registration failed"
             );

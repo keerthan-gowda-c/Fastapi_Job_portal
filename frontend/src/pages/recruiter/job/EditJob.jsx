@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "../../../api/axios";
 import Navbar from "../../../components/Navbar";
 import "./EditJob.css";
+import { toast } from "react-toastify";
 
 function EditJob() {
     const { id } = useParams();
@@ -53,14 +54,14 @@ function EditJob() {
                 salary: Number(form.salary)
             });
 
-            alert("Job updated successfully");
+            toast.success("Job updated successfully");
             navigate("/my-jobs");
 
         } catch (error) {
 
             console.log(error);
 
-            alert(
+            toast.warning(
                 error.response?.data?.detail ||
                 "Update failed"
             );

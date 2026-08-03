@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../api/axios";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import { toast } from "react-toastify";
 
 function CompanyDetails() {
     const [company, setCompany] = useState(null);
@@ -23,7 +24,8 @@ function CompanyDetails() {
 
         } catch (error) {
             console.log(error);
-            alert("Failed to load Company Details");
+            toast.error("Failed to load Company Details");
+            
         } finally {
             setLoading(false);
         }

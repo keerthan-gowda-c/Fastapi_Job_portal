@@ -3,6 +3,7 @@ import api from "../../../api/axios";
 import Navbar from "../../../components/Navbar";
 import { Link } from "react-router-dom";
 import "./RecruiterApplications.css";
+import { toast } from "react-toastify";
 
 function RecruiterApplications() {
 
@@ -19,7 +20,7 @@ function RecruiterApplications() {
         }
         catch (error) {
             console.log(error);
-            alert(
+            toast.warning(
                 error.response?.data?.detail ||
                 "Failed to load applications"
             );

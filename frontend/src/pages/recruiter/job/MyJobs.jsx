@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../../api/axios";
 import Navbar from "../../../components/Navbar";
 import "./MyJobs.css";
+import { toast } from "react-toastify";
 
 function MyJobs() {
     const [jobs, setJobs] = useState([]);
@@ -26,13 +27,13 @@ function MyJobs() {
         try {
             await api.delete(`/jobs/${id}`);
 
-            alert("Job deleted successfully");
+            toast.success("Job deleted successfully");
 
             fetchJobs();
         } catch (error) {
             console.log(error);
 
-            alert(
+            toast.error(
                 error.response?.data?.detail ||
                 "Delete failed"
             );

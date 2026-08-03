@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api/axios";
+import { toast } from "react-toastify";
 
 function Login() {
 
     const { role } = useParams();
 
     const navigate = useNavigate();
+
+    const [loading, setLoading] = useState(false)
 
     const [form, setForm] = useState({
         email: "",
@@ -25,6 +28,7 @@ function Login() {
     const handleSubmit = async (e) => {
 
         e.preventDefault();
+        setLoading(true)
 
         try {
 
@@ -48,6 +52,8 @@ function Login() {
                 JSON.stringify(response.data.user)
             );
 
+            toast.success("Login successful!")
+
             if (response.data.user.role === "recruiter") {
 
                 navigate("/recruiter-dashboard");
@@ -61,11 +67,11 @@ function Login() {
         }
         catch (error) {
 
-            alert(
-                error.response?.data?.detail ||
-                "Login failed"
-            );
+            toast.error("Failed to login!")
 
+        }
+        finally {
+            setLoading(false)
         }
 
     };
@@ -83,11 +89,10 @@ function Login() {
                     <div className="text-center">
 
                         <i
-                            className={`bi ${
-                                role === "jobseeker"
+                            className={`bi ${role === "jobseeker"
                                     ? "bi-person-workspace text-primary"
                                     : "bi-building text-dark"
-                            }`}
+                                }`}
                             style={{ fontSize: "130px" }}
                         ></i>
 
@@ -169,11 +174,31 @@ function Login() {
 
                                 </div>
 
-                                <button
-                                    className="btn btn-primary btn-lg w-100 rounded-pill"
-                                >
 
-                                    Login
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary btn-lg w-100 rounded-pill"
+                                    disabled={loading}
+                                >
+                                    {
+                                        loading ?
+                                            (
+                                                <>
+                                                    <span
+                                                    className="spinner-border spinner-border-sm me-2"
+                                                    role="status"
+                                                    aria-hidden="true">
+                                                        
+                                                    </span>
+                                                Logging in...
+                                                </>
+                                            ) :
+                                            (
+                                                "Login"
+                                            )
+                                    }
+
+
 
                                 </button>
 

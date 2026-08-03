@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api/axios";
 import Navbar from "../../../components/Navbar";
+import { toast } from "react-toastify";
 
 function EditCompany(){
     const navigate = useNavigate()
@@ -42,11 +43,11 @@ function EditCompany(){
 
         try{
             await api.patch("/companies/me",form)
-            alert("Company Updated successfully")
+            toast.success("Company Updated successfully")
             navigate("/company/my-company")
         }
         catch(error){
-            alert(error.response?.data?.detail || "Failed to update")
+            toast.error(error.response?.data?.detail || "Failed to update")
         }
     }
 

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import api from "../../../api/axios";
 import Navbar from "../../../components/Navbar";
 import "./JobApplicants.css";
+import { toast } from "react-toastify";
 
 function JobApplicants() {
     const { jobId } = useParams();
@@ -19,7 +20,7 @@ function JobApplicants() {
             setApplications(response.data);
         } catch (error) {
             console.log(error);
-            alert(error.response?.data?.detail || "Failed to load applications");
+            toast.warning(error.response?.data?.detail || "Failed to load applications");
         }
     };
 
@@ -35,7 +36,7 @@ function JobApplicants() {
 
             console.log(error);
 
-            alert(error.response?.data?.detail || "Failed to update status");
+            toast.warning(error.response?.data?.detail || "Failed to update status");
         }
     };
 
