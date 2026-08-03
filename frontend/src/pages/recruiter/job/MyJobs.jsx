@@ -12,7 +12,7 @@ function MyJobs() {
 
     const fetchJobs = async () => {
         try {
-            const response = await api.get("/jobs/");
+            const response = await api.get("/jobs/my-jobs");
             setJobs(response.data);
         } catch (error) {
             console.log(error);

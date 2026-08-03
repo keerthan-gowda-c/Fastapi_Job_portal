@@ -7,6 +7,8 @@ from app.models.user import User
 from app.dependencies.auth import get_current_user
 from app.dependencies.roles import require_role
 from app.schemas.saved_jobs import SavedJobResponse
+
+
 router = APIRouter(prefix="/saved-jobs",tags=["Saved Job"])
 
 @router.post("/{job_id}")

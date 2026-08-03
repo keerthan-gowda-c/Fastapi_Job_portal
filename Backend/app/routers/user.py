@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, Form
 import os
+import cloudinary
 import cloudinary.uploader
+from cloudinary.utils import cloudinary_url
 import shutil
 from app.dependencies.auth import get_current_user
 from app.models.user import User
@@ -45,13 +47,12 @@ async def upload_resume(
 
     allowed_types = [
         "application/pdf",
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     ]
 
     if file.content_type not in allowed_types:
         raise HTTPException(
             status_code=400,
-            detail="Only PDF and DOCX files are allowed"
+            detail="Only PDF files are allowed"
         )
 
     contents = await file.read()
@@ -61,12 +62,15 @@ async def upload_resume(
             status_code=400,
             detail="File size must be less than 5 MB"
         )
+    filename = os.path.splitext(file.filename)[0]
 
     result = cloudinary.uploader.upload(
         contents,
         resource_type="raw",
+        format="pdf",
         folder="jobportal/resumes",
-        public_id=f"{current_user.id}_{os.path.splitext(file.filename)[0]}"
+        public_id=f"{current_user.id}_{filename}",
+        overwrite=True
     )
 
     current_user.resume_url = result["secure_url"]
@@ -100,8 +104,6 @@ def update_profile(
     skills: str = Form(None),
     experience: str = Form(None),
     education: str = Form(None),
-    resume: UploadFile = File(None),
-    profile_image: UploadFile = File(None),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
@@ -113,25 +115,7 @@ def update_profile(
     current_user.experience = experience
     current_user.education = education
 
-    if resume:
-        result = cloudinary.uploader.upload(
-            resume.file,
-            resource_type="raw",
-            folder="jobportal/resumes",
-            public_id=f"{current_user.id}_{os.path.splitext(resume.filename)[0]}"
-        )
-
-        current_user.resume_url = result["secure_url"]
-
-    if profile_image:
-        result = cloudinary.uploader.upload(
-            profile_image.file,
-            resource_type="raw",
-            folder="jobportal/profile_images",
-            public_id=f"{current_user.id}_{os.path.splitext(profile_image.filename)[0]}"
-        )
-        
-        current_user.profile_image = result["secure_url"]
+    
 
     db.commit()
     db.refresh(current_user)

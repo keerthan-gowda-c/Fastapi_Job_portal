@@ -59,6 +59,29 @@ def create_job(
 
     return db_job
 
+
+@router.get("/my-jobs")
+def get_my_jobs(
+    db:Session = Depends(get_db),
+    current_user: User = Depends(require_role("recruiter"))
+    ):
+    company = (
+        db.query(Company).filter(Company.owner_id == current_user.id).first()
+    )
+
+    if not company:
+        raise HTTPException(
+            status_code=404, 
+            detail="Company not found"
+        )
+
+    jobs = (
+        db.query(Job).filter(Job.company_id == company.id).all()
+    )
+
+    return jobs
+
+
 # search
 @router.get("/")
 def get_jobs(
