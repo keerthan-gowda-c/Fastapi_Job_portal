@@ -17,7 +17,7 @@ function Navbar() {
     };
 
     return (
-        <nav className="navbar bg-dark fixed-top" data-bs-theme="dark">
+        <nav className="navbar fixed-top" data-bs-theme="dark">
             <div className="container ">
 
                 {!user ? (
@@ -40,20 +40,34 @@ function Navbar() {
                     </Link>
 
                     {!user ? (
-                        <>
-                            <Link
-                                className="nav-link text-light me-3 nav-hover"
-                                to="/login"
-                            >
-                                Login
-                            </Link>
-
-                            <Link
-                                className="btn btn-primary rounded-pill px-4 fw-semibold"
-                                to="/register"
+                        <><div className="dropdown">
+                            <button
+                                className=" btn-primary rounded-pill p-2 fw-semibold shadow-sm dropdown-toggle get-started-btn"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
                             >
                                 Get Started
-                            </Link>
+                            </button>
+
+                            <ul className="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-2">
+                                <li>
+                                    <Link className="dropdown-item rounded-3 py-2" to="/choose-login-role">
+                                        <i className="bi bi-box-arrow-in-right me-2 text-primary"></i>
+                                        Login
+                                    </Link>
+                                </li>
+
+                                <li><hr className="dropdown-divider my-1" /></li>
+
+                                <li>
+                                    <Link className="dropdown-item rounded-3 py-2" to="/choose-role">
+                                        <i className="bi bi-person-plus-fill me-2 text-success"></i>
+                                        Register
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
                         </>
                     ) : (
                         <>
