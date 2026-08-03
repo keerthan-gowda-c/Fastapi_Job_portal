@@ -77,7 +77,7 @@ function Profile() {
                             {user.profile_image ? (
 
                                 <img
-                                    src={`http://127.0.0.1:8000/${user.profile_image}`}
+                                    src={`${user.profile_image}`}
                                     alt="Profile"
                                     className="rounded-circle shadow mb-4"
                                     style={{
@@ -229,7 +229,7 @@ function Profile() {
                                 {user.resume_url ? (
 
                                     <a
-                                        href={`http://127.0.0.1:8000/${user.resume_url}`}
+                                        href={`${user.resume_url}`}
                                         target="_blank"
                                         rel="noreferrer"
                                         className="btn btn-success rounded-pill px-4"

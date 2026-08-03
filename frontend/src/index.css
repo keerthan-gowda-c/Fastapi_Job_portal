@@ -52,6 +52,10 @@
 
 body {
   margin: 0;
+
+}
+body:hover{
+  cursor: default;
 }
 
 #root {
@@ -109,3 +113,4 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
