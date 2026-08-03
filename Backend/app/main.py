@@ -1,9 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 import cloudinary
-import os
-
 from app.core.config import settings
 
 from app.models.user import User
@@ -13,16 +10,14 @@ from app.models.application import Application
 from app.models.saved_jobs import SavedJob
 
 
-
 app = FastAPI(
-    title="Job Portal API"
+    title=settings.APP_NAME
 )
 
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173",
-        "https://fastapi-job-portal-mauve.vercel.app",],  # Change later when frontend is deployed
+    allow_origins=[settings.ALLOWED_ORIGIN],  # Change later when frontend is deployed
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -33,7 +28,6 @@ cloudinary.config(
     api_key=settings.CLOUDINARY_API_KEY,
     api_secret=settings.CLOUDINARY_API_SECRET,
     secure=True,
-
 )
 
 
@@ -53,5 +47,3 @@ app.include_router(job_router)
 app.include_router(application_router)
 app.include_router(dashboard_router)
 app.include_router(saved_job_router)
-
-
