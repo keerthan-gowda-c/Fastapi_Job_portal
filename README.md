@@ -6,7 +6,7 @@ A full-stack Job Portal application built with **FastAPI, React.js, and PostgreS
 
 # 🌐 Live Demo
 
-Deployment: Coming Soon
+Deployment: https://jobhive-job-portal.vercel.app/
 
 ---
 
