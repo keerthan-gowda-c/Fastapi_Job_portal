@@ -1,0 +1,22 @@
+from enum import Enum
+
+class DegreeType(str, Enum):
+    BCA = "BCA"
+    BTECH = "BTECH"
+    BE = "BE"
+    BSC = "BSC"
+    BCOM = "BCOM"
+    BBA = "BBA"
+    BA = "BA"
+    BARCH = "BARCH"
+    MCA = "MCA"
+    MTECH = "MTECH"
+    ME = "ME"
+    MSC = "MSC"
+    MCOM = "MCOM"
+    MBA = "MBA"
+    MA = "MA"
+    LLM = "LLM"
+    PHD = "PHD"
+    MPHIL = "MPHIL"
+    OTHER = "OTHER"

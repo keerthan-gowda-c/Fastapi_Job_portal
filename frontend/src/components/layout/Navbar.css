@@ -1,0 +1,266 @@
+/* Falls back to its own values if homepage.css's :root tokens
+   aren't loaded on this page, so the navbar never breaks alone. */
+
+.jh-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--ink, #14213d);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.jh-nav__inner {
+  max-width: var(--max-width, 1120px);
+  margin: 0 auto;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.jh-nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: var(--paper, #faf9f5);
+  text-decoration: none;
+}
+
+.jh-nav__right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.jh-nav__link {
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(250, 249, 245, 0.85);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.jh-nav__link:hover {
+  color: var(--accent, #e9a23b);
+}
+
+.jh-nav__name {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--paper, #faf9f5);
+  display: none;
+}
+
+/* ---------- Buttons (scoped so this file works standalone) ---------- */
+.jh-btn {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.jh-btn--sm {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+}
+
+.jh-btn--accent {
+  background: var(--accent, #e9a23b);
+  color: var(--ink, #14213d);
+}
+.jh-btn--accent:hover {
+  background: var(--accent-dark, #b97614);
+  color: var(--paper, #faf9f5);
+}
+
+.jh-btn--danger {
+  background: #c8483a;
+  color: #fff;
+}
+.jh-btn--danger:hover {
+  background: #a83b2f;
+}
+
+.jh-btn--block {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ---------- "Get started" dropdown ---------- */
+.jh-dropdown {
+  position: relative;
+}
+
+.jh-dropdown__caret {
+  font-size: 0.75rem;
+  transition: transform 0.15s ease;
+}
+.jh-dropdown__caret.is-open {
+  transform: rotate(180deg);
+}
+
+.jh-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid var(--line, #e2ded3);
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(20, 33, 61, 0.18);
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem;
+}
+
+.jh-dropdown__item {
+  display: block;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink, #14213d);
+  text-decoration: none;
+}
+.jh-dropdown__item:hover {
+  background: var(--paper-alt, #f1eee6);
+}
+
+.jh-dropdown__divider {
+  height: 1px;
+  background: var(--line, #e2ded3);
+  margin: 0.35rem 0.4rem;
+}
+
+/* ---------- Mobile menu button ---------- */
+.jh-nav__menu-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--paper, #faf9f5);
+  border-radius: 10px;
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.jh-nav__menu-btn:hover {
+  border-color: var(--accent, #e9a23b);
+}
+
+/* ---------- Drawer ---------- */
+.jh-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 33, 61, 0.45);
+  z-index: 1100;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.jh-drawer {
+  width: min(300px, 85vw);
+  height: 100%;
+  background: var(--paper, #faf9f5);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -12px 0 32px rgba(20, 33, 61, 0.25);
+  animation: jh-drawer-in 0.2s ease;
+}
+
+@keyframes jh-drawer-in {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.jh-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--line, #e2ded3);
+}
+
+.jh-drawer__title {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.15rem;
+  margin: 0;
+  color: var(--ink, #14213d);
+}
+
+.jh-drawer__close {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--ink-soft, #3a4358);
+  cursor: pointer;
+}
+
+.jh-drawer__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.5rem;
+}
+
+.jh-drawer__list {
+  list-style: none;
+  margin: 0 0 auto;
+  padding: 0;
+}
+
+.jh-drawer__list li + li {
+  border-top: 1px solid var(--line, #e2ded3);
+}
+
+.jh-drawer__list a {
+  display: block;
+  padding: 0.85rem 0.1rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.975rem;
+  color: var(--ink, #14213d);
+  text-decoration: none;
+}
+.jh-drawer__list a:hover {
+  color: var(--accent-dark, #b97614);
+}
+
+.jh-drawer__footer {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line, #e2ded3);
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width: 768px) {
+  .jh-nav__name {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 640px) {
+  .jh-nav__link--desktop {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jh-drawer {
+    animation: none;
+  }
+  .jh-btn {
+    transition: none;
+  }
+}

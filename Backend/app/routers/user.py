@@ -30,57 +30,10 @@ def get_me(
         "is_active": current_user.is_active,
         "phone": current_user.phone,
         "location": current_user.location,
-        "skills": current_user.skills,
-        "experience": current_user.experience,
-        "education": current_user.education,
-        "resume_url": current_user.resume_url,
         "profile_image": current_user.profile_image,
     }
 
 
-@router.post("/resume")
-async def upload_resume(
-    file:UploadFile = File(...),
-    current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db),
-    ):
-
-    allowed_types = [
-        "application/pdf",
-    ]
-
-    if file.content_type not in allowed_types:
-        raise HTTPException(
-            status_code=400,
-            detail="Only PDF files are allowed"
-        )
-
-    contents = await file.read()
-
-    if len(contents) > 5 * 1024 * 1024:
-        raise HTTPException(
-            status_code=400,
-            detail="File size must be less than 5 MB"
-        )
-    filename = os.path.splitext(file.filename)[0]
-
-    result = cloudinary.uploader.upload(
-        contents,
-        resource_type="raw",
-        format="pdf",
-        folder="jobportal/resumes",
-        public_id=f"{current_user.id}_{filename}",
-        overwrite=True
-    )
-
-    current_user.resume_url = result["secure_url"]
-    db.commit()
-    db.refresh(current_user)
-
-    return{
-        "message" : "Resume uploaded",
-        "resume_url" : result["secure_url"]
-    }
 
 @router.delete("/delete-all-users")
 def delete_all_users(
@@ -101,21 +54,13 @@ def update_profile(
     full_name: str = Form(...),
     phone: str = Form(None),
     location: str = Form(None),
-    skills: str = Form(None),
-    experience: str = Form(None),
-    education: str = Form(None),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
 
     current_user.full_name = full_name
     current_user.phone = phone
-    current_user.location = location
-    current_user.skills = skills
-    current_user.experience = experience
-    current_user.education = education
-
-    
+    current_user.location = location    
 
     db.commit()
     db.refresh(current_user)

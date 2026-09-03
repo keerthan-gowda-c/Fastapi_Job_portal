@@ -1,0 +1,862 @@
+/* =========================================================
+   JOBSEEKER DASHBOARD
+   Pure CSS
+   ========================================================= */
+
+.js-dashboard {
+
+    --js-ink: #14213d;
+    --js-ink-soft: #3a4358;
+
+    --js-paper: #faf9f5;
+    --js-paper-alt: #f1eee6;
+
+    --js-accent: #e9a23b;
+    --js-accent-dark: #b97614;
+
+    --js-line: #e2ded3;
+    --js-muted: #6b7280;
+
+    --js-success: #3f7652;
+    --js-warning: #b7791f;
+
+    --js-radius: 14px;
+    --js-max-width: 1120px;
+
+    min-height: 100vh;
+
+    background: var(--js-paper);
+    color: var(--js-ink);
+
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    line-height: 1.5;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+.js-dashboard * {
+    box-sizing: border-box;
+}
+
+
+.js-dashboard h1,
+.js-dashboard h2,
+.js-dashboard h3 {
+
+    font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+    font-weight: 500;
+
+    color: var(--js-ink);
+
+    margin: 0;
+
+}
+
+
+.js-dashboard button {
+
+    font-family: inherit;
+
+}
+
+
+.js-dashboard button:focus-visible {
+
+    outline: 2px solid var(--js-accent-dark);
+    outline-offset: 3px;
+
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.js-dashboard__main {
+
+    width: 100%;
+    max-width: var(--js-max-width);
+
+    margin: 0 auto;
+
+    padding:
+        3.5rem 1.5rem 4rem;
+
+}
+
+
+/* =========================================================
+   SMALL EYEBROW
+   ========================================================= */
+
+.js-eyebrow {
+
+    display: inline-block;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    color: var(--js-accent-dark);
+
+    margin-bottom: 0.5rem;
+
+}
+
+
+/* =========================================================
+   WELCOME
+   ========================================================= */
+
+.js-welcome {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 2rem;
+
+    padding: 2.5rem;
+
+    background: var(--js-paper-alt);
+
+    border: 1px solid var(--js-line);
+    border-radius: var(--js-radius);
+
+    margin-bottom: 2rem;
+
+}
+
+
+.js-welcome__content {
+
+    min-width: 0;
+
+}
+
+
+.js-welcome__title {
+
+    font-size: clamp(2rem, 4vw, 3rem);
+
+    line-height: 1.1;
+
+    letter-spacing: -0.02em;
+
+}
+
+
+.js-welcome__title span {
+
+    color: var(--js-accent-dark);
+
+}
+
+
+.js-welcome__text {
+
+    max-width: 650px;
+
+    color: var(--js-ink-soft);
+
+    font-size: 1rem;
+
+    margin: 1rem 0 0;
+
+}
+
+
+.js-welcome__icon {
+
+    width: 76px;
+    height: 76px;
+
+    min-width: 76px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--js-paper);
+
+    border: 1px solid var(--js-line);
+
+    color: var(--js-accent-dark);
+
+    font-size: 2rem;
+
+}
+
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.js-stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    border-top: 1px solid var(--js-line);
+    border-bottom: 1px solid var(--js-line);
+
+    margin-bottom: 4rem;
+
+}
+
+
+.js-stat {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    min-width: 0;
+
+    padding: 1.5rem 1.25rem;
+
+    border-left: 1px solid var(--js-line);
+
+}
+
+
+.js-stat:first-child {
+
+    border-left: none;
+
+}
+
+
+.js-stat__content {
+
+    min-width: 0;
+
+}
+
+
+.js-stat__label {
+
+    display: block;
+
+    color: var(--js-muted);
+
+    font-size: 0.8rem;
+
+    white-space: nowrap;
+
+}
+
+
+.js-stat__number {
+
+    display: block;
+
+    margin-top: 0.3rem;
+
+    font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+    font-size: 2.25rem;
+
+    font-weight: 500;
+
+    line-height: 1;
+
+    color: var(--js-ink);
+
+}
+
+
+.js-stat__icon {
+
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 1.1rem;
+
+}
+
+
+.js-stat__icon--primary {
+
+    color: var(--js-ink);
+
+    background: #e9edf4;
+
+}
+
+
+.js-stat__icon--warning {
+
+    color: var(--js-warning);
+
+    background: #f5ead6;
+
+}
+
+
+.js-stat__icon--accent {
+
+    color: var(--js-accent-dark);
+
+    background: #f8ead1;
+
+}
+
+
+.js-stat__icon--success {
+
+    color: var(--js-success);
+
+    background: #e5eee8;
+
+}
+
+
+/* =========================================================
+   SPINNER
+   ========================================================= */
+
+.js-spinner {
+
+    display: inline-block;
+
+    width: 24px;
+    height: 24px;
+
+    border: 2px solid var(--js-line);
+
+    border-top-color: var(--js-accent-dark);
+
+    border-radius: 50%;
+
+    animation:
+        js-spin 0.7s linear infinite;
+
+}
+
+
+@keyframes js-spin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+   ========================================================= */
+
+.js-actions {
+
+    margin-bottom: 3rem;
+
+}
+
+
+.js-section-heading {
+
+    margin-bottom: 2rem;
+
+}
+
+
+.js-section-heading h2 {
+
+    font-size: clamp(1.8rem, 3vw, 2.35rem);
+
+    line-height: 1.15;
+
+}
+
+
+.js-action-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 1.25rem;
+
+}
+
+
+.js-action-card {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    min-height: 260px;
+
+    padding: 1.5rem;
+
+    background: #ffffff;
+
+    border: 1px solid var(--js-line);
+
+    border-radius: var(--js-radius);
+
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+
+}
+
+
+.js-action-card:hover {
+
+    transform: translateY(-3px);
+
+    border-color: #d1c8b7;
+
+    box-shadow:
+        0 12px 30px rgba(20, 33, 61, 0.07);
+
+}
+
+
+.js-action-card__icon {
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: var(--js-paper-alt);
+
+    color: var(--js-accent-dark);
+
+    font-size: 1.35rem;
+
+    margin-bottom: 1.25rem;
+
+}
+
+
+.js-action-card h3 {
+
+    font-size: 1.3rem;
+
+    margin-bottom: 0.5rem;
+
+}
+
+
+.js-action-card p {
+
+    color: var(--js-muted);
+
+    font-size: 0.9rem;
+
+    margin: 0 0 1.25rem;
+
+    flex: 1;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.js-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 0.55rem;
+
+    min-height: 42px;
+
+    padding:
+        0.65rem 1.15rem;
+
+    border-radius: 999px;
+
+    border: 1px solid transparent;
+
+    font-size: 0.875rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+
+}
+
+
+.js-btn:hover {
+
+    transform: translateY(-1px);
+
+}
+
+
+.js-btn--primary {
+
+    background: var(--js-ink);
+
+    color: #ffffff;
+
+}
+
+
+.js-btn--primary:hover {
+
+    background: var(--js-ink-soft);
+
+}
+
+
+.js-btn--light {
+
+    background: var(--js-paper);
+
+    color: var(--js-ink);
+
+}
+
+
+.js-btn--light:hover {
+
+    background: #ffffff;
+
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.js-cta {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 1.5rem;
+
+    padding: 2rem 2.25rem;
+
+    background: var(--js-ink);
+
+    color: var(--js-paper);
+
+    border-radius: var(--js-radius);
+
+}
+
+
+.js-cta__icon {
+
+    width: 58px;
+    height: 58px;
+
+    min-width: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(250, 249, 245, 0.08);
+
+    color: var(--js-accent);
+
+    font-size: 1.5rem;
+
+}
+
+
+.js-cta__content {
+
+    flex: 1;
+
+}
+
+
+.js-cta .js-eyebrow {
+
+    color: var(--js-accent);
+
+}
+
+
+.js-cta h2 {
+
+    color: var(--js-paper);
+
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+
+    line-height: 1.15;
+
+}
+
+
+.js-cta p {
+
+    color: #b9c0d1;
+
+    font-size: 0.9rem;
+
+    margin: 0.5rem 0 0;
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .js-action-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 750px) {
+
+    .js-dashboard__main {
+
+        padding:
+            2rem 1rem 3rem;
+
+    }
+
+
+    .js-welcome {
+
+        padding: 1.75rem;
+
+    }
+
+
+    .js-welcome__icon {
+
+        display: none;
+
+    }
+
+
+    .js-stats {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .js-stat {
+
+        border-left: none;
+
+        border-bottom: 1px solid var(--js-line);
+
+    }
+
+
+    .js-stat:nth-child(odd) {
+
+        border-right: 1px solid var(--js-line);
+
+    }
+
+
+    .js-stat:nth-child(3),
+    .js-stat:nth-child(4) {
+
+        border-bottom: none;
+
+    }
+
+
+    .js-action-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .js-action-card {
+
+        min-height: 220px;
+
+    }
+
+
+    .js-cta {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding: 1.75rem;
+
+    }
+
+
+    .js-cta .js-btn {
+
+        width: 100%;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .js-welcome {
+
+        padding: 1.5rem;
+
+    }
+
+
+    .js-welcome__title {
+
+        font-size: 2rem;
+
+    }
+
+
+    .js-welcome__text {
+
+        font-size: 0.9rem;
+
+    }
+
+
+    .js-stat {
+
+        padding:
+            1.25rem 0.9rem;
+
+    }
+
+
+    .js-stat__label {
+
+        font-size: 0.7rem;
+
+        white-space: normal;
+
+    }
+
+
+    .js-stat__number {
+
+        font-size: 1.9rem;
+
+    }
+
+
+    .js-stat__icon {
+
+        width: 36px;
+        height: 36px;
+
+        min-width: 36px;
+
+        font-size: 0.95rem;
+
+    }
+
+
+    .js-action-card {
+
+        padding: 1.35rem;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .js-action-card,
+    .js-btn {
+
+        transition: none;
+
+    }
+
+
+    .js-spinner {
+
+        animation: none;
+
+    }
+
+}

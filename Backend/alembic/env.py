@@ -7,12 +7,8 @@ from alembic import context
 
 from app.database import Base
 from app.core.config import settings
+from app.models import *
 
-from app.models.user import User
-from app.models.company import Company
-from app.models.job import Job
-from app.models.application import Application
-from app.models.saved_jobs import SavedJob
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

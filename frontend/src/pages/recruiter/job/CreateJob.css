@@ -1,51 +1,391 @@
-.create-job-bg{
-    background:#f4f7fb;
-    min-height:100vh;
+
+/* =========================================
+   CREATE JOB PAGE
+   Premium / Modern / Responsive
+========================================= */
+
+
+/* =========================================
+   PAGE BACKGROUND
+========================================= */
+
+.create-job-bg {
+    min-height: calc(100vh - 70px);
+    background: #f6f8fc;
+    padding-bottom: 2rem;
 }
 
-.create-job-card{
-    border-radius:20px;
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.create-job-bg .container {
+    max-width: 1100px;
 }
 
-.create-job-card h2{
-    color:#1f2937;
+
+/* =========================================
+   CREATE JOB CARD
+========================================= */
+
+.create-job-card {
+    border-radius: 18px !important;
+    background: #ffffff;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 12px 35px rgba(15, 23, 42, 0.08) !important;
 }
 
-.form-control{
-    border-radius:10px;
-    padding:12px;
-    border:1px solid #d1d5db;
-    transition:all .3s ease;
+
+/* =========================================
+   CARD BODY
+========================================= */
+
+.create-job-card .card-body {
+    padding: 2.5rem !important;
 }
 
-.form-control:focus{
-    border-color:#0d6efd;
-    box-shadow:0 0 0 .15rem rgba(13,110,253,.15);
+
+/* =========================================
+   HEADER
+========================================= */
+
+.create-job-card h2 {
+    color: #111827;
+
+    font-size: 1.65rem;
+    font-weight: 700;
+
+    letter-spacing: -0.4px;
 }
 
-textarea{
-    resize:vertical;
+.create-job-card > .card-body > p {
+    font-size: 0.92rem;
 }
 
-.btn{
-    border-radius:10px;
-    font-weight:600;
-    padding:10px 22px;
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.create-job-card .mb-4 {
+    margin-bottom: 1.15rem !important;
 }
 
-.btn-primary{
-    background:#0A66C2;
-    border:none;
+
+/* =========================================
+   LABELS
+========================================= */
+
+.create-job-card .form-label {
+    display: block;
+
+    margin-bottom: 0.45rem;
+
+    color: #374151;
+
+    font-size: 0.78rem;
+    font-weight: 700 !important;
+
+    letter-spacing: 0.25px;
 }
 
-.btn-primary:hover{
-    background:#004182;
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.create-job-card .form-control,
+.create-job-card .form-select {
+    min-height: 44px;
+
+    border: 1px solid #d9dee7;
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-size: 0.9rem;
+
+    padding: 0.65rem 0.8rem;
+
+    box-shadow: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
 }
 
-@media(max-width:768px){
 
-.create-job-card{
-    padding:8px;
+/* =========================================
+   TEXTAREA
+========================================= */
+
+.create-job-card textarea.form-control {
+    min-height: 130px;
+
+    line-height: 1.55;
+
+    resize: vertical;
 }
+
+
+/* =========================================
+   PLACEHOLDER
+========================================= */
+
+.create-job-card .form-control::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+
+/* =========================================
+   FOCUS
+========================================= */
+
+.create-job-card .form-control:focus,
+.create-job-card .form-select:focus {
+    border-color: #86aaf8;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+
+/* =========================================
+   SELECT
+========================================= */
+
+.create-job-card .form-select {
+    cursor: pointer;
+}
+
+
+/* =========================================
+   ROW SPACING
+========================================= */
+
+.create-job-card .row {
+    --bs-gutter-x: 1rem;
+}
+
+
+/* =========================================
+   BUTTON AREA
+========================================= */
+
+.create-job-card form > .d-flex {
+    padding-top: 0.25rem;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.create-job-card .btn {
+    min-height: 42px;
+
+    border-radius: 9px !important;
+
+    padding: 0.6rem 1.25rem;
+
+    font-size: 0.86rem;
+    font-weight: 600;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+
+/* Primary button */
+
+.create-job-card .btn-primary {
+    border: 1px solid #2563eb;
+
+    box-shadow:
+        0 5px 14px rgba(37, 99, 235, 0.16);
+}
+
+.create-job-card .btn-primary:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 18px rgba(37, 99, 235, 0.24);
+}
+
+
+/* Cancel button */
+
+.create-job-card .btn-outline-secondary {
+    border-color: #cbd5e1;
+
+    color: #475569;
+
+    background: #ffffff;
+}
+
+.create-job-card .btn-outline-secondary:hover {
+    transform: translateY(-1px);
+
+    background: #f8fafc;
+
+    border-color: #94a3b8;
+
+    color: #334155;
+
+    box-shadow:
+        0 5px 14px rgba(100, 116, 139, 0.1);
+}
+
+
+/* =========================================
+   DISABLED BUTTON
+========================================= */
+
+.create-job-card .btn:disabled {
+    cursor: not-allowed;
+
+    transform: none;
+
+    opacity: 0.7;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 991.98px) {
+
+    .create-job-bg .container {
+        max-width: 94%;
+    }
+
+    .create-job-card .card-body {
+        padding: 2rem !important;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767.98px) {
+
+    .create-job-bg {
+        min-height: calc(100vh - 60px);
+    }
+
+    .create-job-bg .container {
+        max-width: 100%;
+    }
+
+    .create-job-bg .container.py-5 {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+
+
+    /* Card */
+
+    .create-job-card {
+        border-radius: 14px !important;
+    }
+
+    .create-job-card .card-body {
+        padding: 1.25rem !important;
+    }
+
+
+    /* Heading */
+
+    .create-job-card h2 {
+        font-size: 1.4rem;
+    }
+
+    .create-job-card > .card-body > p {
+        font-size: 0.84rem;
+
+        line-height: 1.5;
+    }
+
+
+    /* Form */
+
+    .create-job-card .mb-4 {
+        margin-bottom: 1rem !important;
+    }
+
+
+    /* Inputs */
+
+    .create-job-card .form-control,
+    .create-job-card .form-select {
+        min-height: 43px;
+
+        font-size: 0.88rem;
+    }
+
+
+    .create-job-card textarea.form-control {
+        min-height: 120px;
+    }
+
+
+    /* Buttons */
+
+    .create-job-card form > .d-flex {
+        flex-direction: column;
+
+        gap: 0.65rem !important;
+    }
+
+    .create-job-card form > .d-flex .btn {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 420px) {
+
+    .create-job-bg .container.py-5 {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .create-job-card .card-body {
+        padding: 1rem !important;
+    }
+
+    .create-job-card h2 {
+        font-size: 1.3rem;
+    }
+
+    .create-job-card .form-label {
+        font-size: 0.75rem;
+    }
+
+    .create-job-card .form-control,
+    .create-job-card .form-select {
+        font-size: 0.86rem;
+    }
 
 }

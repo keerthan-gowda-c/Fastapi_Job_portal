@@ -1,11 +1,12 @@
+
 import { useEffect, useState } from "react";
 import api from "../../../api/axios";
-import Navbar from "../../../components/Navbar";
+import Navbar from "../../../components/layout/Navbar";
 import { Link } from "react-router-dom";
 import "./RecruiterApplications.css";
 import { toast } from "react-toastify";
 
-function RecruiterApplications() {
+export default function RecruiterApplications() {
 
     const [applications, setApplications] = useState([]);
 
@@ -14,26 +15,62 @@ function RecruiterApplications() {
     }, []);
 
     const fetchApplications = async () => {
+
         try {
+
             const response = await api.get("/applications");
-            setApplications(response.data);
+
+            /*
+             * Group applications by job.
+             * If multiple candidates applied for the same job,
+             * the job will appear only once.
+             */
+            const jobMap = {};
+
+            response.data.forEach((application) => {
+
+                const jobId = application.job.id;
+
+                if (!jobMap[jobId]) {
+
+                    jobMap[jobId] = {
+                        job: application.job,
+                        applicants: 0
+                    };
+
+                }
+
+                jobMap[jobId].applicants += 1;
+
+            });
+
+            setApplications(Object.values(jobMap));
+
         }
         catch (error) {
+
             console.log(error);
+
             toast.warning(
                 error.response?.data?.detail ||
                 "Failed to load applications"
             );
+
         }
+
     };
 
     return (
+
         <>
+
             <Navbar />
 
             <div className="applications-bg">
 
                 <div className="container py-5">
+
+                    {/* Header */}
 
                     <div className="page-header shadow-sm">
 
@@ -47,6 +84,9 @@ function RecruiterApplications() {
 
                     </div>
 
+
+                    {/* Applications */}
+
                     <div className="card border-0 shadow-sm mt-4">
 
                         <div className="card-body">
@@ -55,10 +95,12 @@ function RecruiterApplications() {
 
                                 <div className="text-center py-5">
 
-                                    <h4>No applications found</h4>
+                                    <h4>
+                                        No applications found
+                                    </h4>
 
                                     <p className="text-muted">
-                                        Applications will appear here.
+                                        Applications will appear here when candidates apply.
                                     </p>
 
                                 </div>
@@ -73,9 +115,22 @@ function RecruiterApplications() {
 
                                             <tr>
 
-                                                <th>#</th>
-                                                <th>Job Title</th>
-                                                <th>Job ID</th>
+                                                <th>
+                                                    #
+                                                </th>
+
+                                                <th>
+                                                    Job Title
+                                                </th>
+
+                                                <th>
+                                                    Job ID
+                                                </th>
+
+                                                <th>
+                                                    Applicants
+                                                </th>
+
                                                 <th className="text-center">
                                                     Action
                                                 </th>
@@ -86,40 +141,58 @@ function RecruiterApplications() {
 
                                         <tbody>
 
-                                            {applications.map((application, index) => (
+                                            {applications.map(
+                                                (item, index) => (
 
-                                                <tr key={application.id}>
+                                                    <tr
+                                                        key={item.job.id}
+                                                    >
 
-                                                    <td>
-                                                        {index + 1}
-                                                    </td>
+                                                        <td>
+                                                            {index + 1}
+                                                        </td>
 
-                                                    <td className="fw-semibold">
-                                                        {application.job.title}
-                                                    </td>
+                                                        <td className="fw-semibold">
 
-                                                    <td>
+                                                            {item.job.title}
 
-                                                        <span className="badge bg-secondary">
-                                                            #{application.job.id}
-                                                        </span>
+                                                        </td>
 
-                                                    </td>
+                                                        <td>
 
-                                                    <td className="text-center">
+                                                            <span className="badge bg-secondary">
 
-                                                        <Link
-                                                            to={`/recruiter/job-applicants/${application.job.id}`}
-                                                            className="btn btn-primary btn-sm px-3"
-                                                        >
-                                                            View Applicants
-                                                        </Link>
+                                                                #{item.job.id}
 
-                                                    </td>
+                                                            </span>
 
-                                                </tr>
+                                                        </td>
 
-                                            ))}
+                                                        <td>
+
+                                                            <span className="badge bg-primary">
+
+                                                                {item.applicants}
+
+                                                            </span>
+
+                                                        </td>
+
+                                                        <td className="text-center">
+
+                                                            <Link
+                                                                to={`/recruiter/job-applicants/${item.job.id}`}
+                                                                className="btn btn-primary btn-sm px-3"
+                                                            >
+                                                                View Applicants
+                                                            </Link>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                )
+                                            )}
 
                                         </tbody>
 
@@ -138,7 +211,9 @@ function RecruiterApplications() {
             </div>
 
         </>
+
     );
+
 }
 
-export default RecruiterApplications;
+

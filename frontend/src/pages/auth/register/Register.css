@@ -1,0 +1,578 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap");
+
+
+/* =========================================
+   REGISTER PAGE
+========================================= */
+
+.register-page {
+    --ink: #14213d;
+    --ink-soft: #3a4358;
+
+    --paper: #faf9f5;
+    --paper-alt: #f1eee6;
+
+    --accent: #e9a23b;
+    --accent-dark: #b97614;
+
+    --line: #e2ded3;
+    --muted: #6b7280;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 24px;
+
+    background: var(--paper);
+
+    color: var(--ink);
+
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+.register-page *,
+.register-page *::before,
+.register-page *::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.register-container {
+    width: 100%;
+    max-width: 1050px;
+
+    display: grid;
+
+    grid-template-columns: 0.9fr 1fr;
+
+    gap: 80px;
+
+    align-items: center;
+}
+
+
+/* =========================================
+   LEFT INTRO
+========================================= */
+
+.register-intro {
+    max-width: 430px;
+}
+
+
+.register-icon {
+    width: 62px;
+    height: 62px;
+
+    margin-bottom: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: var(--accent);
+
+    color: var(--ink);
+
+    font-size: 28px;
+
+    transform: rotate(-5deg);
+}
+
+
+.register-icon span {
+    transform: rotate(5deg);
+}
+
+
+.register-label {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: var(--accent-dark);
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.16em;
+}
+
+
+.register-heading {
+    margin: 0;
+
+    font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+    font-size: clamp(3rem, 5.5vw, 4.7rem);
+
+    font-weight: 500;
+
+    line-height: 0.98;
+
+    letter-spacing: -0.035em;
+
+    color: var(--ink);
+}
+
+
+.register-heading span {
+    color: var(--accent-dark);
+}
+
+
+.register-description {
+    max-width: 38ch;
+
+    margin: 25px 0 0;
+
+    color: var(--ink-soft);
+
+    font-size: 1rem;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   REGISTER CARD
+========================================= */
+
+.register-card {
+    width: 100%;
+
+    padding: 42px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--line);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 18px 50px rgba(20, 33, 61, 0.08);
+}
+
+
+/* =========================================
+   CARD HEADER
+========================================= */
+
+.register-card__header {
+    margin-bottom: 30px;
+}
+
+
+.register-card__eyebrow {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--accent-dark);
+
+    font-size: 0.7rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.14em;
+}
+
+
+.register-card__header h2 {
+    margin: 0;
+
+    font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+    font-size: 2rem;
+
+    font-weight: 500;
+
+    line-height: 1.2;
+
+    color: var(--ink);
+}
+
+
+.register-card__header h2 span {
+    color: var(--accent-dark);
+}
+
+
+.register-card__header p {
+    margin: 8px 0 0;
+
+    color: var(--muted);
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.register-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+.register-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.register-field label {
+    color: var(--ink);
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+}
+
+
+.register-field input {
+    width: 100%;
+
+    min-height: 50px;
+
+    padding: 0 15px;
+
+    border: 1px solid var(--line);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: var(--paper);
+
+    color: var(--ink);
+
+    font-family: inherit;
+
+    font-size: 0.92rem;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+}
+
+
+.register-field input::placeholder {
+    color: #9ca3af;
+}
+
+
+.register-field input:hover {
+    border-color: #c9c3b6;
+}
+
+
+.register-field input:focus {
+    border-color: var(--accent-dark);
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(233, 162, 59, 0.14);
+}
+
+
+/* =========================================
+   CREATE ACCOUNT BUTTON
+========================================= */
+
+.register-submit {
+    width: 100%;
+
+    min-height: 50px;
+
+    margin-top: 5px;
+
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 16px;
+
+    border: 1px solid var(--ink);
+
+    border-radius: 999px;
+
+    background: var(--ink);
+
+    color: var(--paper);
+
+    font-family: inherit;
+
+    font-size: 0.95rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.register-submit span {
+    font-size: 1.15rem;
+
+    transition: transform 0.15s ease;
+}
+
+
+.register-submit:hover {
+    background: var(--ink-soft);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(20, 33, 61, 0.15);
+}
+
+
+.register-submit:hover span {
+    transform: translateX(3px);
+}
+
+
+/* =========================================
+   LOGIN LINK
+========================================= */
+
+.register-login {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    margin-top: 25px;
+
+    padding-top: 22px;
+
+    border-top: 1px solid var(--line);
+
+    color: var(--muted);
+
+    font-size: 0.85rem;
+}
+
+
+.register-login button {
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--accent-dark);
+
+    font-family: inherit;
+
+    font-size: inherit;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.register-login button:hover {
+    color: var(--ink);
+
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   FOCUS
+========================================= */
+
+.register-page :focus-visible {
+    outline: 2px solid var(--accent-dark);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 850px) {
+
+    .register-container {
+        grid-template-columns: 1fr;
+
+        max-width: 520px;
+
+        gap: 35px;
+    }
+
+
+    .register-intro {
+        max-width: 100%;
+
+        text-align: center;
+    }
+
+
+    .register-icon {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    .register-heading {
+        font-size: 3.5rem;
+    }
+
+
+    .register-description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .register-page {
+        padding: 25px 16px;
+    }
+
+
+    .register-container {
+        gap: 25px;
+    }
+
+
+    .register-icon {
+        width: 52px;
+        height: 52px;
+
+        margin-bottom: 20px;
+
+        border-radius: 15px;
+
+        font-size: 23px;
+    }
+
+
+    .register-label {
+        margin-bottom: 8px;
+    }
+
+
+    .register-heading {
+        font-size: 3rem;
+    }
+
+
+    .register-description {
+        margin-top: 18px;
+
+        font-size: 0.9rem;
+    }
+
+
+    .register-card {
+        padding: 28px 22px;
+
+        border-radius: 16px;
+    }
+
+
+    .register-card__header {
+        margin-bottom: 25px;
+    }
+
+
+    .register-card__header h2 {
+        font-size: 1.7rem;
+    }
+
+
+    .register-form {
+        gap: 16px;
+    }
+
+
+    .register-field input {
+        min-height: 48px;
+    }
+
+
+    .register-submit {
+        min-height: 48px;
+    }
+
+
+    .register-login {
+        flex-direction: column;
+
+        gap: 3px;
+    }
+
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .register-submit,
+    .register-field input {
+        transition: none;
+    }
+
+}

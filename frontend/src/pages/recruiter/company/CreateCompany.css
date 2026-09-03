@@ -1,0 +1,316 @@
+
+/* =========================================
+   Create Company Page
+   ========================================= */
+
+.create-company-page {
+    min-height: calc(100vh - 70px);
+    background: #f6f8fc;
+    padding-bottom: 40px;
+}
+
+
+/* =========================================
+   Page Header
+   ========================================= */
+
+.create-company-page .company-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.create-company-page .company-header h1 {
+    color: #111827;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.create-company-page .company-header p {
+    color: #6b7280;
+    font-size: 15px;
+    margin-top: 8px;
+}
+
+
+/* =========================================
+   Main Card
+   ========================================= */
+
+.create-company-page .company-form-card {
+    background: #ffffff;
+    border: 1px solid #e7ebf1;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+    overflow: hidden;
+}
+
+.create-company-page .company-form-card .card-body {
+    padding: 32px !important;
+}
+
+
+/* =========================================
+   Form Groups
+   ========================================= */
+
+.create-company-page .mb-4 {
+    margin-bottom: 20px !important;
+}
+
+
+/* =========================================
+   Labels
+   ========================================= */
+
+.create-company-page .form-label {
+    display: block;
+    margin-bottom: 7px;
+
+    color: #374151;
+    font-size: 13px;
+    font-weight: 600 !important;
+}
+
+
+/* =========================================
+   Inputs
+   ========================================= */
+
+.create-company-page .form-control {
+    min-height: 44px;
+
+    border: 1px solid #d9dee7;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #111827;
+
+    font-size: 14px;
+
+    padding: 10px 13px;
+
+    box-shadow: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+
+/* Large Bootstrap inputs */
+
+.create-company-page .form-control-lg {
+    min-height: 46px;
+    font-size: 14px;
+    border-radius: 9px;
+}
+
+
+/* Placeholder */
+
+.create-company-page .form-control::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+
+/* Hover */
+
+.create-company-page .form-control:hover {
+    border-color: #c4cbd6;
+}
+
+
+/* Focus */
+
+.create-company-page .form-control:focus {
+    border-color: #7da2ff;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.10);
+
+    outline: none;
+}
+
+
+/* =========================================
+   Textarea
+   ========================================= */
+
+.create-company-page textarea.form-control {
+    min-height: 120px;
+
+    line-height: 1.5;
+
+    resize: vertical;
+}
+
+
+/* =========================================
+   Optional Text
+   ========================================= */
+
+.create-company-page small.text-muted {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #8a94a6 !important;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   Buttons
+   ========================================= */
+
+.create-company-page .btn {
+    min-height: 44px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background-color 0.18s ease;
+}
+
+
+/* Create button */
+
+.create-company-page .btn-primary {
+    border: none;
+    box-shadow: 0 5px 14px rgba(13, 110, 253, 0.16);
+}
+
+
+/* Create button hover */
+
+.create-company-page .btn-primary:hover {
+    transform: translateY(-1px);
+
+    box-shadow: 0 7px 18px rgba(13, 110, 253, 0.22);
+}
+
+
+/* Cancel button */
+
+.create-company-page .btn-outline-secondary {
+    border-color: #d6dbe3;
+    color: #4b5563;
+    background: #ffffff;
+}
+
+
+.create-company-page .btn-outline-secondary:hover {
+    background: #f8fafc;
+    border-color: #bfc6d1;
+    color: #374151;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   Spinner
+   ========================================= */
+
+.create-company-page .spinner-border {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+}
+
+
+/* =========================================
+   Tablet
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .create-company-page {
+        padding-top: 20px;
+        padding-bottom: 30px;
+    }
+
+    .create-company-page .company-header {
+        margin-bottom: 22px;
+    }
+
+    .create-company-page .company-header h1 {
+        font-size: 25px;
+    }
+
+    .create-company-page .company-header p {
+        font-size: 14px;
+    }
+
+    .create-company-page .company-form-card .card-body {
+        padding: 25px !important;
+    }
+
+}
+
+
+/* =========================================
+   Mobile
+   ========================================= */
+
+@media (max-width: 576px) {
+
+    .create-company-page {
+        padding-top: 15px;
+    }
+
+    .create-company-page .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .create-company-page .company-header {
+        margin-bottom: 18px;
+    }
+
+    .create-company-page .company-header h1 {
+        font-size: 22px;
+    }
+
+    .create-company-page .company-header p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .create-company-page .company-form-card {
+        border-radius: 14px;
+    }
+
+    .create-company-page .company-form-card .card-body {
+        padding: 20px !important;
+    }
+
+    .create-company-page .form-control,
+    .create-company-page .form-control-lg {
+        min-height: 43px;
+        font-size: 13px;
+    }
+
+    .create-company-page textarea.form-control {
+        min-height: 105px;
+    }
+
+    .create-company-page .d-flex.flex-column {
+        gap: 10px !important;
+    }
+
+    .create-company-page .btn {
+        width: 100%;
+        min-height: 43px;
+        font-size: 13px;
+    }
+
+}

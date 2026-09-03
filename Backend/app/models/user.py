@@ -13,28 +13,14 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     role=Column(String,default="jobseeker")
     is_active=Column(Boolean,default=True)
+    profile_image = Column(String, nullable=True)
+    phone = Column(String, nullable=True)
+    location = Column(String, nullable=True)    
     created_at=Column(DateTime(timezone=True),server_default=func.now())
 
-    companies = relationship(
-    "Company",
-    back_populates="owner"
-    )
-    applications = relationship(
-    "Application",
-    back_populates="user"
-    )
-    resume_url = Column(String, nullable=True)
-
+    # Relationships
+    candidate = relationship("Candidate", back_populates="user", uselist=False)
+    recruiter = relationship("Recruiter",back_populates="user", uselist=False)
+    applications = relationship("Application",back_populates="user")
     saved_jobs = relationship("SavedJob",back_populates="user")
-
-    phone = Column(String, nullable=True)
-
-    location = Column(String, nullable=True)
-
-    skills = Column(Text, nullable=True)
-
-    experience = Column(Text, nullable=True)
-
-    education = Column(Text, nullable=True)
-
-    profile_image = Column(String, nullable=True)
+    

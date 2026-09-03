@@ -1,0 +1,425 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap");
+
+/* ---------- Tokens ---------- */
+:root {
+  --ink: #14213d;
+  --ink-soft: #3a4358;
+  --paper: #faf9f5;
+  --paper-alt: #f1eee6;
+  --accent: #e9a23b;
+  --accent-dark: #b97614;
+  --line: #e2ded3;
+  --muted: #6b7280;
+  --success: #2f8f5b;
+  --success-dark: #23703f;
+  --radius: 14px;
+  --max-width: 1120px;
+}
+
+.jh-page {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.jh-page * {
+  box-sizing: border-box;
+}
+
+.jh-page h1,
+.jh-page h2,
+.jh-page h3 {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+}
+
+.jh-page :focus-visible {
+  outline: 2px solid var(--accent-dark);
+  outline-offset: 3px;
+}
+
+/* ---------- Hero ---------- */
+.jh-hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 5rem 1.5rem 4rem;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.jh-badge {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  background: var(--paper-alt);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.jh-heading {
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+.jh-heading--sm {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  margin-bottom: 2.5rem;
+}
+
+.jh-lead {
+  max-width: 42ch;
+  font-size: 1.125rem;
+  color: var(--ink-soft);
+  margin: 1.25rem 0 2.25rem;
+}
+
+.jh-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.jh-btn {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.jh-btn:hover {
+  transform: translateY(-1px);
+}
+
+.jh-btn--primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+.jh-btn--primary:hover {
+  background: var(--ink-soft);
+}
+
+.jh-btn--accent {
+  background: var(--accent);
+  color: var(--ink);
+}
+.jh-btn--accent:hover {
+  background: var(--accent-dark);
+  color: var(--paper);
+}
+
+.jh-btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.jh-btn--ghost:hover {
+  border-color: var(--ink);
+}
+
+.jh-hero__media {
+  display: flex;
+  justify-content: center;
+}
+
+.jh-hero__hex {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1 / 1.05;
+  clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%);
+  background: var(--accent);
+  padding: 10px;
+}
+
+.jh-hero__hex img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%);
+}
+
+/* ---------- Stats ---------- */
+.jh-stats {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.jh-stat {
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border-left: 1px solid var(--line);
+}
+
+.jh-stat:first-child {
+  border-left: none;
+}
+
+.jh-stat__number {
+  display: block;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 2.25rem;
+  color: var(--ink);
+}
+
+.jh-stat__label {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ---------- Steps ---------- */
+.jh-steps {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+}
+
+.jh-steps__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.jh-step {
+  border-left: 2px solid var(--accent);
+  padding-left: 1.5rem;
+}
+
+.jh-step__num {
+  display: block;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1rem;
+  color: var(--accent-dark);
+  margin-bottom: 0.75rem;
+}
+
+.jh-step__title {
+  font-size: 1.375rem;
+  margin-bottom: 0.5rem;
+}
+
+.jh-step__copy {
+  color: var(--ink-soft);
+  font-size: 0.975rem;
+  max-width: 32ch;
+}
+
+/* ---------- Footer ---------- */
+.jh-footer {
+  background: var(--ink);
+  color: var(--paper);
+  margin-top: 2rem;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.jh-footer__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+}
+
+.jh-footer__brand {
+  font-size: 1.5rem;
+  color: var(--paper);
+}
+
+.jh-footer__tag {
+  color: #b9c0d1;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.jh-footer__rule {
+  border: none;
+  border-top: 1px solid rgba(250, 249, 245, 0.15);
+  margin: 0 auto 1.5rem;
+  max-width: 200px;
+}
+
+.jh-footer__fine {
+  color: #8891a5;
+}
+
+/* ---------- Job cards ---------- */
+.jh-jobs-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.jh-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 2px rgba(20, 33, 61, 0.04);
+  overflow: hidden;
+}
+
+.jh-card__body {
+  padding: 1.75rem;
+  flex: 1;
+}
+
+.jh-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.jh-card__title {
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.jh-tag {
+  flex-shrink: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--accent);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+}
+
+.jh-card__desc {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.jh-card__rule {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 1.25rem 0;
+}
+
+.jh-card__meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.jh-card__meta-label {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.35rem;
+}
+
+.jh-card__meta-value {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+.jh-card__meta-value--accent {
+  color: var(--success-dark);
+}
+
+.jh-card__footer {
+  padding: 1.25rem 1.75rem 1.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.jh-card__actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+/* extra button variants/sizes for cards */
+.jh-btn--block {
+  width: 100%;
+}
+
+.jh-btn--flex {
+  flex: 1;
+}
+
+.jh-btn--sm {
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+}
+
+.jh-btn--success {
+  background: var(--success);
+  color: #fff;
+  cursor: default;
+}
+
+.jh-btn--muted {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: var(--line);
+}
+.jh-btn--muted:hover {
+  border-color: var(--ink-soft);
+}
+
+.jh-btn:disabled {
+  transform: none;
+  cursor: default;
+  opacity: 0.9;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .jh-hero {
+    grid-template-columns: 1fr;
+    padding-top: 3rem;
+  }
+  .jh-hero__media {
+    order: -1;
+  }
+  .jh-hero__hex {
+    max-width: 280px;
+  }
+  .jh-stats {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 2rem;
+  }
+  .jh-stat:nth-child(3) {
+    border-left: none;
+  }
+  .jh-steps__list {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .jh-jobs-grid {
+    grid-template-columns: 1fr;
+  }
+  .jh-card__actions {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jh-btn {
+    transition: none;
+  }
+}

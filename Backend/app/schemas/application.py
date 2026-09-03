@@ -1,16 +1,9 @@
 from pydantic import BaseModel
 from datetime import datetime
-from enum import Enum
+
 from app.schemas.job import JobResponse
-
-
-class ApplicationStatus(str, Enum):
-    pending = "pending"
-    reviewed = "reviewed"
-    shortlisted = "shortlisted"
-    rejected = "rejected"
-    hired = "hired"
-    withdrawn = "withdrawn"
+from app.enums.application import ApplicationStatus
+from app.schemas.candidate import CandidateResponse
 
 class ApplicationResponse(BaseModel):
     id: int
@@ -22,22 +15,17 @@ class ApplicationResponse(BaseModel):
     class Config:
         from_attributes = True
 
-
-
 class ApplicationStatusUpdate(BaseModel):
     status:ApplicationStatus
-
-
 
 class ApplicantInfo(BaseModel):
     id:int
     full_name:str 
     email:str 
-    resume_url:str | None=None 
+    candidate: CandidateResponse | None = None
 
     class Config:
         from_attributes = True
-
 
 class RecruiterApplicationResponse(BaseModel):
     id: int
@@ -49,7 +37,6 @@ class RecruiterApplicationResponse(BaseModel):
     class Config:
         from_attributes = True
 
-
 class ApplicationApplicantResponse(BaseModel):
     id:int 
     status:ApplicationStatus 
@@ -57,8 +44,7 @@ class ApplicationApplicantResponse(BaseModel):
     user:ApplicantInfo
 
     class Config: 
-        from_attribute = True
-
+        from_attributes = True
 
 class MyApplicationResponse(BaseModel):
     id:int
@@ -67,4 +53,4 @@ class MyApplicationResponse(BaseModel):
     job:JobResponse
 
     class Config:
-        from_attribute = True
+        from_attributes = True

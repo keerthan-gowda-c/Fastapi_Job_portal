@@ -4,6 +4,7 @@ from typing import Optional
 
 from app.database import get_db
 from app.models.company import Company
+from app.models.recruiter import Recruiter
 from app.models.user import User
 
 
@@ -20,6 +21,24 @@ router = APIRouter(
 )
 
 
+def get_recruiter(
+    current_user: User,
+    db: Session
+):
+    recruiter = (
+        db.query(Recruiter)
+        .filter(Recruiter.user_id == current_user.id)
+        .first()
+    )
+
+    if not recruiter:
+        raise HTTPException(
+            status_code=404,
+            detail="Recruiter profile not found"
+        )
+
+    return recruiter
+
 @router.post("/",response_model=CompanyResponse)
 def create_company(
     company: CompanyCreate,
@@ -28,13 +47,14 @@ def create_company(
         require_role("recruiter")
     )
 ):
+    recruiter = get_recruiter(current_user, db)
 
     new_company = Company(
         name=company.name,
         description=company.description,
         website=company.website,
         location=company.location,
-        owner_id=current_user.id
+        recruiter_id=recruiter.id
     )
 
     db.add(new_company)
@@ -58,13 +78,25 @@ def list_companies(search:Optional[str]=None,
 
 
 
-@router.get("/me")
+@router.get("/me",response_model=CompanyResponse)
 def get_my_company(db:Session=Depends(get_db),current_user:User=Depends(require_role("recruiter"))):
-    return db.query(Company).filter(Company.owner_id == current_user.id).first()
+
+    recruiter = get_recruiter(current_user, db)
+    company = (
+        db.query(Company)
+        .filter(Company.recruiter_id == recruiter.id)
+        .first()
+    )
+    if not company:
+        raise HTTPException(
+            status_code=404,
+            detail="Company not found"
+        )
+    return company
 
 
 
-@router.get("/{company_id}")
+@router.get("/{company_id}", response_model=CompanyResponse)
 def get_company(company_id:int, db:Session=Depends(get_db)):
     company = (db.query(Company).filter(Company.id == company_id).first())
 
@@ -75,25 +107,24 @@ def get_company(company_id:int, db:Session=Depends(get_db)):
 
 
 
-@router.put("/{company_id}")
+@router.put("/{company_id}",response_model=CompanyResponse)
 def update_company(
     company_id:int,
-    company_data:CompanyCreate,
+    company_data:CompanyUpdate,
     db: Session=Depends(get_db),
     current_user: User = Depends(require_role("recruiter"))
 ):
-    company = (db.query(Company).filter(Company.id == company_id).first())
+    recruiter = get_recruiter(current_user, db)
+    company = (db.query(Company).filter(Company.id == company_id,Company.recruiter_id==recruiter.id).first())
 
     if not company:
         raise HTTPException(status_code=404,detail="Company not found")
     
-    if company.owner_id != current_user.id:
+    if company.recruiter_id != recruiter.id:
         raise HTTPException(status_code=403, detail="Access denied")
     
-    company.name = company_data.name
-    company.description = company_data.description
-    company.website = company_data.website
-    company.location = company_data.location
+    for field, value in company_data.model_dump(exclude_unset=True).items():
+        setattr(company, field, value)
 
     db.commit()
     db.refresh(company)
@@ -103,7 +134,8 @@ def update_company(
 
 @router.patch("/me",response_model=CompanyResponse)
 def update_my_company(data:CompanyUpdate, db:Session = Depends(get_db), current_user : User = Depends(require_role("recruiter"))):
-    company = (db.query(Company).filter(Company.owner_id == current_user.id).first())
+    recruiter = get_recruiter(current_user, db)
+    company = (db.query(Company).filter(Company.recruiter_id == recruiter.id).first())
 
     if not company:
         raise HTTPException(status_code=404, detail="Company not found")
@@ -122,12 +154,14 @@ def delete_company(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_role("recruiter"))
 ):
-    company = (db.query(Company).filter(Company.id == company_id).first())
+
+    recruiter = get_recruiter(current_user, db)
+    company = (db.query(Company).filter(Company.id == company_id,Company.recruiter_id==recruiter.id).first())
     
     if not company:
         raise HTTPException(status_code=404,detail="Company not found")
     
-    if company.owner_id != current_user.id:
+    if company.recruiter_id != current_user.id:
         raise HTTPException(status_code=403, detail="Access Denied")
     
     db.delete(company)

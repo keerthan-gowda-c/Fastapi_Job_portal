@@ -1,52 +1,343 @@
-.applications-bg{
-    background:#f4f7fb;
-    min-height:100vh;
+
+/* =========================================
+   Recruiter Applications
+   ========================================= */
+
+.applications-bg {
+    min-height: calc(100vh - 70px);
+    background: #f6f8fc;
+    padding-bottom: 30px;
 }
 
-.page-header{
-    background:#fff;
-    border-radius:16px;
-    padding:24px 30px;
+
+/* =========================================
+   Page Header
+   ========================================= */
+
+.page-header {
+    background: #ffffff;
+    border: 1px solid #e8ecf2;
+    border-radius: 14px;
+    padding: 22px 24px;
 }
 
-.card{
-    border-radius:16px;
+.page-header h2 {
+    color: #111827;
+    font-size: 24px;
+    letter-spacing: -0.3px;
 }
 
-.table{
-    margin-bottom:0;
+.page-header p {
+    font-size: 14px;
+    color: #6b7280 !important;
 }
 
-.table thead th{
-    background:#f8f9fa;
-    color:#495057;
-    font-weight:600;
-    border-bottom:2px solid #dee2e6;
+
+/* =========================================
+   Main Applications Card
+   ========================================= */
+
+.applications-bg > .container > .card {
+    border-radius: 14px !important;
+    overflow: hidden;
+    border: 1px solid #e8ecf2 !important;
+    background: #ffffff;
 }
 
-.table tbody tr{
-    transition:.25s;
+.applications-bg > .container > .card .card-body {
+    padding: 0 !important;
 }
 
-.table tbody tr:hover{
-    background:#f8fafc;
+
+/* =========================================
+   Table Container
+   ========================================= */
+
+.applications-bg .table-responsive {
+    overflow-x: auto;
 }
 
-.badge{
-    font-size:.8rem;
-    padding:8px 12px;
-    border-radius:20px;
+
+/* =========================================
+   Table
+   ========================================= */
+
+.applications-bg table {
+    min-width: 720px;
+    margin: 0;
 }
 
-.btn{
-    border-radius:8px;
-    font-weight:600;
+
+/* Table Header */
+
+.applications-bg thead th {
+    background: #f8fafc !important;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.45px;
+
+    padding: 14px 18px;
+
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
 }
 
-@media(max-width:768px){
 
-.page-header{
-    text-align:center;
+/* Table Body */
+
+.applications-bg tbody td {
+    padding: 15px 18px;
+    font-size: 14px;
+    color: #374151;
+
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
 }
+
+
+/* Last row */
+
+.applications-bg tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================
+   Row Hover
+   ========================================= */
+
+.applications-bg tbody tr {
+    transition:
+        background-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.applications-bg tbody tr:hover {
+    background-color: #f8faff;
+}
+
+
+/* =========================================
+   Job Title
+   ========================================= */
+
+.applications-bg tbody td.fw-semibold {
+    color: #111827;
+    font-weight: 600 !important;
+}
+
+
+/* =========================================
+   Job ID Badge
+   ========================================= */
+
+.applications-bg .badge.bg-secondary {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+
+    padding: 6px 10px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   Applicants Badge
+   ========================================= */
+
+.applications-bg .badge.bg-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 34px;
+    height: 28px;
+
+    padding: 4px 9px;
+
+    border-radius: 999px;
+
+    background: #e8efff !important;
+    color: #3157c8 !important;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   View Applicants Button
+   ========================================= */
+
+.applications-bg .btn-primary {
+    border-radius: 8px;
+
+    padding: 7px 14px !important;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background-color 0.18s ease;
+}
+
+.applications-bg .btn-primary:hover {
+    transform: translateY(-1px);
+
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.18);
+}
+
+
+/* =========================================
+   Empty State
+   ========================================= */
+
+.applications-bg .text-center.py-5 {
+    padding-top: 55px !important;
+    padding-bottom: 55px !important;
+}
+
+.applications-bg .text-center.py-5 h4 {
+    color: #111827;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.applications-bg .text-center.py-5 p {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+
+/* =========================================
+   Scrollbar
+   ========================================= */
+
+.applications-bg .table-responsive::-webkit-scrollbar {
+    height: 7px;
+}
+
+.applications-bg .table-responsive::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+.applications-bg .table-responsive::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.applications-bg .table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+
+/* =========================================
+   Tablet
+   ========================================= */
+
+@media (max-width: 992px) {
+
+    .applications-bg .container {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .page-header {
+        padding: 20px;
+    }
+
+    .page-header h2 {
+        font-size: 22px;
+    }
+
+}
+
+
+/* =========================================
+   Mobile
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .applications-bg {
+        padding-top: 15px;
+    }
+
+    .applications-bg .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .page-header {
+        padding: 18px;
+        border-radius: 12px;
+    }
+
+    .page-header h2 {
+        font-size: 20px;
+    }
+
+    .page-header p {
+        font-size: 13px;
+    }
+
+    .applications-bg > .container > .card {
+        margin-top: 16px !important;
+        border-radius: 12px !important;
+    }
+
+    .applications-bg thead th {
+        padding: 12px 14px;
+    }
+
+    .applications-bg tbody td {
+        padding: 13px 14px;
+    }
+
+}
+
+
+/* =========================================
+   Small Mobile
+   ========================================= */
+
+@media (max-width: 576px) {
+
+    .applications-bg .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .page-header {
+        padding: 16px;
+    }
+
+    .page-header h2 {
+        font-size: 19px;
+    }
+
+    .page-header p {
+        font-size: 12px;
+    }
+
+    .applications-bg table {
+        min-width: 680px;
+    }
+
+    .applications-bg tbody td {
+        font-size: 13px;
+    }
+
+    .applications-bg .btn-primary {
+        font-size: 12px;
+        padding: 6px 11px !important;
+    }
 
 }

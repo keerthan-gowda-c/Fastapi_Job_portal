@@ -1,152 +1,170 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
-import Jobs from "./pages/jobseeker/Jobs";
-import HomePage from "./pages/HomePage";
-import ChooseRole from "./pages/register/ChooseRole";
-import ChooseLoginRole from "./pages/login/ChooseLoginRole";
-import SavedJobs from "./pages/jobseeker/SavedJobs";
+import Login from "./pages/auth/login/Login";
+import ChooseRole from "./pages/auth/register/ChooseRole";
+import HomePage from "./pages/home/HomePage";
+import ProtectedRoute from "./components/common/ProtectedRoute";
+import JobDetails from "./pages/jobs/JobDetails";
+import Register from "./pages/auth/register/Register";
+import ChooseLoginRole from "./pages/auth/login/ChooseLoginRole";
+import Jobs from "./pages/jobs/Jobs";
+import CompaniesList from "./pages/company/CompaniesList";
+import CompanyDetails from "./pages/company/CompanyDetails";
 import RecruiterDashboard from "./pages/recruiter/RecruiterDashboard";
 import CreateCompany from "./pages/recruiter/company/CreateCompany";
+import MyCompany from "./pages/recruiter/company/MyCompany";
+import EditCompany from "./pages/recruiter/company/EditCompany";
 import CreateJob from "./pages/recruiter/job/CreateJob";
 import MyJobs from "./pages/recruiter/job/MyJobs";
 import EditJob from "./pages/recruiter/job/EditJob";
-import Profile from "./pages/jobseeker/Profile";
-import JobseekerDashboard from "./pages/jobseeker/JobseekerDashboard";
-import EditProfile from "./pages/jobseeker/EditProfile";
-import MyApplications from "./pages/jobseeker/MyApplications";
 import RecruiterApplications from "./pages/recruiter/application/RecruiterApplications";
 import JobApplicants from "./pages/recruiter/application/JobApplicants";
-import MyCompany from "./pages/recruiter/company/MyCompany";
-import EditCompany from "./pages/recruiter/company/EditCompany";
-import CompaniesList from "./pages/search/CompaniesList";
-import CompanyDetails from "./pages/company/CompanyDetails";
-
-
-import {ToastContainer} from "react-toastify"
+import SavedJobs from "./pages/jobseeker/jobs/SavedJobs";
+import Profile from "./pages/jobseeker/profile/Profile";
+import JobseekerDashboard from "./pages/jobseeker/dashboard/JobseekerDashboard";
+import MyApplications from "./pages/jobseeker/jobs/MyApplications";
+import EditProfile from "./pages/jobseeker/profile/edits/EditProfile";
+import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 function App() {
   return (
     <>
-    <BrowserRouter>
+      <BrowserRouter>
+        <Routes>
 
-      <Routes>
+          {/* Public Routes */}
+          <Route
+            path="/"
+            element={<HomePage />}
+          />
 
-        <Route
-          path="/"
-          element={<HomePage />}
-        />
+          <Route
+            path="/choose-role"
+            element={<ChooseRole />}
+          />
 
-        <Route
-          path="/choose-role"
-          element={<ChooseRole />}
-        />
+          <Route
+            path="/register/:role"
+            element={<Register />}
+          />
 
-        <Route
-          path="/register/:role"
-          element={<Register />}
-        />
+          <Route
+            path="/choose-login-role"
+            element={<ChooseLoginRole />}
+          />
 
-        <Route
-          path="/choose-login-role"
-          element={<ChooseLoginRole />}
-        />
+          <Route
+            path="/login/:role"
+            element={<Login />}
+          />
 
-        <Route
-          path="/login/:role"
-          element={<Login />}
-        />
+          <Route
+            path="/jobs"
+            element={<Jobs />}
+          />
 
-        <Route
-          path="/jobs"
-          element={<Jobs />}
-        />
+          <Route
+            path="/companies/all"
+            element={<CompaniesList />}
+          />
 
-        <Route
-          path="/recruiter-dashboard"
-          element={<RecruiterDashboard />}
-        />
+          <Route
+            path="/companies/details/:id"
+            element={<CompanyDetails />}
+          />
 
-        <Route
-          path="/company/create"
-          element={<CreateCompany />}
-        />
+          <Route
+            path="/jobs/details/:id"
+            element={<JobDetails />}
+          />
+          {/* Public Routes Ends Here */}
 
-        <Route
-          path="/company/my-company"
-          element={<MyCompany />}
-        />
+          {/* Recruiter Routes */}
+          <Route element={<ProtectedRoute allowedRole="recruiter" />}>
 
-        <Route
-          path="/company/edit-company"
-          element={<EditCompany />}
-        />
+            <Route
+              path="/recruiter-dashboard"
+              element={<RecruiterDashboard />}
+            />
 
-        <Route
-          path="/job/create"
-          element={<CreateJob />}
-        />
+            <Route
+              path="/company/create"
+              element={<CreateCompany />}
+            />
 
-        <Route
-          path="/saved-jobs"
-          element={<SavedJobs />}
-        />
+            <Route
+              path="/company/my-company"
+              element={<MyCompany />}
+            />
 
-        <Route
-          path="/jobseeker/profile"
-          element={<Profile />}
-        />
+            <Route
+              path="/company/edit-company"
+              element={<EditCompany />}
+            />
 
-        <Route
-          path="/jobseeker/dashboard"
-          element={<JobseekerDashboard />}
-        />
+            <Route
+              path="/job/create"
+              element={<CreateJob/>}
+            />
 
-        <Route
-          path="/jobseeker/applications"
-          element={<MyApplications />}
-        />
+            <Route
+              path="/my-jobs"
+              element={<MyJobs />}
+            />
 
-        <Route
-          path="/my-jobs"
-          element={<MyJobs />}
-        />
+            <Route
+              path="/job/edit/:id"
+              element={<EditJob />}
+            />
 
-        <Route
-          path="/job/edit/:id"
-          element={<EditJob />}
-        />
+            <Route
+              path="/recruiter/recruiter-application"
+              element={<RecruiterApplications />}
+            />
 
-        <Route
-          path="/jobseeker/profile/edit"
-          element={<EditProfile />}
-        />
+            <Route
+              path="/recruiter/job-applicants/:jobId"
+              element={<JobApplicants />}
+            />
 
-        <Route
-          path="/recruiter/recruiter-application"
-          element={<RecruiterApplications />}
-        />
+          </Route>
+          {/* Recruiter Routes Ends Here */}
 
-        <Route
-          path="/recruiter/job-applicants/:jobId"
-          element={<JobApplicants />}
-        />
+          {/* Jobseeker Routes */}
+          <Route element={<ProtectedRoute allowedRole="jobseeker" />}>
 
-        <Route
-          path="/companies/all"
-          element={<CompaniesList />}
-        />
+            <Route
+              path="/saved-jobs"
+              element={<SavedJobs />}
+            />
 
-        <Route
-          path="/companies/details/:id"
-          element={<CompanyDetails />}
-        />
+            <Route
+              path="/jobseeker/profile"
+              element={<Profile />}
+            />
 
-      </Routes>
+            <Route
+              path="/jobseeker/dashboard"
+              element={<JobseekerDashboard />}
+            />
 
-    </BrowserRouter>
-    <ToastContainer
+            <Route
+              path="/jobseeker/applications"
+              element={<MyApplications />}
+            />
+
+            <Route
+              path="/jobseeker/profile/edit"
+              element={<EditProfile />}
+            />
+
+          </Route>
+          {/* Jobseeker Routes Ends Here  */}
+
+        </Routes>
+
+      </BrowserRouter>
+      <ToastContainer
         position="top-right"
         autoClose={3000}
         theme="colored"

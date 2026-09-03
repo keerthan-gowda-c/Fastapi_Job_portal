@@ -1,29 +1,35 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import api from "../../../api/axios";
-import Navbar from "../../../components/Navbar";
+import Navbar from "../../../components/layout/Navbar";
 import "./CreateJob.css";
 import { toast } from "react-toastify";
 
-function CreateJob() {
+export default function CreateJob() {
+
     const navigate = useNavigate();
 
     const [form, setForm] = useState({
         title: "",
         description: "",
         location: "",
-        salary: ""
+        salary: "",
+        employment_type: "Full_Time"
     });
 
     const handleChange = (e) => {
+
         setForm({
             ...form,
             [e.target.name]: e.target.value
         });
+
     };
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
 
         try {
@@ -45,11 +51,15 @@ function CreateJob() {
                 error.response?.data?.detail ||
                 "Job creation failed"
             );
+
         }
+
     };
 
     return (
+
         <>
+
             <Navbar />
 
             <div className="create-job-bg">
@@ -74,6 +84,8 @@ function CreateJob() {
 
                                     <form onSubmit={handleSubmit}>
 
+                                        {/* Job Title */}
+
                                         <div className="mb-4">
 
                                             <label className="form-label fw-semibold">
@@ -92,6 +104,9 @@ function CreateJob() {
 
                                         </div>
 
+
+                                        {/* Description */}
+
                                         <div className="mb-4">
 
                                             <label className="form-label fw-semibold">
@@ -109,6 +124,9 @@ function CreateJob() {
                                             />
 
                                         </div>
+
+
+                                        {/* Location */}
 
                                         <div className="row">
 
@@ -130,6 +148,9 @@ function CreateJob() {
 
                                             </div>
 
+
+                                            {/* Salary */}
+
                                             <div className="col-md-6 mb-4">
 
                                                 <label className="form-label fw-semibold">
@@ -143,12 +164,53 @@ function CreateJob() {
                                                     value={form.salary}
                                                     onChange={handleChange}
                                                     placeholder="800000"
+                                                    min="0"
                                                     required
                                                 />
 
                                             </div>
 
                                         </div>
+
+
+                                        {/* Employment Type */}
+
+                                        <div className="mb-4">
+
+                                            <label className="form-label fw-semibold">
+                                                Employment Type
+                                            </label>
+
+                                            <select
+                                                className="form-select"
+                                                name="employment_type"
+                                                value={form.employment_type}
+                                                onChange={handleChange}
+                                                required
+                                            >
+
+                                                <option value="Full_Time">
+                                                    Full Time
+                                                </option>
+
+                                                <option value="Part_Time">
+                                                    Part Time
+                                                </option>
+
+                                                <option value="Internship">
+                                                    Internship
+                                                </option>
+
+                                                <option value="Contract">
+                                                    Contract
+                                                </option>
+
+                                            </select>
+
+                                        </div>
+
+
+                                        {/* Buttons */}
 
                                         <div className="d-flex gap-3 mt-4">
 
@@ -162,7 +224,9 @@ function CreateJob() {
                                             <button
                                                 type="button"
                                                 className="btn btn-outline-secondary px-4"
-                                                onClick={() => navigate("/recruiter-dashboard")}
+                                                onClick={() =>
+                                                    navigate("/recruiter-dashboard")
+                                                }
                                             >
                                                 Cancel
                                             </button>
@@ -184,7 +248,9 @@ function CreateJob() {
             </div>
 
         </>
+
     );
+
 }
 
-export default CreateJob;
+

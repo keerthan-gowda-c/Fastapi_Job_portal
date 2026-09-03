@@ -1,159 +1,250 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api/axios";
-import Navbar from "../../../components/Navbar";
+import Navbar from "../../../components/layout/Navbar";
 import { toast } from "react-toastify";
+import "./CreateCompany.css";
 
+export default function CreateCompany() {
 
-function CreateCompany(){
     const navigate = useNavigate();
-    const[form,setForm] = useState({
-        name:"",
-        description:"",
-        website:"",
-        location:""
-    })
+
+    const [loading, setLoading] = useState(false);
+
+    const [form, setForm] = useState({
+        name: "",
+        description: "",
+        website: "",
+        location: ""
+    });
+
+
     const handleChange = (e) => {
+
         setForm({
-            ...form,[e.target.name]:e.target.value
-        })
-    }
-    const handleSubmit = async(e) => {
+            ...form,
+            [e.target.name]: e.target.value
+        });
+
+    };
+
+
+    const handleSubmit = async (e) => {
+
         e.preventDefault();
 
-        try{
-            await api.post("/companies/",form)
-            toast.success("Company created successfully")
-            navigate("/recruiter-dashboard")
+        setLoading(true);
+
+        try {
+
+            await api.post("/companies/", form);
+
+            toast.success(
+                "Company created successfully"
+            );
+
+            navigate("/recruiter-dashboard");
+
         }
-        catch(error){
-            console.log(error);
-            toast.error(error.response?.data?.detail || "Company creation failed")
+        catch (error) {
+
+            console.error(error);
+
+            toast.error(
+                error.response?.data?.detail ||
+                "Company creation failed"
+            );
+
         }
-    }
+        finally {
+
+            setLoading(false);
+
+        }
+
+    };
 
 
- return (
+    return (
 
         <>
+            <Navbar />
 
-        <Navbar />
+            <div className="container py-5">
 
+                <div className="row justify-content-center">
 
-        <div className="container mt-5">
+                    <div className="col-lg-7 col-md-9">
 
+                        <div className="text-center mb-4">
 
-            <div className="row justify-content-center">
+                            <h1 className="fw-bold">
+                                🏢 Create Your Company
+                            </h1>
 
+                            <p className="text-muted">
+                                Add your company information to start hiring candidates.
+                            </p>
 
-                <div className="col-md-6">
-
-
-                    <div className="card p-4">
-
-
-                        <h2 className="mb-4">
-
-                            Create Company
-
-                        </h2>
+                        </div>
 
 
+                        <div className="card border-0 shadow-lg rounded-4">
 
-                        <form onSubmit={handleSubmit}>
+                            <div className="card-body p-4 p-md-5">
 
+                                <form onSubmit={handleSubmit}>
 
-                            <input
+                                    {/* Company Name */}
 
-                            className="form-control mb-3"
+                                    <div className="mb-4">
 
-                            name="name"
+                                        <label className="form-label fw-semibold">
+                                            Company Name
+                                        </label>
 
-                            placeholder="Company Name"
+                                        <input
+                                            type="text"
+                                            className="form-control form-control-lg"
+                                            name="name"
+                                            placeholder="Enter company name"
+                                            value={form.name}
+                                            onChange={handleChange}
+                                            required
+                                        />
 
-                            onChange={handleChange}
-
-                            required
-
-                            />
-
-
-
-                            <textarea
-
-                            className="form-control mb-3"
-
-                            name="description"
-
-                            placeholder="Company Description"
-
-                            onChange={handleChange}
-
-                            required
-
-                            />
+                                    </div>
 
 
+                                    {/* Description */}
 
-                            <input
+                                    <div className="mb-4">
 
-                            className="form-control mb-3"
+                                        <label className="form-label fw-semibold">
+                                            Company Description
+                                        </label>
 
-                            name="website"
+                                        <textarea
+                                            className="form-control"
+                                            name="description"
+                                            rows="5"
+                                            placeholder="Describe your company..."
+                                            value={form.description}
+                                            onChange={handleChange}
+                                            required
+                                        />
 
-                            placeholder="Website"
-
-                            onChange={handleChange}
-
-                            />
-
-
-
-                            <input
-
-                            className="form-control mb-3"
-
-                            name="location"
-
-                            placeholder="Location"
-
-                            onChange={handleChange}
-
-                            />
+                                    </div>
 
 
+                                    {/* Website */}
 
-                            <button
+                                    <div className="mb-4">
 
-                            className="btn btn-primary w-100"
+                                        <label className="form-label fw-semibold">
+                                            Website
+                                        </label>
 
-                            >
+                                        <input
+                                            type="url"
+                                            className="form-control form-control-lg"
+                                            name="website"
+                                            placeholder="https://example.com"
+                                            value={form.website}
+                                            onChange={handleChange}
+                                        />
 
-                                Create Company
+                                        <small className="text-muted">
+                                            Optional
+                                        </small>
 
-                            </button>
+                                    </div>
 
 
-                        </form>
+                                    {/* Location */}
 
+                                    <div className="mb-4">
+
+                                        <label className="form-label fw-semibold">
+                                            Location
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            className="form-control form-control-lg"
+                                            name="location"
+                                            placeholder="e.g. Bengaluru, Karnataka"
+                                            value={form.location}
+                                            onChange={handleChange}
+                                        />
+
+                                    </div>
+
+
+                                    {/* Buttons */}
+
+                                    <div className="d-flex flex-column flex-md-row gap-3 mt-4">
+
+                                        <button
+                                            type="submit"
+                                            className="btn btn-primary btn-lg rounded-pill flex-fill"
+                                            disabled={loading}
+                                        >
+
+                                            {loading ? (
+
+                                                <>
+                                                    <span
+                                                        className="spinner-border spinner-border-sm me-2"
+                                                        role="status"
+                                                        aria-hidden="true"
+                                                    />
+
+                                                    Creating...
+                                                </>
+
+                                            ) : (
+
+                                                <>
+                                                    <i className="bi bi-building-add me-2"></i>
+                                                    Create Company
+                                                </>
+
+                                            )}
+
+                                        </button>
+
+
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-secondary btn-lg rounded-pill px-4"
+                                            onClick={() =>
+                                                navigate("/recruiter-dashboard")
+                                            }
+                                            disabled={loading}
+                                        >
+                                            Cancel
+                                        </button>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
-
                 </div>
 
-
             </div>
-
-
-        </div>
-
-
         </>
 
-    )
+    );
 
 }
 
 
-export default CreateCompany;
+

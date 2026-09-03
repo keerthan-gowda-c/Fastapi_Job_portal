@@ -7,10 +7,10 @@ from app.models.job import Job
 from app.models.user import User
 from app.models.company import Company
 from app.models.saved_jobs import SavedJob
-
+from app.models.recruiter import Recruiter
 from app.schemas.job import (
     JobCreate,
-    JobResponse
+    JobResponse, JobDetailResponse
 )
 
 from app.dependencies.roles import require_role
@@ -20,6 +20,23 @@ router = APIRouter(
     tags=["Jobs"]
 )
 
+def get_recruiter(
+    current_user: User,
+    db: Session
+):
+    recruiter = (
+        db.query(Recruiter)
+        .filter(Recruiter.user_id == current_user.id)
+        .first()
+    )
+
+    if not recruiter:
+        raise HTTPException(
+            status_code=404,
+            detail="Recruiter profile not found"
+        )
+
+    return recruiter
 
 @router.post("/",response_model=JobResponse)
 def create_job(
@@ -29,11 +46,11 @@ def create_job(
         require_role("recruiter")
     )
 ):
-
+    recruiter = get_recruiter(current_user, db)
     company = (
         db.query(Company)
         .filter(
-            Company.owner_id == current_user.id
+            Company.recruiter_id == recruiter.id
         )
         .first()
     )
@@ -50,6 +67,7 @@ def create_job(
         description=job.description,
         location=job.location,
         salary=job.salary,
+        employment_type=job.employment_type.value,
         company_id=company.id
     )
 
@@ -60,13 +78,14 @@ def create_job(
     return db_job
 
 
-@router.get("/my-jobs")
+@router.get("/my-jobs", response_model=list[JobResponse])
 def get_my_jobs(
     db:Session = Depends(get_db),
     current_user: User = Depends(require_role("recruiter"))
     ):
+    recruiter = get_recruiter(current_user, db)
     company = (
-        db.query(Company).filter(Company.owner_id == current_user.id).first()
+        db.query(Company).filter(Company.recruiter_id == recruiter.id).first()
     )
 
     if not company:
@@ -82,53 +101,7 @@ def get_my_jobs(
     return jobs
 
 
-# search
-@router.get("/")
-def get_jobs(
-    keyword:Optional[str] = None,
-    location:Optional[str] = None,
-    salary:Optional[int] = None,
-    page:int =1,
-    limit:int=10,
-    db:Session = Depends(get_db)
-):
-    query = db.query(Job)
-
-    if keyword:
-        query = query.filter(Job.title.ilike(f"%{keyword}%"))
-
-    if location:
-        query = query.filter(Job.location.ilike(f"%{location}%"))
-
-    if salary:
-        query = query.filter(Job.salary >= salary)
-
-    jobs = query.offset((page - 1) * limit).limit(limit).all()
-
-    return jobs
-
-# Open for all
-@router.get("/{job_id}")
-def get_job(
-    job_id: int,
-    db: Session = Depends(get_db)
-):
-    job = (
-        db.query(Job)
-        .filter(Job.id == job_id)
-        .first()
-    )
-
-    if not job:
-        raise HTTPException(
-            status_code=404,
-            detail="Job not found"
-        )
-
-    return job
-
-
-@router.put("/{job_id}")
+@router.put("/{job_id}",response_model=JobResponse)
 def update_job(
     job_id: int,
     job_data: JobCreate,
@@ -137,6 +110,7 @@ def update_job(
         require_role("recruiter")
     )
 ):
+    recruiter = get_recruiter(current_user, db)
     job = (
         db.query(Job)
         .filter(Job.id == job_id)
@@ -149,7 +123,7 @@ def update_job(
             detail="Job not found"
         )
 
-    if job.company.owner_id != current_user.id:
+    if job.company.recruiter_id != recruiter.id:
         raise HTTPException(
             status_code=403,
             detail="Access denied"
@@ -175,6 +149,7 @@ def delete_job(
         require_role("recruiter")
     )
 ):
+    recruiter = get_recruiter(current_user, db)
     job = (
         db.query(Job)
         .filter(Job.id == job_id)
@@ -187,7 +162,7 @@ def delete_job(
             detail="Job not found"
         )
 
-    if job.company.owner_id != current_user.id:
+    if job.company.recruiter_id != recruiter.id:
         raise HTTPException(
             status_code=403,
             detail="Access denied"
@@ -203,4 +178,58 @@ def delete_job(
     }
 
 
+# search
+@router.get("/", response_model=list[JobResponse])
+def search_jobs(
+    keyword:Optional[str] = None,
+    location:Optional[str] = None,
+    salary:Optional[int] = None,
+    page:int =1,
+    limit:int=10,
+    db:Session = Depends(get_db)
+):
+    query = db.query(Job)
 
+    if keyword:
+        query = query.filter(Job.title.ilike(f"%{keyword}%"))
+
+    if location:
+        query = query.filter(Job.location.ilike(f"%{location}%"))
+
+    if salary:
+        query = query.filter(Job.salary >= salary)
+
+    jobs = query.offset((page - 1) * limit).limit(limit).all()
+
+    return jobs
+
+#
+
+
+@router.get("/{job_id}", response_model=JobDetailResponse)
+def get_job_details(
+    job_id: int,
+    db: Session = Depends(get_db)
+):
+    job = (
+        db.query(Job)
+        .filter(Job.id == job_id)
+        .first()
+    )
+
+    if not job:
+        raise HTTPException(
+            status_code=404,
+            detail="Job not found"
+        )
+
+    return {
+        "id": job.id,
+        "title": job.title,
+        "description": job.description,
+        "location": job.location,
+        "salary": job.salary,
+        "employment_type": job.employment_type,
+        "company": job.company,
+        "recruiter": job.company.recruiter.user
+    }

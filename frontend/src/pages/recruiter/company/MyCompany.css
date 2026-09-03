@@ -1,0 +1,403 @@
+
+/* =========================================
+   MY COMPANY PAGE
+   Premium / Modern / Responsive
+========================================= */
+
+.container {
+    max-width: 1180px;
+}
+
+
+/* =========================================
+   PAGE BACKGROUND
+========================================= */
+
+body {
+    background: #f6f8fc;
+}
+
+
+/* =========================================
+   PAGE HEADING
+========================================= */
+
+.text-center.mb-5 {
+    margin-bottom: 2rem !important;
+}
+
+.text-center.mb-5 h1 {
+    font-size: 2rem;
+    letter-spacing: -0.5px;
+    color: #111827;
+}
+
+.text-center.mb-5 p {
+    font-size: 0.95rem !important;
+    margin-top: 6px;
+}
+
+
+/* =========================================
+   MAIN COMPANY CARD
+========================================= */
+
+.container > .card {
+    border-radius: 18px !important;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.container > .card.shadow-lg {
+    box-shadow:
+        0 12px 35px rgba(15, 23, 42, 0.08) !important;
+}
+
+.container > .card > .card-body {
+    padding: 2.5rem !important;
+}
+
+
+/* =========================================
+   COMPANY HEADER
+========================================= */
+
+.container > .card .rounded-circle {
+    background: #eef4ff !important;
+    border: 1px solid #dbe7ff;
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.08);
+}
+
+.container > .card .rounded-circle i {
+    color: #2563eb !important;
+}
+
+.container > .card h2 {
+    font-size: 1.65rem;
+    color: #111827;
+    letter-spacing: -0.3px;
+}
+
+.container > .card .bi-geo-alt {
+    color: #64748b;
+}
+
+
+/* =========================================
+   DIVIDERS
+========================================= */
+
+.container > .card hr {
+    border: 0;
+    border-top: 1px solid #e5e7eb;
+    opacity: 1;
+}
+
+
+/* =========================================
+   INFORMATION GRID
+========================================= */
+
+.container > .card .row.g-4 {
+    --bs-gutter-x: 1rem;
+    --bs-gutter-y: 1rem;
+}
+
+
+/* =========================================
+   INFORMATION BOXES
+========================================= */
+
+.container > .card .bg-light {
+    background: #f8fafc !important;
+
+    border: 1px solid #e7ebf2;
+
+    border-radius: 12px !important;
+
+    padding: 1.15rem !important;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.container > .card .bg-light:hover {
+    transform: translateY(-2px);
+
+    border-color: #d5def0;
+
+    box-shadow:
+        0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+
+/* =========================================
+   INFORMATION LABEL
+========================================= */
+
+.container > .card .bg-light h6 {
+    font-size: 0.72rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    color: #64748b !important;
+}
+
+.container > .card .bg-light h6 i {
+    color: #2563eb;
+    font-size: 0.9rem;
+}
+
+
+/* =========================================
+   INFORMATION VALUE
+========================================= */
+
+.container > .card .bg-light p {
+    color: #1f2937;
+    font-size: 0.94rem;
+    line-height: 1.6;
+
+    word-break: break-word;
+}
+
+.container > .card .bg-light p.fw-semibold {
+    font-weight: 600 !important;
+}
+
+
+/* =========================================
+   WEBSITE
+========================================= */
+
+.container > .card .bg-light a {
+    display: inline-flex;
+    align-items: center;
+
+    color: #2563eb !important;
+
+    font-size: 0.94rem;
+    font-weight: 600;
+
+    word-break: break-all;
+
+    transition: color 0.2s ease;
+}
+
+.container > .card .bg-light a:hover {
+    color: #1d4ed8 !important;
+    text-decoration: underline !important;
+}
+
+.container > .card .bg-light a .bi {
+    font-size: 0.8rem;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.container > .card .btn {
+    min-height: 42px;
+
+    font-size: 0.88rem;
+    font-weight: 600;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.container > .card .btn:hover {
+    transform: translateY(-1px);
+}
+
+.container > .card .btn-primary {
+    box-shadow:
+        0 5px 14px rgba(37, 99, 235, 0.18);
+}
+
+.container > .card .btn-primary:hover {
+    box-shadow:
+        0 7px 18px rgba(37, 99, 235, 0.25);
+}
+
+.container > .card .btn-outline-danger:hover {
+    box-shadow:
+        0 5px 14px rgba(220, 38, 38, 0.12);
+}
+
+.container > .card .btn-outline-secondary:hover {
+    box-shadow:
+        0 5px 14px rgba(100, 116, 139, 0.12);
+}
+
+
+/* =========================================
+   EMPTY COMPANY STATE
+========================================= */
+
+.container .card.shadow-sm {
+    border-radius: 18px !important;
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, 0.07) !important;
+}
+
+.container .card.shadow-sm .card-body {
+    padding: 3.5rem 1.5rem !important;
+}
+
+.container .card.shadow-sm .bi-building-add {
+    color: #94a3b8 !important;
+    font-size: 3rem;
+}
+
+.container .card.shadow-sm h3 {
+    color: #1f2937;
+    font-size: 1.3rem;
+}
+
+
+/* =========================================
+   LOADING STATE
+========================================= */
+
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+
+    border-width: 0.2rem;
+}
+
+
+/* =========================================
+   RESPONSIVE - TABLET
+========================================= */
+
+@media (max-width: 991.98px) {
+
+    .container {
+        max-width: 94%;
+    }
+
+    .container > .card > .card-body {
+        padding: 2rem !important;
+    }
+
+    .text-center.mb-5 h1 {
+        font-size: 1.8rem;
+    }
+
+    .container > .card h2 {
+        font-size: 1.5rem;
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVE - MOBILE
+========================================= */
+
+@media (max-width: 767.98px) {
+
+    .container {
+        max-width: 100%;
+    }
+
+    .container.py-5 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+
+    .text-center.mb-5 {
+        margin-bottom: 1.5rem !important;
+    }
+
+    .text-center.mb-5 h1 {
+        font-size: 1.55rem;
+    }
+
+    .text-center.mb-5 p {
+        font-size: 0.88rem !important;
+    }
+
+
+    /* Main card */
+
+    .container > .card > .card-body {
+        padding: 1.25rem !important;
+    }
+
+
+    /* Company header */
+
+    .container > .card .rounded-circle {
+        width: 70px !important;
+        height: 70px !important;
+        min-width: 70px !important;
+    }
+
+    .container > .card .rounded-circle i {
+        font-size: 1.7rem !important;
+    }
+
+    .container > .card h2 {
+        font-size: 1.3rem;
+    }
+
+
+    /* Information boxes */
+
+    .container > .card .bg-light {
+        padding: 1rem !important;
+    }
+
+
+    /* Buttons */
+
+    .container > .card .d-flex.flex-wrap {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .container > .card .d-flex.flex-wrap .btn {
+        width: 100%;
+    }
+
+
+    /* Empty state */
+
+    .container .card.shadow-sm .card-body {
+        padding: 2.5rem 1.25rem !important;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 420px) {
+
+    .container.py-5 {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .text-center.mb-5 h1 {
+        font-size: 1.4rem;
+    }
+
+    .container > .card .bg-light p {
+        font-size: 0.88rem;
+    }
+
+}

@@ -14,13 +14,13 @@ class CompanyResponse(BaseModel):
     description: str
     website: str
     location: str
+    recruiter_id: int
 
     class Config:
         from_attributes = True
 
 
 class CompanyUpdate(BaseModel):
-    id: int | None = None
     name: str | None = None
     description: str | None = None
     website: str | None = None

@@ -1,40 +1,346 @@
-.applicants-bg{
-    background:#f4f7fb;
-    min-height:100vh;
+
+/* =========================================
+   Job Applicants Page
+   ========================================= */
+
+.applicants-bg {
+    min-height: calc(100vh - 70px);
+    background: #f6f8fc;
+    padding-bottom: 30px;
 }
 
-.applicants-card{
-    border-radius:20px;
+
+/* =========================================
+   Main Card
+   ========================================= */
+
+.applicants-card {
+    border-radius: 18px !important;
+    overflow: hidden;
+    background: #ffffff;
 }
 
-.table th{
-    font-weight:600;
+.applicants-card .card-body {
+    padding: 26px !important;
 }
 
-.table td{
-    vertical-align:middle;
+
+/* =========================================
+   Header
+   ========================================= */
+
+.applicants-card h2 {
+    font-size: 24px;
+    color: #111827;
+    letter-spacing: -0.3px;
 }
 
-tbody tr{
-    transition:.25s;
+.applicants-card .text-muted {
+    color: #6b7280 !important;
 }
 
-tbody tr:hover{
-    background:#f8f9fa;
+
+/* =========================================
+   Table
+   ========================================= */
+
+.applicants-card .table-responsive {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow-x: auto;
 }
 
-.badge{
-    text-transform:capitalize;
-    padding:8px 12px;
-    font-size:.75rem;
-    border-radius:20px;
+.applicants-card table {
+    margin-bottom: 0;
+    min-width: 900px;
 }
 
-.form-select{
-    border-radius:8px;
+
+/* Table Header */
+
+.applicants-card thead th {
+    background: #f8fafc !important;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
 }
 
-.btn{
-    border-radius:8px;
-    font-weight:600;
+
+/* Table Body */
+
+.applicants-card tbody td {
+    padding: 15px 16px;
+    font-size: 14px;
+    color: #374151;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.applicants-card tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Row Hover */
+
+.applicants-card tbody tr {
+    transition: background-color 0.18s ease;
+}
+
+.applicants-card tbody tr:hover {
+    background: #f8faff;
+}
+
+
+/* Candidate Name */
+
+.applicants-card tbody td strong {
+    color: #111827;
+    font-weight: 650;
+}
+
+
+/* =========================================
+   Status
+   ========================================= */
+
+.applicants-card .badge {
+    min-width: 82px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+}
+
+
+/* Improve Bootstrap badge colors */
+
+.applicants-card .bg-warning {
+    background-color: #fff7d6 !important;
+    color: #92400e !important;
+}
+
+.applicants-card .bg-info {
+    background-color: #e0f2fe !important;
+    color: #0369a1 !important;
+}
+
+.applicants-card .bg-primary {
+    background-color: #e8efff !important;
+    color: #3157c8 !important;
+}
+
+.applicants-card .bg-success {
+    background-color: #dcfce7 !important;
+    color: #166534 !important;
+}
+
+.applicants-card .bg-danger {
+    background-color: #fee2e2 !important;
+    color: #b91c1c !important;
+}
+
+.applicants-card .bg-secondary {
+    background-color: #f1f5f9 !important;
+    color: #475569 !important;
+}
+
+
+/* =========================================
+   Status Select
+   ========================================= */
+
+.applicants-card .form-select {
+    width: 160px !important;
+    min-height: 36px;
+    border: 1px solid #dbe1ea;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #374151;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 32px 6px 10px;
+    cursor: pointer;
+    box-shadow: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.applicants-card .form-select:hover {
+    border-color: #b8c2d1;
+}
+
+.applicants-card .form-select:focus {
+    border-color: #86a8ff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+
+/* =========================================
+   Resume Button
+   ========================================= */
+
+.applicants-card .btn-outline-primary {
+    border-color: #cbd5e1;
+    color: #3157c8;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 13px;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.applicants-card .btn-outline-primary:hover {
+    background-color: #eef3ff;
+    border-color: #9db5ff;
+    color: #2849ad;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   Loading Spinner
+   ========================================= */
+
+.applicants-card .spinner-border,
+.spinner-border.text-primary {
+    animation-duration: 0.7s;
+}
+
+
+/* =========================================
+   Empty State
+   ========================================= */
+
+.applicants-card .display-4 {
+    font-size: 48px;
+}
+
+.applicants-card .text-center.py-5 {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+}
+
+.applicants-card .text-center h4 {
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.applicants-card .text-center p {
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 992px) {
+
+    .applicants-bg .container {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .applicants-card .card-body {
+        padding: 22px !important;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .applicants-bg {
+        padding-top: 15px;
+    }
+
+    .applicants-card {
+        border-radius: 14px !important;
+    }
+
+    .applicants-card .card-body {
+        padding: 16px !important;
+    }
+
+    .applicants-card h2 {
+        font-size: 21px;
+    }
+
+    .applicants-card tbody td {
+        padding: 13px 12px;
+    }
+
+    .applicants-card thead th {
+        padding: 12px;
+    }
+
+}
+
+
+/* =========================================
+   Small Mobile
+   ========================================= */
+
+@media (max-width: 576px) {
+
+    .applicants-bg .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .applicants-card .card-body {
+        padding: 13px !important;
+    }
+
+    .applicants-card h2 {
+        font-size: 19px;
+    }
+
+    .applicants-card .table-responsive {
+        border-radius: 10px;
+    }
+
+    .applicants-card table {
+        min-width: 850px;
+    }
+
+    .applicants-card tbody td {
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================
+   Smooth Scrollbar for Table
+   ========================================= */
+
+.applicants-card .table-responsive::-webkit-scrollbar {
+    height: 7px;
+}
+
+.applicants-card .table-responsive::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+.applicants-card .table-responsive::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.applicants-card .table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
 }

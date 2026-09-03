@@ -1,0 +1,659 @@
+/* =========================================================
+   SAVED JOBS
+   ========================================================= */
+
+.jh-saved-jobs {
+    --ink: #14213d;
+    --ink-soft: #3a4358;
+    --paper: #faf9f5;
+    --paper-alt: #f1eee6;
+    --accent: #e9a23b;
+    --accent-dark: #b97614;
+    --line: #e2ded3;
+    --muted: #6b7280;
+    --success: #3f7d58;
+    --success-dark: #326546;
+    --danger: #b94a48;
+    --max-width: 1120px;
+
+    width: 100%;
+    max-width: var(--max-width);
+
+    margin: 0 auto;
+
+    padding: 4rem 1.5rem 5rem;
+
+    color: var(--ink);
+
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        sans-serif;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.jh-section-header {
+    text-align: center;
+
+    margin-bottom: 3rem;
+}
+
+.jh-section-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 0.75rem;
+
+    color: var(--accent-dark);
+
+    font-size: 0.8rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.jh-section-header .jh-heading {
+    margin: 0 0 0.75rem;
+
+    color: var(--ink);
+
+    font-family: "Fraunces", Georgia, serif;
+
+    font-size: clamp(2rem, 4vw, 3rem);
+
+    font-weight: 500;
+
+    line-height: 1.1;
+}
+
+.jh-section-subtitle {
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    color: var(--muted);
+
+    font-size: 1rem;
+}
+
+
+/* =========================================================
+   SAVED JOB GRID
+   ========================================================= */
+
+.jh-saved-jobs__grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 1.5rem;
+}
+
+
+/* =========================================================
+   SAVED JOB CARD
+   ========================================================= */
+
+.jh-saved-card {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    background: #ffffff;
+
+    border: 1px solid var(--line);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px 24px rgba(20, 33, 61, 0.06);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.jh-saved-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #d3cec1;
+
+    box-shadow:
+        0 14px 32px rgba(20, 33, 61, 0.09);
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.jh-saved-card__content {
+    padding: 1.5rem;
+}
+
+.jh-saved-card__header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 1rem;
+}
+
+.jh-saved-card__title {
+    min-width: 0;
+}
+
+.jh-saved-card__title h2 {
+    margin: 0 0 0.55rem;
+
+    color: var(--ink);
+
+    font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+    font-size: 1.35rem;
+
+    font-weight: 500;
+
+    line-height: 1.25;
+
+    overflow-wrap: anywhere;
+}
+
+.jh-location {
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.35rem;
+
+    margin: 0;
+
+    color: var(--ink-soft);
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   SAVED BADGE
+   ========================================================= */
+
+.jh-saved-status {
+    flex-shrink: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 28px;
+
+    padding:
+        0.35rem
+        0.75rem;
+
+    border-radius: 999px;
+
+    background: #e4f0e7;
+
+    color: var(--success);
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.jh-divider {
+    height: 1px;
+
+    margin: 1.25rem 0;
+
+    background: var(--line);
+}
+
+
+/* =========================================================
+   JOB INFORMATION
+   ========================================================= */
+
+.jh-job-info {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 1rem;
+}
+
+.jh-job-info > div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.3rem;
+
+    min-width: 0;
+}
+
+.jh-info-label {
+    color: var(--muted);
+
+    font-size: 0.75rem;
+
+    font-weight: 500;
+}
+
+.jh-job-info strong {
+    color: var(--ink);
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+
+    text-transform: capitalize;
+}
+
+.jh-job-info .jh-salary {
+    color: var(--success);
+
+    font-size: 1rem;
+
+    text-transform: none;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.jh-saved-card__actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 0.6rem;
+
+    padding:
+        0 1.5rem
+        1.5rem;
+}
+
+.jh-saved-card__actions .jh-btn {
+    flex: 1;
+
+    min-width: 130px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.jh-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.45rem;
+
+    min-height: 42px;
+
+    padding:
+        0.65rem
+        1.1rem;
+
+    border:
+        1.5px solid transparent;
+
+    border-radius: 999px;
+
+    font-family: inherit;
+
+    font-size: 0.88rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.jh-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.jh-btn:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.jh-btn--primary {
+    background: var(--ink);
+
+    color: var(--paper);
+}
+
+.jh-btn--primary:hover:not(:disabled) {
+    background: var(--ink-soft);
+}
+
+
+/* =========================================================
+   GHOST BUTTON
+   ========================================================= */
+
+.jh-btn--ghost {
+    background: transparent;
+
+    color: var(--ink);
+
+    border-color: var(--line);
+}
+
+.jh-btn--ghost:hover:not(:disabled) {
+    background: var(--paper);
+
+    border-color: var(--ink);
+}
+
+
+/* =========================================================
+   DANGER OUTLINE
+   ========================================================= */
+
+.jh-btn--danger-outline {
+    background: transparent;
+
+    color: var(--danger);
+
+    border-color: #e2b8b6;
+}
+
+.jh-btn--danger-outline:hover:not(:disabled) {
+    background: var(--danger);
+
+    border-color: var(--danger);
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.jh-empty {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    padding: 4rem 2rem;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid var(--line);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px 24px rgba(20, 33, 61, 0.05);
+}
+
+.jh-empty__icon {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 72px;
+    height: 72px;
+
+    margin:
+        0 auto
+        1.25rem;
+
+    border-radius: 50%;
+
+    background: var(--paper-alt);
+
+    color: var(--accent-dark);
+
+    font-size: 2.2rem;
+}
+
+.jh-empty h2 {
+    margin: 0 0 0.5rem;
+
+    color: var(--ink);
+
+    font-family:
+        "Fraunces",
+        Georgia,
+        serif;
+
+    font-size: 1.6rem;
+
+    font-weight: 500;
+}
+
+.jh-empty p {
+    margin:
+        0 0
+        1.5rem;
+
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.jh-state {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 280px;
+
+    text-align: center;
+}
+
+.jh-state p {
+    margin-top: 1rem;
+
+    color: var(--muted);
+
+    font-size: 0.9rem;
+}
+
+.jh-spinner {
+    width: 34px;
+    height: 34px;
+
+    border:
+        3px solid var(--line);
+
+    border-top-color:
+        var(--accent-dark);
+
+    border-radius: 50%;
+
+    animation:
+        jh-saved-spin
+        0.8s linear infinite;
+}
+
+.jh-btn-spinner {
+    width: 15px;
+    height: 15px;
+
+    border:
+        2px solid currentColor;
+
+    border-right-color: transparent;
+
+    border-radius: 50%;
+
+    animation:
+        jh-saved-spin
+        0.7s linear infinite;
+}
+
+@keyframes jh-saved-spin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.jh-saved-jobs button:focus-visible {
+    outline:
+        2px solid
+        var(--accent-dark);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .jh-saved-jobs {
+        padding-top: 3rem;
+    }
+
+    .jh-saved-jobs__grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .jh-saved-jobs {
+        padding:
+            2.5rem
+            1rem
+            3rem;
+    }
+
+    .jh-section-header {
+        margin-bottom: 2rem;
+    }
+
+    .jh-section-header .jh-heading {
+        font-size: 2.1rem;
+    }
+
+    .jh-section-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .jh-saved-card__content {
+        padding: 1.2rem;
+    }
+
+    .jh-saved-card__header {
+        flex-direction: column;
+
+        gap: 0.75rem;
+    }
+
+    .jh-saved-status {
+        align-self: flex-start;
+    }
+
+    .jh-job-info {
+        grid-template-columns: 1fr;
+
+        gap: 0.85rem;
+    }
+
+    .jh-saved-card__actions {
+        flex-direction: column;
+
+        padding:
+            0 1.2rem
+            1.2rem;
+    }
+
+    .jh-saved-card__actions .jh-btn {
+        width: 100%;
+    }
+
+    .jh-empty {
+        padding:
+            3rem
+            1.25rem;
+    }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    .jh-saved-card,
+    .jh-btn {
+        transition: none;
+    }
+
+    .jh-spinner,
+    .jh-btn-spinner {
+        animation: none;
+    }
+
+}

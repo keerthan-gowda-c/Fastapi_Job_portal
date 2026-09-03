@@ -1,0 +1,143 @@
+.jh-role-page {
+  min-height: 100vh;
+  background: var(--paper, #faf9f5);
+  padding: 6rem 1.5rem 4rem; /* top padding clears the fixed navbar */
+}
+
+.jh-role-page__inner {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.jh-role-page__head {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.jh-role-page__head .jh-lead {
+  margin: 0.75rem auto 0;
+}
+
+.jh-role-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.jh-role-card {
+  background: #fff;
+  border: 1px solid var(--line, #e2ded3);
+  border-radius: var(--radius, 14px);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.jh-role-card__icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.jh-role-card__icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.jh-role-card__icon--accent {
+  background: rgba(233, 162, 59, 0.14);
+  color: var(--accent-dark, #b97614);
+}
+
+.jh-role-card__icon--ink {
+  background: rgba(20, 33, 61, 0.08);
+  color: var(--ink, #14213d);
+}
+
+.jh-role-card__title {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.35rem;
+  color: var(--ink, #14213d);
+  margin: 0 0 0.75rem;
+}
+
+.jh-role-card__copy {
+  color: var(--ink-soft, #3a4358);
+  font-size: 0.95rem;
+  max-width: 30ch;
+  margin: 0 0 1.75rem;
+}
+
+.jh-role-card .jh-btn {
+  margin-top: auto;
+}
+
+.jh-role-page__back {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* ---------- Buttons (scoped so this file works standalone) ---------- */
+.jh-btn {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.jh-btn:hover {
+  transform: translateY(-1px);
+}
+
+.jh-btn--lg {
+  padding: 0.85rem 2.25rem;
+  font-size: 1rem;
+}
+
+.jh-btn--primary {
+  background: var(--ink, #14213d);
+  color: var(--paper, #faf9f5);
+}
+.jh-btn--primary:hover {
+  background: var(--ink-soft, #3a4358);
+}
+
+.jh-btn--accent {
+  background: var(--accent, #e9a23b);
+  color: var(--ink, #14213d);
+}
+.jh-btn--accent:hover {
+  background: var(--accent-dark, #b97614);
+  color: var(--paper, #faf9f5);
+}
+
+.jh-btn--ghost {
+  background: transparent;
+  color: var(--ink, #14213d);
+  border-color: var(--line, #e2ded3);
+  padding: 0.7rem 1.5rem;
+  font-size: 0.95rem;
+}
+.jh-btn--ghost:hover {
+  border-color: var(--ink, #14213d);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 700px) {
+  .jh-role-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jh-btn {
+    transition: none;
+  }
+}

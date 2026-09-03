@@ -10,6 +10,9 @@ from app.core.security import (
     verify_password,
     create_access_token
 )
+from app.models.candidate import Candidate
+from app.models.recruiter import Recruiter
+
 from app.crud.user import (
     create_user,
     get_user_by_email
@@ -50,6 +53,31 @@ def register(
     )
 
     db.add(new_user)
+
+    db.flush()
+
+    if user.role == "jobseeker":
+
+        candidate = Candidate(
+            user_id=new_user.id,
+            bio="",
+            resume_url="",
+            skills=""
+        )
+
+        db.add(candidate)
+
+    elif user.role == "recruiter":
+
+        recruiter = Recruiter(
+            user_id=new_user.id,
+            designation="",
+            bio=""
+        )
+
+        db.add(recruiter)
+
+
     db.commit()
     db.refresh(new_user)
 
