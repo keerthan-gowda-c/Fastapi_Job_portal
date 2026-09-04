@@ -85,6 +85,7 @@ def apply_for_job(
         raise HTTPException(
             status_code=400,
             detail="Already applied"
+            
         )
 
     application = Application(
@@ -137,7 +138,7 @@ def get_all_applications(
         .join(Job)
         .join(Company)
         .filter(
-            Company.recruiter_id == recruiter.id, Application.is_deleted == False
+            Company.recruiter_id == recruiter.id, Application.is_deleted.is_(False)
         )
         .all()
     )

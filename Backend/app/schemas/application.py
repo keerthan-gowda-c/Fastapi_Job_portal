@@ -18,11 +18,17 @@ class ApplicationResponse(BaseModel):
 class ApplicationStatusUpdate(BaseModel):
     status:ApplicationStatus
 
+class ApplicantCandidateInfo(BaseModel):
+    resume_url: str | None = None
+
+    class Config:
+        from_attributes = True
+
 class ApplicantInfo(BaseModel):
     id:int
     full_name:str 
     email:str 
-    candidate: CandidateResponse | None = None
+    candidate: ApplicantCandidateInfo | None = None
 
     class Config:
         from_attributes = True

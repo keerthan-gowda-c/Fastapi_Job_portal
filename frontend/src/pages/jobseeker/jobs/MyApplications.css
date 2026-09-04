@@ -1,6 +1,7 @@
+
 /* =========================================================
    MY APPLICATIONS
-   ========================================================= */
+========================================================= */
 
 .jh-applications {
     --ink: #14213d;
@@ -14,309 +15,367 @@
     --success: #3f7d58;
     --success-dark: #326546;
     --danger: #b94a48;
-    --danger-dark: #983b39;
-    --info: #4d7187;
-    --max-width: 1120px;
+    --max-width: 1200px;
 
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 4rem 1.5rem 5rem;
+
+    padding: 3.5rem 1.5rem 4rem;
 
     color: var(--ink);
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        sans-serif;
 }
 
 
 /* =========================================================
    PAGE HEADER
-   ========================================================= */
+========================================================= */
 
 .jh-section-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
 }
 
 .jh-section-eyebrow {
     display: inline-block;
 
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.55rem;
 
     color: var(--accent-dark);
 
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
+
     letter-spacing: 0.12em;
     text-transform: uppercase;
 }
 
 .jh-section-header .jh-heading {
-    margin-bottom: 0.75rem;
+    margin: 0 0 0.55rem;
 
     font-family: "Fraunces", Georgia, serif;
-    font-size: clamp(2rem, 4vw, 3rem);
+
+    font-size: clamp(2rem, 4vw, 2.7rem);
+
     font-weight: 500;
-    line-height: 1.1;
+    line-height: 1.15;
 }
 
 .jh-section-subtitle {
     max-width: 600px;
+
     margin: 0 auto;
 
     color: var(--muted);
 
-    font-size: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 
 /* =========================================================
-   APPLICATION GRID
-   ========================================================= */
+   APPLICATION TABLE
+========================================================= */
 
-.jh-applications__grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.5rem;
-}
-
-
-/* =========================================================
-   APPLICATION CARD
-   ========================================================= */
-
-.jh-application-card {
-    display: flex;
-    flex-direction: column;
-
-    min-width: 0;
+.jh-applications__table-wrapper {
+    width: 100%;
 
     background: #ffffff;
 
     border: 1px solid var(--line);
-    border-radius: 14px;
 
-    padding: 1.5rem;
+    border-radius: 12px;
 
-    box-shadow: 0 8px 24px rgba(20, 33, 61, 0.06);
+    overflow-x: auto;
 
-    transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        border-color 0.18s ease;
-}
-
-.jh-application-card:hover {
-    transform: translateY(-3px);
-
-    border-color: #d3cec1;
-
-    box-shadow: 0 14px 32px rgba(20, 33, 61, 0.09);
+    box-shadow:
+        0 6px 22px rgba(20, 33, 61, 0.06);
 }
 
 
 /* =========================================================
-   CARD HEADER
-   ========================================================= */
+   TABLE
+========================================================= */
 
-.jh-application-card__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+.jh-applications__table {
+    width: 100%;
+
+    min-width: 1000px;
+}
+
+
+/* =========================================================
+   TABLE ROW
+========================================================= */
+
+.jh-applications__row {
+    display: grid;
+
+    grid-template-columns:
+        minmax(170px, 1.5fr)
+        minmax(130px, 1fr)
+        minmax(105px, 0.9fr)
+        minmax(100px, 0.8fr)
+        minmax(110px, 0.9fr)
+        minmax(100px, 0.8fr)
+        minmax(210px, 1.4fr);
+
+    align-items: center;
+
+    min-height: 76px;
+
+    padding: 0 1.25rem;
+
+    border-bottom: 1px solid var(--line);
 
     gap: 1rem;
 }
 
-.jh-application-card__title {
+.jh-applications__row:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.jh-applications__row--header {
+    min-height: 48px;
+
+    background: var(--paper);
+
+    color: var(--muted);
+
+    font-size: 0.68rem;
+    font-weight: 700;
+
+    letter-spacing: 0.04em;
+
+    text-transform: uppercase;
+}
+
+.jh-applications__row--header > div {
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TABLE ROW HOVER
+========================================================= */
+
+.jh-applications__row:not(.jh-applications__row--header) {
+    transition:
+        background 0.15s ease;
+}
+
+.jh-applications__row:not(.jh-applications__row--header):hover {
+    background: #fcfbf8;
+}
+
+
+/* =========================================================
+   JOB
+========================================================= */
+
+.jh-table-job {
     min-width: 0;
 }
 
-.jh-application-card__title h2 {
-    margin: 0 0 0.55rem;
+.jh-table-job strong {
+    display: block;
 
     color: var(--ink);
 
     font-family: "Fraunces", Georgia, serif;
-    font-size: 1.35rem;
-    font-weight: 500;
-    line-height: 1.25;
+
+    font-size: 0.98rem;
+    font-weight: 600;
+
+    line-height: 1.35;
 
     overflow-wrap: anywhere;
 }
 
-.jh-location {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
 
-    margin: 0 0 0.35rem;
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.jh-table-location {
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.3rem;
+
+    min-width: 0;
 
     color: var(--ink-soft);
 
-    font-size: 0.9rem;
+    font-size: 0.78rem;
+
+    overflow-wrap: anywhere;
 }
 
-.jh-applied-date {
+.jh-table-location span {
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.jh-table-date {
     color: var(--muted);
 
-    font-size: 0.78rem;
+    font-size: 0.76rem;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   SALARY
+========================================================= */
+
+.jh-table-salary {
+    color: var(--success);
+
+    font-size: 0.82rem;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   EMPLOYMENT
+========================================================= */
+
+.jh-table-employment {
+    color: var(--ink-soft);
+
+    font-size: 0.76rem;
+
+    font-weight: 500;
+
+    text-transform: capitalize;
+
+    overflow-wrap: anywhere;
 }
 
 
 /* =========================================================
    STATUS
-   ========================================================= */
+========================================================= */
 
 .jh-status {
-    flex-shrink: 0;
-
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
-    min-height: 28px;
+    min-height: 26px;
 
-    padding: 0.35rem 0.75rem;
+    padding: 0.3rem 0.65rem;
 
     border-radius: 999px;
 
-    font-size: 0.75rem;
+    font-size: 0.68rem;
+
     font-weight: 700;
+
     white-space: nowrap;
 }
 
 .jh-status--pending {
     color: #805f16;
+
     background: #f8edc9;
 }
 
 .jh-status--reviewed {
     color: #3d6477;
+
     background: #e4eef3;
 }
 
 .jh-status--shortlisted {
     color: #405b87;
+
     background: #e8edf7;
 }
 
 .jh-status--hired {
     color: #326546;
+
     background: #e4f0e7;
 }
 
 .jh-status--withdrawn {
     color: #8f3937;
+
     background: #f6e4e3;
 }
 
 .jh-status--default {
     color: var(--ink-soft);
+
     background: var(--paper-alt);
 }
 
 
 /* =========================================================
-   DIVIDER
-   ========================================================= */
-
-.jh-divider {
-    height: 1px;
-
-    margin: 1.25rem 0;
-
-    background: var(--line);
-}
-
-
-/* =========================================================
-   JOB INFORMATION
-   ========================================================= */
-
-.jh-application-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    gap: 1rem;
-
-    margin-bottom: 1.5rem;
-}
-
-.jh-application-info > div {
-    display: flex;
-    flex-direction: column;
-
-    gap: 0.3rem;
-
-    min-width: 0;
-}
-
-.jh-info-label {
-    color: var(--muted);
-
-    font-size: 0.75rem;
-    font-weight: 500;
-}
-
-.jh-application-info strong {
-    color: var(--ink);
-
-    font-size: 0.9rem;
-    font-weight: 600;
-
-    overflow-wrap: anywhere;
-
-    text-transform: capitalize;
-}
-
-.jh-application-info .jh-salary {
-    color: var(--success);
-
-    font-size: 1rem;
-
-    text-transform: none;
-}
-
-
-/* =========================================================
    ACTIONS
-   ========================================================= */
+========================================================= */
 
-.jh-application-actions {
+.jh-table-actions {
     display: flex;
+
+    align-items: center;
+
+    gap: 0.4rem;
+
     flex-wrap: wrap;
-
-    gap: 0.6rem;
-
-    margin-top: auto;
-}
-
-.jh-application-actions .jh-btn {
-    flex: 1;
-    min-width: 130px;
 }
 
 
 /* =========================================================
    BUTTONS
-   ========================================================= */
+========================================================= */
 
 .jh-btn {
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
-    gap: 0.45rem;
+    gap: 0.35rem;
 
-    min-height: 42px;
+    min-height: 34px;
 
-    padding: 0.65rem 1.1rem;
+    padding: 0.45rem 0.75rem;
 
-    border: 1.5px solid transparent;
-    border-radius: 999px;
+    border: 1px solid transparent;
+
+    border-radius: 7px;
 
     font-family: inherit;
-    font-size: 0.88rem;
+
+    font-size: 0.72rem;
+
     font-weight: 600;
+
+    white-space: nowrap;
 
     cursor: pointer;
 
@@ -333,40 +392,37 @@
 
 .jh-btn:disabled {
     opacity: 0.6;
+
     cursor: not-allowed;
 }
 
 
-/* Primary */
-
-.jh-btn--primary {
-    background: var(--ink);
-    color: var(--paper);
-}
-
-.jh-btn--primary:hover:not(:disabled) {
-    background: var(--ink-soft);
-}
-
-
-/* Ghost */
+/* =========================================================
+   GHOST
+========================================================= */
 
 .jh-btn--ghost {
-    background: transparent;
+    background: #ffffff;
+
     color: var(--ink);
+
     border-color: var(--line);
 }
 
 .jh-btn--ghost:hover:not(:disabled) {
-    border-color: var(--ink);
     background: var(--paper);
+
+    border-color: var(--ink);
 }
 
 
-/* Success */
+/* =========================================================
+   SUCCESS
+========================================================= */
 
 .jh-btn--success {
     background: var(--success);
+
     color: #ffffff;
 }
 
@@ -375,119 +431,156 @@
 }
 
 
-/* Danger */
+/* =========================================================
+   DANGER
+========================================================= */
 
 .jh-btn--danger-outline {
-    background: transparent;
+    background: #ffffff;
+
     color: var(--danger);
+
     border-color: #e2b8b6;
 }
 
 .jh-btn--danger-outline:hover:not(:disabled) {
     color: #ffffff;
+
     background: var(--danger);
+
     border-color: var(--danger);
 }
 
 
 /* =========================================================
+   BUTTON SPINNER
+========================================================= */
+
+.jh-btn-spinner {
+    width: 13px;
+    height: 13px;
+
+    border: 2px solid currentColor;
+
+    border-right-color: transparent;
+
+    border-radius: 50%;
+
+    animation: jh-spin 0.7s linear infinite;
+}
+
+
+/* =========================================================
    EMPTY STATE
-   ========================================================= */
+========================================================= */
 
 .jh-empty {
-    max-width: 650px;
+    max-width: 620px;
 
     margin: 0 auto;
 
-    padding: 4rem 2rem;
+    padding: 3.5rem 2rem;
 
     text-align: center;
 
     background: #ffffff;
 
     border: 1px solid var(--line);
-    border-radius: 14px;
 
-    box-shadow: 0 8px 24px rgba(20, 33, 61, 0.05);
+    border-radius: 12px;
+
+    box-shadow:
+        0 6px 20px rgba(20, 33, 61, 0.05);
 }
 
 .jh-empty__icon {
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    width: 72px;
-    height: 72px;
+    width: 65px;
+    height: 65px;
 
-    margin: 0 auto 1.25rem;
+    margin: 0 auto 1rem;
 
     border-radius: 50%;
 
     background: var(--paper-alt);
 
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 .jh-empty h2 {
     margin: 0 0 0.5rem;
 
     font-family: "Fraunces", Georgia, serif;
-    font-size: 1.6rem;
+
+    font-size: 1.5rem;
+
     font-weight: 500;
 }
 
 .jh-empty p {
-    margin: 0 0 1.5rem;
-
-    color: var(--muted);
-}
-
-
-/* =========================================================
-   LOADING STATE
-   ========================================================= */
-
-.jh-state {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 280px;
-
-    text-align: center;
-}
-
-.jh-state p {
-    margin-top: 1rem;
+    margin: 0 0 1.4rem;
 
     color: var(--muted);
 
     font-size: 0.9rem;
 }
 
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.jh-btn--primary {
+    background: var(--ink);
+
+    color: var(--paper);
+}
+
+.jh-btn--primary:hover:not(:disabled) {
+    background: var(--ink-soft);
+}
+
+
+/* =========================================================
+   LOADING STATE
+========================================================= */
+
+.jh-state {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 260px;
+
+    text-align: center;
+}
+
+.jh-state p {
+    margin-top: 0.9rem;
+
+    color: var(--muted);
+
+    font-size: 0.85rem;
+}
+
 .jh-spinner {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
 
     border: 3px solid var(--line);
+
     border-top-color: var(--accent-dark);
 
     border-radius: 50%;
 
     animation: jh-spin 0.8s linear infinite;
-}
-
-.jh-btn-spinner {
-    width: 15px;
-    height: 15px;
-
-    border: 2px solid currentColor;
-    border-right-color: transparent;
-
-    border-radius: 50%;
-
-    animation: jh-spin 0.7s linear infinite;
 }
 
 @keyframes jh-spin {
@@ -498,50 +591,42 @@
 
 
 /* =========================================================
-   NO ACTION MESSAGE
-   ========================================================= */
-
-.jh-no-actions {
-    margin: 0.9rem 0 0;
-
-    color: var(--muted);
-
-    font-size: 0.78rem;
-    text-align: center;
-}
-
-
-/* =========================================================
    FOCUS
-   ========================================================= */
+========================================================= */
 
 .jh-applications button:focus-visible {
     outline: 2px solid var(--accent-dark);
+
     outline-offset: 3px;
 }
 
 
 /* =========================================================
-   RESPONSIVE
-   ========================================================= */
+   TABLET
+========================================================= */
 
-@media (max-width: 850px) {
+@media (max-width: 1050px) {
 
     .jh-applications {
-        padding-top: 3rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
-    .jh-applications__grid {
-        grid-template-columns: 1fr;
+    .jh-applications__table {
+        min-width: 950px;
     }
 
 }
 
 
-@media (max-width: 600px) {
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
 
     .jh-applications {
-        padding: 2.5rem 1rem 3rem;
+        padding: 2.3rem 0.75rem 3rem;
     }
 
     .jh-section-header {
@@ -549,49 +634,39 @@
     }
 
     .jh-section-header .jh-heading {
-        font-size: 2.1rem;
+        font-size: 2rem;
     }
 
     .jh-section-subtitle {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
-    .jh-application-card {
-        padding: 1.2rem;
+    .jh-applications__table-wrapper {
+        border-radius: 10px;
+
+        /*
+         * Keep table layout on mobile.
+         * User can horizontally scroll.
+         */
+        overflow-x: auto;
+
+        -webkit-overflow-scrolling: touch;
     }
 
-    .jh-application-card__header {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    .jh-status {
-        align-self: flex-start;
-    }
-
-    .jh-application-info {
-        grid-template-columns: 1fr;
-        gap: 0.85rem;
-    }
-
-    .jh-application-actions {
-        flex-direction: column;
-    }
-
-    .jh-application-actions .jh-btn {
-        width: 100%;
-    }
-
-    .jh-empty {
-        padding: 3rem 1.25rem;
+    .jh-applications__table {
+        min-width: 950px;
     }
 
 }
 
 
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
 
-    .jh-application-card,
+    .jh-applications__row,
     .jh-btn {
         transition: none;
     }

@@ -296,216 +296,222 @@ export default function MyApplications() {
 
                     /* Applications */
 
-                    <section className="jh-applications__grid">
+                    <section className="jh-applications__table-wrapper">
 
-                        {applications.map((application) => {
+    <div className="jh-applications__table">
 
-                            const job = application.job;
+        {/* Table Header */}
 
-                            return (
+        <div className="jh-applications__row jh-applications__row--header">
 
-                                <article
-                                    className="jh-application-card"
-                                    key={application.id}
+            <div>Job</div>
+            <div>Location</div>
+            <div>Applied On</div>
+            <div>Salary</div>
+            <div>Employment</div>
+            <div>Status</div>
+            <div>Actions</div>
+
+        </div>
+
+
+        {/* Table Rows */}
+
+        {applications.map((application) => {
+
+            const job = application.job;
+
+            return (
+
+                <div
+                    className="jh-applications__row"
+                    key={application.id}
+                >
+
+                    {/* Job */}
+
+                    <div className="jh-table-job">
+
+                        <strong>
+                            {job?.title || "N/A"}
+                        </strong>
+
+                    </div>
+
+
+                    {/* Location */}
+
+                    <div className="jh-table-location">
+
+                        <span>📍</span>
+
+                        {job?.location || "N/A"}
+
+                    </div>
+
+
+                    {/* Applied Date */}
+
+                    <div className="jh-table-date">
+
+                        {application.applied_at
+                            ? new Date(
+                                application.applied_at
+                            ).toLocaleDateString()
+                            : "N/A"
+                        }
+
+                    </div>
+
+
+                    {/* Salary */}
+
+                    <div className="jh-table-salary">
+
+                        {job?.salary
+                            ? `₹${job.salary}`
+                            : "N/A"
+                        }
+
+                    </div>
+
+
+                    {/* Employment */}
+
+                    <div className="jh-table-employment">
+
+                        {job?.employment_type
+                            ?.replaceAll("_", " ")
+                            || "N/A"
+                        }
+
+                    </div>
+
+
+                    {/* Status */}
+
+                    <div>
+
+                        <span
+                            className={getStatusClass(
+                                application.status
+                            )}
+                        >
+                            {formatStatus(
+                                application.status
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    {/* Actions */}
+
+                    <div className="jh-table-actions">
+
+                        <button
+                            className="jh-btn jh-btn--ghost"
+                            onClick={() =>
+                                navigate(
+                                    `/jobs/${job.id}`
+                                )
+                            }
+                        >
+                            View
+                        </button>
+
+
+                        {application.status === "pending" && (
+
+                            <button
+                                className="jh-btn jh-btn--danger-outline"
+                                disabled={
+                                    actionId === application.id
+                                }
+                                onClick={() =>
+                                    withdrawApplication(
+                                        application.id
+                                    )
+                                }
+                            >
+
+                                {actionId === application.id ? (
+
+                                    <>
+                                        <span className="jh-btn-spinner"></span>
+                                        Withdrawing...
+                                    </>
+
+                                ) : (
+
+                                    "Withdraw"
+
+                                )}
+
+                            </button>
+
+                        )}
+
+
+                        {application.status === "withdrawn" && (
+
+                            <>
+
+                                <button
+                                    className="jh-btn jh-btn--success"
+                                    disabled={
+                                        actionId === job.id
+                                    }
+                                    onClick={() =>
+                                        applyAgain(job.id)
+                                    }
                                 >
 
-                                    {/* Card Header */}
+                                    {actionId === job.id ? (
 
-                                    <div className="jh-application-card__header">
+                                        <>
+                                            <span className="jh-btn-spinner"></span>
+                                            Applying...
+                                        </>
 
-                                        <div className="jh-application-card__title">
+                                    ) : (
 
-                                            <h2>
-                                                {job?.title}
-                                            </h2>
+                                        "Apply Again"
 
-                                            <p className="jh-location">
-                                                <span>📍</span>
-                                                {job?.location}
-                                            </p>
+                                    )}
 
-                                            <span className="jh-applied-date">
-                                                Applied on{" "}
-                                                {new Date(
-                                                    application.applied_at
-                                                ).toLocaleDateString()}
-                                            </span>
-
-                                        </div>
-
-                                        <span
-                                            className={getStatusClass(
-                                                application.status
-                                            )}
-                                        >
-                                            {formatStatus(
-                                                application.status
-                                            )}
-                                        </span>
-
-                                    </div>
+                                </button>
 
 
-                                    {/* Divider */}
+                                <button
+                                    className="jh-btn jh-btn--danger-outline"
+                                    disabled={
+                                        actionId === application.id
+                                    }
+                                    onClick={() =>
+                                        deleteApplication(
+                                            application.id
+                                        )
+                                    }
+                                >
+                                    Delete
+                                </button>
 
-                                    <div className="jh-divider"></div>
+                            </>
 
+                        )}
 
-                                    {/* Job Information */}
+                    </div>
 
-                                    <div className="jh-application-info">
+                </div>
 
-                                        <div>
+            );
 
-                                            <span className="jh-info-label">
-                                                Salary
-                                            </span>
+        })}
 
-                                            <strong className="jh-salary">
-                                                ₹{job?.salary}
-                                            </strong>
+    </div>
 
-                                        </div>
-
-
-                                        <div>
-
-                                            <span className="jh-info-label">
-                                                Employment Type
-                                            </span>
-
-                                            <strong>
-                                                {job?.employment_type
-                                                    ?.replaceAll("_", " ")
-                                                }
-                                            </strong>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    {/* Actions */}
-
-                                    <div className="jh-application-actions">
-
-                                        <button
-                                            className="jh-btn jh-btn--ghost"
-                                            onClick={() =>
-                                                navigate(
-                                                    `/jobs/${job.id}`
-                                                )
-                                            }
-                                        >
-                                            View Details
-                                            <span>→</span>
-                                        </button>
-
-
-                                        {application.status === "pending" && (
-
-                                            <button
-                                                className="jh-btn jh-btn--danger-outline"
-                                                disabled={
-                                                    actionId === application.id
-                                                }
-                                                onClick={() =>
-                                                    withdrawApplication(
-                                                        application.id
-                                                    )
-                                                }
-                                            >
-
-                                                {actionId === application.id ? (
-
-                                                    <>
-                                                        <span className="jh-btn-spinner"></span>
-                                                        Withdrawing...
-                                                    </>
-
-                                                ) : (
-
-                                                    "Withdraw"
-
-                                                )}
-
-                                            </button>
-
-                                        )}
-
-
-                                        {application.status === "withdrawn" && (
-
-                                            <>
-
-                                                <button
-                                                    className="jh-btn jh-btn--success"
-                                                    disabled={
-                                                        actionId === job.id
-                                                    }
-                                                    onClick={() =>
-                                                        applyAgain(
-                                                            job.id
-                                                        )
-                                                    }
-                                                >
-
-                                                    {actionId === job.id ? (
-
-                                                        <>
-                                                            <span className="jh-btn-spinner"></span>
-                                                            Applying...
-                                                        </>
-
-                                                    ) : (
-
-                                                        "Apply Again"
-
-                                                    )}
-
-                                                </button>
-
-
-                                                <button
-                                                    className="jh-btn jh-btn--danger-outline"
-                                                    disabled={
-                                                        actionId === application.id
-                                                    }
-                                                    onClick={() =>
-                                                        deleteApplication(
-                                                            application.id
-                                                        )
-                                                    }
-                                                >
-                                                    Delete
-                                                </button>
-
-                                            </>
-
-                                        )}
-
-                                    </div>
-
-
-                                    {/* No Action Message */}
-
-                                    {application.status !== "pending" &&
-                                        application.status !== "withdrawn" && (
-
-                                            <p className="jh-no-actions">
-                                                No actions available for this application.
-                                            </p>
-
-                                        )}
-
-                                </article>
-
-                            );
-
-                        })}
-
-                    </section>
-
+</section>
                 )}
 
             </main>

@@ -36,9 +36,6 @@ def upgrade() -> None:
     op.alter_column('recruiters', 'bio',
                existing_type=sa.TEXT(),
                nullable=True)
-    op.drop_column("educations", "start_year")
-    op.drop_column("educations", "end_year")
-
     op.add_column(
         "educations",
         sa.Column("start_date", sa.Date(), nullable=True)
@@ -69,16 +66,6 @@ def downgrade() -> None:
     op.alter_column('candidates', 'bio',
                existing_type=sa.TEXT(),
                nullable=False)
-    op.drop_column("educations", "start_date")
-    op.drop_column("educations", "end_date")
-
-    op.add_column(
-        "educations",
-        sa.Column("start_year", sa.Integer(), nullable=True)
-    )
-
-    op.add_column(
-        "educations",
-        sa.Column("end_year", sa.Integer(), nullable=True)
-    )
+    op.drop_column("educations", "start_year")
+    op.drop_column("educations", "end_year")
     # ### end Alembic commands ###

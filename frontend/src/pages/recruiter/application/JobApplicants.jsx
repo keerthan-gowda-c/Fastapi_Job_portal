@@ -244,7 +244,7 @@ export default function JobApplicants() {
 
                                                 const resumeUrl =
                                                     getResumeUrl(
-                                                        application.user?.resume_url
+                                                        application.user?.candidate?.resume_url
                                                     );
 
                                                 return (
