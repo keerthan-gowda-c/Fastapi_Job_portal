@@ -11,7 +11,7 @@
 
 .create-job-bg {
     min-height: calc(100vh - 70px);
-    background: #f6f8fc;
+    background: var(--code-bg);
     padding-bottom: 2rem;
 }
 

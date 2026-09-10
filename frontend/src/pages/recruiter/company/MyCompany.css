@@ -6,6 +6,7 @@
 
 .container {
     max-width: 1180px;
+    
 }
 
 
@@ -14,7 +15,7 @@
 ========================================= */
 
 body {
-    background: #f6f8fc;
+    background: var(--code-bg);
 }
 
 
