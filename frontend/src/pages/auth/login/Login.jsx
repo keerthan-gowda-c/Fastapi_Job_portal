@@ -20,6 +20,7 @@ function Login() {
         email: "",
         password: ""
     });
+    const [showPassword, setShowPassword] = useState(false);
 
 
     const handleChange = (e) => {
@@ -153,7 +154,7 @@ function Login() {
 
                         {/* Email */}
 
-                        <div className="login-field">
+                        <div className="email-field">
 
                             <label htmlFor="email">
                                 Email
@@ -174,22 +175,26 @@ function Login() {
 
                         {/* Password */}
 
-                        <div className="login-field">
+                        <div className="password-field">
 
                             <label htmlFor="password">
                                 Password
                             </label>
+                            <div className="password-input-wrapper">
+                                <input
+                                    id="password"
+                                    name="password"
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Enter your password"
+                                    value={form.password}
+                                    onChange={handleChange}
+                                    required
+                                />
 
-                            <input
-                                id="password"
-                                name="password"
-                                type="password"
-                                placeholder="Enter your password"
-                                value={form.password}
-                                onChange={handleChange}
-                                required
-                            />
-
+                                <button className="password-toggle" type="button" onClick={()=> setShowPassword(!showPassword)} aria-label={showPassword?"Hide password" : "Show password"}>
+                                    <i className={showPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
+                                </button>
+                            </div>
                         </div>
 
 
@@ -243,9 +248,9 @@ function Login() {
 
                 </div>
 
-            </section>
+            </section >
 
-        </main>
+        </main >
 
     );
 

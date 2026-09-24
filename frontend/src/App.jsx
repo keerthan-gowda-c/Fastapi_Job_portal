@@ -167,7 +167,10 @@ function App() {
       <ToastContainer
         position="top-right"
         autoClose={3000}
-        theme="colored"
+        theme="light"
+        toastClassName="app-toast"
+  bodyClassName="app-toast-body"
+  progressClassName="app-toast-progress"
       />
 
     </>

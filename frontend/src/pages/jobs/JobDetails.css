@@ -75,9 +75,7 @@
     margin: 0 auto;
 
     padding:
-        40px
-        24px
-        60px;
+        40px 24px 60px;
 
 }
 
@@ -148,8 +146,7 @@
     background: #ffffff;
 
     border:
-        1px solid
-        var(--line);
+        1px solid var(--line);
 
     border-radius: 20px;
 
@@ -259,11 +256,9 @@
         serif;
 
     font-size:
-        clamp(
-            2.2rem,
+        clamp(2.2rem,
             5vw,
-            3.4rem
-        );
+            3.4rem);
 
     font-weight: 500;
 
@@ -337,12 +332,10 @@
     flex-shrink: 0;
 
     padding:
-        8px
-        14px;
+        8px 14px;
 
     border:
-        1px solid
-        var(--line);
+        1px solid var(--line);
 
     border-radius: 999px;
 
@@ -370,12 +363,12 @@
     display: grid;
 
     grid-template-columns:
-        minmax(0, 1fr)
-        330px;
+        minmax(0, 1fr) 330px;
 
     gap: 22px;
 
     align-items: start;
+
 
 }
 
@@ -391,8 +384,7 @@
     background: #ffffff;
 
     border:
-        1px solid
-        var(--line);
+        1px solid var(--line);
 
     border-radius: 18px;
 
@@ -430,8 +422,7 @@
     background: var(--paper);
 
     border:
-        1px solid
-        var(--line);
+        1px solid var(--line);
 
     border-radius: 12px;
 
@@ -472,7 +463,7 @@
 }
 
 
-.job-overview-item div > span {
+.job-overview-item div>span {
 
     display: block;
 
@@ -519,8 +510,7 @@
     height: 1px;
 
     margin:
-        30px
-        0;
+        30px 0;
 
     background: var(--line);
 
@@ -540,7 +530,6 @@
     gap: 17px;
 
     margin-bottom: 25px;
-
 }
 
 
@@ -562,7 +551,7 @@
 }
 
 
-.job-section-heading > div > span {
+.job-section-heading>div>span {
 
     display: block;
 
@@ -579,7 +568,7 @@
 }
 
 
-.job-section-heading h2 {
+.job-section-heading h5 {
 
     margin: 0;
 
@@ -590,7 +579,7 @@
         Georgia,
         serif;
 
-    font-size: 1.75rem;
+    font-size: 1.3rem;
 
     font-weight: 500;
 
@@ -616,6 +605,7 @@
     line-height: 1.85;
 
     white-space: pre-line;
+    text-align: left;
 
 }
 
@@ -660,19 +650,17 @@
     border-radius: 50%;
 
     background:
-        rgba(
-            250,
+        rgba(250,
             249,
             245,
-            0.06
-        );
+            0.06);
 
     pointer-events: none;
 
 }
 
 
-.job-action-card > .job-section-number {
+.job-action-card>.job-section-number {
 
     position: relative;
 
@@ -711,9 +699,7 @@
     z-index: 1;
 
     margin:
-        8px
-        0
-        13px;
+        8px 0 13px;
 
     color: var(--paper);
 
@@ -811,8 +797,7 @@
 .job-action-primary {
 
     border:
-        1px solid
-        var(--accent);
+        1px solid var(--accent);
 
     background: var(--accent);
 
@@ -850,13 +835,10 @@
 .job-action-secondary {
 
     border:
-        1px solid
-        rgba(
-            250,
+        1px solid rgba(250,
             249,
             245,
-            0.2
-        );
+            0.2);
 
     background: transparent;
 
@@ -868,20 +850,16 @@
 .job-action-secondary:hover {
 
     border-color:
-        rgba(
-            250,
+        rgba(250,
             249,
             245,
-            0.45
-        );
+            0.45);
 
     background:
-        rgba(
-            250,
+        rgba(250,
             249,
             245,
-            0.06
-        );
+            0.06);
 
 }
 
@@ -912,8 +890,7 @@
     height: 38px;
 
     border:
-        3px solid
-        var(--line);
+        3px solid var(--line);
 
     border-top-color:
         var(--accent-dark);
@@ -921,10 +898,7 @@
     border-radius: 50%;
 
     animation:
-        job-details-spin
-        0.8s
-        linear
-        infinite;
+        job-details-spin 0.8s linear infinite;
 
 }
 
@@ -932,9 +906,7 @@
 .job-details-state p {
 
     margin:
-        14px
-        0
-        0;
+        14px 0 0;
 
     color: var(--muted);
 
@@ -975,8 +947,7 @@
     background: #ffffff;
 
     border:
-        1px solid
-        var(--line);
+        1px solid var(--line);
 
     border-radius: 20px;
 
@@ -1036,9 +1007,7 @@
     max-width: 430px;
 
     margin:
-        10px
-        0
-        24px;
+        10px 0 24px;
 
     color: var(--muted);
 
@@ -1054,12 +1023,10 @@
     min-height: 43px;
 
     padding:
-        0
-        20px;
+        0 20px;
 
     border:
-        1.5px solid
-        var(--ink);
+        1.5px solid var(--ink);
 
     border-radius: 999px;
 
@@ -1120,9 +1087,7 @@
     .job-details-container {
 
         padding:
-            30px
-            16px
-            45px;
+            30px 16px 45px;
 
     }
 
@@ -1136,8 +1101,7 @@
         gap: 20px;
 
         padding:
-            27px
-            22px;
+            27px 22px;
 
         border-radius: 16px;
 
@@ -1190,8 +1154,7 @@
     .job-main-card {
 
         padding:
-            25px
-            21px;
+            25px 21px;
 
         border-radius: 16px;
 
@@ -1215,8 +1178,7 @@
     .job-divider {
 
         margin:
-            25px
-            0;
+            25px 0;
 
     }
 
@@ -1249,8 +1211,7 @@
     .job-action-card {
 
         padding:
-            25px
-            22px;
+            25px 22px;
 
         border-radius: 16px;
 
@@ -1299,8 +1260,7 @@
     .job-not-found {
 
         padding:
-            30px
-            18px;
+            30px 18px;
 
     }
 

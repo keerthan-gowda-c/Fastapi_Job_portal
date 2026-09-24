@@ -331,31 +331,25 @@ export default function JobDetails() {
                         <div className="job-description-section">
 
                             <div className="job-section-heading">
-
-                                <span className="job-section-number">
-                                    01
-                                </span>
-
                                 <div>
-
                                     <span>
-                                        ROLE
+                                        ROLE : {job.title}
                                     </span>
-
-                                    <h2>
+                                    
+                                    <h5>
                                         Job Description
-                                    </h2>
+                                    </h5>
 
                                 </div>
 
                             </div>
-
-
                             <p className="job-description">
 
                                 {job.description}
 
                             </p>
+
+
 
                         </div>
 

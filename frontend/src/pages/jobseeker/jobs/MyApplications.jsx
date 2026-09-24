@@ -53,12 +53,6 @@ export default function MyApplications() {
 
     const withdrawApplication = async (applicationId) => {
 
-        const confirmWithdraw = window.confirm(
-            "Are you sure you want to withdraw this application?"
-        );
-
-        if (!confirmWithdraw) return;
-
         setActionId(applicationId);
 
         try {
@@ -412,9 +406,7 @@ export default function MyApplications() {
                         <button
                             className="jh-btn jh-btn--ghost"
                             onClick={() =>
-                                navigate(
-                                    `/jobs/${job.id}`
-                                )
+                                navigate(`/jobs/details/${job.id}`)
                             }
                         >
                             View
@@ -494,7 +486,7 @@ export default function MyApplications() {
                                         )
                                     }
                                 >
-                                    Delete
+                                    <i class="bi bi-trash"></i>
                                 </button>
 
                             </>

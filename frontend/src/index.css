@@ -30,10 +30,7 @@
   }
 }
 
-body {
-  padding-top: 50px;
-  
-}
+
 body:hover{
   cursor: default;
 }

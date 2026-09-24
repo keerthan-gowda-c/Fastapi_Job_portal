@@ -199,17 +199,7 @@ export default function CompanyDetails() {
                     <section className="company-about-card">
 
                         <div className="company-section-heading">
-
-                            <span className="company-section-number">
-                                01
-                            </span>
-
                             <div>
-
-                                <span>
-                                    ABOUT
-                                </span>
-
                                 <h2>
                                     About the Company
                                 </h2>
@@ -272,18 +262,19 @@ export default function CompanyDetails() {
                                 </span>
 
                                 {company.website ? (
+                                    <>
+                                        <a
+                                            href={company.website}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            Visit Website
 
-                                    <a
-                                        href={company.website}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        Visit Website
+                                        </a>
                                         <span>
                                             ↗
                                         </span>
-                                    </a>
-
+                                    </>
                                 ) : (
 
                                     <strong>

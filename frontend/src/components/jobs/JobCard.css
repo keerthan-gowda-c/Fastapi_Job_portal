@@ -311,6 +311,10 @@
 .jh-card__desc {
   color: var(--ink-soft);
   font-size: 0.95rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 .jh-card__rule {

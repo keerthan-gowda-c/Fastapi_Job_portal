@@ -142,20 +142,17 @@ export default function Jobs() {
                 `/saved-jobs/${jobId}`
             );
 
-            setSavedJobIds((prev) => [
+            setSavedJobsIds((prev) => [
                 ...prev,
                 jobId
             ]);
 
-            toast.info(
+            toast.success(
                 "Job saved successfully"
             );
 
         }
         catch (error) {
-
-            console.log(error);
-
             toast.warning(
                 error.response?.data?.detail ||
                 "Failed to save job"
@@ -195,7 +192,7 @@ export default function Jobs() {
 
             setAppliedJobIds(appliedIds);
 
-            setSavedJobIds(savedIds);
+            setSavedJobsIds(savedIds);
 
         }
         catch (error) {
