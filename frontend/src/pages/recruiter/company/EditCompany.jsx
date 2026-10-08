@@ -116,7 +116,7 @@ export default function EditCompany() {
         <>
             <Navbar />
 
-            <div className="container py-5">
+            <div className="container py-5 mt-5">
 
                 <div className="row justify-content-center">
 

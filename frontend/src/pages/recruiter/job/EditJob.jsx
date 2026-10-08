@@ -135,7 +135,7 @@ export default function EditJob() {
 
             <div className="edit-job-bg">
 
-                <div className="container py-5">
+                <div className="container py-5 mt-5">
 
                     <div className="row justify-content-center">
 

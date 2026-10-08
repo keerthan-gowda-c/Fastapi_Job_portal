@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 export default function RecruiterApplications() {
 
     const [applications, setApplications] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchApplications();
@@ -19,12 +20,6 @@ export default function RecruiterApplications() {
         try {
 
             const response = await api.get("/applications");
-
-            /*
-             * Group applications by job.
-             * If multiple candidates applied for the same job,
-             * the job will appear only once.
-             */
             const jobMap = {};
 
             response.data.forEach((application) => {
@@ -57,8 +52,33 @@ export default function RecruiterApplications() {
             );
 
         }
+        finally{
+            setLoading(false)
+        }
 
     };
+
+    if(loading){
+        return(
+              <>
+                <Navbar />
+
+                <div className="d-flex justify-content-center align-items-center vh-100">
+
+                    <div className="text-center">
+
+                        <div className="spinner-border text-primary"></div>
+
+                        <p className="mt-3 text-muted">
+                            Loading applicants...
+                        </p>
+
+                    </div>
+
+                </div>
+            </>
+        )
+    }
 
     return (
 
@@ -68,7 +88,7 @@ export default function RecruiterApplications() {
 
             <div className="applications-bg">
 
-                <div className="container py-5">
+                <div className="container py-5 mt-5">
 
                     {/* Header */}
 

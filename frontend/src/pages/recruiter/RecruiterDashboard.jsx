@@ -133,7 +133,7 @@ function RecruiterDashboard() {
 
                     {/* Header */}
 
-                    <div className="dashboard-header shadow-sm rounded-4 p-4 mb-5">
+                    <div className="dashboard-header shadow-sm rounded-4 p-4 mt-5">
 
                         <div className="d-md-flex justify-content-between align-items-center">
 
