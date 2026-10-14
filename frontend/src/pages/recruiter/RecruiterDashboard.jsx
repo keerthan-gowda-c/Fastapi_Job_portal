@@ -2,52 +2,41 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import api from "../../api/axios";
+
 import Navbar from "../../components/layout/Navbar";
 import "./RecruiterDashboard.css";
+import useRecruiterDashboardStore from "../../store/recruiterDashboard";
 
 
 function RecruiterDashboard() {
 
     const navigate = useNavigate();
 
-    const [stats, setStats] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const stats = useRecruiterDashboardStore((state)=>state.stats)
+    const loading = useRecruiterDashboardStore((state)=>state.loading);
 
 
-    const fetchDashboard = async () => {
+    const fetchDashboard = useRecruiterDashboardStore(
+        (state) => state.fetchDashboard
+    )
 
-        try {
 
-            const response = await api.get("/dashboard/recruiter");
+   useEffect(() => {
+    fetchDashboard().catch((error) => {
+        console.error(error);
+        toast.error(
+            error.response?.data?.detail ||
+            "Failed to load recruiter dashboard"
+        );
+    });
+}, [fetchDashboard]);
 
-            setStats(response.data);
-
-        }
-        catch (error) {
-
+    const retryDashboard = () => {
+        fetchDashboard(true).catch((error) => {
             console.error(error);
-
-            toast.error(
-                error.response?.data?.detail ||
-                "Failed to load recruiter dashboard"
-            );
-
-        }
-        finally {
-
-            setLoading(false);
-
-        }
-
-    };
-
-
-    useEffect(() => {
-
-        fetchDashboard();
-
-    }, []);
+            toast.error(error.response?.data?.detail || "Failed to load recruiter dashboard");
+        })
+    }
 
 
     if (loading) {
@@ -105,7 +94,7 @@ function RecruiterDashboard() {
 
                             <button
                                 className="btn btn-primary rounded-pill px-4"
-                                onClick={fetchDashboard}
+                                onClick={retryDashboard}
                             >
                                 Try Again
                             </button>

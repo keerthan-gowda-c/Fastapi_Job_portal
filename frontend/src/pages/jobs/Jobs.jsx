@@ -1,239 +1,160 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
 import Navbar from "../../components/layout/Navbar";
 import { toast } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
 import JobCard from "../../components/jobs/JobCard";
+import useJobStore, { getJobsCacheKey, } from "../../store/jobStore";
 import "./Jobs.css";
+import useRecruiterApplicationsStore from "../../store/recruiterApplicationsStore";
 
+
+const EMPTY_ARRAY = [];
 export default function Jobs() {
-
     const navigate = useNavigate();
-
     const { user, isAuthenticated } = useAuth();
-
     const role = user?.role;
-
-    const [jobs, setJobs] = useState([]);
+    const userId = user?.id;
     const [keyword, setKeyword] = useState("");
     const [location, setLocation] = useState("");
     const [salary, setSalary] = useState("");
     const [page, setPage] = useState(1);
 
-    const [appliedJobsIds, setAppliedJobIds] = useState([]);
-    const [savedJobsIds, setSavedJobsIds] = useState([]);
-
-    const [loading, setLoading] = useState(false);
-
-
-    const fetchJobs = async () => {
-
-        setLoading(true);
-
-        try {
-
-            const params = {
-                page,
-                limit: 10
-            };
-
-            if (keyword.trim() !== "") {
-                params.keyword = keyword;
-            }
-
-            if (location.trim() !== "") {
-                params.location = location;
-            }
-
-            if (salary !== "") {
-                params.salary = salary;
-            }
-
-            const response = await api.get("/jobs", {
-                params
-            });
-
-            setJobs(response.data);
-
+    const params = useMemo(() => {
+        const result = {
+            page,
+            limit: 10
+        };
+        if (keyword.trim() !== "") {
+            result.keyword = keyword.trim();
         }
-        catch (error) {
+        if (location.trim() !== "") {
+            result.location = location.trim();
+        }
+        if (salary !== "") {
+            result.salary = salary;
+        }
+        return result;
+    }, [page, keyword, location, salary]);
 
-            console.error(
-                "Failed to fetch jobs: ",
-                error
-            );
-
+    const jobsKey = getJobsCacheKey(params);
+    const jobs = useJobStore(
+        (state) => state.jobsCache[jobsKey] ?? EMPTY_ARRAY
+    );
+    const loading = useJobStore(
+        (state) => state.loadingKeys[jobsKey] ?? false
+    );
+    const fetchJobs = useJobStore(
+        (state) => state.fetchJobs
+    );
+    const appliedJobsIds = useJobStore(
+        (state) =>
+            state.userJobStatus[String(userId)]?.appliedIds ?? EMPTY_ARRAY
+    );
+    const savedJobsIds = useJobStore(
+        (state) =>
+            state.userJobStatus[String(userId)]?.savedIds ?? EMPTY_ARRAY
+    );
+    const fetchUserJobStatus = useJobStore(
+        (state) => state.fetchUserJobStatus
+    );
+    const markJobApplied = useJobStore(
+        (state) => state.markJobApplied
+    );
+    const markJobSaved = useJobStore(
+        (state) => state.markJobSaved
+    );
+    const invalidateApplications = useRecruiterApplicationsStore(
+        (state) => state.invalidateApplications
+    );
+    useEffect(() => {
+        fetchJobs(params).catch((error) => {
             toast.error(
                 error.response?.data?.detail ||
                 "Failed to load jobs"
             );
-
-        }
-        finally {
-
-            setLoading(false);
-
-        }
-
-    };
-
-
-    useEffect(() => {
-
-        fetchJobs();
-
-    }, [page]);
-
+        });
+    }, [params, fetchJobs]);
 
     const searchJobs = () => {
-
         if (page === 1) {
-
-            fetchJobs();
-
+            fetchJobs(params, true).catch((error) => {
+                toast.error(
+                    error.response?.data?.detail ||
+                    "Failed to load jobs"
+                );
+            });
         }
         else {
-
             setPage(1);
-
         }
-
     };
-
-
+    // Apply for a job.
     const applyJob = async (jobId) => {
-
         try {
-
             await api.post(
                 `/applications/jobs/${jobId}`
             );
-
-            setAppliedJobIds((prev) => [
-                ...prev,
-                jobId
-            ]);
-
+            markJobApplied(userId, jobId);
+            invalidateApplications();
             toast.success(
                 "Application submitted successfully"
             );
-
         }
         catch (error) {
-
             console.log(error);
-
             toast.warning(
                 error.response?.data?.detail ||
                 "Failed to apply"
             );
-
         }
-
     };
 
-
+    // Save a job.
     const saveJob = async (jobId) => {
-
         try {
-
             await api.post(
                 `/saved-jobs/${jobId}`
             );
-
-            setSavedJobsIds((prev) => [
-                ...prev,
-                jobId
-            ]);
-
+            markJobSaved(userId, jobId);
             toast.success(
                 "Job saved successfully"
             );
-
         }
         catch (error) {
             toast.warning(
                 error.response?.data?.detail ||
                 "Failed to save job"
             );
-
         }
-
     };
-
-
-    const fetchUserJobStatus = async () => {
-
-        try {
-
-            const [
-                applicationsResponse,
-                savedResponse
-            ] = await Promise.all([
-                api.get("/applications/me"),
-                api.get("/saved-jobs/")
-            ]);
-
-
-            const appliedIds =
-                applicationsResponse.data.map(
-                    (application) =>
-                        application.job.id
-                );
-
-
-            const savedIds =
-                savedResponse.data.map(
-                    (savedJob) =>
-                        savedJob.job.id
-                );
-
-
-            setAppliedJobIds(appliedIds);
-
-            setSavedJobsIds(savedIds);
-
-        }
-        catch (error) {
-
-            console.error(
-                "Failed to fetch job status: ",
-                error
-            );
-
-        }
-
-    };
-
 
     useEffect(() => {
-
         if (
             isAuthenticated &&
-            role === "jobseeker"
+            role === "jobseeker" &&
+            userId != null
         ) {
-
-            fetchUserJobStatus();
-
+            fetchUserJobStatus(userId).catch((error) => {
+                console.error(
+                    "Failed to fetch job status: ",
+                    error
+                );
+            });
         }
-
     }, [
         isAuthenticated,
-        role
+        role,
+        userId,
+        fetchUserJobStatus
     ]);
 
-
     const handleKeyDown = (e) => {
-
         if (e.key === "Enter") {
-
             searchJobs();
-
         }
-
     };
-
 
     return (
 

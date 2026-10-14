@@ -5,12 +5,19 @@ import api from "../../../api/axios";
 import Navbar from "../../../components/layout/Navbar";
 import { toast } from "react-toastify";
 import "./EditCompany.css"
+import useCompanyStore from "../../../store/companyStore";
+import useRecruiterDashboardStore from "../../../store/recruiterDashboard";
 
 export default function EditCompany() {
 
     const navigate = useNavigate();
 
-    const [loading, setLoading] = useState(true);
+    const company = useCompanyStore((state)=>state.company);
+    const loading = useCompanyStore((state)=>state.loading);
+    const fetchCompany = useCompanyStore((state)=>state.fetchCompany);
+    const invalidateCompany = useCompanyStore((state)=>state.invalidateCompany)
+    const invalidateDashboard = useRecruiterDashboardStore((state)=>state.invalidateDashboard)
+
     const [saving, setSaving] = useState(false);
 
     const [form, setForm] = useState({
@@ -21,37 +28,23 @@ export default function EditCompany() {
     });
 
     useEffect(() => {
-        fetchCompany();
-    }, []);
-
-    const fetchCompany = async () => {
-
-        try {
-
-            const response = await api.get("/companies/me");
+        fetchCompany().then((data)=>{
+            if (!data) return
 
             setForm({
-                name: response.data.name || "",
-                description: response.data.description || "",
-                website: response.data.website || "",
-                location: response.data.location || "",
-            });
+                name: data.name || "",
+                description: data.description || "",
+                website: data.website || "",
+                location: data.location || "",
+            })
+        }).catch((error)=>{
+            console.error(error);
 
-        } catch (error) {
+            toast.error(error.response?.data?.detail || "Failed to load company")
+        });
+    }, [fetchCompany]);
 
-            console.log(error);
-
-            toast.error(
-                error.response?.data?.detail ||
-                "Failed to load company"
-            );
-
-        } finally {
-
-            setLoading(false);
-
-        }
-    };
+    
 
     const handleChange = (e) => {
 
@@ -70,7 +63,13 @@ export default function EditCompany() {
 
         try {
 
-            await api.patch("/companies/me", form);
+            const response = await api.patch("/companies/me", form);
+
+            useCompanyStore.setState({
+                company: response.data, hasFetched:true,
+            });
+            invalidateCompany();
+            invalidateDashboard();
 
             toast.success("Company updated successfully");
 

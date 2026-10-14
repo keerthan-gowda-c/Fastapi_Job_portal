@@ -30,6 +30,8 @@ cloudinary.config(
 
 from app.routers.auth import router as auth_router
 from app.routers.user import router as user_router
+from app.routers.candidates import router as candidate_router
+from app.routers.recruiters import router as recruiter_router
 from app.routers.companies import router as company_router
 from app.routers.jobs import router as job_router
 from app.routers.applications import router as application_router
@@ -39,6 +41,8 @@ from app.routers.saved_jobs import router as saved_job_router
 
 app.include_router(auth_router)
 app.include_router(user_router)
+app.include_router(candidate_router)
+app.include_router(recruiter_router)
 app.include_router(company_router)
 app.include_router(job_router)
 app.include_router(application_router)

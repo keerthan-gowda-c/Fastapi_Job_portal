@@ -5,46 +5,29 @@ import api from "../../../api/axios";
 import Navbar from "../../../components/layout/Navbar";
 import "./JobApplicants.css";
 import { toast } from "react-toastify";
+import useJobApplicantsStore from "../../../store/jobApplicantsStore";
+import useRecruiterDashboardStore from "../../../store/recruiterDashboard";
+
+const EMPTY_APPLICATIONS = [];
 
 export default function JobApplicants() {
 
     const { jobId } = useParams();
-
-    const [applications, setApplications] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const applications = useJobApplicantsStore((state)=>state.applicationsByJob[String(jobId)]??EMPTY_APPLICATIONS);
+    const loading = useJobApplicantsStore((state)=>Boolean(state.loadingByJob[String(jobId)]));
+    const fetchApplicants = useJobApplicantsStore((state)=>state.fetchApplicants);
+    const updateApplicationStatusInStore = useJobApplicantsStore((state)=>state.updateApplicationStatus)
+    const invalidateDashboard = useRecruiterDashboardStore((state)=>state.invalidateDashboard)
     const [updatingId, setUpdatingId] = useState(null);
 
     useEffect(() => {
 
-        fetchApplicants();
-
-    }, [jobId]);
-
-    const fetchApplicants = async () => {
-
-        try {
-
-            const response = await api.get(
-                `/applications/job/${jobId}`
-            );
-
-            setApplications(response.data);
-
-        } catch (error) {
-
+        fetchApplicants(jobId).catch((error)=>{
             console.log(error);
+            toast.error(error.response?.data?.detail || "Failed to load applications")
+        });
 
-            toast.error(
-                error.response?.data?.detail ||
-                "Failed to load applications"
-            );
-
-        } finally {
-
-            setLoading(false);
-
-        }
-    };
+    }, [jobId, fetchApplicants]);
 
     const updateStatus = async (applicationId, status) => {
 
@@ -59,16 +42,11 @@ export default function JobApplicants() {
                 }
             );
 
-            setApplications((prevApplications) =>
-                prevApplications.map((application) =>
-                    application.id === applicationId
-                        ? {
-                            ...application,
-                            status
-                        }
-                        : application
-                )
+            updateApplicationStatusInStore(
+                jobId, applicationId, status
             );
+
+            invalidateDashboard();
 
             toast.success("Application status updated");
 

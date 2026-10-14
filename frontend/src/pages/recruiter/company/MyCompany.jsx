@@ -5,48 +5,39 @@ import api from "../../../api/axios";
 import Navbar from "../../../components/layout/Navbar";
 import { toast } from "react-toastify";
 import "./MyCompany.css"
+import useCompanyStore from "../../../store/companyStore";
+import useRecruiterDashboardStore from "../../../store/recruiterDashboard";
 
 export default function MyCompany() {
+    const navigate = useNavigate();
 
-    const [company, setCompany] = useState(null);
+    const company = useCompanyStore((state)=>state.company);
+    const fetchCompany = useCompanyStore((state)=>state.fetchCompany);
+    const clearCompany = useCompanyStore((state)=>state.clearCompany);
+    const invalidateDashboard = useRecruiterDashboardStore((state)=>invalidateDashboard)
     const [loading, setLoading] = useState(true);
 
-    const navigate = useNavigate();
 
 
     useEffect(() => {
-
-        fetchCompany();
-
-    }, []);
-
-
-    const fetchCompany = async () => {
-
-        try {
-
-            const response = await api.get("/companies/me");
-
-            setCompany(response.data);
-
-        }
-        catch (error) {
-
-            console.error(error);
-
-            toast.warning(
-                error.response?.data?.detail ||
-                "Failed to load company"
-            );
-
-        }
-        finally {
-
-            setLoading(false);
-
+        let active = true;
+        if(company){
+            setLoading(false)
         }
 
-    };
+        fetchCompany().catch((error)=>{
+            console.error(error)
+            toast.warning(error.response?.data?.detail || "Failed to load company")
+        }).finally(()=>{
+            if(active){
+                setLoading(false)
+            }
+        });
+        return () => {
+            active = false;
+        }
+
+    }, [fetchCompany, company]);
 
 
     const deleteCompany = async () => {
@@ -61,6 +52,9 @@ export default function MyCompany() {
         try {
 
             await api.delete(`/companies/${company.id}`);
+
+            clearCompany();
+            invalidateDashboard();
 
             toast.success(
                 "Company deleted successfully"

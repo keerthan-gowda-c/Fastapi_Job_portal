@@ -5,62 +5,31 @@ import Navbar from "../../../components/layout/Navbar";
 import { Link } from "react-router-dom";
 import "./RecruiterApplications.css";
 import { toast } from "react-toastify";
+import useRecruiterApplicationsStore from "../../../store/recruiterApplicationsStore";
 
 export default function RecruiterApplications() {
 
-    const [applications, setApplications] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const applications = useRecruiterApplicationsStore((state) => state.applications);
+    const loading = useRecruiterApplicationsStore((state) => state.loading);
+    const fetchApplications = useRecruiterApplicationsStore((state) => state.fetchApplications);
+    const invalidateApplications = useRecruiterApplicationsStore(
+    (state) => state.invalidateApplications
+);
 
     useEffect(() => {
-        fetchApplications();
-    }, []);
+        fetchApplications().catch((error) => {
+        console.log(error);
 
-    const fetchApplications = async () => {
+        toast.warning(
+            error.response?.data?.detail ||
+            "Failed to load applications"
+        );
+    });
+    }, [fetchApplications]);
 
-        try {
-
-            const response = await api.get("/applications");
-            const jobMap = {};
-
-            response.data.forEach((application) => {
-
-                const jobId = application.job.id;
-
-                if (!jobMap[jobId]) {
-
-                    jobMap[jobId] = {
-                        job: application.job,
-                        applicants: 0
-                    };
-
-                }
-
-                jobMap[jobId].applicants += 1;
-
-            });
-
-            setApplications(Object.values(jobMap));
-
-        }
-        catch (error) {
-
-            console.log(error);
-
-            toast.warning(
-                error.response?.data?.detail ||
-                "Failed to load applications"
-            );
-
-        }
-        finally{
-            setLoading(false)
-        }
-
-    };
-
-    if(loading){
-        return(
-              <>
+    if (loading) {
+        return (
+            <>
                 <Navbar />
 
                 <div className="d-flex justify-content-center align-items-center vh-100">

@@ -6,10 +6,16 @@ import api from "../../../api/axios";
 import Navbar from "../../../components/layout/Navbar";
 import "./CreateJob.css";
 import { toast } from "react-toastify";
+import useRecruiterDashboardStore from "../../../store/recruiterDashboard";
+import useMyJobStore from "../../../store/myJobStore";
+import useJobStore from "../../../store/jobStore";
 
 export default function CreateJob() {
 
     const navigate = useNavigate();
+    const invalidateDashboard = useRecruiterDashboardStore((state)=>state.invalidateDashboard);
+    const invalidateJobs = useMyJobStore((state)=>state.invalidateJobs)
+    const invalidatePublicJobs = useJobStore((state)=>state.invalidateJobs);
 
     const [form, setForm] = useState({
         title: "",
@@ -38,6 +44,9 @@ export default function CreateJob() {
                 ...form,
                 salary: Number(form.salary)
             });
+            invalidateJobs();
+            invalidateDashboard();
+            invalidatePublicJobs();
 
             toast.success("Job created successfully");
 

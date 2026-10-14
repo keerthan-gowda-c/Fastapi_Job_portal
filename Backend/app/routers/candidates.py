@@ -26,6 +26,10 @@ def get_candidate(current_user: User, db: Session):
     return candidate
 
 
+@router.get("/me", response_model=CandidateResponse)
+def get_my_profile(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    return get_candidate(current_user, db)
+
 @router.get("/{candidate_id}", response_model=CandidateResponse)
 def get_candidate_profile(candidate_id: int, db: Session = Depends(get_db)):
     candidate = db.query(Candidate).filter(Candidate.id == candidate_id).first()
@@ -36,9 +40,6 @@ def get_candidate_profile(candidate_id: int, db: Session = Depends(get_db)):
     return candidate
 
 
-@router.get("/me", response_model=CandidateResponse)
-def get_my_profile(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    return get_candidate(current_user, db)
 
 
 @router.put("/me", response_model=CandidateResponse)

@@ -5,12 +5,15 @@ import api from "../../../api/axios";
 import Navbar from "../../../components/layout/Navbar";
 import { toast } from "react-toastify";
 import "./CreateCompany.css";
+import useRecruiterDashboardStore from "../../../store/recruiterDashboard";
 
 export default function CreateCompany() {
 
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
+
+    const invalidateDashboard = useRecruiterDashboardStore((state)=>state.invalidateDashboard)
 
     const [form, setForm] = useState({
         name: "",
@@ -39,6 +42,8 @@ export default function CreateCompany() {
         try {
 
             await api.post("/companies/", form);
+
+            invalidateDashboard();
 
             toast.success(
                 "Company created successfully"

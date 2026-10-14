@@ -4,51 +4,46 @@ import Navbar from "../../../components/layout/Navbar";
 import api from "../../../api/axios";
 import { toast } from "react-toastify";
 import "./SavedJobs.css";
+import useJobStore from "../../../store/jobStore";
+import useSavedJobsStore from "../../../store/savedJobsStore";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function SavedJobs() {
 
     const navigate = useNavigate();
-
-    const [savedJobs, setSavedJobs] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [removingId, setRemovingId] = useState(null);
+    const savedJobs = useSavedJobsStore(
+        (state) => state.savedJobs
+    );
 
+    const loading = useSavedJobsStore(
+        (state) => state.loading
+    );
 
-    const fetchSavedJobs = async () => {
+    const fetchSavedJobs = useSavedJobsStore(
+        (state) => state.fetchSavedJobs
+    );
 
-        setLoading(true);
+    const removeSavedJobFromCache = useSavedJobsStore(
+        (state) => state.removeSavedJobFromCache
+    );
 
-        try {
+    const clearUserJobStatus = useJobStore(
+        (state) => state.clearUserJobStatus
+    );
 
-            const response = await api.get("/saved-jobs");
+    const { user } = useAuth();
 
-            setSavedJobs(response.data);
-
-        }
-        catch (error) {
-
+    useEffect(() => {
+        fetchSavedJobs().catch((error) => {
             console.error("Failed to load saved jobs:", error);
 
             toast.warning(
                 error.response?.data?.detail ||
                 "Failed to load saved jobs"
             );
-
-        }
-        finally {
-
-            setLoading(false);
-
-        }
-
-    };
-
-
-    useEffect(() => {
-
-        fetchSavedJobs();
-
-    }, []);
+        });
+    }, [fetchSavedJobs]);
 
 
     const removeSavedJob = async (jobId) => {
@@ -59,12 +54,8 @@ export default function SavedJobs() {
 
             await api.delete(`/saved-jobs/${jobId}`);
 
-            setSavedJobs((currentJobs) =>
-                currentJobs.filter(
-                    (savedJob) =>
-                        savedJob.job.id !== jobId
-                )
-            );
+            removeSavedJobFromCache(jobId);
+            clearUserJobStatus(user?.id);
 
             toast.success("Job removed from saved jobs");
 

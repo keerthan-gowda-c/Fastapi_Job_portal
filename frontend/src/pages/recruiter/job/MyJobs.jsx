@@ -6,44 +6,28 @@ import api from "../../../api/axios";
 import Navbar from "../../../components/layout/Navbar";
 import "./MyJobs.css";
 import { toast } from "react-toastify";
+import useMyJobStore from "../../../store/myJobStore";
+import useRecruiterDashboardStore from "../../../store/recruiterDashboard";
 
 export default function MyJobs() {
-
-    const [jobs, setJobs] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [deletingId, setDeletingId] = useState(null);
-
     const navigate = useNavigate();
 
-    const fetchJobs = async () => {
+    const jobs = useMyJobStore((state)=>state.jobs);
+    const loading = useMyJobStore((state)=>state.loading);
+    const fetchJobs = useMyJobStore((state)=>state.fetchJobs);
+    const removeJobs = useMyJobStore((state)=>state.removeJobs);
 
-        try {
-
-            const response = await api.get("/jobs/my-jobs");
-
-            setJobs(response.data);
-
-        } catch (error) {
-
-            console.log(error);
-
-            toast.error(
-                error.response?.data?.detail ||
-                "Failed to load jobs"
-            );
-
-        } finally {
-
-            setLoading(false);
-
-        }
-    };
+    const invalidateDashboard = useRecruiterDashboardStore((state)=>state.invalidateDashboard);
+    
+    const [deletingId, setDeletingId] = useState(null);
 
     useEffect(() => {
+        fetchJobs().catch((error) =>{
+            console.error(error)
+        toast.error(error.response?.data?.detail || "Failed to load Jobs")
+        });
 
-        fetchJobs();
-
-    }, []);
+    }, [fetchJobs]);
 
     const deleteJob = async (id) => {
 
@@ -59,12 +43,12 @@ export default function MyJobs() {
 
             await api.delete(`/jobs/${id}`);
 
+            removeJobs(id);
+            invalidateDashboard();
+
             toast.success("Job deleted successfully");
 
-            setJobs((prevJobs) =>
-                prevJobs.filter((job) => job.id !== id)
-            );
-
+        
         } catch (error) {
 
             console.log(error);

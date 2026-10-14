@@ -4,51 +4,56 @@ import Navbar from "../../../components/layout/Navbar";
 import api from "../../../api/axios";
 import { toast } from "react-toastify";
 import "./MyApplications.css"
+import useMyApplicationsStore from "../../../store/myApplicationsStore";
+import useJobStore from "../../../store/jobStore";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function MyApplications() {
 
     const navigate = useNavigate();
-
-    const [applications, setApplications] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [actionId, setActionId] = useState(null);
+    const applications = useMyApplicationsStore((state) => state.applications);
+    const loading = useMyApplicationsStore(
+        (state) => state.loading
+    );
+
+    const fetchApplications = useMyApplicationsStore(
+        (state) => state.fetchApplications
+    );
+
+    const updateApplication = useMyApplicationsStore(
+        (state) => state.updateApplication
+    );
+
+    const removeApplication = useMyApplicationsStore(
+        (state) => state.removeApplication
+    );
+
+    const invalidateApplications = useMyApplicationsStore(
+        (state) => state.invalidateApplications
+    );
+
+    const markJobApplied = useJobStore(
+        (state) => state.markJobApplied
+    );
+
+    const clearUserJobStatus = useJobStore(
+        (state) => state.clearUserJobStatus
+    );
+
+    const { user } = useAuth();
 
 
-    const fetchApplications = async () => {
-
-        setLoading(true);
-
-        try {
-
-            const response = await api.get("/applications/me");
-
-            setApplications(response.data);
-
-        }
-        catch (error) {
-
+    useEffect(() => {
+        fetchApplications().catch((error) => {
             console.error("Failed to load applications:", error);
 
             toast.warning(
                 error.response?.data?.detail ||
                 "Failed to load applications"
             );
-
-        }
-        finally {
-
-            setLoading(false);
-
-        }
-
-    };
-
-
-    useEffect(() => {
-
-        fetchApplications();
-
-    }, []);
+        });
+    }, [fetchApplications]);
 
 
     const withdrawApplication = async (applicationId) => {
@@ -61,16 +66,11 @@ export default function MyApplications() {
                 `/applications/${applicationId}/withdraw`
             );
 
-            setApplications((currentApplications) =>
-                currentApplications.map((application) =>
-                    application.id === applicationId
-                        ? {
-                            ...application,
-                            status: "withdrawn"
-                        }
-                        : application
-                )
-            );
+            updateApplication(applicationId, {
+                status: "withdrawn",
+            });
+
+            clearUserJobStatus(user?.id);
 
             toast.info(
                 "Application withdrawn successfully"
@@ -105,6 +105,10 @@ export default function MyApplications() {
             await api.post(
                 `/applications/jobs/${jobId}`
             );
+
+            invalidateApplications();
+            clearUserJobStatus(user?.id)
+            await fetchApplications(true);
 
             toast.success(
                 "Application submitted successfully"
@@ -148,12 +152,8 @@ export default function MyApplications() {
                 `/applications/${applicationId}/delete`
             );
 
-            setApplications((currentApplications) =>
-                currentApplications.filter(
-                    (application) =>
-                        application.id !== applicationId
-                )
-            );
+            removeApplication(applicationId);
+            clearUserJobStatus(user?.id);
 
             toast.success(
                 "Application deleted successfully"
@@ -292,218 +292,218 @@ export default function MyApplications() {
 
                     <section className="jh-applications__table-wrapper">
 
-    <div className="jh-applications__table">
+                        <div className="jh-applications__table">
 
-        {/* Table Header */}
+                            {/* Table Header */}
 
-        <div className="jh-applications__row jh-applications__row--header">
+                            <div className="jh-applications__row jh-applications__row--header">
 
-            <div>Job</div>
-            <div>Location</div>
-            <div>Applied On</div>
-            <div>Salary</div>
-            <div>Employment</div>
-            <div>Status</div>
-            <div>Actions</div>
+                                <div>Job</div>
+                                <div>Location</div>
+                                <div>Applied On</div>
+                                <div>Salary</div>
+                                <div>Employment</div>
+                                <div>Status</div>
+                                <div>Actions</div>
 
-        </div>
+                            </div>
 
 
-        {/* Table Rows */}
+                            {/* Table Rows */}
 
-        {applications.map((application) => {
+                            {applications.map((application) => {
 
-            const job = application.job;
+                                const job = application.job;
 
-            return (
+                                return (
 
-                <div
-                    className="jh-applications__row"
-                    key={application.id}
-                >
+                                    <div
+                                        className="jh-applications__row"
+                                        key={application.id}
+                                    >
 
-                    {/* Job */}
+                                        {/* Job */}
 
-                    <div className="jh-table-job">
+                                        <div className="jh-table-job">
 
-                        <strong>
-                            {job?.title || "N/A"}
-                        </strong>
+                                            <strong>
+                                                {job?.title || "N/A"}
+                                            </strong>
 
-                    </div>
+                                        </div>
 
 
-                    {/* Location */}
+                                        {/* Location */}
 
-                    <div className="jh-table-location">
+                                        <div className="jh-table-location">
 
-                        <span>📍</span>
+                                            <span>📍</span>
 
-                        {job?.location || "N/A"}
+                                            {job?.location || "N/A"}
 
-                    </div>
+                                        </div>
 
 
-                    {/* Applied Date */}
+                                        {/* Applied Date */}
 
-                    <div className="jh-table-date">
+                                        <div className="jh-table-date">
 
-                        {application.applied_at
-                            ? new Date(
-                                application.applied_at
-                            ).toLocaleDateString()
-                            : "N/A"
-                        }
+                                            {application.applied_at
+                                                ? new Date(
+                                                    application.applied_at
+                                                ).toLocaleDateString()
+                                                : "N/A"
+                                            }
 
-                    </div>
+                                        </div>
 
 
-                    {/* Salary */}
+                                        {/* Salary */}
 
-                    <div className="jh-table-salary">
+                                        <div className="jh-table-salary">
 
-                        {job?.salary
-                            ? `₹${job.salary}`
-                            : "N/A"
-                        }
+                                            {job?.salary
+                                                ? `₹${job.salary}`
+                                                : "N/A"
+                                            }
 
-                    </div>
+                                        </div>
 
 
-                    {/* Employment */}
+                                        {/* Employment */}
 
-                    <div className="jh-table-employment">
+                                        <div className="jh-table-employment">
 
-                        {job?.employment_type
-                            ?.replaceAll("_", " ")
-                            || "N/A"
-                        }
+                                            {job?.employment_type
+                                                ?.replaceAll("_", " ")
+                                                || "N/A"
+                                            }
 
-                    </div>
+                                        </div>
 
 
-                    {/* Status */}
+                                        {/* Status */}
 
-                    <div>
+                                        <div>
 
-                        <span
-                            className={getStatusClass(
-                                application.status
-                            )}
-                        >
-                            {formatStatus(
-                                application.status
-                            )}
-                        </span>
+                                            <span
+                                                className={getStatusClass(
+                                                    application.status
+                                                )}
+                                            >
+                                                {formatStatus(
+                                                    application.status
+                                                )}
+                                            </span>
 
-                    </div>
+                                        </div>
 
 
-                    {/* Actions */}
+                                        {/* Actions */}
 
-                    <div className="jh-table-actions">
+                                        <div className="jh-table-actions">
 
-                        <button
-                            className="jh-btn jh-btn--ghost"
-                            onClick={() =>
-                                navigate(`/jobs/details/${job.id}`)
-                            }
-                        >
-                            View
-                        </button>
+                                            <button
+                                                className="jh-btn jh-btn--ghost"
+                                                onClick={() =>
+                                                    navigate(`/jobs/details/${job.id}`)
+                                                }
+                                            >
+                                                View
+                                            </button>
 
 
-                        {application.status === "pending" && (
+                                            {application.status === "pending" && (
 
-                            <button
-                                className="jh-btn jh-btn--danger-outline"
-                                disabled={
-                                    actionId === application.id
-                                }
-                                onClick={() =>
-                                    withdrawApplication(
-                                        application.id
-                                    )
-                                }
-                            >
+                                                <button
+                                                    className="jh-btn jh-btn--danger-outline"
+                                                    disabled={
+                                                        actionId === application.id
+                                                    }
+                                                    onClick={() =>
+                                                        withdrawApplication(
+                                                            application.id
+                                                        )
+                                                    }
+                                                >
 
-                                {actionId === application.id ? (
+                                                    {actionId === application.id ? (
 
-                                    <>
-                                        <span className="jh-btn-spinner"></span>
-                                        Withdrawing...
-                                    </>
+                                                        <>
+                                                            <span className="jh-btn-spinner"></span>
+                                                            Withdrawing...
+                                                        </>
 
-                                ) : (
+                                                    ) : (
 
-                                    "Withdraw"
+                                                        "Withdraw"
 
-                                )}
+                                                    )}
 
-                            </button>
+                                                </button>
 
-                        )}
+                                            )}
 
 
-                        {application.status === "withdrawn" && (
+                                            {application.status === "withdrawn" && (
 
-                            <>
+                                                <>
 
-                                <button
-                                    className="jh-btn jh-btn--success"
-                                    disabled={
-                                        actionId === job.id
-                                    }
-                                    onClick={() =>
-                                        applyAgain(job.id)
-                                    }
-                                >
+                                                    <button
+                                                        className="jh-btn jh-btn--success"
+                                                        disabled={
+                                                            actionId === job.id
+                                                        }
+                                                        onClick={() =>
+                                                            applyAgain(job.id)
+                                                        }
+                                                    >
 
-                                    {actionId === job.id ? (
+                                                        {actionId === job.id ? (
 
-                                        <>
-                                            <span className="jh-btn-spinner"></span>
-                                            Applying...
-                                        </>
+                                                            <>
+                                                                <span className="jh-btn-spinner"></span>
+                                                                Applying...
+                                                            </>
 
-                                    ) : (
+                                                        ) : (
 
-                                        "Apply Again"
+                                                            "Apply Again"
 
-                                    )}
+                                                        )}
 
-                                </button>
+                                                    </button>
 
 
-                                <button
-                                    className="jh-btn jh-btn--danger-outline"
-                                    disabled={
-                                        actionId === application.id
-                                    }
-                                    onClick={() =>
-                                        deleteApplication(
-                                            application.id
-                                        )
-                                    }
-                                >
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                                                    <button
+                                                        className="jh-btn jh-btn--danger-outline"
+                                                        disabled={
+                                                            actionId === application.id
+                                                        }
+                                                        onClick={() =>
+                                                            deleteApplication(
+                                                                application.id
+                                                            )
+                                                        }
+                                                    >
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
 
-                            </>
+                                                </>
 
-                        )}
+                                            )}
 
-                    </div>
+                                        </div>
 
-                </div>
+                                    </div>
 
-            );
+                                );
 
-        })}
+                            })}
 
-    </div>
+                        </div>
 
-</section>
+                    </section>
                 )}
 
             </main>

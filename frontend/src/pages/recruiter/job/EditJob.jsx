@@ -6,6 +6,9 @@ import api from "../../../api/axios";
 import Navbar from "../../../components/layout/Navbar";
 import "./EditJob.css";
 import { toast } from "react-toastify";
+import useMyJobStore from "../../../store/myJobStore";
+import useRecruiterDashboardStore from "../../../store/recruiterDashboard";
+import useJobStore from "../../../store/jobStore";
 
 export default function EditJob() {
 
@@ -14,6 +17,11 @@ export default function EditJob() {
 
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+
+    const invalidateJobs = useMyJobStore((state)=>state.invalidateJobs);
+    const invalidateDashboard = useRecruiterDashboardStore((state)=>state.invalidateDashboard);
+    const invalidatePublicJobs = useJobStore((state)=>state.invalidateJobs);
+
 
     const [form, setForm] = useState({
         title: "",
@@ -85,6 +93,9 @@ export default function EditJob() {
                 employment_type: form.employment_type
             });
 
+            invalidateJobs();
+            invalidateDashboard();
+            invalidatePublicJobs();
             toast.success("Job updated successfully");
 
             navigate("/my-jobs");

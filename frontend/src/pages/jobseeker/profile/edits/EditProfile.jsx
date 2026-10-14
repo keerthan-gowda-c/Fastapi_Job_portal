@@ -85,7 +85,7 @@ export default function EditProfile() {
 
         data.append("file", resume);
 
-        await api.post("/users/resume", data);
+        await api.post("/candidates/me/resume", data);
 
     };
 

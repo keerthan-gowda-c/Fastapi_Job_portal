@@ -5,70 +5,109 @@ import Navbar from "../../components/layout/Navbar";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import "./JobDetails.css";
+import useJobStore from "../../store/jobStore";
+import useSavedJobsStore from "../../store/savedJobsStore";
+import useMyApplicationsStore from "../../store/myApplicationsStore";
 
 export default function JobDetails() {
 
     const { id } = useParams();
     const navigate = useNavigate();
-
     const { user, isAuthenticated } = useAuth();
 
+    const cachedJob = useJobStore((state) => Object.values(state.jobsCache).flat().find((item) => String(item.id) === String(id)))
     const [job, setJob] = useState(null);
     const [loading, setLoading] = useState(true);
+    const markJobApplied = useJobStore((state) => state.markJobApplied);
+    const markJobSaved = useJobStore((state) => state.markJobSaved)
+    const fetchUserJobStatus = useJobStore((state) => state.fetchUserJobStatus)
+    const invalidateApplications = useMyApplicationsStore(
+        (state) => state.invalidateApplications
+    );
 
+    const invalidateSavedJobs = useSavedJobsStore(
+        (state) => state.invalidateSavedJobs
+    );
 
-    const fetchJob = async () => {
-
-        try {
-
-            const response = await api.get(`/jobs/${id}`);
-
-            setJob(response.data);
-
-        } catch (error) {
-
-            console.error("Failed to fetch job:", error);
-
-            toast.error(
-                error.response?.data?.detail ||
-                "Failed to load job"
-            );
-
-        } finally {
-
-            setLoading(false);
-
-        }
-
-    };
-
+    const clearUserJobStatus = useJobStore(
+        (state) => state.clearUserJobStatus
+    );
 
     useEffect(() => {
+        let cancelled = false;
+        const fetchJob = async () => {
+            setLoading(true);
+            setJob(null);
+            if (cachedJob) {
+                setJob(cachedJob);
+                setLoading(false);
+                return;
+            }
 
+            try {
+                const response = await api.get(`/jobs/${id}`);
+                if (!cancelled) {
+                    setJob(response.data);
+                }
+            } catch (error) {
+                if (!cancelled) {
+                    console.error("Failed to fetch job:", error);
+
+                    toast.error(
+                        error.response?.data?.detail ||
+                        "Failed to load job"
+                    );
+                }
+
+
+            } finally {
+                if (!cancelled) {
+                    setLoading(false);
+                }
+
+            }
+
+        };
         fetchJob();
+        return () => {
+            cancelled = true;
+        }
+    }, [id, cachedJob])
 
-    }, [id]);
-
+    useEffect(() => {
+        if (isAuthenticated && user?.role === "jobseeker" && user?.id != null) {
+            fetchUserJobStatus(user.id).catch((error) => {
+                console.error("Failed to fetch job status:", error)
+            })
+        }
+    }, [isAuthenticated, user?.role, user?.id, fetchUserJobStatus])
 
     const applyJob = async () => {
 
-        try {
+        if (!isAuthenticated) {
+            navigate("/login");
+            return;
+        }
 
+        if (user?.role !== "jobseeker") {
+            toast.warning("Only jobseekers can apply for jobs");
+            return;
+        }
+
+        try {
             await api.post(`/applications/jobs/${job.id}`);
 
-            toast.success(
-                "Application submitted successfully"
-            );
+            markJobApplied(user.id, job.id);
+            invalidateApplications();
 
+            toast.success("Application submitted successfully");
         } catch (error) {
-
             console.error(error);
 
             toast.warning(
                 error.response?.data?.detail ||
                 "Failed to apply"
             );
-
         }
 
     };
@@ -76,31 +115,33 @@ export default function JobDetails() {
 
     const saveJob = async () => {
 
-        try {
+        if (!isAuthenticated) {
+            navigate("/login");
+            return;
+        }
 
+        if (user?.role !== "jobseeker") {
+            toast.warning("Only jobseekers can save jobs");
+            return;
+        }
+
+        try {
             await api.post(`/saved-jobs/${job.id}`);
 
-            toast.info(
-                "Job saved successfully"
-            );
+            markJobSaved(user.id, job.id);
+            invalidateApplications();
 
+            toast.success("Job saved successfully");
         } catch (error) {
-
             console.error(error);
 
             toast.warning(
                 error.response?.data?.detail ||
                 "Failed to save job"
             );
-
         }
 
     };
-
-
-    /* =========================================
-       LOADING
-    ========================================= */
 
     if (loading) {
 
@@ -129,11 +170,6 @@ export default function JobDetails() {
         );
 
     }
-
-
-    /* =========================================
-       JOB NOT FOUND
-    ========================================= */
 
     if (!job) {
 
@@ -335,7 +371,7 @@ export default function JobDetails() {
                                     <span>
                                         ROLE : {job.title}
                                     </span>
-                                    
+
                                     <h5>
                                         Job Description
                                     </h5>
