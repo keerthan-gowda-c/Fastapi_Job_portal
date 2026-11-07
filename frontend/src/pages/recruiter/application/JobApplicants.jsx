@@ -112,7 +112,7 @@ export default function JobApplicants() {
             return resumeUrl;
         }
 
-        const baseUrl = import.meta.env.API_URL?.replace(/\/$/, "");
+        const baseUrl = import.meta.env.VITE_API_URL?.replace(/\/$/, "");
 
         return `${baseUrl}/${resumeUrl.replace(/^\//, "")}`;
     };
