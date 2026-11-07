@@ -14,7 +14,7 @@ export default function MyCompany() {
     const company = useCompanyStore((state)=>state.company);
     const fetchCompany = useCompanyStore((state)=>state.fetchCompany);
     const clearCompany = useCompanyStore((state)=>state.clearCompany);
-    const invalidateDashboard = useRecruiterDashboardStore((state)=>invalidateDashboard)
+    const invalidateDashboard = useRecruiterDashboardStore((state)=>state.invalidateDashboard)
     const [loading, setLoading] = useState(true);
 
 

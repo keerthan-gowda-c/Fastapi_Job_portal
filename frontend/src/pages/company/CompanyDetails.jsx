@@ -15,13 +15,7 @@ export default function CompanyDetails() {
 
 
     useEffect(() => {
-
-        fetchCompanyDetails();
-
-    }, [id]);
-
-
-    const fetchCompanyDetails = async () => {
+            const fetchCompanyDetails = async () => {
 
         try {
 
@@ -49,6 +43,13 @@ export default function CompanyDetails() {
         }
 
     };
+
+        fetchCompanyDetails();
+
+    }, [id]);
+
+
+
 
 
     /* =========================================
