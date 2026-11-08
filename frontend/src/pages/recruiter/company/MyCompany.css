@@ -1,404 +1,229 @@
-
-/* =========================================
-   MY COMPANY PAGE
-   Premium / Modern / Responsive
-========================================= */
-
-.container {
-    max-width: 1180px;
-    
+.my-company-page {
+    min-height: 100vh;
+    padding: 105px 0 55px;
+    background: var(--jh-background);
 }
-
-
-/* =========================================
-   PAGE BACKGROUND
-========================================= */
-
-body {
-    background: var(--code-bg);
+.container:has(.bi-building-add) {
+    padding-top: 105px !important;
+    padding-bottom: 50px !important;
 }
-
-
-/* =========================================
-   PAGE HEADING
-========================================= */
-
-.text-center.mb-5 {
-    margin-bottom: 2rem !important;
-}
-
-.text-center.mb-5 h1 {
-    font-size: 2rem;
-    letter-spacing: -0.5px;
-    color: #111827;
-}
-
-.text-center.mb-5 p {
-    font-size: 0.95rem !important;
-    margin-top: 6px;
-}
-
-
-/* =========================================
-   MAIN COMPANY CARD
-========================================= */
-
-.container > .card {
+.container:has(.bi-building-add) .card {
+    border: 1px solid var(--jh-border) !important;
     border-radius: 18px !important;
-    background: #ffffff;
-    overflow: hidden;
+    background: #fff;
+    box-shadow: var(--jh-shadow) !important;
 }
-
-.container > .card.shadow-lg {
-    box-shadow:
-        0 12px 35px rgba(15, 23, 42, 0.08) !important;
+.container:has(.bi-building-add) .card-body {
+    padding: 38px !important;
 }
-
-.container > .card > .card-body {
-    padding: 2.5rem !important;
+.container:has(.bi-building-add) .text-center h3 {
+    color: var(--jh-navy);
+    font-size: 23px;
 }
-
-
-/* =========================================
-   COMPANY HEADER
-========================================= */
-
-.container > .card .rounded-circle {
-    background: #eef4ff !important;
-    border: 1px solid #dbe7ff;
-    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.08);
+.container:has(.bi-building-add) .text-center p {
+    color: var(--jh-muted) !important;
+    font-size: 14px;
 }
-
-.container > .card .rounded-circle i {
-    color: #2563eb !important;
-}
-
-.container > .card h2 {
-    font-size: 1.65rem;
-    color: #111827;
-    letter-spacing: -0.3px;
-}
-
-.container > .card .bi-geo-alt {
-    color: #64748b;
-}
-
-
-/* =========================================
-   DIVIDERS
-========================================= */
-
-.container > .card hr {
+.container:has(.bi-building-add) .text-center .btn {
+    min-height: 43px;
+    padding: 10px 20px !important;
     border: 0;
-    border-top: 1px solid #e5e7eb;
+    border-radius: 9px !important;
+    background: var(--jh-primary);
+    font-size: 13px;
+    font-weight: 650;
+}
+.container:has(.bi-building-add) .text-center .btn:hover {
+    background: var(--jh-primary-hover);
+}
+.container:has(.bi-building-add) .spinner-border {
+    width: 2.2rem;
+    height: 2.2rem;
+}
+.container:has(.bi-building-add) .text-muted {
+    color: var(--jh-muted) !important;
+}
+.container:has(.bi-building-add) .text-center.py-5 {
+    padding-top: 55px !important;
+    padding-bottom: 55px !important;
+}
+.container:has(.bi-building-add) .text-center .fs-1 {
+    font-size: 42px !important;
+}
+.container:has(.bi-building-add) .text-center .mt-3 {
+    margin-top: 16px !important;
+}
+.container:has(.bi-building-add) .text-center .btn {
+    transition: all 0.2s ease;
+}
+.container:has(.bi-building-add) .text-center .btn:hover {
+    transform: translateY(-2px);
+}
+.container:has(.bi-building) {
+    padding-top: 105px !important;
+    padding-bottom: 55px !important;
+}
+.container:has(.bi-building) > .text-center {
+    margin-bottom: 35px !important;
+}
+.container:has(.bi-building) > .text-center h1 {
+    color: var(--jh-navy);
+    font-size: 30px;
+    letter-spacing: -0.7px;
+}
+.container:has(.bi-building) > .text-center p {
+    color: var(--jh-muted) !important;
+    font-size: 15px;
+}
+.container:has(.bi-building) > .card {
+    overflow: hidden;
+    border: 1px solid var(--jh-border) !important;
+    border-radius: 18px !important;
+    background: #fff;
+    box-shadow: var(--jh-shadow) !important;
+}
+.container:has(.bi-building) > .card > .card-body {
+    padding: 38px !important;
+}
+.container:has(.bi-building) .rounded-circle.bg-primary {
+    width: 90px;
+    height: 90px;
+    min-width: 90px;
+    border: 1px solid #dbeafe;
+    background: #eff6ff !important;
+}
+.container:has(.bi-building) .rounded-circle .bi-building {
+    color: var(--jh-primary) !important;
+    font-size: 35px !important;
+}
+.container:has(.bi-building) .card-body h2 {
+    color: var(--jh-navy);
+    font-size: 25px;
+    letter-spacing: -0.5px;
+}
+.container:has(.bi-building) .card-body > .d-flex p {
+    color: var(--jh-muted) !important;
+    font-size: 13px;
+}
+.container:has(.bi-building) hr {
+    border-color: var(--jh-border);
     opacity: 1;
 }
-
-
-/* =========================================
-   INFORMATION GRID
-========================================= */
-
-.container > .card .row.g-4 {
-    --bs-gutter-x: 1rem;
-    --bs-gutter-y: 1rem;
-}
-
-
-/* =========================================
-   INFORMATION BOXES
-========================================= */
-
-.container > .card .bg-light {
-    background: #f8fafc !important;
-
-    border: 1px solid #e7ebf2;
-
+.container:has(.bi-building) .bg-light {
+    height: 100%;
+    padding: 22px !important;
+    border: 1px solid #edf1f6;
     border-radius: 12px !important;
-
-    padding: 1.15rem !important;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
+    background: #f8fafc !important;
 }
-
-.container > .card .bg-light:hover {
-    transform: translateY(-2px);
-
-    border-color: #d5def0;
-
-    box-shadow:
-        0 8px 20px rgba(15, 23, 42, 0.06);
-}
-
-
-/* =========================================
-   INFORMATION LABEL
-========================================= */
-
-.container > .card .bg-light h6 {
-    font-size: 0.72rem;
-    font-weight: 700;
-
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-
-    color: #64748b !important;
-}
-
-.container > .card .bg-light h6 i {
-    color: #2563eb;
-    font-size: 0.9rem;
-}
-
-
-/* =========================================
-   INFORMATION VALUE
-========================================= */
-
-.container > .card .bg-light p {
-    color: #1f2937;
-    font-size: 0.94rem;
-    line-height: 1.6;
-
-    word-break: break-word;
-}
-
-.container > .card .bg-light p.fw-semibold {
-    font-weight: 600 !important;
-}
-
-
-/* =========================================
-   WEBSITE
-========================================= */
-
-.container > .card .bg-light a {
-    display: inline-flex;
+.container:has(.bi-building) .bg-light h6 {
+    display: flex;
     align-items: center;
-
-    color: #2563eb !important;
-
-    font-size: 0.94rem;
-    font-weight: 600;
-
-    word-break: break-all;
-
-    transition: color 0.2s ease;
+    gap: 7px;
+    margin-bottom: 12px !important;
+    color: var(--jh-muted) !important;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
 }
-
-.container > .card .bg-light a:hover {
-    color: #1d4ed8 !important;
+.container:has(.bi-building) .bg-light h6 i {
+    color: var(--jh-primary);
+    font-size: 15px;
+}
+.container:has(.bi-building) .bg-light p {
+    margin-bottom: 0;
+    color: var(--jh-text);
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+.container:has(.bi-building) .bg-light p.fw-semibold {
+    color: var(--jh-navy);
+    font-weight: 650 !important;
+}
+.container:has(.bi-building) .bg-light a {
+    color: var(--jh-primary);
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+.container:has(.bi-building) .bg-light a:hover {
+    color: var(--jh-primary-hover);
     text-decoration: underline !important;
 }
-
-.container > .card .bg-light a .bi {
-    font-size: 0.8rem;
+.container:has(.bi-building) .card-body > .d-flex.flex-wrap {
+    gap: 12px !important;
 }
-
-
-/* =========================================
-   BUTTONS
-========================================= */
-
-.container > .card .btn {
-    min-height: 42px;
-
-    font-size: 0.88rem;
-    font-weight: 600;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background-color 0.2s ease;
+.container:has(.bi-building) .card-body > .d-flex.flex-wrap .btn {
+    min-height: 43px;
+    padding: 10px 19px !important;
+    border-radius: 9px !important;
+    font-size: 13px;
+    font-weight: 650;
+    transition: all 0.2s ease;
 }
-
-.container > .card .btn:hover {
-    transform: translateY(-1px);
+.container:has(.bi-building) .card-body > .d-flex.flex-wrap .btn:hover {
+    transform: translateY(-2px);
 }
-
-.container > .card .btn-primary {
-    box-shadow:
-        0 5px 14px rgba(37, 99, 235, 0.18);
+.container:has(.bi-building) .btn-primary {
+    border-color: var(--jh-primary);
+    background: var(--jh-primary);
 }
-
-.container > .card .btn-primary:hover {
-    box-shadow:
-        0 7px 18px rgba(37, 99, 235, 0.25);
+.container:has(.bi-building) .btn-primary:hover {
+    border-color: var(--jh-primary-hover);
+    background: var(--jh-primary-hover);
 }
-
-.container > .card .btn-outline-danger:hover {
-    box-shadow:
-        0 5px 14px rgba(220, 38, 38, 0.12);
+.container:has(.bi-building) .btn-outline-danger {
+    border-color: #fecaca;
+    color: #dc2626;
 }
-
-.container > .card .btn-outline-secondary:hover {
-    box-shadow:
-        0 5px 14px rgba(100, 116, 139, 0.12);
+.container:has(.bi-building) .btn-outline-danger:hover {
+    border-color: #dc2626;
+    background: #dc2626;
+    color: #fff;
 }
-
-
-/* =========================================
-   EMPTY COMPANY STATE
-========================================= */
-
-.container .card.shadow-sm {
-    border-radius: 18px !important;
-    box-shadow:
-        0 10px 30px rgba(15, 23, 42, 0.07) !important;
+.container:has(.bi-building) .btn-outline-secondary {
+    border-color: var(--jh-border);
+    color: var(--jh-text);
 }
-
-.container .card.shadow-sm .card-body {
-    padding: 3.5rem 1.5rem !important;
+.container:has(.bi-building) .btn-outline-secondary:hover {
+    border-color: #cbd5e1;
+    background: #f1f5f9;
+    color: var(--jh-navy);
 }
-
-.container .card.shadow-sm .bi-building-add {
-    color: #94a3b8 !important;
-    font-size: 3rem;
+@media (max-width: 767px) {
+    .container:has(.bi-building-add),
+    .container:has(.bi-building) {
+        padding-top: 85px !important;
+        padding-bottom: 35px !important;
+    }
+    .container:has(.bi-building) > .text-center h1 {
+        font-size: 25px;
+    }
+    .container:has(.bi-building) > .card > .card-body {
+        padding: 25px !important;
+    }
+    .container:has(.bi-building) .rounded-circle.bg-primary {
+        margin-right: 0 !important;
+    }
+    .container:has(.bi-building) .card-body h2 {
+        font-size: 22px;
+    }
 }
-
-.container .card.shadow-sm h3 {
-    color: #1f2937;
-    font-size: 1.3rem;
-}
-
-
-/* =========================================
-   LOADING STATE
-========================================= */
-
-.spinner-border {
-    width: 2rem;
-    height: 2rem;
-
-    border-width: 0.2rem;
-}
-
-
-/* =========================================
-   RESPONSIVE - TABLET
-========================================= */
-
-@media (max-width: 991.98px) {
-
-    .container {
-        max-width: 94%;
+@media (max-width: 480px) {
+    .container:has(.bi-building-add),
+    .container:has(.bi-building) {
+        padding-right: 16px;
+        padding-left: 16px;
     }
-
-    .container > .card > .card-body {
-        padding: 2rem !important;
+    .container:has(.bi-building) > .card > .card-body {
+        padding: 19px !important;
     }
-
-    .text-center.mb-5 h1 {
-        font-size: 1.8rem;
+    .container:has(.bi-building) .bg-light {
+        padding: 18px !important;
     }
-
-    .container > .card h2 {
-        font-size: 1.5rem;
-    }
-
-}
-
-
-/* =========================================
-   RESPONSIVE - MOBILE
-========================================= */
-
-@media (max-width: 767.98px) {
-
-    .container {
-        max-width: 100%;
-    }
-
-    .container.py-5 {
-        padding-top: 2rem !important;
-        padding-bottom: 2rem !important;
-    }
-
-    .text-center.mb-5 {
-        margin-bottom: 1.5rem !important;
-    }
-
-    .text-center.mb-5 h1 {
-        font-size: 1.55rem;
-    }
-
-    .text-center.mb-5 p {
-        font-size: 0.88rem !important;
-    }
-
-
-    /* Main card */
-
-    .container > .card > .card-body {
-        padding: 1.25rem !important;
-    }
-
-
-    /* Company header */
-
-    .container > .card .rounded-circle {
-        width: 70px !important;
-        height: 70px !important;
-        min-width: 70px !important;
-    }
-
-    .container > .card .rounded-circle i {
-        font-size: 1.7rem !important;
-    }
-
-    .container > .card h2 {
-        font-size: 1.3rem;
-    }
-
-
-    /* Information boxes */
-
-    .container > .card .bg-light {
-        padding: 1rem !important;
-    }
-
-
-    /* Buttons */
-
-    .container > .card .d-flex.flex-wrap {
-        flex-direction: column;
+    .container:has(.bi-building) .card-body > .d-flex.flex-wrap .btn {
         width: 100%;
     }
-
-    .container > .card .d-flex.flex-wrap .btn {
-        width: 100%;
-    }
-
-
-    /* Empty state */
-
-    .container .card.shadow-sm .card-body {
-        padding: 2.5rem 1.25rem !important;
-    }
-
-}
-
-
-/* =========================================
-   SMALL MOBILE
-========================================= */
-
-@media (max-width: 420px) {
-
-    .container.py-5 {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-    .text-center.mb-5 h1 {
-        font-size: 1.4rem;
-    }
-
-    .container > .card .bg-light p {
-        font-size: 0.88rem;
-    }
-
 }

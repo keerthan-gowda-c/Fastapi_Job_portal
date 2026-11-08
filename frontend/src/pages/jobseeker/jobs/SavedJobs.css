@@ -1,154 +1,86 @@
-/* =========================================================
-   SAVED JOBS
-   ========================================================= */
 
-.jh-saved-jobs {
-    --ink: #14213d;
-    --ink-soft: #3a4358;
-    --paper: #faf9f5;
-    --paper-alt: #f1eee6;
-    --accent: #e9a23b;
-    --accent-dark: #b97614;
-    --line: #e2ded3;
-    --muted: #6b7280;
-    --success: #3f7d58;
-    --success-dark: #326546;
-    --danger: #b94a48;
-    --max-width: 1120px;
-
+.jh-page {
     width: 100%;
-    max-width: var(--max-width);
-
-    margin: 0 auto;
-
-    padding: 4rem 1.5rem 5rem;
-
-    color: var(--ink);
-
-    font-family:
-        "Inter",
-        -apple-system,
-        BlinkMacSystemFont,
-        sans-serif;
+    min-height: 100vh;
+    background: #f5f7fb;
 }
 
+.jh-saved-jobs {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 110px 28px 65px;
+}
 
-/* =========================================================
-   HEADER
-   ========================================================= */
-
+/* Header */
 .jh-section-header {
-    text-align: center;
-
-    margin-bottom: 3rem;
+    margin-bottom: 35px;
 }
 
 .jh-section-eyebrow {
     display: inline-block;
-
-    margin-bottom: 0.75rem;
-
-    color: var(--accent-dark);
-
-    font-size: 0.8rem;
-    font-weight: 700;
-
-    letter-spacing: 0.12em;
+    margin-bottom: 11px;
+    color: #2563eb;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.6px;
     text-transform: uppercase;
 }
 
 .jh-section-header .jh-heading {
-    margin: 0 0 0.75rem;
-
-    color: var(--ink);
-
-    font-family: "Fraunces", Georgia, serif;
-
-    font-size: clamp(2rem, 4vw, 3rem);
-
-    font-weight: 500;
-
-    line-height: 1.1;
+    margin: 0 0 10px;
+    color: #172b4d;
+    font-size: 35px;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -1px;
 }
 
 .jh-section-subtitle {
-    max-width: 600px;
-
-    margin: 0 auto;
-
-    color: var(--muted);
-
-    font-size: 1rem;
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.7;
 }
 
-
-/* =========================================================
-   SAVED JOB GRID
-   ========================================================= */
-
+/* Saved jobs grid */
 .jh-saved-jobs__grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 19px;
 }
 
-
-/* =========================================================
-   SAVED JOB CARD
-   ========================================================= */
-
+/* Saved job card */
 .jh-saved-card {
+    min-width: 0;
+    min-height: 235px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
-
-    min-width: 0;
-
+    justify-content: space-between;
     background: #ffffff;
-
-    border: 1px solid var(--line);
-
-    border-radius: 14px;
-
-    box-shadow:
-        0 8px 24px rgba(20, 33, 61, 0.06);
-
-    overflow: hidden;
-
-    transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        border-color 0.18s ease;
+    border: 1px solid #e2e8f0;
+    border-radius: 11px;
+    box-shadow: 0 4px 15px rgba(23, 43, 77, 0.035);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .jh-saved-card:hover {
     transform: translateY(-3px);
-
-    border-color: #d3cec1;
-
-    box-shadow:
-        0 14px 32px rgba(20, 33, 61, 0.09);
+    border-color: #bfdbfe;
+    box-shadow: 0 10px 25px rgba(23, 43, 77, 0.07);
 }
 
-
-/* =========================================================
-   CARD CONTENT
-   ========================================================= */
-
 .jh-saved-card__content {
-    padding: 1.5rem;
+    min-width: 0;
 }
 
 .jh-saved-card__header {
     display: flex;
-
-    justify-content: space-between;
-
     align-items: flex-start;
-
-    gap: 1rem;
+    justify-content: space-between;
+    gap: 15px;
 }
 
 .jh-saved-card__title {
@@ -156,504 +88,334 @@
 }
 
 .jh-saved-card__title h2 {
-    margin: 0 0 0.55rem;
-
-    color: var(--ink);
-
-    font-family:
-        "Fraunces",
-        Georgia,
-        serif;
-
-    font-size: 1.35rem;
-
-    font-weight: 500;
-
-    line-height: 1.25;
-
+    margin: 0 0 10px;
+    color: #172b4d;
+    font-size: 18px;
+    font-weight: 750;
+    line-height: 1.45;
     overflow-wrap: anywhere;
 }
 
 .jh-location {
-    display: flex;
-
-    align-items: center;
-
-    gap: 0.35rem;
-
     margin: 0;
-
-    color: var(--ink-soft);
-
-    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
 }
 
-
-/* =========================================================
-   SAVED BADGE
-   ========================================================= */
+.jh-location span {
+    flex-shrink: 0;
+}
 
 .jh-saved-status {
     flex-shrink: 0;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    min-height: 28px;
-
-    padding:
-        0.35rem
-        0.75rem;
-
-    border-radius: 999px;
-
-    background: #e4f0e7;
-
-    color: var(--success);
-
-    font-size: 0.75rem;
-
-    font-weight: 700;
-
-    white-space: nowrap;
+    padding: 6px 11px;
+    color: #047857;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 30px;
+    font-size: 9px;
+    font-weight: 750;
 }
 
-
-/* =========================================================
-   DIVIDER
-   ========================================================= */
-
+/* Divider */
 .jh-divider {
+    width: 100%;
     height: 1px;
-
-    margin: 1.25rem 0;
-
-    background: var(--line);
+    margin: 23px 0;
+    background: #e2e8f0;
 }
 
-
-/* =========================================================
-   JOB INFORMATION
-   ========================================================= */
-
+/* Job information */
 .jh-job-info {
     display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
 }
 
 .jh-job-info > div {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 0.3rem;
-
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .jh-info-label {
-    color: var(--muted);
-
-    font-size: 0.75rem;
-
-    font-weight: 500;
+    color: #94a3b8;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
 }
 
 .jh-job-info strong {
-    color: var(--ink);
-
-    font-size: 0.9rem;
-
-    font-weight: 600;
-
+    color: #172b4d;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.6;
     overflow-wrap: anywhere;
-
-    text-transform: capitalize;
 }
 
 .jh-job-info .jh-salary {
-    color: var(--success);
-
-    font-size: 1rem;
-
-    text-transform: none;
+    color: #059669;
+    font-size: 15px;
+    font-weight: 800;
 }
 
-
-/* =========================================================
-   ACTIONS
-   ========================================================= */
-
+/* Card actions */
 .jh-saved-card__actions {
+    margin-top: 25px;
+    padding-top: 17px;
     display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 0.6rem;
-
-    padding:
-        0 1.5rem
-        1.5rem;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid #edf0f5;
 }
-
-.jh-saved-card__actions .jh-btn {
-    flex: 1;
-
-    min-width: 130px;
-}
-
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
 
 .jh-btn {
+    min-height: 39px;
+    padding: 9px 14px;
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
-    gap: 0.45rem;
-
-    min-height: 42px;
-
-    padding:
-        0.65rem
-        1.1rem;
-
-    border:
-        1.5px solid transparent;
-
-    border-radius: 999px;
-
-    font-family: inherit;
-
-    font-size: 0.88rem;
-
-    font-weight: 600;
-
+    gap: 8px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 700;
     cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        background 0.15s ease,
-        border-color 0.15s ease,
-        color 0.15s ease;
+    transition: all 0.2s ease;
 }
-
-.jh-btn:hover:not(:disabled) {
-    transform: translateY(-1px);
-}
-
-.jh-btn:disabled {
-    opacity: 0.6;
-
-    cursor: not-allowed;
-}
-
-
-/* =========================================================
-   PRIMARY BUTTON
-   ========================================================= */
-
-.jh-btn--primary {
-    background: var(--ink);
-
-    color: var(--paper);
-}
-
-.jh-btn--primary:hover:not(:disabled) {
-    background: var(--ink-soft);
-}
-
-
-/* =========================================================
-   GHOST BUTTON
-   ========================================================= */
 
 .jh-btn--ghost {
-    background: transparent;
-
-    color: var(--ink);
-
-    border-color: var(--line);
+    flex: 1;
+    color: #2563eb;
+    background: #eff6ff;
+    border-color: #dbeafe;
 }
 
-.jh-btn--ghost:hover:not(:disabled) {
-    background: var(--paper);
-
-    border-color: var(--ink);
+.jh-btn--ghost:hover {
+    color: #1d4ed8;
+    background: #dbeafe;
+    border-color: #bfdbfe;
 }
 
-
-/* =========================================================
-   DANGER OUTLINE
-   ========================================================= */
+.jh-btn--ghost span {
+    font-size: 16px;
+}
 
 .jh-btn--danger-outline {
-    background: transparent;
-
-    color: var(--danger);
-
-    border-color: #e2b8b6;
+    color: #dc2626;
+    background: #ffffff;
+    border-color: #fecaca;
 }
 
 .jh-btn--danger-outline:hover:not(:disabled) {
-    background: var(--danger);
-
-    border-color: var(--danger);
-
     color: #ffffff;
+    background: #dc2626;
+    border-color: #dc2626;
 }
 
-
-/* =========================================================
-   EMPTY STATE
-   ========================================================= */
-
-.jh-empty {
-    max-width: 650px;
-
-    margin: 0 auto;
-
-    padding: 4rem 2rem;
-
-    text-align: center;
-
-    background: #ffffff;
-
-    border: 1px solid var(--line);
-
-    border-radius: 14px;
-
-    box-shadow:
-        0 8px 24px rgba(20, 33, 61, 0.05);
-}
-
-.jh-empty__icon {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 72px;
-    height: 72px;
-
-    margin:
-        0 auto
-        1.25rem;
-
-    border-radius: 50%;
-
-    background: var(--paper-alt);
-
-    color: var(--accent-dark);
-
-    font-size: 2.2rem;
-}
-
-.jh-empty h2 {
-    margin: 0 0 0.5rem;
-
-    color: var(--ink);
-
-    font-family:
-        "Fraunces",
-        Georgia,
-        serif;
-
-    font-size: 1.6rem;
-
-    font-weight: 500;
-}
-
-.jh-empty p {
-    margin:
-        0 0
-        1.5rem;
-
-    color: var(--muted);
-}
-
-
-/* =========================================================
-   LOADING
-   ========================================================= */
-
-.jh-state {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    min-height: 280px;
-
-    text-align: center;
-}
-
-.jh-state p {
-    margin-top: 1rem;
-
-    color: var(--muted);
-
-    font-size: 0.9rem;
-}
-
-.jh-spinner {
-    width: 34px;
-    height: 34px;
-
-    border:
-        3px solid var(--line);
-
-    border-top-color:
-        var(--accent-dark);
-
-    border-radius: 50%;
-
-    animation:
-        jh-saved-spin
-        0.8s linear infinite;
+.jh-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
 }
 
 .jh-btn-spinner {
-    width: 15px;
-    height: 15px;
-
-    border:
-        2px solid currentColor;
-
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    border: 2px solid currentColor;
     border-right-color: transparent;
-
     border-radius: 50%;
-
-    animation:
-        jh-saved-spin
-        0.7s linear infinite;
+    animation: jh-saved-spin 0.7s linear infinite;
 }
 
 @keyframes jh-saved-spin {
-
     to {
         transform: rotate(360deg);
     }
-
 }
 
+/* Loading state */
+.jh-state {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: #64748b;
+}
 
-/* =========================================================
-   FOCUS
-   ========================================================= */
+.jh-spinner {
+    width: 38px;
+    height: 38px;
+    border: 3px solid #dbeafe;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: jh-saved-spin 0.8s linear infinite;
+}
 
+.jh-state p {
+    margin: 0;
+    font-size: 13px;
+}
+
+/* Empty state */
+.jh-empty {
+    min-height: 350px;
+    padding: 45px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.jh-empty__icon {
+    width: 62px;
+    height: 62px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2563eb;
+    background: #eff6ff;
+    border-radius: 50%;
+    font-size: 29px;
+}
+
+.jh-empty h2 {
+    margin: 0 0 10px;
+    color: #172b4d;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.jh-empty p {
+    max-width: 390px;
+    margin: 0 0 23px;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.jh-empty .jh-btn--primary {
+    min-height: 43px;
+    padding: 11px 20px;
+    color: #ffffff;
+    background: #172b4d;
+    border-color: #172b4d;
+    font-size: 11px;
+}
+
+.jh-empty .jh-btn--primary:hover {
+    background: #243e66;
+}
+
+.jh-empty .jh-btn--primary span {
+    font-size: 16px;
+}
+
+/* Focus */
 .jh-saved-jobs button:focus-visible {
-    outline:
-        2px solid
-        var(--accent-dark);
-
+    outline: 3px solid rgba(37, 99, 235, 0.25);
     outline-offset: 3px;
 }
 
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 850px) {
-
+/* Tablet */
+@media (max-width: 900px) {
     .jh-saved-jobs {
-        padding-top: 3rem;
+        padding: 100px 22px 55px;
+    }
+
+    .jh-saved-jobs__grid {
+        gap: 14px;
+    }
+
+    .jh-saved-card {
+        padding: 20px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+    .jh-saved-jobs {
+        padding: 90px 16px 40px;
+    }
+
+    .jh-section-header {
+        margin-bottom: 26px;
+    }
+
+    .jh-section-header .jh-heading {
+        font-size: 29px;
+    }
+
+    .jh-section-subtitle {
+        font-size: 12px;
     }
 
     .jh-saved-jobs__grid {
         grid-template-columns: 1fr;
+        gap: 14px;
     }
 
-}
-
-
-@media (max-width: 600px) {
-
-    .jh-saved-jobs {
-        padding:
-            2.5rem
-            1rem
-            3rem;
-    }
-
-    .jh-section-header {
-        margin-bottom: 2rem;
-    }
-
-    .jh-section-header .jh-heading {
-        font-size: 2.1rem;
-    }
-
-    .jh-section-subtitle {
-        font-size: 0.9rem;
-    }
-
-    .jh-saved-card__content {
-        padding: 1.2rem;
-    }
-
-    .jh-saved-card__header {
-        flex-direction: column;
-
-        gap: 0.75rem;
-    }
-
-    .jh-saved-status {
-        align-self: flex-start;
-    }
-
-    .jh-job-info {
-        grid-template-columns: 1fr;
-
-        gap: 0.85rem;
-    }
-
-    .jh-saved-card__actions {
-        flex-direction: column;
-
-        padding:
-            0 1.2rem
-            1.2rem;
-    }
-
-    .jh-saved-card__actions .jh-btn {
-        width: 100%;
+    .jh-saved-card {
+        min-height: 220px;
+        padding: 21px;
     }
 
     .jh-empty {
-        padding:
-            3rem
-            1.25rem;
+        min-height: 310px;
+        padding: 35px 18px;
     }
-
 }
 
+@media (max-width: 380px) {
+    .jh-saved-jobs {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .jh-saved-card {
+        padding: 17px;
+    }
+
+    .jh-saved-card__title h2 {
+        font-size: 16px;
+    }
+
+    .jh-job-info {
+        gap: 12px;
+    }
+
+    .jh-saved-card__actions {
+        gap: 7px;
+    }
+
+    .jh-btn {
+        padding: 9px 10px;
+        font-size: 10px;
+    }
+}
 
 @media (prefers-reduced-motion: reduce) {
+    .jh-spinner,
+    .jh-btn-spinner {
+        animation-duration: 2s;
+    }
 
     .jh-saved-card,
     .jh-btn {
         transition: none;
     }
-
-    .jh-spinner,
-    .jh-btn-spinner {
-        animation: none;
-    }
-
 }

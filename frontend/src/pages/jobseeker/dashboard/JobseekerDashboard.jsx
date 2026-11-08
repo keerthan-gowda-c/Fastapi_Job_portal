@@ -10,8 +10,7 @@ export default function JobseekerDashboard() {
     const navigate = useNavigate();
 
     const user = JSON.parse(
-        localStorage.getItem("user") || "null"
-    );
+        localStorage.getItem("user") || "null");
 
     const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(true);

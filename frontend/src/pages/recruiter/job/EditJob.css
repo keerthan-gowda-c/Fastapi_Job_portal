@@ -1,282 +1,191 @@
-
-/* =========================================
-   EDIT JOB PAGE
-   ========================================= */
-
 .edit-job-bg {
-    min-height: calc(100vh - 70px);
-    background: var(--code-bg);
-    padding-bottom: 30px;
+    min-height: 100vh;
+    padding: 100px 0 50px;
+    background: var(--jh-background);
 }
 
-
-/* =========================================
-   MAIN CARD
-   ========================================= */
+.edit-job-bg > .container {
+    margin-top: 0 !important;
+}
 
 .edit-job-card {
-    border-radius: 18px !important;
-    background: #ffffff;
+    border-radius: 18px;
+    background: var(--jh-surface);
+    box-shadow: var(--jh-shadow) !important;
     overflow: hidden;
-    transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
-
-.edit-job-card:hover {
-    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.10) !important;
-}
-
-
-/* =========================================
-   CARD CONTENT
-   ========================================= */
 
 .edit-job-card .card-body {
-    padding: 36px 42px !important;
+    padding: 38px 42px !important;
 }
 
+.edit-job-back {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 8px 13px;
+    border: 1px solid var(--jh-border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--jh-text);
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
 
-/* =========================================
-   HEADING
-   ========================================= */
+.edit-job-back:hover {
+    border-color: var(--jh-primary);
+    background: #eff6ff;
+    color: var(--jh-primary);
+}
 
 .edit-job-card h2 {
-    color: #111827;
-    font-size: 26px;
-    letter-spacing: -0.4px;
+    margin-bottom: 8px;
+    color: var(--jh-navy);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
-.edit-job-card > .card-body > p {
+.edit-job-card p {
+    color: var(--jh-muted);
     font-size: 14px;
+    line-height: 1.6;
 }
-
-
-/* =========================================
-   FORM
-   ========================================= */
 
 .edit-job-card .form-label {
-    color: #374151;
-    font-size: 13px;
-    margin-bottom: 7px;
+    display: block;
+    margin-bottom: 9px;
+    color: var(--jh-navy);
+    font-size: 14px;
+    font-weight: 600;
 }
-
-
-/* =========================================
-   INPUTS
-   ========================================= */
 
 .edit-job-card .form-control,
 .edit-job-card .form-select {
-    min-height: 44px;
-
-    border: 1px solid #d9dee7;
+    min-height: 48px;
+    padding: 11px 14px;
+    border: 1px solid var(--jh-border);
     border-radius: 9px;
-
-    background: #ffffff;
-    color: #111827;
-
+    background-color: #fff;
+    color: var(--jh-text);
     font-size: 14px;
-
-    padding: 10px 13px;
-
     box-shadow: none;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-
-
-/* Textarea */
 
 .edit-job-card textarea.form-control {
-    min-height: 120px;
-    line-height: 1.5;
+    min-height: 150px;
     resize: vertical;
+    line-height: 1.6;
 }
-
-
-/* Placeholder */
 
 .edit-job-card .form-control::placeholder {
-    color: #9ca3af;
+    color: var(--jh-light-muted);
 }
-
-
-/* Focus */
 
 .edit-job-card .form-control:focus,
 .edit-job-card .form-select:focus {
-    border-color: #6366f1;
-
-    box-shadow:
-        0 0 0 3px rgba(99, 102, 241, 0.10);
-
-    background: #ffffff;
+    border-color: var(--jh-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    outline: none;
 }
 
-
-/* Hover */
-
-.edit-job-card .form-control:hover,
-.edit-job-card .form-select:hover {
-    border-color: #b8c0cc;
+.edit-job-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px;
 }
 
-
-/* =========================================
-   FORM SPACING
-   ========================================= */
-
-.edit-job-card form > .mb-4 {
-    margin-bottom: 18px !important;
-}
-
-.edit-job-card .row {
-    --bs-gutter-x: 18px;
-}
-
-
-/* =========================================
-   BUTTONS
-   ========================================= */
-
-.edit-job-card .btn {
-    min-height: 42px;
-
-    border-radius: 9px !important;
-
-    padding: 9px 20px;
-
+.edit-job-actions .btn {
+    min-height: 44px;
+    padding: 10px 22px;
+    border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
+    transition: all 0.2s ease;
 }
 
-
-/* Update button */
-
-.edit-job-card .btn-success {
-    background: #16a34a;
-    border-color: #16a34a;
+.edit-job-actions .btn-primary {
+    border-color: var(--jh-primary);
+    background: var(--jh-primary);
 }
 
-.edit-job-card .btn-success:hover:not(:disabled) {
-    background: #15803d;
-    border-color: #15803d;
-
-    transform: translateY(-1px);
-
-    box-shadow: 0 5px 12px rgba(22, 163, 74, 0.20);
-}
-
-
-/* Cancel button */
-
-.edit-job-card .btn-outline-secondary {
-    color: #4b5563;
-    border-color: #d1d5db;
-    background: #ffffff;
-}
-
-.edit-job-card .btn-outline-secondary:hover:not(:disabled) {
-    color: #374151;
-    background: #f3f4f6;
-    border-color: #c5cad3;
-
+.edit-job-actions .btn-primary:hover {
+    border-color: var(--jh-primary-hover);
+    background: var(--jh-primary-hover);
     transform: translateY(-1px);
 }
 
+.edit-job-actions .btn-outline-secondary {
+    border-color: var(--jh-border);
+    background: #fff;
+    color: var(--jh-text);
+}
 
-/* Disabled */
+.edit-job-actions .btn-outline-secondary:hover {
+    border-color: #cbd5e1;
+    background: #f1f5f9;
+    color: var(--jh-navy);
+}
 
-.edit-job-card .btn:disabled {
-    opacity: 0.7;
+.edit-job-actions .btn:disabled {
     cursor: not-allowed;
+    opacity: 0.65;
+    transform: none;
 }
 
-
-/* =========================================
-   LOADING SPINNER
-   ========================================= */
-
-.edit-job-bg + .spinner-border,
-.spinner-border {
-    vertical-align: middle;
+.edit-job-loading {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 90px 20px 30px;
+    background: var(--jh-background);
 }
 
+.edit-job-loading .spinner-border {
+    width: 42px;
+    height: 42px;
+}
 
-/* =========================================
-   RESPONSIVE
-   ========================================= */
+.edit-job-loading p {
+    margin-top: 16px;
+    color: var(--jh-muted);
+    font-size: 14px;
+}
 
 @media (max-width: 767px) {
-
     .edit-job-bg {
-        padding-top: 10px;
-    }
-
-    .edit-job-card {
-        border-radius: 14px !important;
+        padding: 88px 0 35px;
     }
 
     .edit-job-card .card-body {
-        padding: 25px 20px !important;
+        padding: 26px 22px !important;
     }
 
     .edit-job-card h2 {
-        font-size: 22px;
-    }
-
-    .edit-job-card .form-control,
-    .edit-job-card .form-select {
-        min-height: 42px;
-        font-size: 13px;
+        font-size: 23px;
     }
 
     .edit-job-card textarea.form-control {
-        min-height: 105px;
+        min-height: 130px;
     }
 
-    .edit-job-card .btn {
-        flex: 1;
-        min-height: 42px;
+    .edit-job-actions {
+        flex-direction: column;
+        align-items: stretch;
     }
 
+    .edit-job-actions .btn {
+        width: 100%;
+    }
 }
 
-
-/* =========================================
-   SMALL MOBILE
-   ========================================= */
-
-@media (max-width: 480px) {
-
-    .edit-job-bg .container {
-        padding-left: 14px;
-        padding-right: 14px;
-    }
-
+@media (max-width: 400px) {
     .edit-job-card .card-body {
         padding: 22px 16px !important;
     }
-
-    .edit-job-card h2 {
-        font-size: 20px;
-    }
-
-    .edit-job-card .d-flex.gap-3 {
-        flex-direction: column;
-        gap: 10px !important;
-    }
-
-    .edit-job-card .btn {
-        width: 100%;
-    }
-
 }

@@ -1,188 +1,99 @@
 
-/* =========================================================
-   MY APPLICATIONS
-========================================================= */
-
-.jh-applications {
-    --ink: #14213d;
-    --ink-soft: #3a4358;
-    --paper: #faf9f5;
-    --paper-alt: #f1eee6;
-    --accent: #e9a23b;
-    --accent-dark: #b97614;
-    --line: #e2ded3;
-    --muted: #6b7280;
-    --success: #3f7d58;
-    --success-dark: #326546;
-    --danger: #b94a48;
-    --max-width: 1200px;
-
+.jh-page {
     width: 100%;
-    max-width: var(--max-width);
-    margin: 0 auto;
-
-    padding: 4rem 1.5rem;
-
-    color: var(--ink);
-
-    font-family:
-        "Inter",
-        -apple-system,
-        BlinkMacSystemFont,
-        sans-serif;
+    min-height: 100vh;
+    background: #f5f7fb;
 }
 
+.jh-applications {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 110px 28px 65px;
+}
 
-/* =========================================================
-   PAGE HEADER
-========================================================= */
-
+/* Header */
 .jh-section-header {
-    text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 35px;
 }
 
 .jh-section-eyebrow {
     display: inline-block;
-
-    margin-bottom: 0.55rem;
-
-    color: var(--accent-dark);
-
-    font-size: 0.75rem;
-    font-weight: 700;
-
-    letter-spacing: 0.12em;
+    margin-bottom: 11px;
+    color: #2563eb;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.6px;
     text-transform: uppercase;
 }
 
 .jh-section-header .jh-heading {
-    margin: 0 0 0.55rem;
-
-    font-family: "Fraunces", Georgia, serif;
-
-    font-size: clamp(2rem, 4vw, 2.7rem);
-
-    font-weight: 500;
-    line-height: 1.15;
+    margin: 0 0 10px;
+    color: #172b4d;
+    font-size: 35px;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -1px;
 }
 
 .jh-section-subtitle {
-    max-width: 600px;
-
-    margin: 0 auto;
-
-    color: var(--muted);
-
-    font-size: 0.9rem;
-    line-height: 1.5;
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.7;
 }
 
-
-/* =========================================================
-   APPLICATION TABLE
-========================================================= */
-
+/* Applications table */
 .jh-applications__table-wrapper {
     width: 100%;
-
-    background: #ffffff;
-
-    border: 1px solid var(--line);
-
-    border-radius: 12px;
-
     overflow-x: auto;
-
-    box-shadow:
-        0 6px 22px rgba(20, 33, 61, 0.06);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(23, 43, 77, 0.04);
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f8fafc;
 }
-
-
-/* =========================================================
-   TABLE
-========================================================= */
 
 .jh-applications__table {
     width: 100%;
-
-    min-width: 1000px;
+    min-width: 1050px;
 }
 
-
-/* =========================================================
-   TABLE ROW
-========================================================= */
-
 .jh-applications__row {
+    min-height: 78px;
+    padding: 13px 19px;
     display: grid;
-
-    grid-template-columns:
-        minmax(170px, 1.5fr)
-        minmax(130px, 1fr)
-        minmax(105px, 0.9fr)
-        minmax(100px, 0.8fr)
-        minmax(110px, 0.9fr)
-        minmax(100px, 0.8fr)
-        minmax(210px, 1.4fr);
-
+    grid-template-columns: 1.25fr 1fr 0.9fr 0.8fr 0.95fr 0.9fr 1.6fr;
     align-items: center;
-
-    min-height: 76px;
-
-    padding: 0 1.25rem;
-
-    border-bottom: 1px solid var(--line);
-
-    gap: 1rem;
+    gap: 13px;
+    border-bottom: 1px solid #edf0f5;
 }
 
 .jh-applications__row:last-child {
     border-bottom: none;
 }
 
-
-/* =========================================================
-   TABLE HEADER
-========================================================= */
-
 .jh-applications__row--header {
-    min-height: 48px;
-
-    background: var(--paper);
-
-    color: var(--muted);
-
-    font-size: 0.68rem;
-    font-weight: 700;
-
-    letter-spacing: 0.04em;
-
+    min-height: 49px;
+    color: #64748b;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 0.7px;
     text-transform: uppercase;
 }
 
-.jh-applications__row--header > div {
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   TABLE ROW HOVER
-========================================================= */
-
 .jh-applications__row:not(.jh-applications__row--header) {
-    transition:
-        background 0.15s ease;
+    color: #475569;
+    font-size: 11px;
+    transition: background 0.2s ease;
 }
 
 .jh-applications__row:not(.jh-applications__row--header):hover {
-    background: #fcfbf8;
+    background: #fbfdff;
 }
-
-
-/* =========================================================
-   JOB
-========================================================= */
 
 .jh-table-job {
     min-width: 0;
@@ -190,490 +101,316 @@
 
 .jh-table-job strong {
     display: block;
-
-    color: var(--ink);
-
-    font-family: "Fraunces", Georgia, serif;
-
-    font-size: 0.98rem;
-    font-weight: 600;
-
-    line-height: 1.35;
-
+    color: #172b4d;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.6;
     overflow-wrap: anywhere;
 }
 
-
-/* =========================================================
-   LOCATION
-========================================================= */
+.jh-table-location,
+.jh-table-date,
+.jh-table-salary,
+.jh-table-employment {
+    min-width: 0;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
 
 .jh-table-location {
     display: flex;
-
-    align-items: center;
-
-    gap: 0.3rem;
-
-    min-width: 0;
-
-    color: var(--ink-soft);
-
-    font-size: 0.78rem;
-
-    overflow-wrap: anywhere;
+    align-items: flex-start;
+    gap: 5px;
 }
 
 .jh-table-location span {
     flex-shrink: 0;
 }
 
-
-/* =========================================================
-   DATE
-========================================================= */
-
-.jh-table-date {
-    color: var(--muted);
-
-    font-size: 0.76rem;
-
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   SALARY
-========================================================= */
-
 .jh-table-salary {
-    color: var(--success);
-
-    font-size: 0.82rem;
-
-    font-weight: 600;
-
-    white-space: nowrap;
+    color: #172b4d;
+    font-weight: 700;
 }
 
-
-/* =========================================================
-   EMPLOYMENT
-========================================================= */
-
-.jh-table-employment {
-    color: var(--ink-soft);
-
-    font-size: 0.76rem;
-
-    font-weight: 500;
-
-    text-transform: capitalize;
-
-    overflow-wrap: anywhere;
-}
-
-
-/* =========================================================
-   STATUS
-========================================================= */
-
+/* Status badges */
 .jh-status {
+    width: fit-content;
+    max-width: 100%;
+    padding: 6px 10px;
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
-    min-height: 26px;
-
-    padding: 0.3rem 0.65rem;
-
-    border-radius: 999px;
-
-    font-size: 0.68rem;
-
-    font-weight: 700;
-
+    border-radius: 30px;
+    font-size: 9px;
+    font-weight: 750;
+    line-height: 1.3;
     white-space: nowrap;
 }
 
 .jh-status--pending {
-    color: #805f16;
-
-    background: #f8edc9;
+    color: #b45309;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
 }
 
 .jh-status--reviewed {
-    color: #3d6477;
-
-    background: #e4eef3;
+    color: #1d4ed8;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
 }
 
 .jh-status--shortlisted {
-    color: #405b87;
-
-    background: #e8edf7;
+    color: #7c3aed;
+    background: #f5f3ff;
+    border: 1px solid #ddd6fe;
 }
 
 .jh-status--hired {
-    color: #326546;
-
-    background: #e4f0e7;
+    color: #047857;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
 }
 
 .jh-status--withdrawn {
-    color: #8f3937;
-
-    background: #f6e4e3;
+    color: #64748b;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
 }
 
 .jh-status--default {
-    color: var(--ink-soft);
-
-    background: var(--paper-alt);
+    color: #475569;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
 }
 
-
-/* =========================================================
-   ACTIONS
-========================================================= */
-
+/* Action buttons */
 .jh-table-actions {
-    display: grid;
-grid-template-columns: repeat(3,1fr);
+    min-width: 0;
+    display: flex;
     align-items: center;
-
-    gap: 0.4rem;
-
     flex-wrap: wrap;
+    gap: 6px;
 }
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
 
 .jh-btn {
+    min-height: 32px;
+    padding: 7px 10px;
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
-    gap: 0.35rem;
-
-    min-height: 34px;
-
-    padding: 0.45rem 0.75rem;
-
+    gap: 6px;
     border: 1px solid transparent;
-
-    border-radius: 7px;
-
-    font-family: inherit;
-
-    font-size: 0.72rem;
-
-    font-weight: 600;
-
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
     white-space: nowrap;
-
     cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        background 0.15s ease,
-        border-color 0.15s ease,
-        color 0.15s ease;
+    transition: all 0.2s ease;
 }
-
-.jh-btn:hover:not(:disabled) {
-    transform: translateY(-1px);
-}
-
-.jh-btn:disabled {
-    opacity: 0.6;
-
-    cursor: not-allowed;
-}
-
-
-/* =========================================================
-   GHOST
-========================================================= */
 
 .jh-btn--ghost {
-    background: #ffffff;
-
-    color: var(--ink);
-
-    border-color: var(--line);
+    color: #2563eb;
+    background: #eff6ff;
+    border-color: #dbeafe;
 }
 
-.jh-btn--ghost:hover:not(:disabled) {
-    background: var(--paper);
-
-    border-color: var(--ink);
+.jh-btn--ghost:hover {
+    color: #1d4ed8;
+    background: #dbeafe;
 }
-
-
-/* =========================================================
-   SUCCESS
-========================================================= */
-
-.jh-btn--success {
-    background: var(--success);
-
-    color: #ffffff;
-}
-
-.jh-btn--success:hover:not(:disabled) {
-    background: var(--success-dark);
-}
-
-
-/* =========================================================
-   DANGER
-========================================================= */
 
 .jh-btn--danger-outline {
+    color: #dc2626;
     background: #ffffff;
-
-    color: var(--danger);
-
-    border-color: #e2b8b6;
+    border-color: #fecaca;
 }
 
 .jh-btn--danger-outline:hover:not(:disabled) {
     color: #ffffff;
-
-    background: var(--danger);
-
-    border-color: var(--danger);
+    background: #dc2626;
+    border-color: #dc2626;
 }
 
+.jh-btn--success {
+    color: #047857;
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+}
 
-/* =========================================================
-   BUTTON SPINNER
-========================================================= */
+.jh-btn--success:hover:not(:disabled) {
+    color: #ffffff;
+    background: #059669;
+    border-color: #059669;
+}
+
+.jh-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
 
 .jh-btn-spinner {
-    width: 13px;
-    height: 13px;
-
+    width: 12px;
+    height: 12px;
+    display: inline-block;
     border: 2px solid currentColor;
-
     border-right-color: transparent;
-
     border-radius: 50%;
-
-    animation: jh-spin 0.7s linear infinite;
+    animation: jh-app-spin 0.7s linear infinite;
 }
 
-
-/* =========================================================
-   EMPTY STATE
-========================================================= */
-
-.jh-empty {
-    max-width: 620px;
-
-    margin: 0 auto;
-
-    padding: 3.5rem 2rem;
-
-    text-align: center;
-
-    background: #ffffff;
-
-    border: 1px solid var(--line);
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 6px 20px rgba(20, 33, 61, 0.05);
-}
-
-.jh-empty__icon {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    width: 65px;
-    height: 65px;
-
-    margin: 0 auto 1rem;
-
-    border-radius: 50%;
-
-    background: var(--paper-alt);
-
-    font-size: 1.8rem;
-}
-
-.jh-empty h2 {
-    margin: 0 0 0.5rem;
-
-    font-family: "Fraunces", Georgia, serif;
-
-    font-size: 1.5rem;
-
-    font-weight: 500;
-}
-
-.jh-empty p {
-    margin: 0 0 1.4rem;
-
-    color: var(--muted);
-
-    font-size: 0.9rem;
-}
-
-
-/* =========================================================
-   PRIMARY BUTTON
-========================================================= */
-
-.jh-btn--primary {
-    background: var(--ink);
-
-    color: var(--paper);
-}
-
-.jh-btn--primary:hover:not(:disabled) {
-    background: var(--ink-soft);
-}
-
-
-/* =========================================================
-   LOADING STATE
-========================================================= */
-
-.jh-state {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    min-height: 260px;
-
-    text-align: center;
-}
-
-.jh-state p {
-    margin-top: 0.9rem;
-
-    color: var(--muted);
-
-    font-size: 0.85rem;
-}
-
-.jh-spinner {
-    width: 32px;
-    height: 32px;
-
-    border: 3px solid var(--line);
-
-    border-top-color: var(--accent-dark);
-
-    border-radius: 50%;
-
-    animation: jh-spin 0.8s linear infinite;
-}
-
-@keyframes jh-spin {
+@keyframes jh-app-spin {
     to {
         transform: rotate(360deg);
     }
 }
 
+/* Loading state */
+.jh-state {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: #64748b;
+}
 
-/* =========================================================
-   FOCUS
-========================================================= */
+.jh-spinner {
+    width: 38px;
+    height: 38px;
+    border: 3px solid #dbeafe;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: jh-app-spin 0.8s linear infinite;
+}
 
+.jh-state p {
+    margin: 0;
+    font-size: 13px;
+}
+
+/* Empty state */
+.jh-empty {
+    min-height: 350px;
+    padding: 45px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.jh-empty__icon {
+    width: 62px;
+    height: 62px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2563eb;
+    background: #eff6ff;
+    border-radius: 50%;
+    font-size: 29px;
+}
+
+.jh-empty h2 {
+    margin: 0 0 10px;
+    color: #172b4d;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.jh-empty p {
+    margin: 0 0 23px;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.jh-empty .jh-btn--primary {
+    min-height: 43px;
+    padding: 11px 20px;
+    color: #ffffff;
+    background: #172b4d;
+    border-color: #172b4d;
+    font-size: 11px;
+}
+
+.jh-empty .jh-btn--primary:hover {
+    background: #243e66;
+}
+
+.jh-empty .jh-btn--primary span {
+    font-size: 16px;
+}
+
+/* Focus */
 .jh-applications button:focus-visible {
-    outline: 2px solid var(--accent-dark);
-
+    outline: 3px solid rgba(37, 99, 235, 0.25);
     outline-offset: 3px;
 }
 
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 1050px) {
-
+/* Tablet and mobile */
+@media (max-width: 900px) {
     .jh-applications {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding: 100px 22px 55px;
     }
 
     .jh-applications__table {
-        min-width: 950px;
+        min-width: 1000px;
     }
-
 }
 
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 700px) {
-
+@media (max-width: 600px) {
     .jh-applications {
-        padding: 2.3rem 0.75rem 3rem;
+        padding: 90px 16px 40px;
     }
 
     .jh-section-header {
-        margin-bottom: 2rem;
+        margin-bottom: 26px;
     }
 
     .jh-section-header .jh-heading {
-        font-size: 2rem;
+        font-size: 29px;
     }
 
     .jh-section-subtitle {
-        font-size: 0.85rem;
+        font-size: 12px;
     }
 
     .jh-applications__table-wrapper {
-        border-radius: 10px;
-
-        /*
-         * Keep table layout on mobile.
-         * User can horizontally scroll.
-         */
-        overflow-x: auto;
-
-        -webkit-overflow-scrolling: touch;
+        border-radius: 9px;
     }
 
     .jh-applications__table {
-        min-width: 950px;
+        min-width: 1000px;
     }
 
+    .jh-empty {
+        min-height: 310px;
+        padding: 35px 18px;
+    }
 }
 
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
+@media (max-width: 380px) {
+    .jh-applications {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+}
 
 @media (prefers-reduced-motion: reduce) {
+    .jh-spinner,
+    .jh-btn-spinner {
+        animation-duration: 2s;
+    }
 
-    .jh-applications__row,
     .jh-btn {
         transition: none;
     }
-
-    .jh-spinner,
-    .jh-btn-spinner {
-        animation: none;
-    }
-
 }

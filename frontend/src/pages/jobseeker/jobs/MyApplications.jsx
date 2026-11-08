@@ -114,7 +114,6 @@ export default function MyApplications() {
                 "Application submitted successfully"
             );
 
-            fetchApplications();
 
         }
         catch (error) {
@@ -486,7 +485,7 @@ export default function MyApplications() {
                                                             )
                                                         }
                                                     >
-                                                        <i class="bi bi-trash"></i>
+                                                        <i className="bi bi-trash"></i>
                                                     </button>
 
                                                 </>

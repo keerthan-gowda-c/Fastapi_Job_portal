@@ -1,731 +1,520 @@
 
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap");
-
-
-/* =========================================
-   DESIGN TOKENS
-========================================= */
-
 .jh-page {
-    --ink: #14213d;
-    --ink-soft: #3a4358;
-
-    --paper: #faf9f5;
-    --paper-alt: #f1eee6;
-
-    --accent: #e9a23b;
-    --accent-dark: #b97614;
-
-    --line: #e2ded3;
-    --muted: #6b7280;
-
-    --radius: 14px;
-    --max-width: 1120px;
-
     width: 100%;
     min-height: 100vh;
-
-    background: var(--paper);
-    color: var(--ink);
-
-    font-family:
-        "Inter",
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-    line-height: 1.5;
-
-    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+    color: #334155;
+    background: #ffffff;
 }
 
-
-.jh-page *,
-.jh-page *::before,
-.jh-page *::after {
-    box-sizing: border-box;
+/* Hero */
+.jh-hero {
+    width: 100%;
+    max-width: 1200px;
+    min-height: 590px;
+    margin: 0 auto;
+    padding: 125px 28px 75px;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: 55px;
 }
 
+.jh-hero__content {
+    max-width: 590px;
+}
 
-/* =========================================
-   TYPOGRAPHY
-========================================= */
+.jh-badge {
+    width: fit-content;
+    margin-bottom: 25px;
+    padding: 8px 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #1d4ed8;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
 
-.jh-page h1,
-.jh-page h2,
-.jh-page h3 {
+.jh-heading {
+    margin: 0 0 23px;
+    color: #172b4d;
+    font-size: clamp(42px, 5.5vw, 62px);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -2.5px;
+}
+
+.jh-heading__accent {
+    color: #2563eb;
+}
+
+.jh-lead {
+    max-width: 530px;
     margin: 0;
-
-    font-family:
-        "Fraunces",
-        Georgia,
-        serif;
-
-    font-weight: 500;
-
-    color: var(--ink);
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.9;
 }
 
-
-.jh-page button {
-    font-family: inherit;
+.jh-cta-row {
+    margin-top: 34px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
+.jh-btn {
+    min-height: 47px;
+    padding: 12px 23px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-.jh-page :focus-visible {
-    outline: 2px solid var(--accent-dark);
+.jh-btn:hover {
+    transform: translateY(-2px);
+}
+
+.jh-btn--primary {
+    color: #ffffff;
+    background: #172b4d;
+    border-color: #172b4d;
+}
+
+.jh-btn--primary:hover {
+    background: #243e66;
+    box-shadow: 0 6px 15px rgba(23, 43, 77, 0.16);
+}
+
+.jh-btn--ghost {
+    color: #334155;
+    background: #ffffff;
+    border-color: #dbe3ed;
+}
+
+.jh-btn--ghost:hover {
+    color: #2563eb;
+    background: #f8fafc;
+    border-color: #bfdbfe;
+}
+
+.jh-btn--accent {
+    color: #ffffff;
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+.jh-btn--accent:hover {
+    background: #1d4ed8;
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.18);
+}
+
+.jh-btn:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.25);
     outline-offset: 3px;
 }
 
-
-/* =========================================
-   HERO
-========================================= */
-
-.jh-hero {
-    width: 100%;
-    max-width: var(--max-width);
-
-    min-height: 560px;
-
-    margin: 0 auto;
-    padding: 5rem 1.5rem 4rem;
-
-    display: grid;
-
-    grid-template-columns: 1.1fr 0.9fr;
-
-    gap: 3.5rem;
-
-    align-items: center;
-}
-
-
-/* Hero Content */
-
-.jh-hero__content {
-    max-width: 620px;
-}
-
-
-.jh-badge {
-    display: inline-block;
-
-    margin-bottom: 1.5rem;
-
-    padding: 0.4rem 0.9rem;
-
-    border: 1px solid var(--line);
-    border-radius: 999px;
-
-    background: var(--paper-alt);
-
-    color: var(--ink-soft);
-
-    font-size: 0.875rem;
-    font-weight: 500;
-}
-
-
-.jh-heading {
-    font-size: clamp(2.5rem, 5vw, 4.25rem);
-
-    line-height: 1.08;
-
-    letter-spacing: -0.025em;
-}
-
-
-.jh-heading__accent {
-    color: var(--accent-dark);
-}
-
-
-.jh-heading--sm {
-    max-width: 650px;
-
-    margin-top: 0.75rem;
-
-    font-size: clamp(1.9rem, 3vw, 2.5rem);
-
-    line-height: 1.15;
-}
-
-
-.jh-lead {
-    max-width: 48ch;
-
-    margin: 1.35rem 0 2.25rem;
-
-    color: var(--ink-soft);
-
-    font-size: 1.08rem;
-
-    line-height: 1.7;
-}
-
-
-/* =========================================
-   BUTTONS
-========================================= */
-
-.jh-cta-row {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 0.75rem;
-}
-
-
-.jh-btn {
-    min-height: 46px;
-
-    padding: 0.75rem 1.5rem;
-
-    border: 1.5px solid transparent;
-
-    border-radius: 999px;
-
-    font-size: 0.95rem;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        background 0.15s ease,
-        border-color 0.15s ease,
-        color 0.15s ease;
-}
-
-
-.jh-btn:hover {
-    transform: translateY(-1px);
-}
-
-
-/* Primary */
-
-.jh-btn--primary {
-    background: var(--ink);
-    color: var(--paper);
-}
-
-
-.jh-btn--primary:hover {
-    background: var(--ink-soft);
-}
-
-
-/* Accent */
-
-.jh-btn--accent {
-    background: var(--accent);
-    color: var(--ink);
-}
-
-
-.jh-btn--accent:hover {
-    background: var(--accent-dark);
-    color: var(--paper);
-}
-
-
-/* Ghost */
-
-.jh-btn--ghost {
-    background: transparent;
-
-    color: var(--ink);
-
-    border-color: var(--line);
-}
-
-
-.jh-btn--ghost:hover {
-    border-color: var(--ink);
-}
-
-
-/* =========================================
-   HERO IMAGE
-========================================= */
-
+/* Hero image */
 .jh-hero__media {
+    position: relative;
+    min-width: 0;
     display: flex;
-
-    justify-content: center;
-
     align-items: center;
+    justify-content: center;
 }
 
+.jh-hero__media::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 390px;
+    height: 390px;
+    content: "";
+    transform: translate(-50%, -50%);
+    background: #eff6ff;
+    border-radius: 50%;
+}
 
 .jh-hero__hex {
+    position: relative;
     width: 100%;
-    max-width: 420px;
-
-    aspect-ratio: 1 / 1.05;
-
-    padding: 10px;
-
-    background: var(--accent);
-
-    clip-path: polygon(
-        25% 3%,
-        75% 3%,
-        100% 50%,
-        75% 97%,
-        25% 97%,
-        0% 50%
-    );
+    max-width: 450px;
+    height: 400px;
+    overflow: hidden;
+    border: 9px solid #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(23, 43, 77, 0.14);
+    transform: rotate(1.5deg);
 }
-
 
 .jh-hero__hex img {
     width: 100%;
     height: 100%;
-
     display: block;
-
     object-fit: cover;
-
-    clip-path: polygon(
-        25% 3%,
-        75% 3%,
-        100% 50%,
-        75% 97%,
-        25% 97%,
-        0% 50%
-    );
+    object-position: center;
+    transform: scale(1.02);
 }
 
-
-/* =========================================
-   STATISTICS
-========================================= */
-
+/* Statistics */
 .jh-stats {
     width: 100%;
-    max-width: var(--max-width);
-
+    max-width: 1144px;
     margin: 0 auto;
-
-    padding: 2.75rem 1.5rem;
-
+    padding: 30px 35px;
     display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
 }
-
 
 .jh-stat {
-    padding: 0.5rem 1rem;
-
+    min-width: 0;
+    padding: 8px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-
-    border-left: 1px solid var(--line);
 }
 
-
-.jh-stat:first-child {
-    border-left: none;
+.jh-stat + .jh-stat {
+    border-left: 1px solid #dbe3ed;
 }
-
 
 .jh-stat__number {
-    display: block;
-
-    font-family:
-        "Fraunces",
-        Georgia,
-        serif;
-
-    font-size: 2.3rem;
-
-    line-height: 1.2;
-
-    color: var(--ink);
+    margin-bottom: 7px;
+    color: #172b4d;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.8px;
 }
-
 
 .jh-stat__label {
-    display: block;
-
-    margin-top: 0.3rem;
-
-    color: var(--muted);
-
-    font-size: 0.9rem;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
 }
 
-
-/* =========================================
-   STEPS / FEATURES
-========================================= */
-
+/* How it works */
 .jh-steps {
     width: 100%;
-    max-width: var(--max-width);
-
+    max-width: 1200px;
     margin: 0 auto;
-
-    padding: 5rem 1.5rem;
+    padding: 105px 28px 100px;
 }
-
 
 .jh-steps__header {
-    margin-bottom: 3rem;
+    max-width: 650px;
+    margin: 0 auto 48px;
+    text-align: center;
 }
-
 
 .jh-section-label {
-    display: block;
-
-    margin-bottom: 0.6rem;
-
-    color: var(--accent-dark);
-
-    font-size: 0.75rem;
-
-    font-weight: 700;
-
-    letter-spacing: 0.14em;
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 1.8px;
 }
 
+.jh-heading--sm {
+    margin: 0;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.3;
+    letter-spacing: -1.1px;
+}
 
 .jh-steps__list {
     display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 2.5rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
 }
-
 
 .jh-step {
-    min-height: 190px;
-
-    padding-left: 1.5rem;
-
-    border-left: 2px solid var(--accent);
+    min-width: 0;
+    min-height: 230px;
+    padding: 29px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 5px 18px rgba(23, 43, 77, 0.035);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
+.jh-step:hover {
+    transform: translateY(-4px);
+    border-color: #bfdbfe;
+    box-shadow: 0 12px 28px rgba(23, 43, 77, 0.07);
+}
 
 .jh-step__num {
-    display: block;
-
-    margin-bottom: 0.7rem;
-
-    color: var(--accent-dark);
-
-    font-family:
-        "Fraunces",
-        Georgia,
-        serif;
-
-    font-size: 1rem;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2563eb;
+    background: #eff6ff;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 750;
 }
-
 
 .jh-step__title {
-    margin-bottom: 0.55rem !important;
-
-    font-size: 1.45rem;
+    margin: 0 0 12px;
+    color: #172b4d;
+    font-size: 19px;
+    font-weight: 750;
 }
-
 
 .jh-step__copy {
-    max-width: 34ch;
-
     margin: 0;
-
-    color: var(--ink-soft);
-
-    font-size: 0.95rem;
-
-    line-height: 1.7;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.85;
 }
 
-
-/* =========================================
-   FOOTER
-========================================= */
-
+/* Footer */
 .jh-footer {
     width: 100%;
-
-    margin-top: 1rem;
-
-    border-radius:
-        var(--radius)
-        var(--radius)
-        0
-        0;
-
-    background: var(--ink);
-
-    color: var(--paper);
+    padding: 48px 25px 30px;
+    color: #ffffff;
+    background: #172b4d;
 }
-
 
 .jh-footer__inner {
     width: 100%;
-    max-width: var(--max-width);
-
+    max-width: 1144px;
     margin: 0 auto;
-
-    padding: 3.25rem 1.5rem;
-
     text-align: center;
 }
 
-
 .jh-footer__brand {
-    color: var(--paper) !important;
-
-    font-family:
-        "Fraunces",
-        Georgia,
-        serif;
-
-    font-size: 1.6rem;
+    margin: 0 0 8px;
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
 }
-
 
 .jh-footer__tag {
-    margin: 0.5rem 0 1.5rem;
-
-    color: #b9c0d1;
-
-    font-size: 0.95rem;
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 13px;
+    line-height: 1.6;
 }
-
 
 .jh-footer__rule {
-    width: 100%;
-    max-width: 200px;
-
-    margin: 0 auto 1.5rem;
-
+    height: 1px;
+    margin: 30px 0 22px;
+    background: rgba(255, 255, 255, 0.16);
     border: none;
-
-    border-top: 1px solid
-        rgba(250, 249, 245, 0.15);
 }
-
 
 .jh-footer__fine {
-    color: #8891a5;
-
-    font-size: 0.8rem;
+    color: #94a3b8;
+    font-size: 11px;
+    line-height: 1.7;
 }
 
-
-/* =========================================
-   TABLET
-========================================= */
-
+/* Tablet */
 @media (max-width: 900px) {
-
     .jh-hero {
+        min-height: auto;
+        padding: 115px 25px 65px;
+        gap: 30px;
+    }
+
+    .jh-heading {
+        font-size: 46px;
+    }
+
+    .jh-hero__hex {
+        height: 330px;
+    }
+
+    .jh-hero__media::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .jh-stats {
+        width: calc(100% - 50px);
+    }
+
+    .jh-steps {
+        padding: 80px 25px;
+    }
+
+    .jh-steps__list {
+        gap: 15px;
+    }
+
+    .jh-step {
+        padding: 23px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+    .jh-hero {
+        padding: 105px 20px 55px;
         grid-template-columns: 1fr;
+        gap: 42px;
+    }
 
-        gap: 2.5rem;
-
-        padding-top: 3.5rem;
-
+    .jh-hero__content {
+        max-width: 100%;
         text-align: center;
     }
 
-
-    .jh-hero__content {
-        max-width: 700px;
-
-        margin: 0 auto;
+    .jh-badge {
+        margin-right: auto;
+        margin-left: auto;
     }
 
+    .jh-heading {
+        font-size: clamp(36px, 9vw, 46px);
+        letter-spacing: -1.8px;
+    }
 
     .jh-lead {
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto;
+        font-size: 14px;
+        line-height: 1.8;
     }
-
 
     .jh-cta-row {
         justify-content: center;
+        gap: 9px;
     }
 
+    .jh-btn {
+        min-height: 44px;
+        padding: 11px 16px;
+        font-size: 12px;
+    }
 
     .jh-hero__media {
-        order: -1;
+        width: 100%;
     }
-
 
     .jh-hero__hex {
-        max-width: 300px;
+        max-width: 440px;
+        height: 300px;
+        border-width: 6px;
     }
 
+    .jh-hero__media::before {
+        width: 270px;
+        height: 270px;
+    }
 
     .jh-stats {
-        grid-template-columns: repeat(2, 1fr);
-
-        row-gap: 2rem;
+        width: calc(100% - 36px);
+        padding: 20px 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 20px;
     }
 
+    .jh-stat {
+        padding: 10px;
+    }
 
-    .jh-stat:nth-child(3) {
+    .jh-stat + .jh-stat {
         border-left: none;
     }
 
+    .jh-stat:nth-child(even) {
+        border-left: 1px solid #dbe3ed;
+    }
+
+    .jh-stat__number {
+        font-size: 27px;
+    }
+
+    .jh-steps {
+        padding: 75px 20px;
+    }
+
+    .jh-steps__header {
+        margin-bottom: 30px;
+    }
+
+    .jh-heading--sm {
+        font-size: 29px;
+    }
 
     .jh-steps__list {
         grid-template-columns: 1fr;
-
-        gap: 2rem;
+        gap: 15px;
     }
-
 
     .jh-step {
         min-height: auto;
+        padding: 25px;
     }
 
+    .jh-step__num {
+        margin-bottom: 18px;
+    }
+
+    .jh-footer {
+        padding: 40px 18px 25px;
+    }
 }
 
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 600px) {
-
+/* Small mobile */
+@media (max-width: 380px) {
     .jh-hero {
-        min-height: auto;
-
-        padding:
-            2.5rem
-            1.25rem
-            3rem;
-
-        gap: 2rem;
+        padding-right: 14px;
+        padding-left: 14px;
     }
-
-
-    .jh-hero__hex {
-        max-width: 250px;
-    }
-
 
     .jh-heading {
-        font-size: 2.5rem;
+        font-size: 35px;
     }
-
-
-    .jh-lead {
-        margin-top: 1rem;
-        margin-bottom: 1.75rem;
-
-        font-size: 0.98rem;
-    }
-
 
     .jh-cta-row {
-        flex-direction: column;
-
-        width: 100%;
-
-        max-width: 320px;
-
-        margin: 0 auto;
+        gap: 7px;
     }
-
 
     .jh-btn {
-        width: 100%;
+        padding: 10px 12px;
     }
 
+    .jh-hero__hex {
+        height: 245px;
+    }
 
     .jh-stats {
-        padding:
-            2rem
-            1.25rem;
-
-        row-gap: 1.5rem;
+        width: calc(100% - 28px);
     }
-
-
-    .jh-stat {
-        padding:
-            0.25rem
-            0.5rem;
-    }
-
 
     .jh-stat__number {
-        font-size: 1.8rem;
+        font-size: 24px;
     }
-
-
-    .jh-stat__label {
-        font-size: 0.78rem;
-    }
-
-
-    .jh-steps {
-        padding:
-            3.5rem
-            1.25rem;
-    }
-
-
-    .jh-steps__header {
-        margin-bottom: 2.25rem;
-    }
-
-
-    .jh-heading--sm {
-        font-size: 1.9rem;
-    }
-
-
-    .jh-step {
-        padding-left: 1.1rem;
-    }
-
-
-    .jh-step__title {
-        font-size: 1.3rem;
-    }
-
-
-    .jh-footer__inner {
-        padding:
-            2.75rem
-            1.25rem;
-    }
-
-
-    .jh-footer__fine {
-        font-size: 0.72rem;
-
-        line-height: 1.6;
-    }
-
 }
 
-
-/* =========================================
-   REDUCED MOTION
-========================================= */
-
 @media (prefers-reduced-motion: reduce) {
-
-    .jh-btn {
+    .jh-btn,
+    .jh-step {
         transition: none;
     }
-
 }

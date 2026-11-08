@@ -1,316 +1,118 @@
-
-/* =========================================
-   Create Company Page
-   ========================================= */
-
-.create-company-page {
-    min-height: calc(100vh - 70px);
-    background: var(--code-bg);
-    padding-bottom: 40px;
+.container:has(.card form) {
+    color: var(--jh-text);
 }
-
-
-/* =========================================
-   Page Header
-   ========================================= */
-
-.create-company-page .company-header {
-    text-align: center;
-    margin-bottom: 28px;
+.container:has(.card form) > .row {
+    padding-top: 25px;
+    padding-bottom: 30px;
 }
-
-.create-company-page .company-header h1 {
-    color: #111827;
+.container:has(.card form) .text-center h1 {
+    color: var(--jh-navy);
     font-size: 30px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.7px;
 }
-
-.create-company-page .company-header p {
-    color: #6b7280;
-    font-size: 15px;
-    margin-top: 8px;
+.container:has(.card form) .text-center p {
+    color: var(--jh-muted) !important;
+    font-size: 14px;
 }
-
-
-/* =========================================
-   Main Card
-   ========================================= */
-
-.create-company-page .company-form-card {
-    background: #ffffff;
-    border: 1px solid #e7ebf1;
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+.container:has(.card form) .card {
     overflow: hidden;
+    border: 1px solid var(--jh-border) !important;
+    border-radius: 18px !important;
+    background: #fff;
+    box-shadow: var(--jh-shadow) !important;
 }
-
-.create-company-page .company-form-card .card-body {
-    padding: 32px !important;
+.container:has(.card form) .card-body {
+    padding: 36px !important;
 }
-
-
-/* =========================================
-   Form Groups
-   ========================================= */
-
-.create-company-page .mb-4 {
-    margin-bottom: 20px !important;
-}
-
-
-/* =========================================
-   Labels
-   ========================================= */
-
-.create-company-page .form-label {
+.container:has(.card form) .form-label {
     display: block;
-    margin-bottom: 7px;
-
-    color: #374151;
+    margin-bottom: 9px;
+    color: var(--jh-navy);
     font-size: 13px;
-    font-weight: 600 !important;
+    font-weight: 650 !important;
 }
-
-
-/* =========================================
-   Inputs
-   ========================================= */
-
-.create-company-page .form-control {
-    min-height: 44px;
-
-    border: 1px solid #d9dee7;
+.container:has(.card form) .form-control {
+    min-height: 48px;
+    padding: 12px 15px;
+    border: 1px solid var(--jh-border);
     border-radius: 9px;
-
-    background: #ffffff;
-    color: #111827;
-
+    background: #fff;
+    color: var(--jh-text);
     font-size: 14px;
-
-    padding: 10px 13px;
-
     box-shadow: none;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background-color 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-
-
-/* Large Bootstrap inputs */
-
-.create-company-page .form-control-lg {
-    min-height: 46px;
-    font-size: 14px;
-    border-radius: 9px;
-}
-
-
-/* Placeholder */
-
-.create-company-page .form-control::placeholder {
-    color: #9ca3af;
-    opacity: 1;
-}
-
-
-/* Hover */
-
-.create-company-page .form-control:hover {
-    border-color: #c4cbd6;
-}
-
-
-/* Focus */
-
-.create-company-page .form-control:focus {
-    border-color: #7da2ff;
-
-    background: #ffffff;
-
-    box-shadow:
-        0 0 0 3px rgba(59, 130, 246, 0.10);
-
-    outline: none;
-}
-
-
-/* =========================================
-   Textarea
-   ========================================= */
-
-.create-company-page textarea.form-control {
-    min-height: 120px;
-
-    line-height: 1.5;
-
+.container:has(.card form) textarea.form-control {
+    min-height: 125px;
     resize: vertical;
 }
-
-
-/* =========================================
-   Optional Text
-   ========================================= */
-
-.create-company-page small.text-muted {
-    display: block;
-
-    margin-top: 6px;
-
-    color: #8a94a6 !important;
+.container:has(.card form) .form-control::placeholder {
+    color: #a0aec0;
+}
+.container:has(.card form) .form-control:focus {
+    border-color: var(--jh-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+.container:has(.card form) small {
+    display: inline-block;
+    margin-top: 7px;
+    color: var(--jh-muted) !important;
     font-size: 12px;
 }
-
-
-/* =========================================
-   Buttons
-   ========================================= */
-
-.create-company-page .btn {
-    min-height: 44px;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        background-color 0.18s ease;
+.container:has(.card form) form > .d-flex {
+    margin-top: 30px !important;
 }
-
-
-/* Create button */
-
-.create-company-page .btn-primary {
-    border: none;
-    box-shadow: 0 5px 14px rgba(13, 110, 253, 0.16);
+.container:has(.card form) form .btn {
+    min-height: 47px;
+    padding: 11px 22px;
+    border-radius: 9px !important;
+    font-size: 13px;
+    font-weight: 650;
+    transition: all 0.2s ease;
 }
-
-
-/* Create button hover */
-
-.create-company-page .btn-primary:hover {
-    transform: translateY(-1px);
-
-    box-shadow: 0 7px 18px rgba(13, 110, 253, 0.22);
+.container:has(.card form) form .btn-primary {
+    border-color: var(--jh-primary);
+    background: var(--jh-primary);
 }
-
-
-/* Cancel button */
-
-.create-company-page .btn-outline-secondary {
-    border-color: #d6dbe3;
-    color: #4b5563;
-    background: #ffffff;
-}
-
-
-.create-company-page .btn-outline-secondary:hover {
-    background: #f8fafc;
-    border-color: #bfc6d1;
-    color: #374151;
-
+.container:has(.card form) form .btn-primary:hover {
+    border-color: var(--jh-primary-hover);
+    background: var(--jh-primary-hover);
     transform: translateY(-1px);
 }
-
-
-/* =========================================
-   Spinner
-   ========================================= */
-
-.create-company-page .spinner-border {
-    width: 16px;
-    height: 16px;
-    border-width: 2px;
+.container:has(.card form) form .btn-outline-secondary {
+    border-color: var(--jh-border);
+    background: #fff;
+    color: var(--jh-text);
 }
-
-
-/* =========================================
-   Tablet
-   ========================================= */
-
-@media (max-width: 768px) {
-
-    .create-company-page {
-        padding-top: 20px;
-        padding-bottom: 30px;
+.container:has(.card form) form .btn-outline-secondary:hover {
+    border-color: #cbd5e1;
+    background: #f1f5f9;
+    color: var(--jh-navy);
+}
+.container:has(.card form) form .btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+@media (max-width: 767px) {
+    .container:has(.card form) {
+        padding-top: 85px !important;
     }
-
-    .create-company-page .company-header {
-        margin-bottom: 22px;
-    }
-
-    .create-company-page .company-header h1 {
+    .container:has(.card form) .text-center h1 {
         font-size: 25px;
     }
-
-    .create-company-page .company-header p {
-        font-size: 14px;
-    }
-
-    .create-company-page .company-form-card .card-body {
+    .container:has(.card form) .card-body {
         padding: 25px !important;
     }
-
 }
-
-
-/* =========================================
-   Mobile
-   ========================================= */
-
-@media (max-width: 576px) {
-
-    .create-company-page {
-        padding-top: 15px;
+@media (max-width: 480px) {
+    .container:has(.card form) {
+        padding-right: 16px;
+        padding-left: 16px;
     }
-
-    .create-company-page .container {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-    .create-company-page .company-header {
-        margin-bottom: 18px;
-    }
-
-    .create-company-page .company-header h1 {
-        font-size: 22px;
-    }
-
-    .create-company-page .company-header p {
-        font-size: 13px;
-        line-height: 1.5;
-    }
-
-    .create-company-page .company-form-card {
-        border-radius: 14px;
-    }
-
-    .create-company-page .company-form-card .card-body {
+    .container:has(.card form) .card-body {
         padding: 20px !important;
     }
-
-    .create-company-page .form-control,
-    .create-company-page .form-control-lg {
-        min-height: 43px;
-        font-size: 13px;
-    }
-
-    .create-company-page textarea.form-control {
-        min-height: 105px;
-    }
-
-    .create-company-page .d-flex.flex-column {
-        gap: 10px !important;
-    }
-
-    .create-company-page .btn {
+    .container:has(.card form) form .btn {
         width: 100%;
-        min-height: 43px;
-        font-size: 13px;
     }
-
 }

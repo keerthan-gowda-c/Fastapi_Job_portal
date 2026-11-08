@@ -1,473 +1,210 @@
-
-/* =========================================
-   RECRUITER DASHBOARD
-   ========================================= */
-
 .dashboard-bg {
-    min-height: calc(100vh - 70px);
-    background: var(--code-bg);
-    padding-bottom: 35px;
+    min-height: 100vh;
+    padding: 1px 0 50px;
+    background: var(--jh-background);
 }
-
-
-/* =========================================
-   DASHBOARD HEADER
-   ========================================= */
-
+.dashboard-bg > .container {
+    max-width: 1240px;
+}
 .dashboard-header {
-    background: #ffffff;
-
-    border: 1px solid #edf0f5;
-
-    padding: 22px 26px !important;
-
-    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05) !important;
-
-    transition: box-shadow 0.25s ease;
+    margin-top: 100px !important;
+    margin-bottom: 38px;
+    padding: 30px !important;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 18px !important;
+    background: linear-gradient(120deg, #ffffff 0%, #f0f6ff 100%);
 }
-
-.dashboard-header:hover {
-    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.07) !important;
-}
-
 .dashboard-header h2 {
-    color: #111827;
-
-    font-size: 25px;
-
-    letter-spacing: -0.4px;
+    color: var(--jh-navy);
+    font-size: 27px;
+    letter-spacing: -0.6px;
 }
-
 .dashboard-header p {
-    font-size: 13px;
+    color: var(--jh-muted) !important;
+    font-size: 14px;
 }
-
-
-/* =========================================
-   HEADER BUTTONS
-   ========================================= */
-
 .dashboard-header .btn {
-    min-height: 40px;
-
-    padding: 8px 17px;
-
+    min-height: 42px;
+    padding: 10px 18px !important;
     border-radius: 9px !important;
-
     font-size: 13px;
-
-    font-weight: 600;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease;
+    font-weight: 650;
+    transition: all 0.2s ease;
 }
-
 .dashboard-header .btn:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: var(--jh-shadow-sm);
 }
-
-.dashboard-header .btn-primary:hover {
-    box-shadow: 0 5px 12px rgba(13, 110, 253, 0.18);
-}
-
-.dashboard-header .btn-success:hover {
-    box-shadow: 0 5px 12px rgba(25, 135, 84, 0.18);
-}
-
-.dashboard-header .btn-outline-primary:hover,
-.dashboard-header .btn-outline-dark:hover {
-    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
-}
-
-
-/* =========================================
-   SECTION HEADINGS
-   ========================================= */
-
 .dashboard-bg h5.fw-bold {
-    color: #111827;
-
-    font-size: 16px;
-
-    letter-spacing: -0.15px;
+    margin-bottom: 18px !important;
+    color: var(--jh-navy);
+    font-size: 18px;
 }
-
-
-/* =========================================
-   DASHBOARD CARDS
-   ========================================= */
-
+.dashboard-bg .row.g-4 {
+    row-gap: 22px !important;
+}
 .dashboard-card {
     position: relative;
-
-    background: #ffffff;
-
-    border: 1px solid #edf0f5 !important;
-
-    border-radius: 15px !important;
-
+    min-height: 145px;
     overflow: hidden;
-
-    cursor: default;
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        border-color 0.25s ease;
+    border: 1px solid var(--jh-border) !important;
+    border-radius: 15px !important;
+    background: #fff;
+    box-shadow: var(--jh-shadow-sm) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .dashboard-card:hover {
-    transform: translateY(-3px);
-
-    border-color: #e1e6ee !important;
-
-    box-shadow:
-        0 10px 25px rgba(15, 23, 42, 0.08) !important;
+    transform: translateY(-4px);
+    box-shadow: var(--jh-shadow) !important;
 }
-
-
-/* Clickable cards */
-
 .dashboard-card-clickable {
     cursor: pointer;
 }
-
-.dashboard-card-clickable:hover {
-    transform: translateY(-4px);
-
-    box-shadow:
-        0 13px 28px rgba(15, 23, 42, 0.10) !important;
-}
-
-.dashboard-card-clickable:active {
-    transform: translateY(-1px);
-}
-
-
-/* =========================================
-   CARD BODY
-   ========================================= */
-
 .dashboard-card .card-body {
-    padding: 21px 22px;
-
-    min-height: 130px;
+    padding: 25px 22px;
 }
-
-
-/* =========================================
-   TOP ACCENT LINE
-   ========================================= */
-
 .dashboard-card .top-line {
     position: absolute;
-
     top: 0;
     left: 0;
-    right: 0;
-
-    height: 3px;
+    width: 100%;
+    height: 4px;
 }
-
-
-/* =========================================
-   CARD TITLE
-   ========================================= */
-
-.dashboard-card p.text-muted {
-    color: #6b7280 !important;
-
-    font-size: 12px;
-
-    letter-spacing: 0.1px;
+.dashboard-card .text-muted {
+    color: var(--jh-muted) !important;
+    font-size: 13px;
 }
-
-
-/* =========================================
-   CARD VALUE
-   ========================================= */
-
 .dashboard-card h2 {
-    color: #111827;
-
-    font-size: 30px;
-
-    line-height: 1;
-
-    letter-spacing: -0.7px;
+    color: var(--jh-navy);
+    font-size: 31px;
+    letter-spacing: -0.8px;
 }
-
-
-/* =========================================
-   CARD ICON
-   ========================================= */
-
-.dashboard-card .bi {
-    opacity: 0.85;
-
-    transition:
-        transform 0.25s ease,
-        opacity 0.25s ease;
+.dashboard-card > .card-body > .d-flex > i {
+    display: flex;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: #eff6ff;
+    font-size: 23px !important;
 }
-
-.dashboard-card:hover .bi {
-    transform: scale(1.08);
-
-    opacity: 1;
-}
-
-
-/* =========================================
-   APPLICATION STATUS COLORS
-   ========================================= */
-
-/* Keep Bootstrap colors but soften the visual appearance */
-
 .dashboard-card .text-primary {
     color: #2563eb !important;
 }
-
 .dashboard-card .text-success {
-    color: #16a34a !important;
+    color: #059669 !important;
 }
-
 .dashboard-card .text-warning {
     color: #d97706 !important;
 }
-
 .dashboard-card .text-info {
     color: #0891b2 !important;
 }
-
 .dashboard-card .text-secondary {
     color: #64748b !important;
 }
-
 .dashboard-card .text-danger {
     color: #dc2626 !important;
 }
-
-
-/* =========================================
-   QUICK ACTION CARD
-   ========================================= */
-
 .dashboard-bg .card.border-0.shadow-sm.rounded-4 {
-    background: #ffffff;
-
-    border: 1px solid #edf0f5 !important;
-
-    border-radius: 15px !important;
-
-    box-shadow:
-        0 4px 14px rgba(15, 23, 42, 0.05) !important;
+    margin-top: 40px !important;
+    border: 1px solid var(--jh-border) !important;
+    border-radius: 16px !important;
+    background: #fff;
+    box-shadow: var(--jh-shadow-sm) !important;
 }
-
-.dashboard-bg .card.border-0.shadow-sm.rounded-4 .card-body {
-    padding: 22px 24px !important;
+.dashboard-bg .card-body.p-4 {
+    padding: 26px !important;
 }
-
-.dashboard-bg .card.border-0.shadow-sm.rounded-4 h5 {
-    color: #111827;
-
-    font-size: 16px;
+.dashboard-bg .card-body h5 {
+    margin-bottom: 8px;
+    color: var(--jh-navy);
+    font-size: 18px;
 }
-
-.dashboard-bg .card.border-0.shadow-sm.rounded-4 p {
-    font-size: 13px;
+.dashboard-bg .card-body p {
+    color: var(--jh-muted) !important;
+    font-size: 14px;
 }
-
-
-/* =========================================
-   QUICK ACTION BUTTON
-   ========================================= */
-
-.dashboard-bg .card.border-0.shadow-sm.rounded-4 .btn {
-    min-height: 40px;
-
-    padding: 8px 18px;
-
+.dashboard-bg .card-body .btn {
+    min-height: 42px;
+    padding: 10px 20px !important;
     border-radius: 9px !important;
-
     font-size: 13px;
-
-    font-weight: 600;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+    font-weight: 650;
 }
-
-.dashboard-bg .card.border-0.shadow-sm.rounded-4 .btn:hover {
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 5px 12px rgba(13, 110, 253, 0.18);
+.dashboard-bg .card-body .btn-primary {
+    border-color: var(--jh-primary);
+    background: var(--jh-primary);
 }
-
-
-/* =========================================
-   LOADING / ERROR STATE
-   ========================================= */
-
-.dashboard-bg .spinner-border {
-    width: 2rem;
-    height: 2rem;
+.dashboard-bg .card-body .btn-primary:hover {
+    border-color: var(--jh-primary-hover);
+    background: var(--jh-primary-hover);
 }
-
-
-/* =========================================
-   RESPONSIVE - TABLET
-   ========================================= */
-
+.dashboard-bg .container > .card {
+    margin-top: 100px !important;
+    border: 1px solid var(--jh-border) !important;
+    border-radius: 16px !important;
+}
+.dashboard-bg .container > .card .card-body {
+    padding: 40px 25px !important;
+}
+.dashboard-bg .container > .card .btn {
+    border-radius: 9px !important;
+    font-weight: 650;
+}
 @media (max-width: 991px) {
-
-    .dashboard-bg .container {
-        padding-top: 30px !important;
-    }
-
     .dashboard-header {
-        padding: 20px !important;
+        padding: 25px !important;
     }
-
-    .dashboard-card .card-body {
-        min-height: 120px;
-
-        padding: 19px 20px;
+    .dashboard-header .btn {
+        padding: 9px 14px !important;
     }
-
 }
-
-
-/* =========================================
-   RESPONSIVE - MOBILE
-   ========================================= */
-
 @media (max-width: 767px) {
-
-    .dashboard-bg {
-        padding-bottom: 20px;
-    }
-
     .dashboard-header {
-        border-radius: 14px !important;
-
-        padding: 18px !important;
+        margin-top: 85px !important;
+        padding: 22px !important;
     }
-
     .dashboard-header h2 {
-        font-size: 21px;
+        font-size: 23px;
     }
-
-    .dashboard-header p {
-        font-size: 12px;
+    .dashboard-header .mt-3 {
+        margin-top: 20px !important;
     }
-
-
-    /* Header action buttons */
-
-    .dashboard-header .d-flex.flex-wrap {
-        width: 100%;
+    .dashboard-bg h5.fw-bold {
+        font-size: 17px;
     }
-
-    .dashboard-header .d-flex.flex-wrap .btn {
-        flex: 1;
-
-        min-width: 140px;
-    }
-
-
-    /* Cards */
-
     .dashboard-card {
-        border-radius: 13px !important;
+        min-height: 130px;
     }
-
     .dashboard-card .card-body {
-        min-height: 115px;
-
-        padding: 18px;
+        padding: 21px;
     }
-
     .dashboard-card h2 {
         font-size: 27px;
     }
-
-
-    /* Quick action */
-
-    .dashboard-bg .card.border-0.shadow-sm.rounded-4 .card-body {
+    .dashboard-bg .card-body.p-4 {
+        padding: 22px !important;
+    }
+}
+@media (max-width: 480px) {
+    .dashboard-bg > .container {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+    .dashboard-header {
+        margin-top: 80px !important;
         padding: 19px !important;
     }
-
-}
-
-
-/* =========================================
-   SMALL MOBILE
-   ========================================= */
-
-@media (max-width: 480px) {
-
-    .dashboard-bg .container {
-        padding-left: 13px;
-        padding-right: 13px;
-    }
-
-    .dashboard-header {
-        padding: 16px !important;
-    }
-
     .dashboard-header h2 {
-        font-size: 19px;
+        font-size: 21px;
     }
-
-
-    .dashboard-header .d-flex.flex-wrap {
-        flex-direction: column;
-
-        gap: 8px !important;
-    }
-
-    .dashboard-header .d-flex.flex-wrap .btn {
+    .dashboard-header .btn {
         width: 100%;
-
-        flex: none;
+        justify-content: center;
     }
-
-
     .dashboard-card .card-body {
-        min-height: 105px;
-
-        padding: 17px;
+        padding: 19px;
     }
-
-    .dashboard-card h2 {
-        font-size: 25px;
-    }
-
-    .dashboard-card p.text-muted {
-        font-size: 11px;
-    }
-
-    .dashboard-card .bi {
-        font-size: 1.5rem !important;
-    }
-
-
-    .dashboard-bg .card.border-0.shadow-sm.rounded-4 .card-body {
-        padding: 18px !important;
-    }
-
-    .dashboard-bg .card.border-0.shadow-sm.rounded-4 .d-flex {
-        align-items: stretch !important;
-    }
-
-    .dashboard-bg .card.border-0.shadow-sm.rounded-4 .btn {
-        width: 100%;
-    }
-
 }

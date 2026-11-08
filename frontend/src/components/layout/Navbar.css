@@ -1,266 +1,394 @@
-/* Falls back to its own values if homepage.css's :root tokens
-   aren't loaded on this page, so the navbar never breaks alone. */
-
 .jh-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: var(--ink, #14213d);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 72px;
+    background: #172b4d;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 3px 15px rgba(15, 23, 42, 0.08);
 }
 
 .jh-nav__inner {
-  max-width: var(--max-width, 1120px);
-  margin: 0 auto;
-  padding: 0.85rem 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
 }
 
 .jh-nav__brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: "Fraunces", Georgia, serif;
-  font-weight: 500;
-  font-size: 1.25rem;
-  color: var(--paper, #faf9f5);
-  text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    flex-shrink: 0;
+    color: #ffffff;
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    text-decoration: none;
+}
+
+.jh-nav__brand:hover {
+    color: #ffffff;
+}
+
+.jh-nav__brand span {
+    color: #ffffff;
 }
 
 .jh-nav__right {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 26px;
 }
 
 .jh-nav__link {
-  font-family: "Inter", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: rgba(250, 249, 245, 0.85);
-  text-decoration: none;
-  transition: color 0.15s ease;
+    color: #dbe5f3;
+    font-size: 14px;
+    font-weight: 550;
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 .jh-nav__link:hover {
-  color: var(--accent, #e9a23b);
+    color: #93c5fd;
 }
 
 .jh-nav__name {
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--paper, #faf9f5);
-  display: none;
+    display: inline-block;
+    max-width: 180px;
+    overflow: hidden;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-/* ---------- Buttons (scoped so this file works standalone) ---------- */
-.jh-btn {
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-  border-radius: 999px;
-  border: 1.5px solid transparent;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  transition: transform 0.15s ease, background 0.15s ease;
+.jh-nav .jh-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 650;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.jh-btn--sm {
-  padding: 0.5rem 1.1rem;
-  font-size: 0.9rem;
+.jh-nav .jh-btn--sm {
+    min-height: 39px;
+    padding: 8px 17px;
+    font-size: 13px;
 }
 
-.jh-btn--accent {
-  background: var(--accent, #e9a23b);
-  color: var(--ink, #14213d);
-}
-.jh-btn--accent:hover {
-  background: var(--accent-dark, #b97614);
-  color: var(--paper, #faf9f5);
+.jh-nav .jh-btn--accent {
+    color: #ffffff;
+    background: #2563eb;
 }
 
-.jh-btn--danger {
-  background: #c8483a;
-  color: #fff;
-}
-.jh-btn--danger:hover {
-  background: #a83b2f;
+.jh-nav .jh-btn--accent:hover {
+    color: #ffffff;
+    background: #1d4ed8;
+    transform: translateY(-1px);
 }
 
-.jh-btn--block {
-  width: 100%;
-  justify-content: center;
-}
-
-/* ---------- "Get started" dropdown ---------- */
 .jh-dropdown {
-  position: relative;
+    position: relative;
 }
 
 .jh-dropdown__caret {
-  font-size: 0.75rem;
-  transition: transform 0.15s ease;
+    display: inline-block;
+    font-size: 12px;
+    transition: transform 0.2s ease;
 }
+
 .jh-dropdown__caret.is-open {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 .jh-dropdown__menu {
-  position: absolute;
-  top: calc(100% + 0.6rem);
-  right: 0;
-  min-width: 180px;
-  background: #fff;
-  border: 1px solid var(--line, #e2ded3);
-  border-radius: 12px;
-  box-shadow: 0 12px 28px rgba(20, 33, 61, 0.18);
-  list-style: none;
-  margin: 0;
-  padding: 0.4rem;
+    position: absolute;
+    top: calc(100% + 13px);
+    right: 0;
+    z-index: 1002;
+    width: 190px;
+    margin: 0;
+    padding: 7px;
+    list-style: none;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 11px;
+    box-shadow: 0 12px 30px rgba(23, 43, 77, 0.15);
+    animation: jh-dropdown-in 0.18s ease;
+}
+
+@keyframes jh-dropdown-in {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .jh-dropdown__item {
-  display: block;
-  padding: 0.6rem 0.75rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--ink, #14213d);
-  text-decoration: none;
+    display: block;
+    padding: 11px 12px;
+    color: #334155;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 550;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
 }
+
 .jh-dropdown__item:hover {
-  background: var(--paper-alt, #f1eee6);
+    color: #2563eb;
+    background: #eff6ff;
 }
 
 .jh-dropdown__divider {
-  height: 1px;
-  background: var(--line, #e2ded3);
-  margin: 0.35rem 0.4rem;
+    height: 1px;
+    margin: 5px 4px;
+    background: #e2e8f0;
 }
 
-/* ---------- Mobile menu button ---------- */
 .jh-nav__menu-btn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: var(--paper, #faf9f5);
-  border-radius: 10px;
-  width: 2.4rem;
-  height: 2.4rem;
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-.jh-nav__menu-btn:hover {
-  border-color: var(--accent, #e9a23b);
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9px;
+    font-size: 21px;
+    line-height: 1;
+    transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-/* ---------- Drawer ---------- */
+.jh-nav__menu-btn:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: #93c5fd;
+}
+
 .jh-drawer-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(20, 33, 61, 0.45);
-  z-index: 1100;
-  display: flex;
-  justify-content: flex-end;
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: flex;
+    justify-content: flex-end;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(2px);
+    animation: jh-overlay-in 0.2s ease;
+}
+
+@keyframes jh-overlay-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .jh-drawer {
-  width: min(300px, 85vw);
-  height: 100%;
-  background: var(--paper, #faf9f5);
-  display: flex;
-  flex-direction: column;
-  box-shadow: -12px 0 32px rgba(20, 33, 61, 0.25);
-  animation: jh-drawer-in 0.2s ease;
+    width: min(330px, 88vw);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background: #ffffff;
+    box-shadow: -10px 0 35px rgba(15, 23, 42, 0.15);
+    animation: jh-drawer-in 0.25s ease;
 }
 
 @keyframes jh-drawer-in {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
 }
 
 .jh-drawer__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--line, #e2ded3);
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    background: #172b4d;
 }
 
 .jh-drawer__title {
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 1.15rem;
-  margin: 0;
-  color: var(--ink, #14213d);
+    margin: 0;
+    color: #ffffff;
+    font-size: 21px;
+    font-weight: 750;
 }
 
 .jh-drawer__close {
-  background: transparent;
-  border: none;
-  font-size: 1.1rem;
-  color: var(--ink-soft, #3a4358);
-  cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.jh-drawer__close:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .jh-drawer__body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 1.25rem 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 22px;
 }
 
 .jh-drawer__list {
-  list-style: none;
-  margin: 0 0 auto;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .jh-drawer__list li + li {
-  border-top: 1px solid var(--line, #e2ded3);
+    border-top: 1px solid #edf0f5;
 }
 
 .jh-drawer__list a {
-  display: block;
-  padding: 0.85rem 0.1rem;
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
-  font-size: 0.975rem;
-  color: var(--ink, #14213d);
-  text-decoration: none;
+    display: block;
+    padding: 14px 5px;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 550;
+    text-decoration: none;
+    transition: color 0.2s ease, padding-left 0.2s ease;
 }
+
 .jh-drawer__list a:hover {
-  color: var(--accent-dark, #b97614);
+    padding-left: 10px;
+    color: #2563eb;
 }
 
 .jh-drawer__footer {
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--line, #e2ded3);
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
 }
 
-/* ---------- Responsive ---------- */
-@media (min-width: 768px) {
-  .jh-nav__name {
-    display: inline-block;
-  }
+.jh-drawer .jh-btn--danger {
+    width: 100%;
+    min-height: 45px;
+    justify-content: center;
+    padding: 11px 18px;
+    color: #ffffff;
+    background: #dc2626;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.jh-drawer .jh-btn--danger:hover {
+    background: #b91c1c;
+}
+
+.jh-nav button:focus-visible,
+.jh-nav a:focus-visible,
+.jh-drawer button:focus-visible,
+.jh-drawer a:focus-visible {
+    outline: 3px solid rgba(147, 197, 253, 0.65);
+    outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+    .jh-nav__inner {
+        padding: 0 20px;
+    }
+
+    .jh-nav__right {
+        gap: 16px;
+    }
+
+    .jh-nav__name {
+        max-width: 130px;
+    }
 }
 
 @media (max-width: 640px) {
-  .jh-nav__link--desktop {
-    display: none;
-  }
+    .jh-nav {
+        height: 66px;
+    }
+
+    .jh-nav__inner {
+        padding: 0 16px;
+    }
+
+    .jh-nav__brand {
+        font-size: 21px;
+    }
+
+    .jh-nav__right {
+        gap: 12px;
+    }
+
+    .jh-nav__link--desktop {
+        display: none;
+    }
+
+    .jh-nav .jh-btn--sm {
+        min-height: 37px;
+        padding: 7px 13px;
+        font-size: 12px;
+    }
+
+    .jh-nav__menu-btn {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 380px) {
+    .jh-nav__inner {
+        padding: 0 12px;
+    }
+
+    .jh-nav__brand {
+        font-size: 19px;
+    }
+
+    .jh-nav__right {
+        gap: 9px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .jh-drawer {
-    animation: none;
-  }
-  .jh-btn {
-    transition: none;
-  }
+    .jh-nav *,
+    .jh-drawer *,
+    .jh-drawer-overlay {
+        animation: none !important;
+        transition: none !important;
+    }
 }
