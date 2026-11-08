@@ -34,7 +34,7 @@ function JobCard({
                     <div className="jh-card__meta-col">
                         <p className="jh-card__meta-label">💰 Salary</p>
                         <p className="jh-card__meta-value jh-card__meta-value--accent">
-                            ₹{job.salary}
+                            ₹{job.salary || "Not Disclosed"}
                         </p>
                     </div>
                 </div>

@@ -1,7 +1,9 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../../api/axios";
 import Navbar from "../../../components/layout/Navbar";
+import RichTextEditor from "../../../components/common/RichTextEditor";
 import "./EditJob.css";
 import { toast } from "react-toastify";
 import useMyJobStore from "../../../store/myJobStore";
@@ -67,7 +69,7 @@ export default function EditJob() {
         try {
             await api.put(`/jobs/${id}`, {
                 ...form,
-                salary: Number(form.salary)
+                salary: form.salary
             });
 
             invalidateJobs();
@@ -142,14 +144,14 @@ export default function EditJob() {
                                             <label className="form-label">
                                                 Job Description
                                             </label>
-                                            <textarea
-                                                rows="6"
-                                                className="form-control"
-                                                name="description"
+                                            <RichTextEditor
                                                 value={form.description}
-                                                onChange={handleChange}
-                                                placeholder="Describe the responsibilities, requirements, and benefits..."
-                                                required
+                                                onChange={(value) =>
+                                                    setForm((prev) => ({
+                                                        ...prev,
+                                                        description: value
+                                                    }))
+                                                }
                                             />
                                         </div>
 
@@ -174,13 +176,12 @@ export default function EditJob() {
                                                     Annual Salary (₹)
                                                 </label>
                                                 <input
-                                                    type="number"
+                                                    type="text"
                                                     className="form-control"
                                                     name="salary"
                                                     value={form.salary}
                                                     onChange={handleChange}
                                                     placeholder="800000"
-                                                    min="0"
                                                     required
                                                 />
                                             </div>

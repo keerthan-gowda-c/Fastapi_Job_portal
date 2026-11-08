@@ -1,5 +1,7 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import DOMPurify from "dompurify";
 import api from "../../api/axios";
 import Navbar from "../../components/layout/Navbar";
 import { useAuth } from "../../context/AuthContext";
@@ -10,17 +12,23 @@ import useSavedJobsStore from "../../store/savedJobsStore";
 import useMyApplicationsStore from "../../store/myApplicationsStore";
 
 export default function JobDetails() {
-
     const { id } = useParams();
     const navigate = useNavigate();
     const { user, isAuthenticated } = useAuth();
 
-    const cachedJob = useJobStore((state) => Object.values(state.jobsCache).flat().find((item) => String(item.id) === String(id)))
+    const cachedJob = useJobStore((state) =>
+        Object.values(state.jobsCache)
+            .flat()
+            .find((item) => String(item.id) === String(id))
+    );
+
     const [job, setJob] = useState(null);
     const [loading, setLoading] = useState(true);
+
     const markJobApplied = useJobStore((state) => state.markJobApplied);
-    const markJobSaved = useJobStore((state) => state.markJobSaved)
-    const fetchUserJobStatus = useJobStore((state) => state.fetchUserJobStatus)
+    const markJobSaved = useJobStore((state) => state.markJobSaved);
+    const fetchUserJobStatus = useJobStore((state) => state.fetchUserJobStatus);
+
     const invalidateApplications = useMyApplicationsStore(
         (state) => state.invalidateApplications
     );
@@ -35,9 +43,11 @@ export default function JobDetails() {
 
     useEffect(() => {
         let cancelled = false;
+
         const fetchJob = async () => {
             setLoading(true);
             setJob(null);
+
             if (cachedJob) {
                 setJob(cachedJob);
                 setLoading(false);
@@ -46,6 +56,7 @@ export default function JobDetails() {
 
             try {
                 const response = await api.get(`/jobs/${id}`);
+
                 if (!cancelled) {
                     setJob(response.data);
                 }
@@ -58,32 +69,29 @@ export default function JobDetails() {
                         "Failed to load job"
                     );
                 }
-
-
             } finally {
                 if (!cancelled) {
                     setLoading(false);
                 }
-
             }
-
         };
+
         fetchJob();
+
         return () => {
             cancelled = true;
-        }
-    }, [id, cachedJob])
+        };
+    }, [id, cachedJob]);
 
     useEffect(() => {
         if (isAuthenticated && user?.role === "jobseeker" && user?.id != null) {
             fetchUserJobStatus(user.id).catch((error) => {
-                console.error("Failed to fetch job status:", error)
-            })
+                console.error("Failed to fetch job status:", error);
+            });
         }
-    }, [isAuthenticated, user?.role, user?.id, fetchUserJobStatus])
+    }, [isAuthenticated, user?.role, user?.id, fetchUserJobStatus]);
 
     const applyJob = async () => {
-
         if (!isAuthenticated) {
             navigate("/login");
             return;
@@ -109,12 +117,9 @@ export default function JobDetails() {
                 "Failed to apply"
             );
         }
-
     };
 
-
     const saveJob = async () => {
-
         if (!isAuthenticated) {
             navigate("/login");
             return;
@@ -140,60 +145,37 @@ export default function JobDetails() {
                 "Failed to save job"
             );
         }
-
     };
 
     if (loading) {
-
         return (
-
             <div className="job-details-page">
-
                 <Navbar />
 
                 <main className="job-details-container">
-
                     <div className="job-details-state">
-
                         <div className="job-details-loader"></div>
-
-                        <p>
-                            Loading job details...
-                        </p>
-
+                        <p>Loading job details...</p>
                     </div>
-
                 </main>
-
             </div>
-
         );
-
     }
 
     if (!job) {
-
         return (
-
             <div className="job-details-page">
-
                 <Navbar />
 
                 <main className="job-details-container">
-
                     <div className="job-not-found">
-
-                        <div className="job-not-found__icon">
-                            !
-                        </div>
+                        <div className="job-not-found__icon">!</div>
 
                         <span className="job-details-label">
                             JOB
                         </span>
 
-                        <h1>
-                            Job not found.
-                        </h1>
+                        <h1>Job not found.</h1>
 
                         <p>
                             The job you're looking for could not
@@ -206,28 +188,17 @@ export default function JobDetails() {
                         >
                             ← Browse Jobs
                         </button>
-
                     </div>
-
                 </main>
-
             </div>
-
         );
-
     }
 
-
     return (
-
         <div className="job-details-page">
-
             <Navbar />
 
             <main className="job-details-container">
-
-                {/* Back */}
-
                 <button
                     type="button"
                     className="job-back"
@@ -236,26 +207,18 @@ export default function JobDetails() {
                     ← Back to Jobs
                 </button>
 
-
-                {/* Job Header */}
-
                 <section className="job-header">
-
                     <div className="job-header__main">
-
                         <div className="job-company-icon">
                             ▣
                         </div>
 
                         <div className="job-header__content">
-
                             <span className="job-details-label">
                                 JOB OPPORTUNITY
                             </span>
 
-                            <h1>
-                                {job.title}
-                            </h1>
+                            <h1>{job.title}</h1>
 
                             <button
                                 type="button"
@@ -269,135 +232,81 @@ export default function JobDetails() {
                                 {job.company?.name}
                                 <span>↗</span>
                             </button>
-
                         </div>
-
                     </div>
-
 
                     <div className="job-type-badge">
                         {job.employment_type}
                     </div>
-
                 </section>
 
-
-                {/* Main Content */}
-
                 <div className="job-details-grid">
-
-                    {/* Job Information */}
-
                     <section className="job-main-card">
-
-                        {/* Overview */}
-
                         <div className="job-overview">
-
                             <div className="job-overview-item">
-
                                 <span className="job-overview-icon">
                                     ⌖
                                 </span>
 
                                 <div>
-
-                                    <span>
-                                        LOCATION
-                                    </span>
-
-                                    <strong>
-                                        {job.location}
-                                    </strong>
-
+                                    <span>LOCATION</span>
+                                    <strong>{job.location}</strong>
                                 </div>
-
                             </div>
 
-
                             <div className="job-overview-item">
-
                                 <span className="job-overview-icon">
                                     ₹
                                 </span>
 
                                 <div>
-
-                                    <span>
-                                        SALARY
-                                    </span>
-
+                                    <span>SALARY</span>
                                     <strong>
-                                        ₹{job.salary}
+                                        {job.salary || "Not Disclosed"}
                                     </strong>
-
                                 </div>
-
                             </div>
 
-
                             <div className="job-overview-item">
-
                                 <span className="job-overview-icon">
                                     ◉
                                 </span>
 
                                 <div>
-
-                                    <span>
-                                        RECRUITER
-                                    </span>
-
+                                    <span>RECRUITER</span>
                                     <strong>
                                         {job.recruiter?.full_name}
                                     </strong>
-
                                 </div>
-
                             </div>
-
                         </div>
-
 
                         <div className="job-divider"></div>
 
-
-                        {/* Description */}
-
                         <div className="job-description-section">
-
                             <div className="job-section-heading">
                                 <div>
                                     <span>
                                         ROLE : {job.title}
                                     </span>
 
-                                    <h5>
-                                        Job Description
-                                    </h5>
-
+                                    <h5>Job Description</h5>
                                 </div>
-
                             </div>
-                            <p className="job-description">
 
-                                {job.description}
-
-                            </p>
-
-
-
+                            <div
+                                className="job-description job-description-formatted"
+                                dangerouslySetInnerHTML={{
+                                    __html: DOMPurify.sanitize(
+                                        job.description || ""
+                                    )
+                                }}
+                            />
                         </div>
-
                     </section>
 
-
-                    {/* Action Card */}
-
-                    {(!isAuthenticated) ? (
-
+                    {!isAuthenticated ? (
                         <aside className="job-action-card">
-
                             <span className="job-section-number">
                                 02
                             </span>
@@ -415,30 +324,21 @@ export default function JobDetails() {
                                 apply for this opportunity.
                             </p>
 
-
                             <div className="job-actions">
-
                                 <button
                                     type="button"
                                     className="job-action-primary"
                                     onClick={() =>
-                                        navigate(
-                                            "/choose-login-role"
-                                        )
+                                        navigate("/choose-login-role")
                                     }
                                 >
                                     Login to Apply
                                     <span>→</span>
                                 </button>
-
                             </div>
-
                         </aside>
-
                     ) : user?.role === "jobseeker" ? (
-
                         <aside className="job-action-card">
-
                             <span className="job-section-number">
                                 02
                             </span>
@@ -456,9 +356,7 @@ export default function JobDetails() {
                                 later.
                             </p>
 
-
                             <div className="job-actions">
-
                                 <button
                                     type="button"
                                     className="job-action-primary"
@@ -468,7 +366,6 @@ export default function JobDetails() {
                                     <span>→</span>
                                 </button>
 
-
                                 <button
                                     type="button"
                                     className="job-action-secondary"
@@ -476,19 +373,11 @@ export default function JobDetails() {
                                 >
                                     Save Job
                                 </button>
-
                             </div>
-
                         </aside>
-
                     ) : null}
-
                 </div>
-
             </main>
-
         </div>
-
     );
-
 }

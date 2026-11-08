@@ -302,7 +302,7 @@ export default function Jobs() {
                                 </span>
 
                                 <input
-                                    type="number"
+                                    type="text"
                                     placeholder="e.g. 500000"
                                     value={salary}
                                     onChange={(e) =>

@@ -9,13 +9,14 @@ import { toast } from "react-toastify";
 import useRecruiterDashboardStore from "../../../store/recruiterDashboard";
 import useMyJobStore from "../../../store/myJobStore";
 import useJobStore from "../../../store/jobStore";
+import RichTextEditor from "../../../components/common/RichTextEditor";
 
 export default function CreateJob() {
 
     const navigate = useNavigate();
-    const invalidateDashboard = useRecruiterDashboardStore((state)=>state.invalidateDashboard);
-    const invalidateJobs = useMyJobStore((state)=>state.invalidateJobs)
-    const invalidatePublicJobs = useJobStore((state)=>state.invalidateJobs);
+    const invalidateDashboard = useRecruiterDashboardStore((state) => state.invalidateDashboard);
+    const invalidateJobs = useMyJobStore((state) => state.invalidateJobs)
+    const invalidatePublicJobs = useJobStore((state) => state.invalidateJobs);
 
     const [form, setForm] = useState({
         title: "",
@@ -42,7 +43,7 @@ export default function CreateJob() {
 
             await api.post("/jobs/", {
                 ...form,
-                salary: Number(form.salary)
+                salary: form.salary
             });
             invalidateJobs();
             invalidateDashboard();
@@ -122,18 +123,11 @@ export default function CreateJob() {
                                                 Job Description
                                             </label>
 
-                                            <textarea
-                                                rows="6"
-                                                className="form-control"
-                                                name="description"
+                                            <RichTextEditor
                                                 value={form.description}
-                                                onChange={handleChange}
-                                                placeholder="Describe the responsibilities, requirements, and benefits..."
-                                                required
+                                                onChange={(value) => setForm((prev) => ({ ...prev, description: value }))}
                                             />
-
                                         </div>
-
 
                                         {/* Location */}
 
@@ -167,7 +161,7 @@ export default function CreateJob() {
                                                 </label>
 
                                                 <input
-                                                    type="number"
+                                                    type="text"
                                                     className="form-control"
                                                     name="salary"
                                                     value={form.salary}

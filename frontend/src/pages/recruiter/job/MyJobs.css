@@ -206,6 +206,41 @@
     height: 42px;
 }
 
+.job-description-preview {
+    max-height: 180px;
+    overflow-y: auto;
+    overflow-wrap: anywhere;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.job-description-preview p {
+    margin-bottom: 8px;
+}
+
+.job-description-preview h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 12px 0 6px;
+}
+
+.job-description-preview h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 10px 0 6px;
+}
+
+.job-description-preview ul,
+.job-description-preview ol {
+    padding-left: 22px;
+    margin-bottom: 10px;
+}
+
+.job-description-preview a {
+    color: var(--jh-primary);
+    text-decoration: underline;
+}
+
 @media (max-width: 767px) {
     .jobs-bg {
         padding: 88px 0 35px;

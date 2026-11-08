@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import DOMPurify from "dompurify";
 import api from "../../../api/axios";
 import Navbar from "../../../components/layout/Navbar";
 import "./MyJobs.css";
@@ -12,19 +12,19 @@ import useRecruiterDashboardStore from "../../../store/recruiterDashboard";
 export default function MyJobs() {
     const navigate = useNavigate();
 
-    const jobs = useMyJobStore((state)=>state.jobs);
-    const loading = useMyJobStore((state)=>state.loading);
-    const fetchJobs = useMyJobStore((state)=>state.fetchJobs);
-    const removeJobs = useMyJobStore((state)=>state.removeJobs);
+    const jobs = useMyJobStore((state) => state.jobs);
+    const loading = useMyJobStore((state) => state.loading);
+    const fetchJobs = useMyJobStore((state) => state.fetchJobs);
+    const removeJobs = useMyJobStore((state) => state.removeJobs);
 
-    const invalidateDashboard = useRecruiterDashboardStore((state)=>state.invalidateDashboard);
-    
+    const invalidateDashboard = useRecruiterDashboardStore((state) => state.invalidateDashboard);
+
     const [deletingId, setDeletingId] = useState(null);
 
     useEffect(() => {
-        fetchJobs().catch((error) =>{
+        fetchJobs().catch((error) => {
             console.error(error)
-        toast.error(error.response?.data?.detail || "Failed to load Jobs")
+            toast.error(error.response?.data?.detail || "Failed to load Jobs")
         });
 
     }, [fetchJobs]);
@@ -48,7 +48,7 @@ export default function MyJobs() {
 
             toast.success("Job deleted successfully");
 
-        
+
         } catch (error) {
 
             console.log(error);
@@ -208,11 +208,14 @@ export default function MyJobs() {
 
                                             {/* Description */}
 
-                                            <p className="text-muted mt-3">
+                                            {/* Description */}
 
-                                                {job.description}
-
-                                            </p>
+                                            <div
+                                                className="job-description-preview text-muted mt-3"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: DOMPurify.sanitize(job.description || "")
+                                                }}
+                                            />
 
                                             <hr />
 
@@ -239,7 +242,7 @@ export default function MyJobs() {
                                                     </small>
 
                                                     <strong className="text-success">
-                                                        ₹ {job.salary}
+                                                        ₹ {job.salary || "Not Disclosed"}
                                                     </strong>
 
                                                 </div>
