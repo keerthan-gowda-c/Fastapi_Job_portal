@@ -19,7 +19,7 @@ class Job(Base):
     title = Column(String, nullable=False)
     description = Column(Text, nullable=False)
     location = Column(String)
-    salary = Column(Integer)
+    salary = Column(String, nullable=False)
     employment_type = Column(String, nullable=False)
     company_id = Column(Integer,ForeignKey("companies.id"))
     created_at = Column(DateTime(timezone=True),server_default=func.now())

@@ -5,7 +5,7 @@ class JobCreate(BaseModel):
     title: str
     description: str
     location: str
-    salary: int
+    salary: str
     employment_type : EmploymentType
 
 
@@ -14,7 +14,7 @@ class JobResponse(BaseModel):
     title: str
     description: str
     location: str
-    salary: int
+    salary: str
     employment_type : EmploymentType
 
     class Config:
@@ -40,7 +40,7 @@ class JobDetailResponse(BaseModel):
     title: str
     description: str
     location: str
-    salary: int
+    salary: str
     employment_type: EmploymentType
     company: CompanyBasicResponse
     recruiter: RecruiterBasicResponse

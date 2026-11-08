@@ -183,7 +183,7 @@ def delete_job(
 def search_jobs(
     keyword:Optional[str] = None,
     location:Optional[str] = None,
-    salary:Optional[int] = None,
+    salary:Optional[str] = None,
     page:int =1,
     limit:int=10,
     db:Session = Depends(get_db)
