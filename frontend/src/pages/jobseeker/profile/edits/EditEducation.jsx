@@ -3,6 +3,28 @@ import api from "../../../../api/axios";
 import { toast } from "react-toastify";
 import "./EditEducation.css";
 
+const DEGREES = [
+    { value: "BCA", label: "BCA" },
+    { value: "BTECH", label: "BTech" },
+    { value: "BE", label: "BE" },
+    { value: "BSC", label: "BSc" },
+    { value: "BCOM", label: "BCom" },
+    { value: "BBA", label: "BBA" },
+    { value: "BA", label: "BA" },
+    { value: "BARCH", label: "BArch" },
+    { value: "MCA", label: "MCA" },
+    { value: "MTECH", label: "MTech" },
+    { value: "ME", label: "ME" },
+    { value: "MSC", label: "MSc" },
+    { value: "MCOM", label: "MCom" },
+    { value: "MBA", label: "MBA" },
+    { value: "MA", label: "MA" },
+    { value: "LLM", label: "LLM" },
+    { value: "PHD", label: "PhD" },
+    { value: "MPHIL", label: "MPhil" },
+    { value: "OTHER", label: "Other" },
+];
+
 export default function EditEducation({
     education,
     onSuccess,
@@ -144,41 +166,12 @@ export default function EditEducation({
                             onChange={handleChange}
                             required
                         >
-                            <option value="">
-                                Select degree
-                            </option>
-
-                            <option value="BCA">
-                                BCA
-                            </option>
-
-                            <option value="BSc">
-                                BSc
-                            </option>
-
-                            <option value="BTech">
-                                BTech
-                            </option>
-
-                            <option value="BE">
-                                BE
-                            </option>
-
-                            <option value="MCA">
-                                MCA
-                            </option>
-
-                            <option value="MTech">
-                                MTech
-                            </option>
-
-                            <option value="MBA">
-                                MBA
-                            </option>
-
-                            <option value="Other">
-                                Other
-                            </option>
+                            <option value="">Select degree</option>
+                            {DEGREES.map((d) => (
+                                <option key={d.value} value={d.value}>
+                                    {d.label}
+                                </option>
+                            ))}
 
                         </select>
 
