@@ -75,7 +75,7 @@ export default function EditExperience({
 
             toast.error(
                 error.response?.data?.detail ||
-                "Failed to save experience"
+                "Failed to save experience, try again."
             );
 
         }

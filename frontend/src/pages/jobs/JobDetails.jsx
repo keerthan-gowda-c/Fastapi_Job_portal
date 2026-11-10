@@ -62,12 +62,11 @@ export default function JobDetails() {
                 }
             } catch (error) {
                 if (!cancelled) {
-                    console.error("Failed to fetch job:", error);
-
-                    toast.error(
-                        error.response?.data?.detail ||
-                        "Failed to load job"
-                    );
+                
+                    toast.info(
+                error.response?.data?.detail ||
+                "It takes some time"
+            );
                 }
             } finally {
                 if (!cancelled) {

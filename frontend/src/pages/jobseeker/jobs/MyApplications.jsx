@@ -122,7 +122,7 @@ export default function MyApplications() {
 
             toast.error(
                 error.response?.data?.detail ||
-                "Failed to apply"
+                "Failed to apply, try again after sometimes"
             );
 
         }

@@ -43,8 +43,8 @@ export default function EditJob() {
                 });
             } catch (error) {
                 console.error(error);
-                toast.error(
-                    error.response?.data?.detail || "Failed to load job details"
+                toast.info(
+                    error.response?.data?.detail || "It takes some time"
                 );
                 navigate("/my-jobs");
             } finally {

@@ -70,9 +70,9 @@ export default function Jobs() {
     );
     useEffect(() => {
         fetchJobs(params).catch((error) => {
-            toast.error(
+           toast.info(
                 error.response?.data?.detail ||
-                "Failed to load jobs"
+                "It takes some time"
             );
         });
     }, [params, fetchJobs]);
@@ -80,10 +80,6 @@ export default function Jobs() {
     const searchJobs = () => {
         if (page === 1) {
             fetchJobs(params, true).catch((error) => {
-                toast.error(
-                    error.response?.data?.detail ||
-                    "Failed to load jobs"
-                );
             });
         }
         else {

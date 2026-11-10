@@ -30,9 +30,9 @@ export default function CompanyDetails() {
 
             console.error(error);
 
-            toast.error(
+            toast.info(
                 error.response?.data?.detail ||
-                "Failed to load company details"
+                "It takes some time"
             );
 
         }

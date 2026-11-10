@@ -40,7 +40,7 @@ export default function EditCompany() {
         }).catch((error)=>{
             console.error(error);
 
-            toast.error(error.response?.data?.detail || "Failed to load company")
+            toast.info(error.response?.data?.detail || "It takes sometime")
         });
     }, [fetchCompany]);
 

@@ -148,7 +148,7 @@ export default function EditProfile() {
 
             toast.error(
                 error.response?.data?.detail ||
-                "Failed to update profile"
+                "Failed to update profile, try again."
             );
 
         }

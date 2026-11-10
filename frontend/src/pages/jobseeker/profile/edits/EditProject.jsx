@@ -70,7 +70,7 @@ export default function EditProject({
 
             toast.error(
                 error.response?.data?.detail ||
-                "Failed to save project"
+                "Failed to save project, try again"
             );
 
         }

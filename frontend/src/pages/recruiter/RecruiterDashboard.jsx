@@ -24,9 +24,9 @@ function RecruiterDashboard() {
    useEffect(() => {
     fetchDashboard().catch((error) => {
         console.error(error);
-        toast.error(
+        toast.info(
             error.response?.data?.detail ||
-            "Failed to load recruiter dashboard"
+            "It takes some time"
         );
     });
 }, [fetchDashboard]);
@@ -34,7 +34,7 @@ function RecruiterDashboard() {
     const retryDashboard = () => {
         fetchDashboard(true).catch((error) => {
             console.error(error);
-            toast.error(error.response?.data?.detail || "Failed to load recruiter dashboard");
+            toast.info(error.response?.data?.detail || "It takes some time");
         })
     }
 

@@ -96,7 +96,7 @@ export default function EditEducation({
 
             toast.error(
                 error.response?.data?.detail ||
-                "Failed to save education"
+                "Failed to save education, try again."
             );
 
         }

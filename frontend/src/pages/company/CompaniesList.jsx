@@ -42,9 +42,9 @@ function CompaniesList() {
 
             console.error(error);
 
-            toast.error(
+            toast.info(
                 error.response?.data?.detail ||
-                "Failed to fetch companies"
+                "It takes some time"
             );
 
         }

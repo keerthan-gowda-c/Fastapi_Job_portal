@@ -20,14 +20,12 @@ export default function Educations() {
             setEducations(response.data);
 
         }
-        catch (error) {
+        catch (error) {           
 
-            console.error("Failed to load education:", error);
-
-            // toast.error(
-            //     error.response?.data?.detail ||
-            //     "Failed to load education"
-            // );
+            toast.info(
+                error.response?.data?.detail ||
+                "It takes some time"
+            );
 
         }
         finally {

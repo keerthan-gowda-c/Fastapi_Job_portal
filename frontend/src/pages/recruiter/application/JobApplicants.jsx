@@ -24,7 +24,7 @@ export default function JobApplicants() {
 
         fetchApplicants(jobId).catch((error)=>{
             console.log(error);
-            toast.error(error.response?.data?.detail || "Failed to load applications")
+            toast.info(error.response?.data?.detail || "It takes sometime")
         });
 
     }, [jobId, fetchApplicants]);
@@ -54,9 +54,9 @@ export default function JobApplicants() {
 
             console.log(error);
 
-            toast.error(
+            toast.info(
                 error.response?.data?.detail ||
-                "Failed to update status"
+                "It takes some time"
             );
 
         } finally {

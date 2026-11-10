@@ -22,10 +22,10 @@ export default function Experiences() {
         }
         catch (error) {
 
-            // toast.error(
-            //     error.response?.data?.detail ||
-            //     "Failed to load experience"
-            // );
+            toast.info(
+                error.response?.data?.detail ||
+                "It takes some time"
+            );
 
         }
         finally {
