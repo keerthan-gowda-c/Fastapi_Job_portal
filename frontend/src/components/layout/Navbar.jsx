@@ -92,6 +92,7 @@ function Navbar() {
 
                             <span className="jh-nav__name">{user.full_name}</span>
 
+
                             <button
                                 type="button"
                                 className="jh-nav__menu-btn"

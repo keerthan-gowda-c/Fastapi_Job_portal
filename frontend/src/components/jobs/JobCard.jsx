@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./JobCard.css";
+import DOMPurify from "dompurify";
 
 function JobCard({
     job,
@@ -21,7 +22,16 @@ function JobCard({
                     <span className="jh-tag">New</span>
                 </div>
 
-                <p className="jh-card__desc">{job.description}</p>
+                <p className="jh-card__desc" 
+                dangerouslySetInnerHTML={{
+                        __html:DOMPurify.sanitize(job.description || "")
+                    }}
+                    />
+                    
+                
+                {/* <div className="jh-card__des">
+                    
+                </div> */}
 
                 <hr className="jh-card__rule" />
 

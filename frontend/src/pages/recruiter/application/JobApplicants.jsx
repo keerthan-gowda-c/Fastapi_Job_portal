@@ -1,10 +1,14 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import api from "../../../api/axios";
 import Navbar from "../../../components/layout/Navbar";
+
 import "./JobApplicants.css";
+
 import { toast } from "react-toastify";
+
 import useJobApplicantsStore from "../../../store/jobApplicantsStore";
 import useRecruiterDashboardStore from "../../../store/recruiterDashboard";
 
@@ -13,22 +17,50 @@ const EMPTY_APPLICATIONS = [];
 export default function JobApplicants() {
 
     const { jobId } = useParams();
-    const applications = useJobApplicantsStore((state)=>state.applicationsByJob[String(jobId)]??EMPTY_APPLICATIONS);
-    const loading = useJobApplicantsStore((state)=>Boolean(state.loadingByJob[String(jobId)]));
-    const fetchApplicants = useJobApplicantsStore((state)=>state.fetchApplicants);
-    const updateApplicationStatusInStore = useJobApplicantsStore((state)=>state.updateApplicationStatus)
-    const invalidateDashboard = useRecruiterDashboardStore((state)=>state.invalidateDashboard)
+
+    // Zustand store
+    const applications = useJobApplicantsStore(
+        (state) =>
+            state.applicationsByJob[String(jobId)] ?? EMPTY_APPLICATIONS
+    );
+
+    const loading = useJobApplicantsStore(
+        (state) =>
+            Boolean(state.loadingByJob[String(jobId)])
+    );
+
+    const fetchApplicants = useJobApplicantsStore(
+        (state) => state.fetchApplicants
+    );
+
+    const updateApplicationStatusInStore = useJobApplicantsStore(
+        (state) => state.updateApplicationStatus
+    );
+
+    const invalidateDashboard = useRecruiterDashboardStore(
+        (state) => state.invalidateDashboard
+    );
+
     const [updatingId, setUpdatingId] = useState(null);
 
+    // Fetch applicants
     useEffect(() => {
 
-        fetchApplicants(jobId).catch((error)=>{
-            console.log(error);
-            toast.info(error.response?.data?.detail || "It takes sometime")
+        fetchApplicants(jobId).catch((error) => {
+
+            console.error(error);
+
+            toast.error(
+                error.response?.data?.detail ||
+                "Failed to load applicants"
+            );
+
         });
 
     }, [jobId, fetchApplicants]);
 
+
+    // Update application status
     const updateStatus = async (applicationId, status) => {
 
         setUpdatingId(applicationId);
@@ -37,26 +69,28 @@ export default function JobApplicants() {
 
             await api.patch(
                 `/applications/${applicationId}/status`,
-                {
-                    status
-                }
+                { status }
             );
 
+            // Update Zustand store
             updateApplicationStatusInStore(
-                jobId, applicationId, status
+                jobId,
+                applicationId,
+                status
             );
 
+            // Refresh recruiter dashboard data when needed
             invalidateDashboard();
 
-            toast.success("Application status updated");
+            toast.success("Application status updated successfully");
 
         } catch (error) {
 
-            console.log(error);
+            console.error(error);
 
-            toast.info(
+            toast.error(
                 error.response?.data?.detail ||
-                "It takes some time"
+                "Failed to update application status"
             );
 
         } finally {
@@ -66,6 +100,8 @@ export default function JobApplicants() {
         }
     };
 
+
+    // Status badge colors
     const badgeColor = (status) => {
 
         switch (status) {
@@ -85,11 +121,16 @@ export default function JobApplicants() {
             case "rejected":
                 return "danger";
 
+            case "withdrawn":
+                return "secondary";
+
             default:
                 return "secondary";
         }
     };
 
+
+    // Format application status
     const formatStatus = (status) => {
 
         if (!status) return "Unknown";
@@ -101,22 +142,26 @@ export default function JobApplicants() {
             );
     };
 
+
+    // Generate resume URL
     const getResumeUrl = (resumeUrl) => {
 
         if (!resumeUrl) return null;
 
-        if (
-            resumeUrl.startsWith("http://") ||
-            resumeUrl.startsWith("https://")
-        ) {
+        // Already an absolute URL
+        if (/^https?:\/\//i.test(resumeUrl)) {
             return resumeUrl;
         }
 
-        const baseUrl = import.meta.env.API_URL?.replace(/\/$/, "");
+        const baseUrl = import.meta.env.VITE_API_URL?.replace(/\/+$/, "");
 
-        return `${baseUrl}/${resumeUrl.replace(/^\//, "")}`;
+        if (!baseUrl) return null;
+
+        return `${baseUrl}/${resumeUrl.replace(/^\/+/, "")}`;
     };
 
+
+    // Loading state
     if (loading) {
 
         return (
@@ -138,11 +183,13 @@ export default function JobApplicants() {
                 </div>
             </>
         );
-
     }
 
+
     return (
+
         <>
+
             <Navbar />
 
             <div className="applicants-bg">
@@ -170,6 +217,7 @@ export default function JobApplicants() {
                                 </div>
 
                             </div>
+
 
                             {/* Empty State */}
 
@@ -220,10 +268,9 @@ export default function JobApplicants() {
 
                                             {applications.map((application) => {
 
-                                                const resumeUrl =
-                                                    getResumeUrl(
-                                                        application.user?.candidate?.resume_url
-                                                    );
+                                                const resumeUrl = getResumeUrl(
+                                                    application.user?.candidate?.resume_url
+                                                );
 
                                                 return (
 
@@ -240,20 +287,20 @@ export default function JobApplicants() {
 
                                                         </td>
 
+
                                                         {/* Email */}
 
                                                         <td>
-
                                                             {application.user?.email ||
                                                                 "Not available"}
-
                                                         </td>
+
 
                                                         {/* Status */}
 
                                                         <td>
 
-                                                            <div className="d-flex align-items-center gap-2">
+                                                            <div className="d-flex align-items-center gap-2 flex-wrap">
 
                                                                 <span
                                                                     className={`badge bg-${badgeColor(
@@ -265,50 +312,56 @@ export default function JobApplicants() {
                                                                     )}
                                                                 </span>
 
-                                                                <select
-                                                                    className="form-select form-select-sm"
-                                                                    style={{
-                                                                        width: "160px"
-                                                                    }}
-                                                                    value={
-                                                                        application.status
-                                                                    }
-                                                                    disabled={
-                                                                        updatingId ===
-                                                                        application.id
-                                                                    }
-                                                                    onChange={(e) =>
-                                                                        updateStatus(
-                                                                            application.id,
-                                                                            e.target.value
-                                                                        )
-                                                                    }
-                                                                >
 
-                                                                    <option value="pending">
-                                                                        Pending
-                                                                    </option>
+                                                                {/* Status update dropdown */}
 
-                                                                    <option value="reviewed">
-                                                                        Reviewed
-                                                                    </option>
+                                                                {application.status !== "withdrawn" && (
 
-                                                                    <option value="shortlisted">
-                                                                        Shortlisted
-                                                                    </option>
+                                                                    <select
+                                                                        className="form-select form-select-sm"
+                                                                        style={{
+                                                                            width: "160px"
+                                                                        }}
+                                                                        value={application.status}
+                                                                        disabled={
+                                                                            updatingId === application.id
+                                                                        }
+                                                                        onChange={(e) =>
+                                                                            updateStatus(
+                                                                                application.id,
+                                                                                e.target.value
+                                                                            )
+                                                                        }
+                                                                    >
 
-                                                                    <option value="hired">
-                                                                        Hired
-                                                                    </option>
+                                                                        <option value="pending">
+                                                                            Pending
+                                                                        </option>
 
-                                                                    <option value="rejected">
-                                                                        Rejected
-                                                                    </option>
+                                                                        <option value="reviewed">
+                                                                            Reviewed
+                                                                        </option>
 
-                                                                </select>
+                                                                        <option value="shortlisted">
+                                                                            Shortlisted
+                                                                        </option>
 
-                                                                {updatingId ===
-                                                                    application.id && (
+                                                                        <option value="hired">
+                                                                            Hired
+                                                                        </option>
+
+                                                                        <option value="rejected">
+                                                                            Rejected
+                                                                        </option>
+
+                                                                    </select>
+
+                                                                )}
+
+
+                                                                {/* Updating spinner */}
+
+                                                                {updatingId === application.id && (
 
                                                                     <span
                                                                         className="spinner-border spinner-border-sm text-primary"
@@ -321,6 +374,7 @@ export default function JobApplicants() {
 
                                                         </td>
 
+
                                                         {/* Applied Date */}
 
                                                         <td>
@@ -332,6 +386,7 @@ export default function JobApplicants() {
                                                                 : "Not available"}
 
                                                         </td>
+
 
                                                         {/* Resume */}
 
@@ -379,8 +434,9 @@ export default function JobApplicants() {
                 </div>
 
             </div>
+
         </>
+
     );
+
 }
-
-

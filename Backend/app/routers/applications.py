@@ -190,7 +190,7 @@ def update_application_status(
     if not application:
         raise HTTPException(status_code=404, detail = "Application not found")
     
-    if not application.job.company.recruiter_id != recruiter.id:
+    if application.job.company.recruiter_id != recruiter.id:
         raise HTTPException(status_code=403, detail="Access Denied")
     
      # Prevent updating withdrawn applications

@@ -362,7 +362,7 @@ export default function MyApplications() {
                                         <div className="jh-table-salary">
 
                                             {job?.salary
-                                                ? `₹${job.salary}`
+                                                ? `${job.salary}`
                                                 : "N/A"
                                             }
 
