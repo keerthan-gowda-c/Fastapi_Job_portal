@@ -97,7 +97,7 @@ export default function EditCompany() {
             <>
                 <Navbar />
 
-                <div className="container mt-5 text-center">
+                <div className="container text-center">
 
                     <div className="spinner-border text-primary"></div>
 
@@ -115,7 +115,7 @@ export default function EditCompany() {
         <>
             <Navbar />
 
-            <div className="container py-5 mt-5">
+            <div className="container">
 
                 <div className="row justify-content-center">
 

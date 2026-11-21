@@ -40,6 +40,21 @@ def get_candidate_profile(candidate_id: int, db: Session = Depends(get_db)):
     return candidate
 
 
+@router.patch("/me", response_model=CandidateResponse)
+def partial_update_my_profile(
+    data: CandidateUpdate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    candidate = get_candidate(current_user, db)
+
+    for field, value in data.model_dump(exclude_unset=True).items():
+        setattr(candidate, field, value)
+
+    db.commit()
+    db.refresh(candidate)
+
+    return candidate
 
 
 @router.put("/me", response_model=CandidateResponse)

@@ -45,17 +45,18 @@ const useJobStore = create((set, get) => ({
 
             try {
                 const response = await api.get("/jobs", { params });
-
+                const sortedJobs = [...response.data].sort((a, b) =>
+                        new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
                 if (get().jobsVersion === version) {
                     set((state) => ({
                         jobsCache: {
                             ...state.jobsCache,
-                            [key]: response.data,
+                            [key]: sortedJobs,
                         },
                     }));
                 }
 
-                return response.data;
+                return sortedJobs;
             } catch (error) {
                 if (get().jobsVersion === version) {
                     set((state) => ({

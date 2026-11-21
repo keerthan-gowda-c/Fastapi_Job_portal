@@ -49,7 +49,7 @@ class ExperienceResponse(ExperienceCreate):
 class ExperienceUpdate(BaseModel):
     job_title: str | None = None
     company_name : str | None = None
-    employment_type : EmploymentType
+    employment_type : EmploymentType | None = None
     location : str | None = None
     start_date : date | None = None
     end_date : date | None = None

@@ -84,7 +84,7 @@ export default function MyCompany() {
             <>
                 <Navbar />
 
-                <div className="container py-5">
+                <div className="container">
 
                     <div className="text-center py-5">
 
@@ -114,7 +114,7 @@ export default function MyCompany() {
             <>
                 <Navbar />
 
-                <div className="container py-5 mt-5">
+                <div className="container">
 
                     <div className="card border-0 shadow-sm rounded-4">
 
@@ -157,7 +157,7 @@ export default function MyCompany() {
         <>
             <Navbar />
 
-            <div className="container py-5">
+            <div className="container">
 
                 {/* Heading */}
 

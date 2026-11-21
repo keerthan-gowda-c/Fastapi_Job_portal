@@ -194,7 +194,7 @@ export default function JobApplicants() {
 
             <div className="applicants-bg">
 
-                <div className="container py-5 mt-5">
+                <div className="container">
 
                     <div className="card border-0 shadow-lg applicants-card">
 

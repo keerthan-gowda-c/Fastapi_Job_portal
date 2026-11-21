@@ -1,164 +1,226 @@
+
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
+// import "./Sidebar.css";
 import { useAuth } from "../../context/AuthContext";
+
+const ROLE_LINKS = {
+    jobseeker: [
+        { to: "/jobseeker/dashboard", icon: "bi-grid-1x2", label: "Dashboard" },
+        { to: "/saved-jobs", icon: "bi-bookmark-heart", label: "Saved Jobs" },
+        { to: "/jobseeker/applications", icon: "bi-file-earmark-text", label: "My Applications" },
+        { to: "/jobseeker/profile", icon: "bi-person-circle", label: "My Profile" },
+    ],
+    recruiter: [
+        { to: "/recruiter-dashboard", icon: "bi-grid-1x2", label: "Dashboard" },
+        { to: "/my-jobs", icon: "bi-briefcase", label: "My Jobs" },
+        { to: "/recruiter/recruiter-application", icon: "bi-file-earmark-text", label: "Applications" },
+    ],
+};
 
 function Navbar() {
     const navigate = useNavigate();
     const { user, logout } = useAuth();
 
     const [menuOpen, setMenuOpen] = useState(false);
-    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [collapsed, setCollapsed] = useState(() => {
+        try {
+            return localStorage.getItem("jh-sidebar") === "collapsed";
+        } catch {
+            return false;
+        }
+    });
+
     const menuRef = useRef(null);
+    const hasSidebar = Boolean(user);
+
+    const links = ROLE_LINKS[user?.role] || [];
+    const initial = (user?.full_name || "?").trim().charAt(0).toUpperCase();
 
     const handleLogout = () => {
         logout();
-        setDrawerOpen(false);
         navigate("/");
     };
 
-    // close the "Get Started" dropdown on outside click
+    const toggleCollapsed = () => {
+        setCollapsed((prev) => {
+            try {
+                localStorage.setItem("jh-sidebar", prev ? "expanded" : "collapsed");
+            } catch {
+                // Storage unavailable
+            }
+            return !prev;
+        });
+    };
+
     useEffect(() => {
-        function onClickOutside(e) {
-            if (menuRef.current && !menuRef.current.contains(e.target)) {
+        function handleClickOutside(event) {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
                 setMenuOpen(false);
             }
         }
-        document.addEventListener("mousedown", onClickOutside);
-        return () => document.removeEventListener("mousedown", onClickOutside);
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    // lock body scroll while the mobile drawer is open
     useEffect(() => {
-        document.body.style.overflow = drawerOpen ? "hidden" : "";
-        return () => { document.body.style.overflow = ""; };
-    }, [drawerOpen]);
+        document.body.classList.toggle("has-sidebar", hasSidebar);
+        document.body.classList.toggle(
+            "sidebar-collapsed",
+            hasSidebar && collapsed
+        );
+
+        return () => {
+            document.body.classList.remove("has-sidebar", "sidebar-collapsed");
+        };
+    }, [hasSidebar, collapsed]);
+
+    const goToProfile = () => {
+        navigate(user.role === "jobseeker" ? "/jobseeker/profile" : "/company/my-company")
+    }
 
     return (
-        <nav className="jh-nav">
-            <div className="jh-nav__inner">
-                <Link className="jh-nav__brand" to={user ? "/jobs" : "/"}>
-                    💼 <span>JobHive</span>
-                </Link>
-
-                <div className="jh-nav__right">
-                    <Link className="jh-nav__link jh-nav__link--desktop" to="/companies/all">
-                        Companies
+        <>
+            <header className="jh-nav">
+                <div className="jh-nav__inner">
+                    <Link
+                        className="jh-nav__brand"
+                        to={user?.role === "recruiter" ? "/recruiter-dashboard" : user ? "/jobs" : "/"}
+                    >
+                        <span className="jh-nav__logo">💼</span>
+                        <span>JobHive</span>
                     </Link>
 
-                    {!user ? (
-                        <div className="jh-dropdown" ref={menuRef}>
-                            <button
-                                type="button"
-                                className="jh-btn jh-btn--accent jh-btn--sm"
-                                onClick={() => setMenuOpen((v) => !v)}
-                                aria-expanded={menuOpen}
-                            >
-                                Get started
-                                <span className={`jh-dropdown__caret ${menuOpen ? "is-open" : ""}`}>▾</span>
-                            </button>
+                    <nav className="jh-nav__main" aria-label="Main navigation">
+                        <NavLink
+                            to="/jobs"
+                            className={({ isActive }) =>
+                                `jh-nav__link ${isActive ? "is-active" : ""}`
+                            }
+                        >
+                            <i className="bi bi-briefcase"></i>
+                            Jobs
+                        </NavLink>
 
-                            {menuOpen && (
-                                <ul className="jh-dropdown__menu">
-                                    <li>
+                        <NavLink
+                            to="/companies/all"
+                            className={({ isActive }) =>
+                                `jh-nav__link ${isActive ? "is-active" : ""}`
+                            }
+                        >
+                            <i className="bi bi-building"></i>
+                            Companies
+                        </NavLink>
+                    </nav>
+
+                    <div className="jh-nav__right">
+                        {!user ? (
+                            <div className="jh-dropdown" ref={menuRef}>
+                                <button
+                                    type="button"
+                                    className="jh-btn jh-btn--accent"
+                                    onClick={() => setMenuOpen((prev) => !prev)}
+                                    aria-expanded={menuOpen}
+                                >
+                                    Get Started
+                                    <i className="bi bi-chevron-down"></i>
+                                </button>
+
+                                {menuOpen && (
+                                    <div className="jh-dropdown__menu">
                                         <Link
-                                            className="jh-dropdown__item"
                                             to="/choose-login-role"
                                             onClick={() => setMenuOpen(false)}
                                         >
                                             Log in
                                         </Link>
-                                    </li>
-                                    <li className="jh-dropdown__divider" />
-                                    <li>
                                         <Link
-                                            className="jh-dropdown__item"
                                             to="/choose-role"
                                             onClick={() => setMenuOpen(false)}
                                         >
                                             Register
                                         </Link>
-                                    </li>
-                                </ul>
-                            )}
-                        </div>
-                    ) : (
-                        <>
-                            {user.role === "jobseeker" && (
-                                <Link className="jh-nav__link jh-nav__link--desktop" to="/jobs">
-                                    Jobs
-                                </Link>
-                            )}
-
-                            <span className="jh-nav__name">{user.full_name}</span>
-
-
-                            <button
-                                type="button"
-                                className="jh-nav__menu-btn"
-                                onClick={() => setDrawerOpen(true)}
-                                aria-label="Open menu"
-                            >
-                                ☰
-                            </button>
-                        </>
-                    )}
-                </div>
-            </div>
-
-            {/* Mobile / account drawer */}
-            {drawerOpen && (
-                <div className="jh-drawer-overlay" onClick={() => setDrawerOpen(false)}>
-                    <aside
-                        className="jh-drawer"
-                        onClick={(e) => e.stopPropagation()}
-                        aria-label="Menu"
-                    >
-                        <div className="jh-drawer__header">
-                            <h5 className="jh-drawer__title">💼 JobHive</h5>
-                            <button
-                                type="button"
-                                className="jh-drawer__close"
-                                onClick={() => setDrawerOpen(false)}
-                                aria-label="Close menu"
-                            >
-                                ✕
-                            </button>
-                        </div>
-
-                        <div className="jh-drawer__body">
-                            {user?.role === "jobseeker" && (
-                                <ul className="jh-drawer__list">
-                                    <li><Link to="/jobs" onClick={() => setDrawerOpen(false)}>Jobs</Link></li>
-                                    <li><Link to="/saved-jobs" onClick={() => setDrawerOpen(false)}>Saved jobs</Link></li>
-                                    <li><Link to="/jobseeker/applications" onClick={() => setDrawerOpen(false)}>Applications</Link></li>
-                                    <li><Link to="/jobseeker/dashboard" onClick={() => setDrawerOpen(false)}>Dashboard</Link></li>
-                                    <li><Link to="/jobseeker/profile" onClick={() => setDrawerOpen(false)}>My profile</Link></li>
-                                </ul>
-                            )}
-
-                            {user?.role === "recruiter" && (
-                                <ul className="jh-drawer__list">
-                                    <li><Link to="/recruiter-dashboard" onClick={() => setDrawerOpen(false)}>Dashboard</Link></li>
-                                    <li><Link to="/my-jobs" onClick={() => setDrawerOpen(false)}>My jobs</Link></li>
-                                    <li><Link to="/recruiter/recruiter-application" onClick={() => setDrawerOpen(false)}>Applications</Link></li>
-                                </ul>
-                            )}
-
-                            <div className="jh-drawer__footer">
-                                <button
-                                    type="button"
-                                    className="jh-btn jh-btn--danger jh-btn--block"
-                                    onClick={handleLogout}
-                                >
-                                    Log out
-                                </button>
+                                    </div>
+                                )}
                             </div>
-                        </div>
-                    </aside>
+                        ) : (
+                            <button
+                                type="button"
+                                className="jh-nav__user"
+                                onClick={goToProfile}
+                                title={user.role === "jobseeker" ? "View profile" : "View company"}
+                            >
+                                <span className="jh-nav__user-avatar">{initial}</span>
+                                <div className="jh-nav__user-info">
+                                    <strong>{user.full_name}</strong>
+                                    <small>
+                                        {user.role === "jobseeker" ? "Job Seeker" : "Recruiter"}
+                                    </small>
+                                </div>
+                            </button>
+                        )}
+                    </div>
                 </div>
+            </header>
+
+            {user && (
+                <aside
+                    className={`jh-side ${collapsed ? "is-collapsed" : ""}`}
+                    aria-label="Dashboard navigation"
+                >
+                    <div className="jh-side__section">
+                        <span className="jh-side__heading">WORKSPACE</span>
+
+                        <nav className="jh-side__nav">
+                            {links.map((link) => (
+                                <NavLink
+                                    key={link.to}
+                                    to={link.to}
+                                    title={collapsed ? link.label : undefined}
+                                    className={({ isActive }) =>
+                                        `jh-side__link ${isActive ? "is-active" : ""}`
+                                    }
+                                >
+                                    <i className={`bi ${link.icon}`}></i>
+                                    <span className="jh-side__label">{link.label}</span>
+                                </NavLink>
+                            ))}
+                        </nav>
+                    </div>
+
+                    <div className="jh-side__footer">
+                        <button
+                            type="button"
+                            className="jh-side__link jh-side__collapse"
+                            onClick={toggleCollapsed}
+                            title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+                        >
+                            <i
+                                className={`bi ${collapsed
+                                        ? "bi-chevron-double-right"
+                                        : "bi-chevron-double-left"
+                                    }`}
+                            ></i>
+                            <span className="jh-side__label">
+                                {collapsed ? "Expand" : "Collapse"}
+                            </span>
+                        </button>
+
+                        <button
+                            type="button"
+                            className="jh-side__link jh-side__logout"
+                            onClick={handleLogout}
+                            title="Log out"
+                        >
+                            <i className="bi bi-box-arrow-right"></i>
+                            <span className="jh-side__label">Log out</span>
+                        </button>
+                    </div>
+                </aside>
             )}
-        </nav>
+        </>
     );
 }
 

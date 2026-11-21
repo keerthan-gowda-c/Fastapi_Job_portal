@@ -1,0 +1,12 @@
+.donut { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; color: inherit; }
+.donut__ring { position: relative; flex: none; }
+.donut__ring svg { width: 100%; height: 100%; display: block; }
+.donut__track { fill: none; stroke: currentColor; stroke-opacity: 0.1; stroke-width: 4; }
+.donut__seg { fill: none; stroke-width: 4; }
+.donut__center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.donut__center strong { font-size: 2.1rem; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.donut__center span { font-size: 0.78rem; opacity: 0.65; margin-top: 4px; }
+.donut__legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; flex: 1; min-width: 150px; }
+.donut__legend li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
+.donut__dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.donut__legend b { margin-left: auto; font-variant-numeric: tabular-nums; }

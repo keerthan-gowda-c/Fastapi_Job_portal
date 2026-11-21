@@ -16,8 +16,12 @@ export default function Projects() {
         try {
 
             const response = await api.get("/candidates/me/projects");
+            const sortedProjects = [...response.data].sort((a,b)=>{
+                const dateA = new Date(a.end_date || a.start_date ||0).getTime()
+                const dateB = new Date(b.end_date || b.start_date ||0).getTime()
 
-            setProjects(response.data);
+            })
+            setProjects(sortedProjects);
 
         }
         catch (error) {
@@ -184,6 +188,20 @@ export default function Projects() {
                                             {project.description}
                                         </p>
                                     )}
+
+                                    <div className="project-meta">
+                                     {project.start_date && (
+                                        <span>{project.start_date}</span>
+                                    )}
+
+                                    <span>—</span>
+
+                                    {project.end_date && (
+                                        <span>{project.end_date}</span>
+                                    )}
+                                    </div>
+
+                                   
 
                                     <div className="project-links">
 

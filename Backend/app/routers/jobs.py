@@ -185,7 +185,7 @@ def search_jobs(
     location:Optional[str] = None,
     salary:Optional[str] = None,
     page:int =1,
-    limit:int=10,
+    limit:int=12,
     db:Session = Depends(get_db)
 ):
     query = db.query(Job)
@@ -198,6 +198,8 @@ def search_jobs(
 
     if salary:
         query = query.filter(Job.salary >= salary)
+
+    query = query.order_by(Job.created_at.desc())
 
     jobs = query.offset((page - 1) * limit).limit(limit).all()
 

@@ -16,8 +16,13 @@ export default function Experiences() {
         try {
 
             const response = await api.get("/candidates/me/experience");
+            const sortedExperiences = [...response.data].sort((a, b) => {
+                const dateA = new Date(a.end_date || a.start_date || 0).getTime()
+                const dateB = new Date(b.end_date || b.start_date || 0).getTime()
 
-            setExperiences(response.data);
+                return dateB - dateA
+            })
+            setExperiences(sortedExperiences);
 
         }
         catch (error) {
@@ -197,13 +202,16 @@ export default function Experiences() {
                                             </span>
                                         )}
 
+                                        <span>—</span>
+
                                         {experience.end_date ? (
+
                                             <span>
-                                                — {experience.end_date}
+                                                {experience.end_date}
                                             </span>
                                         ) : experience.is_current ? (
                                             <span>
-                                                — Present
+                                                Present
                                             </span>
                                         ) : null}
 

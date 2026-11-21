@@ -106,7 +106,7 @@ export default function MyJobs() {
 
             <div className="jobs-bg">
 
-                <div className="container py-5 mt-5">
+                <div className="container">
 
                     {/* Header */}
 

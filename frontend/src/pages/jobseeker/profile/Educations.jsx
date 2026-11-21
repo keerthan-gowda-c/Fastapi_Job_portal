@@ -11,30 +11,27 @@ export default function Educations() {
     const [showForm, setShowForm] = useState(false);
     const [editingEducation, setEditingEducation] = useState(null);
 
-    const getEducations = async () => {
+   const getEducations = async () => {
+    try {
+        const response = await api.get("/candidates/me/education");
 
-        try {
+        const sortedEducations = [...response.data].sort((a, b) => {
+            const dateA = new Date(a.end_date || a.end_year || a.start_year || 0).getTime();
+            const dateB = new Date(b.end_date || b.end_year || b.start_year || 0).getTime();
 
-            const response = await api.get("/candidates/me/education");
+            return dateB - dateA;
+        });
 
-            setEducations(response.data);
+       
 
-        }
-        catch (error) {           
+        setEducations(sortedEducations);
 
-            toast.info(
-                error.response?.data?.detail ||
-                "It takes some time"
-            );
-
-        }
-        finally {
-
-            setLoading(false);
-
-        }
-
-    };
+    } catch (error) {
+        toast.info(error.response?.data?.detail || "It takes some time");
+    } finally {
+        setLoading(false);
+    }
+};
 
     useEffect(() => {
 

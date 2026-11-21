@@ -57,7 +57,7 @@ export default function RecruiterApplications() {
 
             <div className="applications-bg">
 
-                <div className="container py-5 mt-5">
+                <div className="container ">
 
                     {/* Header */}
 

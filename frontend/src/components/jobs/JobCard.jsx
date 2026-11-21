@@ -14,21 +14,39 @@ function JobCard({
 
     const navigate = useNavigate();
 
+    const isRecentlyPosted = (createdAt) => {
+        if (!createdAt) return false;
+
+        const postedDate = new Date(createdAt);
+
+        if (isNaN(postedDate.getTime())) return false;
+
+        const currentDate = new Date();
+
+        const differenceInDays =
+            (currentDate - postedDate) / (1000 * 60 * 60 * 24);
+
+        return differenceInDays >= 0 && differenceInDays <= 7;
+    };
+
     return (
         <div className="jh-card">
             <div className="jh-card__body">
                 <div className="jh-card__head">
                     <h3 className="jh-card__title">{job.title}</h3>
-                    <span className="jh-tag">New</span>
+                    {isRecentlyPosted(job.created_at) && (
+                        <span className="jh-tag">New</span>
+                    )}
+                    
                 </div>
 
-                <p className="jh-card__desc" 
-                dangerouslySetInnerHTML={{
-                        __html:DOMPurify.sanitize(job.description || "")
+                <p className="jh-card__desc"
+                    dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(job.description || "")
                     }}
-                    />
-                    
-                
+                />
+
+
                 {/* <div className="jh-card__des">
                     
                 </div> */}
@@ -44,7 +62,7 @@ function JobCard({
                     <div className="jh-card__meta-col">
                         <p className="jh-card__meta-label">💰 Salary</p>
                         <p className="jh-card__meta-value jh-card__meta-value--accent">
-                            ₹{job.salary || "Not Disclosed"}
+                            {job.salary || "Not Disclosed"}
                         </p>
                     </div>
                 </div>
@@ -61,9 +79,8 @@ function JobCard({
                 ) : role === "jobseeker" ? (
                     <div className="jh-card__actions">
                         <button
-                            className={`jh-btn jh-btn--sm jh-btn--flex ${
-                                isApplied ? "jh-btn--success" : "jh-btn--primary"
-                            }`}
+                            className={`jh-btn jh-btn--sm jh-btn--flex ${isApplied ? "jh-btn--success" : "jh-btn--primary"
+                                }`}
                             onClick={() => !isApplied && onApply(job.id)}
                             disabled={isApplied}
                         >
@@ -78,9 +95,8 @@ function JobCard({
                         </button>
 
                         <button
-                            className={`jh-btn jh-btn--sm jh-btn--flex ${
-                                isSaved ? "jh-btn--success" : "jh-btn--muted"
-                            }`}
+                            className={`jh-btn jh-btn--sm jh-btn--flex ${isSaved ? "jh-btn--success" : "jh-btn--muted"
+                                }`}
                             onClick={() => !isSaved && onSave(job.id)}
                             disabled={isSaved}
                         >

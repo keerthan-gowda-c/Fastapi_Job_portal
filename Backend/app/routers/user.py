@@ -68,6 +68,20 @@ def update_profile(
     return current_user
 
 
+@router.patch("/me")
+def partial_update_profile(
+    data: UserUpdate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    for field, value in data.model_dump(exclude_unset=True).items():
+        setattr(current_user, field, value)
+
+    db.commit()
+    db.refresh(current_user)
+
+    return current_user
+
 @router.post("/profile-image")
 async def upload_profile_image(
     file: UploadFile = File(...),

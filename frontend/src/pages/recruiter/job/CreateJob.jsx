@@ -74,7 +74,7 @@ export default function CreateJob() {
 
             <div className="create-job-bg">
 
-                <div className="container py-5 mt-5">
+                <div className="container">
 
                     <div className="row justify-content-center">
 

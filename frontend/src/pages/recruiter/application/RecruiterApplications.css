@@ -1,6 +1,6 @@
 .applications-bg {
     min-height: 100vh;
-    padding: 1px 0 50px;
+    padding: 20px 50px;
     background: var(--jh-background);
 }
 .applications-bg > .container {
@@ -8,7 +8,6 @@
     padding-top: 1px;
 }
 .page-header {
-    margin-top: 100px;
     padding: 28px 30px;
     border: 1px solid var(--jh-border);
     border-radius: 16px;
